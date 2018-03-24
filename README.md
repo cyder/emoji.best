@@ -34,7 +34,6 @@ source ~/.bash_profile
 ### Ruby 2.4.2
 ```sh
 rbenv install 2.4.2
-rbenv local 2.4.2
 ```
 
 ### Ruby on rails 5.1.5
