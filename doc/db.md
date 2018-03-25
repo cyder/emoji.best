@@ -1,4 +1,5 @@
 # DB設計
+\* がついてるのはオプション
 ## User
 * id
 * name
@@ -9,7 +10,7 @@
 ## Emoji
 * id
 * name
-* description
+* description *
 * original_image
   * original size
   * emoji/[user_id]/original/[emoji_name]
@@ -29,7 +30,7 @@
 ## DownloadLog
 * id
 * emoji
-* user
+* user *
 * create_at
 * update_at
 
