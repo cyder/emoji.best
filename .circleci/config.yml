@@ -1,16 +1,11 @@
-defaults: &defaults
-  working_directory: ~/emojix
-  docker:
-    - image: circleci/ruby:2.4.2-node
-      environment:
-        RAILS_ENV: test
-
-    - image: circleci/mysql:5.7 
-
 version: 2
 jobs:
   bundle_dependencies:
-    <<: *defaults
+    working_directory: ~/emojix
+    docker:
+      - image: circleci/ruby:2.4.2-node
+        environment:
+          RAILS_ENV: test
     steps:
       - checkout
       - attach_workspace:
@@ -28,7 +23,12 @@ jobs:
           paths: vendor/bundle
 
   rspec_test:
-    <<: *defaults
+    working_directory: ~/emojix
+    docker:
+      - image: circleci/ruby:2.4.2-node
+        environment:
+          RAILS_ENV: test
+      - image: circleci/mysql:5.7 
     steps:
       - checkout
       - attach_workspace:
