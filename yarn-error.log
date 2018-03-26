@@ -1,0 +1,31 @@
+Arguments: 
+  /usr/local/Cellar/node/9.9.0/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js add @rails/webpacker
+
+PATH: 
+  /Users/atsushi/github/emojix/vendor/bundle/ruby/2.4.0/bin:/Users/atsushi/.rbenv/versions/2.4.2/bin:/usr/local/Cellar/rbenv/1.1.1/libexec:/Users/atsushi/.pyenv/shims:/Users/atsushi/.pyenv/bin:/usr/local/opt/imagemagick@6/bin:/Users/atsushi/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Wireshark.app/Contents/MacOS:/Users/atsushi/.rbenv/bin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  9.9.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "emojix",
+    "private": true,
+    "dependencies": {}
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: connect ETIMEDOUT 104.16.60.173:443
+      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1173:14)

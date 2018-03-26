@@ -1,5 +1,8 @@
 {
   "name": "emojix",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "webpack-dev-server": "2.11.2"
+  }
 }
