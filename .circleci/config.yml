@@ -22,9 +22,9 @@ jobs:
       - save_cache:
           key: v1-bundle-{{ checksum "Gemfile.lock" }}
           paths:
-            - ~/emojix/vendor/bundle
+            - vendor/bundle
       - persist_to_workspace:
-          root: ~/emojix
+          root: .
           paths: vendor/bundle
 
   rspec_test:
@@ -35,8 +35,8 @@ jobs:
           at: ~/emojix
       - run: cp config/database.yml.ci config/database.yml
       - run: bundle --path vendor/bundle
-      - run: bundle exec rails db:create
-      - run: bundle exec rails db:schema:load
+      - run: rails db:create
+      - run: rails db:schema:load
       - run: bundle exec rspec
 
 workflows:
