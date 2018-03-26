@@ -1,0 +1,25 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.4.2
+        environment:
+          RAILS_ENV: test
+    
+      - image: circleci/mysql:5.7
+    
+    working_directory: ~/emojix
+
+    steps:
+      - checkout
+
+      - run: gem install bundler
+      - run: bundle install --path vendor/bundle
+
+      # Database setup
+      - run: cp config/database.yml.ci config/database.yml
+      - run: rails db:create
+      - run: rails db:schema:load
+
+      # Run the tests
+      - run: bundle exec rspec
