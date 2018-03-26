@@ -50,7 +50,7 @@ Emojiのアップロードを行う
 * code: 0, message: Bad parameter.
 * code: 1, message: There is already this name emoji.
 
-#### 400 Forbidden
+#### 403 Forbidden
 ```js
 {
   result: "Failed"

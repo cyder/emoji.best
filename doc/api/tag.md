@@ -28,7 +28,7 @@ Tagの追加
 }
 ```
 
-#### 400 Forbidden
+#### 403 Forbidden
 ```js
 {
   result: "Failed"
@@ -76,7 +76,7 @@ Tagの削除
 }
 ```
 
-#### 400 Forbidden
+#### 403 Forbidden
 ```js
 {
   result: "Failed"

@@ -68,7 +68,7 @@ SignOutを行う
 }
 ```
 
-#### 400 Forbidden
+#### 403 Forbidden
 ```js
 {
   result: "Failed"
