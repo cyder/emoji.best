@@ -12,6 +12,7 @@
     "webpack-dev-server": "2.11.2"
   },
   "scripts": {
-    "start": "rails s & bin/webpack-dev-server"
+    "start": "rails s & bin/webpack-dev-server",
+    "build": "bin/webpack"
   }
 }
