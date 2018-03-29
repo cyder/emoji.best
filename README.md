@@ -9,6 +9,7 @@ slack用emoji投稿サイト、「Emojix（仮称）」用リポジトリです�
 * [Ruby on Rails 5.1.5](https://github.com/rails/rails)
 * [bundler](http://bundler.io/)
 * [MySQL 5.7](https://dev.mysql.com/doc/refman/5.7/en/)
+* [yarn](https://github.com/yarnpkg/yarn)
 * [editorconfig plugin](http://editorconfig.org/#download)
 
 ### Xcode Command line tools
@@ -51,6 +52,11 @@ gem install bundler
 brew install mysql
 ```
 
+### yarn
+```sh
+brew install yarn
+```
+
 ### editorconfig plugin
 [ここ](http://editorconfig.org/#download)からエディタに合わせたものをインストールすること。
 
@@ -61,9 +67,10 @@ git@github.com:cyder-akashi/emojix.git
 cd emojix
 ```
 
-2. Gemライブラリをインストールする
+2. ライブラリをインストールする
 ```sh
 bundle install --path=vendor/bundle
+yarn install
 ```
 
 3. MySqlを起動する
@@ -80,7 +87,7 @@ rails db:seed
 
 5. サーバを起動する
 ```sh
-rails server
+yarn start
 ```
 
 ## 著者
