@@ -43,6 +43,6 @@ Pull Requestには必ず以下のいずれかを付与し、状況が変化し�
 2. developmentブランチからブランチを作成する。その際、ブランチ名は `<Issue番号>-<簡単なIssueの説明>` とする。
 3. 内容に応じコミットを行う。上記のコミットメッセージのルールに従うこと。
 4. `bundle exec rspec spec/` を実施し、すべてのテストが通るか確認する。
-5. `bundle exec rubocop` を実施し、コーディング規約に従っているかチェックする。
+5. `bundle exec rubocop` 及び `yarn lint` を実施し、コーディング規約に従っているかチェックする。
 6. originにpushし、Pull Requestを作成する。その際、Pull Requestのコメント欄の最初に `close #<Issue番号>` と記述すること。 **wait for review** のタグを設定し、Reviewersを指定する。
 7. 指定された人がレビューを行い、問題がなければ最後にレビューを行った者がマージする。
