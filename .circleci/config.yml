@@ -1,0 +1,90 @@
+version: 2
+jobs:
+  bundle_dependencies:
+    working_directory: ~/emojix
+    docker:
+      - image: circleci/ruby:2.4.2-node
+        environment:
+          RAILS_ENV: test
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/emojix
+      - restore_cache:
+          keys:
+            - v1-bundle-{{ checksum "Gemfile.lock" }}
+      - run: bundle install --path vendor/bundle
+      - save_cache:
+          key: v1-bundle-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - persist_to_workspace:
+          root: .
+          paths: vendor/bundle
+
+  yarn_dependencies:
+    working_directory: ~/emojix
+    docker:
+      - image: circleci/ruby:2.4.2-node
+        environment:
+          NODE_ENV: test
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/emojix
+      - restore_cache:
+          keys:
+            - v1-yarn-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: v1-yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - persist_to_workspace:
+          root: .
+          paths: node_modules
+
+  rspec_test:
+    working_directory: ~/emojix
+    docker:
+      - image: circleci/ruby:2.4.2-node
+        environment:
+          RAILS_ENV: test
+      - image: circleci/mysql:5.7 
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/emojix
+      - run: cp config/database.yml.ci config/database.yml
+      - run: bundle --path vendor/bundle
+      - run: rails db:create
+      - run: rails db:schema:load
+      - run: bundle exec rspec
+
+  yarn_build:
+    working_directory: ~/emojix
+    docker:
+      - image: circleci/ruby:2.4.2-node
+        environment:
+          RAILS_ENV: test
+          NODE_ENV: test
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/emojix
+      - run: bundle --path vendor/bundle
+      - run: yarn build
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - bundle_dependencies
+      - yarn_dependencies
+      - rspec_test:
+          requires:
+            - bundle_dependencies
+      - yarn_build:
+          requires:
+            - bundle_dependencies
+            - yarn_dependencies
