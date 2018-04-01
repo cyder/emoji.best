@@ -1,5 +1,5 @@
 # DownloadLog
-## POST /emoji/:id/download_logs
+## POST /emoji/:id/downloaded
 Emojiのダウンロード時に叩く
 
 ### request
@@ -12,7 +12,7 @@ Emojiのダウンロード時に叩く
 ```js
 {
   result: "Success"
-  url: "/emoji/:id/download_logs"
+  url: "/emoji/:id/downloaded"
   method: "POST"
   download_log: {
     id: :id,
@@ -27,7 +27,7 @@ Emojiのダウンロード時に叩く
 ```js
 {
   result: "Failed"
-  url: "/emoji/:id/download_logs"
+  url: "/emoji/:id/downloaded"
   method: "POST"
   error {
     code: :code
