@@ -1,4 +1,4 @@
-# Emojix | [![CircleCI](https://circleci.com/gh/cyder/emojix.svg?style=svg)](https://circleci.com/gh/cyder/emojix)
+# Emojix | [![CircleCI](https://circleci.com/gh/cyder/emojix.svg?style=svg)](https://circleci.com/gh/cyder/emojix) [![codecov](https://codecov.io/gh/cyder/emojix/branch/master/graph/badge.svg)](https://codecov.io/gh/cyder/emojix)
 slack用emoji投稿サイト、「Emojix（仮称）」用リポジトリです。
 
 ## 必要環境
