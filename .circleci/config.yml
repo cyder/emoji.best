@@ -50,7 +50,7 @@ jobs:
       - image: circleci/ruby:2.4.2-node
         environment:
           RAILS_ENV: test
-      - image: circleci/mysql:5.7 
+      - image: circleci/mysql:5.7
     steps:
       - checkout
       - attach_workspace:
