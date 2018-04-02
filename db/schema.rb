@@ -12,6 +12,15 @@
 
 ActiveRecord::Schema.define(version: 20180402080743) do
 
+  create_table "download_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.bigint "emoji_id", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["emoji_id"], name: "index_download_logs_on_emoji_id"
+    t.index ["user_id"], name: "index_download_logs_on_user_id"
+  end
+
   create_table "emojis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.string "name", null: false
