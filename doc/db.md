@@ -28,6 +28,13 @@
 * create_at
 * update_at
 
+## DownloadLog
+* id
+* emoji
+* user *
+* create_at
+* update_at
+
 ## Tag
 * id
 * name
