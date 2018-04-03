@@ -37,6 +37,8 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include JsonSpec::Helpers
   config.include RSpec::RequestDescriber, type: :request
+  config.include Sorcery::TestHelpers::Rails::Controller, type: :request
+  config.include Sorcery::TestHelpers::Rails::Integration, type: :request
 
   config.before :all do
     FactoryBot.reload
