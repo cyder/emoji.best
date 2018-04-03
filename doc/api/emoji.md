@@ -21,7 +21,7 @@ Emojiのアップロードを行う
   url: "/emoji"
   method: "POST"
   emoji: {
-    id: :id,
+    id: :id,
     name: :name,
     description: :description,
     image: {
@@ -86,7 +86,7 @@ Emojiの編集を行う（画像以外）
   url: "/emoji/:id"
   method: "PATCH"
   emoji: {
-    id: :id,
+    id: :id,
     name: :name,
     description: :description,
     image: {

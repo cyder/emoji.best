@@ -12,11 +12,11 @@ Emojiのダウンロード時に叩く
 ```js
 {
   result: "Success"
-  url: "/emoji/:id/downloaded"
+  url: "/emoji/:id/downloaded"
   method: "POST"
   download_log: {
     id: :id,
-    emoji_id: :id,
+    emoji_id: :id,
     user_id: :id,
     create_at: :create_at
   }

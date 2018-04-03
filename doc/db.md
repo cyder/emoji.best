@@ -15,13 +15,13 @@
   * original size
   * emoji/[user_id]/original/[emoji_name]
 * large_image
-  * 512px * 512px(仮)
+  * 512px * 512px(仮)
   * emoji/[user_id]/large/[emoji_name]
 * thumbnail_image
-  * 256px * 256px(仮)
+  * 256px * 256px(仮)
   * emoji/[user_id]/thumbnail/[emoji_name]
 * slack_image
-  * 128px * 128px
+  * 128px * 128px
   * emoji/[user_id]/slack/[emoji_name]
 * user
 * number_of_donwloaded
