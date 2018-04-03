@@ -12,7 +12,10 @@ describe "POST /api/v1/users" do
     it "returns a user" do
       is_expected.to eq 200
       body = response.body
-      p body
+      expect(body).to be_json_eql(%("Success")).at_path("result")
+      expect(body).to be_json_eql(%("#{user.email}")).at_path("user/email")
     end
+
+    it { expect { subject }.to change(User, :count).by(1) }
   end
 end
