@@ -41,6 +41,10 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem "capybara", "~> 2.13"
   gem "codecov", require: false
+  gem "factory_bot_rails"
+  gem "onkcop", require: false
+  gem "rspec-rails", "~> 3.5"
+  gem "rubocop"
   gem "selenium-webdriver"
   gem "simplecov", require: false
 end
@@ -50,10 +54,6 @@ group :development do
   gem "listen", ">= 3.0.5", "< 3.2"
   gem "web-console", ">= 3.3.0"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem "factory_bot_rails"
-  gem "onkcop", require: false
-  gem "rspec-rails", "~> 3.5"
-  gem "rubocop"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
 end
