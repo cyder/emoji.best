@@ -35,6 +35,8 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
+  config.include JsonSpec::Helpers
+  config.include RSpec::RequestDescriber, type: :request
 
   config.before :all do
     FactoryBot.reload

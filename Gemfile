@@ -42,8 +42,10 @@ group :development, :test do
   gem "capybara", "~> 2.13"
   gem "codecov", require: false
   gem "factory_bot_rails"
+  gem "json_spec"
   gem "onkcop", require: false
   gem "rspec-rails", "~> 3.5"
+  gem "rspec-request_describer"
   gem "rubocop"
   gem "selenium-webdriver"
   gem "simplecov", require: false
