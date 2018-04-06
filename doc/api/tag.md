@@ -5,7 +5,7 @@ Tagの追加
 ### request
 ```js
 {
-  tag: {
+  tag: {
     name: :name
   }
 }
@@ -16,11 +16,11 @@ Tagの追加
 ```js
 {
   result: "Success"
-  url: "/emoji/:id/tags"
+  url: "/emoji/:id/tags"
   method: "POST"
   tag: {
     id: :id,
-    emoji_id: :id,
+    emoji_id: :id,
     user_id: :id,
     name: :name,
     create_at: :create_at
@@ -32,7 +32,7 @@ Tagの追加
 ```js
 {
   result: "Failed"
-  url: "/emoji/:id/tags"
+  url: "/emoji/:id/tags"
   method: "POST"
   error {
     code: :code
@@ -71,7 +71,7 @@ Tagの削除
 ```js
 {
   result: "Success"
-  url: "/emoji/:emoji_id/tags/:tag_id"
+  url: "/emoji/:emoji_id/tags/:tag_id"
   method: "DELETE"
 }
 ```
@@ -80,7 +80,7 @@ Tagの削除
 ```js
 {
   result: "Failed"
-  url: "/emoji/:emoji_id/tags/:tag_id"
+  url: "/emoji/:emoji_id/tags/:tag_id"
   method: "DELETE"
   error {
     code: :code
@@ -95,7 +95,7 @@ Tagの削除
 ```js
 {
   result: "Failed"
-  url: "/emoji/:emoji_id/tags/:tag_id"
+  url: "/emoji/:emoji_id/tags/:tag_id"
   method: "DELETE"
   error {
     code: :code

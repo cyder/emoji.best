@@ -20,7 +20,7 @@ SignInを行う
   url: "/users/sign_in"
   method: "POST"
   user: {
-    id: :id,
+    id: :id,
     name: :name,
     email: :email
   }
@@ -61,7 +61,7 @@ SignOutを行う
   url: "/users/sign_out"
   method: "DELETE"
   user: {
-    id: :id,
+    id: :id,
     name: :name,
     email: :email
   }
@@ -129,7 +129,7 @@ Userを作成する
 * code: 0, message: Bad parameter.
 * code: 1, message: This email address has used.
 * code: 2, message: This password is too easy.
-* code: 3, message: These passwords do not match.
+* code: 3, message: These passwords do not match.
 
 ### PATCH /users
 ユーザ情報を更新（パスワード以外）
@@ -137,7 +137,7 @@ Userを作成する
 ### request
 ```js
 {
-  user: {
+  user: {
     name: :name,
     email: :email,
   }
@@ -152,7 +152,7 @@ Userを作成する
   url: "/users"
   method: "PATCH"
   user: {
-    id: :id,
+    id: :id,
     name: :name,
     email: :email
   }
@@ -198,7 +198,7 @@ Userを作成する
   url: "/users"
   method: "PATCH"
   user: {
-    id: :id,
+    id: :id,
     name: :name,
     email: :email
   }
@@ -228,9 +228,9 @@ Userを作成する
 ### request
 ```js
 {
-  user: {
+  user: {
     email: :email,
-    password: :name
+    password: :name
   }
 }
 ```
