@@ -24,7 +24,13 @@
   * 128px * 128px
   * emoji/[user_id]/slack/[emoji_name]
 * user
-* number_of_donwloaded
+* create_at
+* update_at
+
+## DownloadLog
+* id
+* emoji
+* user *
 * create_at
 * update_at
 
