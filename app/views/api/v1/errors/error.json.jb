@@ -1,0 +1,9 @@
+{
+  result: "Failed",
+  url: request.fullpath,
+  method: request.method,
+  error: {
+    code: code,
+    message: message,
+  },
+}
