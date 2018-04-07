@@ -6,7 +6,49 @@ describe "POST /api/v1/users" do
   let(:email) { user.email }
   let(:name) { user.name }
   let(:password) { user.password }
-  let(:password_confirm) { user.password }
+  let(:password_confirm) { password }
+
+  context "with invalid email" do
+    let(:email) { nil }
+    it "returns a error" do
+      is_expected.to eq 400
+      body = response.body
+      expect(body).to be_json_eql(%("Failed")).at_path("result")
+      expect(body).to be_json_eql(0).at_path("error/code")
+    end
+  end
+
+  context "with used email address" do
+    before { user.save }
+
+    it "returns a error" do
+      is_expected.to eq 400
+      body = response.body
+      expect(body).to be_json_eql(%("Failed")).at_path("result")
+      expect(body).to be_json_eql(1).at_path("error/code")
+    end
+  end
+
+  context "with easy password" do
+    let(:password) { "aaa" }
+
+    it "returns a error" do
+      is_expected.to eq 400
+      body = response.body
+      expect(body).to be_json_eql(%("Failed")).at_path("result")
+      expect(body).to be_json_eql(2).at_path("error/code")
+    end
+  end
+
+  context "without match passwords" do
+    let(:password_confirm) { "invalid_password" }
+    it "returns a error" do
+      is_expected.to eq 400
+      body = response.body
+      expect(body).to be_json_eql(%("Failed")).at_path("result")
+      expect(body).to be_json_eql(3).at_path("error/code")
+    end
+  end
 
   context "with valid params" do
     it "returns a user" do
