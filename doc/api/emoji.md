@@ -40,10 +40,11 @@ Emojiのアップロードを行う
   result: "Failed"
   url: "/emoji"
   method: "POST"
-  error {
-    code: :code
-    message: :message
-  }
+  errors: [
+    {code: :code, message: :message},
+    {code: :code, message: :message},
+    ...
+  ]
 }
 ```
 
@@ -56,10 +57,11 @@ Emojiのアップロードを行う
   result: "Failed"
   url: "/emoji"
   method: "POST"
-  error {
-    code: :code
-    message: :message
-  }
+  errors: [
+    {code: :code, message: :message},
+    {code: :code, message: :message},
+    ...
+  ]
 }
 ```
 
@@ -105,10 +107,11 @@ Emojiの編集を行う（画像以外）
   result: "Failed"
   url: "/emoji/:id"
   method: "PATCH"
-  error {
-    code: :code
-    message: :message
-  }
+  errors: [
+    {code: :code, message: :message},
+    {code: :code, message: :message},
+    ...
+  ]
 }
 ```
 
@@ -121,10 +124,11 @@ Emojiの編集を行う（画像以外）
   result: "Failed"
   url: "/emoji/:id"
   method: "PATCH"
-  error {
-    code: :code
-    message: :message
-  }
+  errors: [
+    {code: :code, message: :message},
+    {code: :code, message: :message},
+    ...
+  ]
 }
 ```
 
@@ -136,10 +140,11 @@ Emojiの編集を行う（画像以外）
   result: "Failed"
   url: "/emoji/:id"
   method: "PATCH"
-  error {
-    code: :code
-    message: :message
-  }
+  errors: [
+    {code: :code, message: :message},
+    {code: :code, message: :message},
+    ...
+  ]
 }
 ```
 
@@ -169,10 +174,11 @@ Emojiの削除を行う
   result: "Failed"
   url: "/emoji/:id"
   method: "DELETE"
-  error {
-    code: :code
-    message: :message
-  }
+  errors: [
+    {code: :code, message: :message},
+    {code: :code, message: :message},
+    ...
+  ]
 }
 ```
 
@@ -184,10 +190,11 @@ Emojiの削除を行う
   result: "Failed"
   url: "/emoji/:id"
   method: "DELETE"
-  error {
-    code: :code
-    message: :message
-  }
+  errors: [
+    {code: :code, message: :message},
+    {code: :code, message: :message},
+    ...
+  ]
 }
 ```
 
@@ -230,10 +237,11 @@ Emojiの情報を取得する
   result: "Failed"
   url: "/emoji/:id"
   method: "GET"
-  error {
-    code: :code
-    message: :message
-  }
+  errors: [
+    {code: :code, message: :message},
+    {code: :code, message: :message},
+    ...
+  ]
 }
 ```
 
