@@ -34,11 +34,10 @@ Tagの追加
   result: "Failed"
   url: "/emoji/:id/tags"
   method: "POST"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
@@ -50,11 +49,10 @@ Tagの追加
   result: "Failed"
   url: "/emoji/:id/tags"
   method: "POST"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
@@ -84,11 +82,10 @@ Tagの削除
   result: "Failed"
   url: "/emoji/:emoji_id/tags/:tag_id"
   method: "DELETE"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
@@ -100,11 +97,10 @@ Tagの削除
   result: "Failed"
   url: "/emoji/:emoji_id/tags/:tag_id"
   method: "DELETE"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 

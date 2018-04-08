@@ -29,11 +29,10 @@ Emojiのダウンロード時に叩く
   result: "Failed"
   url: "/emoji/:id/downloaded"
   method: "POST"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 

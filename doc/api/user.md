@@ -33,11 +33,10 @@ SignInを行う
   result: "Failed"
   url: "/users/sign_in"
   method: "POST"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
@@ -75,11 +74,10 @@ SignOutを行う
   result: "Failed"
   url: "/users/sign_out"
   method: "DELETE"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
@@ -121,11 +119,10 @@ Userを作成する
   result: "Failed"
   url: "/users/sign_out"
   method: "POST"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
@@ -168,11 +165,10 @@ Userを作成する
   result: "Failed"
   url: "/users"
   method: "PATCH"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
@@ -215,11 +211,10 @@ Userを作成する
   result: "Failed"
   url: "/users"
   method: "PATCH"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
@@ -256,11 +251,10 @@ Userを作成する
   result: "Failed"
   url: "/users/sign_out"
   method: "DELETE"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
@@ -308,11 +302,10 @@ Userを作成する
   result: "Failed"
   url: "/users/:id"
   method: "GET"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 

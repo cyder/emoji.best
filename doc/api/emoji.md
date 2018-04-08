@@ -40,11 +40,10 @@ Emojiのアップロードを行う
   result: "Failed"
   url: "/emoji"
   method: "POST"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
@@ -57,11 +56,10 @@ Emojiのアップロードを行う
   result: "Failed"
   url: "/emoji"
   method: "POST"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
@@ -107,11 +105,10 @@ Emojiの編集を行う（画像以外）
   result: "Failed"
   url: "/emoji/:id"
   method: "PATCH"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
@@ -124,11 +121,10 @@ Emojiの編集を行う（画像以外）
   result: "Failed"
   url: "/emoji/:id"
   method: "PATCH"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
@@ -140,11 +136,10 @@ Emojiの編集を行う（画像以外）
   result: "Failed"
   url: "/emoji/:id"
   method: "PATCH"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
@@ -174,11 +169,10 @@ Emojiの削除を行う
   result: "Failed"
   url: "/emoji/:id"
   method: "DELETE"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
@@ -190,11 +184,10 @@ Emojiの削除を行う
   result: "Failed"
   url: "/emoji/:id"
   method: "DELETE"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
@@ -237,11 +230,10 @@ Emojiの情報を取得する
   result: "Failed"
   url: "/emoji/:id"
   method: "GET"
-  errors: [
-    {code: :code, message: :message},
-    {code: :code, message: :message},
-    ...
-  ]
+  error {
+    code: :code
+    message: :message
+  }
 }
 ```
 
