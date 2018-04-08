@@ -2,11 +2,11 @@ require "rails_helper"
 
 describe "POST /api/v1/users" do
   let(:user) { build(:user) }
-  let(:params) { { user: { email: email, name: name, password: password, password_confirm: password_confirm } } }
+  let(:params) { { user: { email: email, name: name, password: password, password_confirmation: password_confirmation } } }
   let(:email) { user.email }
   let(:name) { user.name }
   let(:password) { user.password }
-  let(:password_confirm) { password }
+  let(:password_confirmation) { password }
 
   context "with invalid email" do
     let(:email) { nil }
@@ -41,7 +41,7 @@ describe "POST /api/v1/users" do
   end
 
   context "without match passwords" do
-    let(:password_confirm) { "invalid_password" }
+    let(:password_confirmation) { "invalid_password" }
     it "returns a error" do
       is_expected.to eq 400
       body = response.body
