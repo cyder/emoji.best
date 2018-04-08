@@ -14,7 +14,7 @@ describe "POST /api/v1/users" do
       is_expected.to eq 400
       body = response.body
       expect(body).to be_json_eql(%("Failed")).at_path("result")
-      expect(body).to be_json_eql(0).at_path("error/code")
+      expect(body).to be_json_eql(0).at_path("errors/0/code")
     end
   end
 
@@ -25,7 +25,7 @@ describe "POST /api/v1/users" do
       is_expected.to eq 400
       body = response.body
       expect(body).to be_json_eql(%("Failed")).at_path("result")
-      expect(body).to be_json_eql(1).at_path("error/code")
+      expect(body).to be_json_eql(1).at_path("errors/0/code")
     end
   end
 
@@ -36,7 +36,7 @@ describe "POST /api/v1/users" do
       is_expected.to eq 400
       body = response.body
       expect(body).to be_json_eql(%("Failed")).at_path("result")
-      expect(body).to be_json_eql(2).at_path("error/code")
+      expect(body).to be_json_eql(2).at_path("errors/0/code")
     end
   end
 
@@ -46,7 +46,7 @@ describe "POST /api/v1/users" do
       is_expected.to eq 400
       body = response.body
       expect(body).to be_json_eql(%("Failed")).at_path("result")
-      expect(body).to be_json_eql(3).at_path("error/code")
+      expect(body).to be_json_eql(3).at_path("errors/0/code")
     end
   end
 
