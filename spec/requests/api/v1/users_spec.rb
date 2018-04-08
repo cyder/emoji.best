@@ -9,7 +9,7 @@ describe "POST /api/v1/users" do
   let(:password_confirmation) { password }
 
   context "with invalid email" do
-    let(:email) { nil }
+    let(:email) { "invalid_email" }
     it "returns a error" do
       is_expected.to eq 400
       body = response.body
@@ -30,7 +30,7 @@ describe "POST /api/v1/users" do
   end
 
   context "with easy password" do
-    let(:password) { "aaa" }
+    let(:password) { "easy" }
 
     it "returns a error" do
       is_expected.to eq 400
