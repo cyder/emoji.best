@@ -13,8 +13,8 @@ describe "POST /api/v1/users" do
     it "returns a error" do
       is_expected.to eq 400
       body = response.body
-      expect(body).to be_json_eql(%("Failed")).at_path("result")
-      expect(body).to be_json_eql(0).at_path("errors/0/code")
+      expect(body).to have_json_path("errors/email")
+      expect(body).to be_json_eql(%("invalid")).at_path("errors/email/0/error")
     end
   end
 
@@ -24,8 +24,8 @@ describe "POST /api/v1/users" do
     it "returns a error" do
       is_expected.to eq 400
       body = response.body
-      expect(body).to be_json_eql(%("Failed")).at_path("result")
-      expect(body).to be_json_eql(1).at_path("errors/0/code")
+      expect(body).to have_json_path("errors/email")
+      expect(body).to be_json_eql(%("taken")).at_path("errors/email/0/error")
     end
   end
 
@@ -35,8 +35,8 @@ describe "POST /api/v1/users" do
     it "returns a error" do
       is_expected.to eq 400
       body = response.body
-      expect(body).to be_json_eql(%("Failed")).at_path("result")
-      expect(body).to be_json_eql(2).at_path("errors/0/code")
+      expect(body).to have_json_path("errors/password")
+      expect(body).to be_json_eql(%("too_short")).at_path("errors/password/0/error")
     end
   end
 
@@ -45,8 +45,8 @@ describe "POST /api/v1/users" do
     it "returns a error" do
       is_expected.to eq 400
       body = response.body
-      expect(body).to be_json_eql(%("Failed")).at_path("result")
-      expect(body).to be_json_eql(3).at_path("errors/0/code")
+      expect(body).to have_json_path("errors/password_confirmation")
+      expect(body).to be_json_eql(%("confirmation")).at_path("errors/password_confirmation/0/error")
     end
   end
 
@@ -54,7 +54,7 @@ describe "POST /api/v1/users" do
     it "returns a user" do
       is_expected.to eq 200
       body = response.body
-      expect(body).to be_json_eql(%("Success")).at_path("result")
+      expect(body).to have_json_path("user/id")
       expect(body).to be_json_eql(%("#{user.email}")).at_path("user/email")
     end
 
