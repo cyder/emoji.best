@@ -19,7 +19,7 @@ describe "POST /api/v1/users" do
   end
 
   context "with used email address" do
-    before { user.save }
+    before { create(:user, email: email) }
 
     it "returns a error" do
       is_expected.to eq 400
