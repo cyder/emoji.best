@@ -1,6 +1,3 @@
 {
-  result: "Success",
-  url: request.fullpath,
-  method: request.method,
   user: render(@user),
 }
