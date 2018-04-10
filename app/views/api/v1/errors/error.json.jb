@@ -1,6 +1,3 @@
 {
-  result: "Failed",
-  url: request.fullpath,
-  method: request.method,
-  errors: errors.map {|e| { code: e[:code], message: e[:message] } },
+  errors: errors,
 }
