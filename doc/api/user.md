@@ -118,7 +118,7 @@ Userを作成する
 {
   result: "Failed"
   url: "/users/sign_out"
-  method: "DELETE"
+  method: "POST"
   error {
     code: :code
     message: :message
