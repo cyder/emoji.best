@@ -7,10 +7,17 @@ Returns a user.
 ```
 POST /api/v1/users HTTP/1.1
 Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 Host: www.example.com
 
-user[email]=user1%40factory.com&user[name]=name&user[password]=password&user[password_confirmation]=password
+{
+  "user": {
+    "email": "user1@factory.com",
+    "name": "name",
+    "password": "password",
+    "password_confirmation": "password"
+  }
+}
 ```
 
 #### Response
@@ -22,7 +29,7 @@ X-Frame-Options: SAMEORIGIN
 
 {
   "user": {
-    "id": 198,
+    "id": 212,
     "name": "name",
     "email": "user1@factory.com"
   }
@@ -38,10 +45,17 @@ Returns a invalid email error.
 ```
 POST /api/v1/users HTTP/1.1
 Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 Host: www.example.com
 
-user[email]=invalid_email&user[name]=name&user[password]=password&user[password_confirmation]=password
+{
+  "user": {
+    "email": "invalid_email",
+    "name": "name",
+    "password": "password",
+    "password_confirmation": "password"
+  }
+}
 ```
 
 #### Response
@@ -72,10 +86,17 @@ Returns a token email error.
 ```
 POST /api/v1/users HTTP/1.1
 Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 Host: www.example.com
 
-user[email]=user4%40factory.com&user[name]=name&user[password]=password&user[password_confirmation]=password
+{
+  "user": {
+    "email": "user4@factory.com",
+    "name": "name",
+    "password": "password",
+    "password_confirmation": "password"
+  }
+}
 ```
 
 #### Response
@@ -106,10 +127,17 @@ Returns a too_short password error.
 ```
 POST /api/v1/users HTTP/1.1
 Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 Host: www.example.com
 
-user[email]=user5%40factory.com&user[name]=name&user[password]=easy&user[password_confirmation]=easy
+{
+  "user": {
+    "email": "user5@factory.com",
+    "name": "name",
+    "password": "easy",
+    "password_confirmation": "easy"
+  }
+}
 ```
 
 #### Response
@@ -140,10 +168,17 @@ Returns a confirmation password error.
 ```
 POST /api/v1/users HTTP/1.1
 Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 Host: www.example.com
 
-user[email]=user6%40factory.com&user[name]=name&user[password]=password&user[password_confirmation]=invalid_password
+{
+  "user": {
+    "email": "user6@factory.com",
+    "name": "name",
+    "password": "password",
+    "password_confirmation": "invalid_password"
+  }
+}
 ```
 
 #### Response

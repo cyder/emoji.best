@@ -3,6 +3,7 @@ require "rails_helper"
 describe "POST /api/v1/users" do
   let(:user) { build(:user) }
   let(:params) { { user: { email: email, name: name, password: password, password_confirmation: password_confirmation } } }
+  let(:headers) { { "Content-Type" => "application/json" } }
   let(:email) { user.email }
   let(:name) { user.name }
   let(:password) { user.password }
