@@ -8,9 +8,21 @@ describe "POST /api/v1/users" do
   let(:password) { user.password }
   let(:password_confirmation) { password }
 
+  context "with valid params" do
+    it "returns a user", autodoc: true do
+      is_expected.to eq 200
+      body = response.body
+      expect(body).to have_json_path("user/id")
+      expect(body).to be_json_eql(%("#{user.email}")).at_path("user/email")
+    end
+
+    it { expect { subject }.to change(User, :count).by(1) }
+  end
+
   context "with invalid email" do
     let(:email) { "invalid_email" }
-    it "returns a error" do
+
+    it "returns a invalid email error", autodoc: true do
       is_expected.to eq 400
       body = response.body
       expect(body).to have_json_path("errors/email")
@@ -21,7 +33,7 @@ describe "POST /api/v1/users" do
   context "with used email address" do
     before { create(:user, email: email) }
 
-    it "returns a error" do
+    it "returns a token email error", autodoc: true do
       is_expected.to eq 400
       body = response.body
       expect(body).to have_json_path("errors/email")
@@ -32,7 +44,7 @@ describe "POST /api/v1/users" do
   context "with easy password" do
     let(:password) { "easy" }
 
-    it "returns a error" do
+    it "returns a too_short password error", autodoc: true do
       is_expected.to eq 400
       body = response.body
       expect(body).to have_json_path("errors/password")
@@ -42,22 +54,12 @@ describe "POST /api/v1/users" do
 
   context "without match passwords" do
     let(:password_confirmation) { "invalid_password" }
-    it "returns a error" do
+
+    it "returns a confirmation password error", autodoc: true do
       is_expected.to eq 400
       body = response.body
       expect(body).to have_json_path("errors/password_confirmation")
       expect(body).to be_json_eql(%("confirmation")).at_path("errors/password_confirmation/0/error")
     end
-  end
-
-  context "with valid params" do
-    it "returns a user" do
-      is_expected.to eq 200
-      body = response.body
-      expect(body).to have_json_path("user/id")
-      expect(body).to be_json_eql(%("#{user.email}")).at_path("user/email")
-    end
-
-    it { expect { subject }.to change(User, :count).by(1) }
   end
 end
