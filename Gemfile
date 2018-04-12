@@ -49,6 +49,7 @@ group :development, :test do
   gem "rubocop"
   gem "selenium-webdriver"
   gem "simplecov", require: false
+  gem "autodoc"
 end
 
 group :development do
