@@ -12,6 +12,10 @@ if ENV["CI"] == "true"
   require "codecov"
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
+
+Autodoc.configuration.path = "doc"
+Autodoc.configuration.suppressed_request_header = ["Cache-Control", "Content-Length", "X-Request-Id", "ETag", "Set-Cookie"]
+Autodoc.configuration.suppressed_response_header = ["Cache-Control", "Content-Length", "X-Request-Id", "X-Runtime", "X-XSS-Protection", "ETag", "Set-Cookie"]
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
