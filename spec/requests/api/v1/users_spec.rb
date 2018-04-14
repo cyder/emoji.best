@@ -64,3 +64,56 @@ describe "POST /api/v1/users" do
     end
   end
 end
+
+describe "POST /api/v1/users/sign_in" do
+  let(:user) { build(:user) }
+  let(:params) { { user: { email: email, name: name, password: password, password_confirmation: password_confirmation } } }
+  let(:email) { user.email }
+  let(:name) { user.name }
+  let(:password) { user.password }
+  let(:password_confirmation) { password }
+
+  context "with valid params" do
+    before { create(:user) }
+
+    it "should be able to sign in" do
+      is_expected.to eq 200
+      body = response.body
+    end
+  end
+
+  context "with invalid params" do
+    before { create(:user) }
+
+    it "should be return error code 0" do
+      is_expected.to eq 400
+      body = response.body
+      expect(body).to have_json_path("errors/email")
+      expect(body).to be_json_eql(%("invalid")).at_path("errors/email/0/error")
+    end
+  end
+
+  context "with not found email" do
+    let(:email) { "invalid_email" }
+    before { create(:user) }
+
+    it "should be return error code 1" do
+      is_expected.to eq 400
+      body = response.body
+      expect(body).to have_json_path("errors/email")
+      expect(body).to be_json_eql(%("taken")).at_path("errors/email/0/error")
+    end
+  end
+
+  context "with password incorrect" do
+    let(:password) { "invalid_password" }
+    before { create(:user) }
+
+    it "should be return error code 2" do
+      is_expected.to eq 400
+      body = response.body
+      expect(body).to have_json_path("errors/email")
+      expect(body).to be_json_eql(%("incorrect")).at_path("errors/email/0/error")
+    end
+  end
+end
