@@ -5,12 +5,35 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def sign_in
-    @user = login(params[:user][:email], params[:user][:password])
+    head 200
+    email = params[:user][:email]
+    password = params[:user][:password]
 
-    if @user
-      api_key = @user.activate
-      @access_token = api_key.access_token
+    begin
+      User.find_by!(email: email)
+
+      @user = login(email, password)
+
+      if @user
+      else
+      end
+    rescue ActiveRecord::RecordNotFound
+      head 400
+      nico = {
+        result: "Failed",
+        url: "/users/sign_in",
+        method: "POST",
+        errors: {
+          password: {
+            "0": {
+              code: 0,
+              error: "invalid"
+            }
+          }
+        }
+      }
     end
+    render :json => nico.to_json
   end
 
   private
