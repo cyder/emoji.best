@@ -85,11 +85,12 @@ describe "POST /api/v1/users/sign_in" do
   end
 
   context "with invalid params" do
+    let(:params) { nil }
     it "should be return error code 0" do
       is_expected.to eq 400
       body = response.body
-      expect(body).to have_json_path("errors/email")
-      expect(body).to be_json_eql(%("invalid")).at_path("errors/email/0/error")
+      expect(body).to have_json_path("errors/param")
+      expect(body).to be_json_eql(%("Bad Parameter")).at_path("errors/param/0/error")
     end
   end
 
@@ -100,11 +101,12 @@ describe "POST /api/v1/users/sign_in" do
       is_expected.to eq 400
       body = response.body
       expect(body).to have_json_path("errors/email")
-      expect(body).to be_json_eql(%("taken")).at_path("errors/email/0/error")
+      expect(body).to be_json_eql(%("invalid")).at_path("errors/email/0/error")
     end
   end
 
   context "with password incorrect" do
+    before { create(:user, email: email) }
     let(:password) { "invalid_password" }
 
     it "should be return error code 2" do
