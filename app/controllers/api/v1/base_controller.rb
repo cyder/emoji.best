@@ -4,22 +4,26 @@ class Api::V1::BaseController < ApplicationController
     render template: "api/v1/errors/error", locals: { errors: errors }, status: :bad_request
   end
 
-  rescue_from ActiveRecord::RecordNotFound do |e|
+  rescue_from ActiveRecord::RecordNotFound do
     errors = {
-      email: [{
-        error: "invalid",
-        value: "invalid_email"
-      }]
+      email: [
+        {
+          error: "invalid",
+          value: "invalid_email",
+        },
+      ],
     }
     render template: "api/v1/errors/error", locals: { errors: errors }, status: :bad_request
   end
 
-  rescue_from NoMethodError do |e|
+  rescue_from NoMethodError do
     errors = {
-      param: [{
-        error: "Bad Parameter",
-        value: "invalid_param"
-      }]
+      param: [
+        {
+          error: "Bad Parameter",
+          value: "invalid_param",
+        },
+      ],
     }
     render template: "api/v1/errors/error", locals: { errors: errors }, status: :bad_request
   end

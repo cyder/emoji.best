@@ -7,14 +7,14 @@ class Api::V1::UserSessionsController < Api::V1::BaseController
 
     @user = login(email, password)
 
-    unless @user
-      errors = {
-        password: [{
-          error: "incorrect"
-        }]
-      }
-      render template: "api/v1/errors/error", locals: { errors: errors }, status: :bad_request
-    end
+    errors = {
+      password: [
+        {
+          error: "incorrect",
+        },
+      ],
+    }
+    render template: "api/v1/errors/error", locals: { errors: errors }, status: :bad_request unless @user
   end
 
   def destroy
