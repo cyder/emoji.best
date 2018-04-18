@@ -7,7 +7,7 @@ class Api::V1::UserSessionsController < Api::V1::BaseController
 
     @user = login(email, password)
 
-    render template: "api/v1/user_sessions/incorrect", status: :bad_request unless @user
+    render template: "api/v1/errors/incorrect", status: :bad_request unless @user
   end
 
   def destroy
