@@ -5,10 +5,10 @@ class Api::V1::SearchController < Api::V1::BaseController
   def index
     @num = params[:num] || DEFAULT_PAGE_NUM
     @order = params[:order] || DEFAULT_ORDER
-    items = Emoji.all
+    items = params[:keyword].present? ? Emoji.keyword_search(params[:keyword]) : Emoji.all
     ordered_items = order_emojis(items, @order)
     @total = Emoji.all.count
-    @emojis = items.order_by_popularity.limit(@num)
+    @emojis = ordered_items.limit(@num)
   end
 
   private

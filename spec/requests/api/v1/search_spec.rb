@@ -1,14 +1,14 @@
 require "rails_helper"
 
 describe "GET /api/v1/search" do
-  let(:headers) { { "Content-Type" => "application/json" } }
   let(:emoji) { build(:emoji) }
   let(:download_log) { build(:download_log) }
   let(:new) { "new" }
   let(:popular) { "popular" }
+  let(:keyword) { "sample" }
 
   context "with valid params" do
-    let(:params) { { order: new, num: 10 } }
+    let(:params) { { order: new, num: 10, keyword: keyword } }
     before do
       download_log.save
       emoji.save

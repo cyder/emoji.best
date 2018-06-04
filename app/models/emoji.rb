@@ -7,7 +7,8 @@ class Emoji < ApplicationRecord
   end
 
   scope :keyword_search, ->(keyword) {
-    where("name LIKE ?", "%#{keyword}%")
+    str = "%#{keyword}%"
+    where("name LIKE ? or description LIKE ?", str, str)
   }
 
   scope :order_by_newest, -> {
