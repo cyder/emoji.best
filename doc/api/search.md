@@ -29,8 +29,14 @@
       tag: [
         { id: id, name: :name },
         ...
-      ]
+      ],
+      images: {
+        learge_url: :large_image,
+        thumbnail_url: :thumbnail_image,
+        slack_url: :slack_image
+      },
       user: {
+        id: :id,
         name: :name
       }
     }
