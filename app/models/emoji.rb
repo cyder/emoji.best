@@ -9,7 +9,8 @@ class Emoji < ApplicationRecord
 
   scope :keyword_search, ->(keyword) {
     str = "%#{keyword}%"
-    where("name LIKE ? or description LIKE ?", str, str)
+    where("name LIKE ? or description LIKE ?", str, str).
+      or(where(id: Tag.select(:emoji_id).keyword_search(keyword).distinct))
   }
 
   scope :order_by_newest, -> {
