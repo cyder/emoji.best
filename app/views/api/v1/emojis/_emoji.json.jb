@@ -11,5 +11,5 @@
   tags: emoji.tags.map do |tag|
     { id: tag.id, name: tag.name }
   end,
-  user: { id: emoji.user.id, name: emoji.user.name }
+  user: { id: emoji.user.id, name: emoji.user.name },
 }

@@ -10,7 +10,7 @@ describe "GET /api/v1/search" do
   let(:tag) { build(:tag, emoji: tagged_emoji) }
 
   before do
-    emojis.map(&:save)
+    emojis.each(&:save)
     tag.save
     download_log.save
   end
