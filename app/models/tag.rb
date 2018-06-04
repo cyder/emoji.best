@@ -5,5 +5,4 @@ class Tag < ApplicationRecord
   scope :keyword_search, ->(keyword) {
     where("name LIKE ?", "%#{keyword}%")
   }
-
 end

@@ -18,10 +18,9 @@ class Emoji < ApplicationRecord
   }
 
   scope :order_by_popularity, -> {
-    select("emojis.*, COUNT(download_logs.id) AS num_of_donwloaded").
-      left_joins(:download_logs).
+    left_joins(:download_logs).
       group(:id).
-      order("num_of_donwloaded DESC").
+      order("COUNT(download_logs.id) DESC").
       order_by_newest
   }
 end
