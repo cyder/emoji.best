@@ -3,4 +3,7 @@
   name: emoji.name,
   description: emoji.description,
   number_of_donwloaded: emoji.number_of_donwloaded,
+  tags: emoji.tags.map do |tag|
+    { id: tag.id, name: tag.name }
+  end,
 }

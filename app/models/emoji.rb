@@ -1,6 +1,7 @@
 class Emoji < ApplicationRecord
   belongs_to :user
   has_many :download_logs
+  has_many :tags
 
   def number_of_donwloaded
     download_logs.count
