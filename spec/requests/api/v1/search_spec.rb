@@ -1,10 +1,19 @@
 require "rails_helper"
 
 describe "GET /api/v1/search" do
+  let(:headers) { { "Content-Type" => "application/json" } }
   let(:emoji) { build(:emoji) }
+  let(:download_log) { build(:download_log) }
+  let(:new) { "new" }
+  let(:popular) { "popular" }
 
   context "with valid params" do
-    before { emoji.save }
+    let(:params) { { order: new, num: 10 } }
+    before do
+      download_log.save
+      emoji.save
+    end
+
     it "returns a emojis", autodoc: true do
       is_expected.to eq 200
       body = response.body
