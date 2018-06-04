@@ -1,0 +1,5 @@
+{
+  id: emoji.id,
+  name: emoji.name,
+  description: emoji.description,
+}
