@@ -25,7 +25,7 @@
       id: :id,
       name: :name,
       description: :description,
-      number_of_donwloaded: :number_of_donwloaded,
+      number_of_downloaded: :number_of_downloaded,
       tag: [
         { id: id, name: :name },
         ...

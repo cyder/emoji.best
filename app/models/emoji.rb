@@ -3,7 +3,7 @@ class Emoji < ApplicationRecord
   has_many :download_logs, dependent: :destroy
   has_many :tags, dependent: :destroy
 
-  def number_of_donwloaded
+  def number_of_downloaded
     download_logs.count
   end
 

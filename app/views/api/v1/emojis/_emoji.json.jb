@@ -2,7 +2,7 @@
   id: emoji.id,
   name: emoji.name,
   description: emoji.description,
-  number_of_donwloaded: emoji.number_of_donwloaded,
+  number_of_downloaded: emoji.number_of_downloaded,
   images: {
     learge_url: emoji.large_image_url,
     thumbnail_url: emoji.thumbnail_image_url,
