@@ -4,5 +4,5 @@
   order: @order,
   emojis: @emojis.map do |emoji|
     render(emoji)
-  end
+  end,
 }

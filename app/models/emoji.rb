@@ -3,7 +3,7 @@ class Emoji < ApplicationRecord
   has_many :download_logs
 
   def number_of_donwloaded
-    num_of_donwloaded || download_logs.count
+    download_logs.count
   end
 
   scope :keyword_search, ->(keyword) {

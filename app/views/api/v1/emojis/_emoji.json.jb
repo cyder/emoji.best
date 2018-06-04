@@ -2,5 +2,5 @@
   id: emoji.id,
   name: emoji.name,
   description: emoji.description,
-  number_of_donwloaded: emoji.number_of_donwloaded
+  number_of_donwloaded: emoji.number_of_donwloaded,
 }

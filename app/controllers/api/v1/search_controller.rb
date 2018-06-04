@@ -1,6 +1,6 @@
-class Api::V1::SearchController < ApplicationController
+class Api::V1::SearchController < Api::V1::BaseController
   DEFAULT_PAGE_NUM = 10
-  DEFAULT_ORDER = "new"
+  DEFAULT_ORDER = "new".freeze
 
   def index
     @num = params[:num] || DEFAULT_PAGE_NUM
