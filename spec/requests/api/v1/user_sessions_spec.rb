@@ -9,7 +9,7 @@ describe "POST /api/v1/users/sign_in" do
   context "with valid params" do
     before { create(:user, email: email) }
 
-    it "should be able to sign in" do
+    it "should be able to sign in", autodoc: true do
       is_expected.to eq 200
       body = response.body
       expect(body).to have_json_path("user/id")
