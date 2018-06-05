@@ -15,9 +15,9 @@ class Api::V1::SearchController < Api::V1::BaseController
 
     def order_emojis(items, method)
       case method
-      when "new" then
+      when "new"
         items.order_by_newest
-      when "popular" then
+      when "popular"
         items.order_by_popularity
       end
     end
