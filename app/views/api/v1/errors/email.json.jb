@@ -1,0 +1,10 @@
+{
+  errors: {
+    email: [
+      {
+        error: "invalid",
+        value: "invalid_email",
+      },
+    ],
+  },
+}
