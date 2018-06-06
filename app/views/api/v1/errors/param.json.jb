@@ -1,0 +1,10 @@
+{
+  errors: {
+    param: [
+      {
+        error: "Bad Parameter",
+        value: "invalid_param",
+      },
+    ],
+  },
+}
