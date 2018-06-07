@@ -1,4 +1,6 @@
 class Api::V1::UserSessionsController < Api::V1::BaseController
+  skip_before_action :require_valid_token, only: :create
+
   def create
     email = params[:user][:email]
     password = params[:user][:password]
