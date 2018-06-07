@@ -12,8 +12,7 @@ class User < ApplicationRecord
 
   scope :find_from_access_token, ->(token) {
     joins(:access_tokens).
-      merge(AccessToken.where(token: token).before_expired).
-      first
+      merge(AccessToken.where(token: token).before_expired)
   }
 
   def activate
