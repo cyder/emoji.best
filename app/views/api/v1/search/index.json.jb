@@ -1,0 +1,8 @@
+{
+  total: @total,
+  num: @num,
+  order: @order,
+  emojis: @emojis.map do |emoji|
+    render(emoji)
+  end,
+}

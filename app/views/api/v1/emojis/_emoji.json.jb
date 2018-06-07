@@ -1,0 +1,15 @@
+{
+  id: emoji.id,
+  name: emoji.name,
+  description: emoji.description,
+  number_of_downloaded: emoji.number_of_downloaded,
+  images: {
+    learge_url: emoji.large_image_url,
+    thumbnail_url: emoji.thumbnail_image_url,
+    slack_url: emoji.slack_image_url,
+  },
+  tags: emoji.tags.map do |tag|
+    { id: tag.id, name: tag.name }
+  end,
+  user: { id: emoji.user.id, name: emoji.user.name },
+}

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resource :users, only: [:create] do
         post "sign_in", to: "user_sessions#create"
       end
+      resources :search, only: [:index]
     end
   end
 end
