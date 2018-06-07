@@ -21,6 +21,6 @@
   "scripts": {
     "start": "rails s & bin/webpack-dev-server",
     "build": "bin/webpack",
-    "lint": "eslint --ext .jsx,.js app/javascript/packs/"
+    "lint": "eslint --ext .jsx,.js app/javascript/"
   }
 }
