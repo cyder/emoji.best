@@ -2,7 +2,7 @@ class AccessToken < ApplicationRecord
   before_create :generate_token, :set_expiration
   belongs_to :user
 
-  scope :before_expired, -> { where("expires_at > ?", DateTime.now) }
+  scope :before_expired, -> { where("expires_at > ?", Time.current) }
 
   private
 
@@ -11,6 +11,6 @@ class AccessToken < ApplicationRecord
     end
 
     def set_expiration
-      self.expires_at = DateTime.now + 30 # 30日間有効
+      self.expires_at = Time.current + 1.month # 30日間有効
     end
 end

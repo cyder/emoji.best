@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, confirmation: true
   validates :password_confirmation, presence: true
 
-  scope :find_by_access_token, ->(token) {
+  scope :find_from_access_token, ->(token) {
     joins(:access_tokens).
       merge(AccessToken.where(token: token).before_expired).
       first

@@ -18,7 +18,7 @@ class Api::V1::BaseController < ApplicationController
 
   def require_valid_token
     access_token = request.headers[:Authorization]
-    user = User.find_by_access_token(access_token)
+    user = User.find_from_access_token(access_token)
     if access_token.blank? || user.blank?
       render template: "api/v1/errors/forbidden", status: :forbidden
       return

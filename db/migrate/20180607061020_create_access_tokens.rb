@@ -4,6 +4,8 @@ class CreateAccessTokens < ActiveRecord::Migration[5.1]
       t.string :token, null: false
       t.references :user, null: false
       t.datetime :expires_at, null: false
+
+      t.timestamps
     end
   end
 end

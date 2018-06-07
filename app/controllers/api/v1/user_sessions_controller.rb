@@ -6,11 +6,12 @@ class Api::V1::UserSessionsController < Api::V1::BaseController
     password = login_params[:password]
 
     User.find_by!(email: email)
-    if @user = login(email, password)
-      @access_token = @user.activate.token
-    else
+    @user = login(email, password)
+    unless @user
       render template: "api/v1/errors/incorrect", status: :bad_request
+      return
     end
+    @access_token = @user.activate.token
   end
 
   def destroy
