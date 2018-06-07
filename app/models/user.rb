@@ -8,4 +8,8 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :password, presence: true, length: { minimum: 6 }, confirmation: true
   validates :password_confirmation, presence: true
+
+  def activate
+    AccessToken.create(user: self)
+  end
 end

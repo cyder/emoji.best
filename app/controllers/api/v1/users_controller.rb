@@ -1,6 +1,7 @@
 class Api::V1::UsersController < Api::V1::BaseController
   def create
     @user = User.create! user_params
+    @access_token = @user.activate.token
     auto_login(@user)
   end
 

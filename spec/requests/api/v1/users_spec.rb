@@ -17,6 +17,12 @@ describe "POST /api/v1/users" do
       expect(body).to be_json_eql(%("#{user.email}")).at_path("user/email")
     end
 
+    it "return access token" do
+      is_expected.to eq 200
+      body = response.body
+      expect(body).to have_json_path("access_token")
+    end
+
     it { expect { subject }.to change(User, :count).by(1) }
   end
 

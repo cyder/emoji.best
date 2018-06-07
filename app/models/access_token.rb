@@ -9,6 +9,6 @@ class AccessToken < ApplicationRecord
     end
 
     def set_expiration
-      self.expires_at = DateTime.now + 30 #30日間有効
+      self.expires_at = DateTime.now + 30 # 30日間有効
     end
 end

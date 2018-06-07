@@ -15,6 +15,12 @@ describe "POST /api/v1/users/sign_in" do
       expect(body).to have_json_path("user/id")
       expect(body).to be_json_eql(%("#{user.email}")).at_path("user/email")
     end
+
+    it "return access token" do
+      is_expected.to eq 200
+      body = response.body
+      expect(body).to have_json_path("access_token")
+    end
   end
 
   context "with invalid params" do
