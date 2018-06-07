@@ -6,12 +6,14 @@ class Api::V1::BaseController < ApplicationController
     render template: "api/v1/errors/error", locals: { errors: errors }, status: :bad_request
   end
 
-  rescue_from ActiveRecord::RecordNotFound do
-    render template: "api/v1/errors/email", status: :bad_request
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    error = e.to_s
+    render template: "api/v1/errors/not_found", locals: { error: error }, status: :not_found
   end
 
-  rescue_from NoMethodError do
-    render template: "api/v1/errors/param", status: :bad_request
+  rescue_from ActionController::ParameterMissing do |e|
+    error = e.to_s
+    render template: "api/v1/errors/param", locals: { error: error }, status: :bad_request
   end
 
   def require_valid_token
