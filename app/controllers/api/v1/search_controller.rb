@@ -1,4 +1,6 @@
 class Api::V1::SearchController < Api::V1::BaseController
+  skip_before_action :require_valid_token
+
   DEFAULT_PAGE_NUM = 10
   DEFAULT_ORDER = "new".freeze
 
