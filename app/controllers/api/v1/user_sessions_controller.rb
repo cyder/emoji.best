@@ -1,15 +1,25 @@
 class Api::V1::UserSessionsController < Api::V1::BaseController
+  skip_before_action :require_valid_token, only: :create
+
   def create
-    email = params[:user][:email]
-    password = params[:user][:password]
+    email = login_params[:email]
+    password = login_params[:password]
 
     User.find_by!(email: email)
-
     @user = login(email, password)
-
-    render template: "api/v1/errors/incorrect", status: :bad_request unless @user
+    unless @user
+      render template: "api/v1/errors/incorrect", status: :bad_request
+      return
+    end
+    @access_token = @user.activate.token
   end
 
   def destroy
   end
+
+  private
+
+    def login_params
+      params.require(:user).permit(:email, :password)
+    end
 end

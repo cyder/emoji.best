@@ -32,7 +32,8 @@ X-Frame-Options: SAMEORIGIN
     "id": 18,
     "name": "name",
     "email": "user1@factory.com"
-  }
+  },
+  "access_token": "1024:1baae05907d2c0cb9cbdfde8feba03d7"
 }
 ```
 
