@@ -1,21 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
 
-const Hello = props => (
-  <div>Hello {props.name}!</div>
-);
-
-Hello.defaultProps = {
-  name: 'David',
-};
-
-Hello.propTypes = {
-  name: PropTypes.string,
-};
-
+import AppContainer from './containers/app';
+import store from './redux/configure-store';
 
 const App = () => (
-  <Hello name="React" />
+  <Provider store={store}>
+    <AppContainer />
+  </Provider>
 );
 
 export default App;
