@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Emoji from './emoji';
+import EmojiListShape from './shapes/emoji-list';
 
 const EmojiList = ({ emojiList }) => (
   <section>
@@ -11,5 +12,9 @@ const EmojiList = ({ emojiList }) => (
     }
   </section>
 );
+
+EmojiList.propTypes = {
+  emojiList: EmojiListShape.isRequired,
+};
 
 export default EmojiList;
