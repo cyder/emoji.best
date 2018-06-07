@@ -54,3 +54,18 @@ describe "POST /api/v1/users/sign_in" do
     end
   end
 end
+
+describe "DELETE /api/v1/users/sign_out" do
+  let(:user) { create(:user) }
+  let(:access_token) { create(:access_token, user: user) }
+  let(:headers) { { "Authorization" => access_token.token } }
+
+  context "with valid params" do
+    it "should be able to sign out", autodoc: true do
+      is_expected.to eq 200
+      body = response.body
+      expect(body).to have_json_path("user/id")
+      expect(body).to be_json_eql(%("#{user.email}")).at_path("user/email")
+    end
+  end
+end

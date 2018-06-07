@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resource :users, only: [:create] do
         post "sign_in", to: "user_sessions#create"
+        delete "sign_out", to: "user_sessions#destroy"
       end
       resources :search, only: [:index]
     end
