@@ -3,7 +3,7 @@ import React from 'react';
 import EmojiShape from './shapes/emoji';
 
 const Emoji = ({ name }) => (
-  <article>{name}</article>
+  <div>{name}</div>
 );
 
 Emoji.propTypes = EmojiShape;
