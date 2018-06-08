@@ -21,6 +21,8 @@ describe "POST /api/v1/users/sign_in" do
       body = response.body
       expect(body).to have_json_path("access_token")
     end
+
+    it { expect { subject }.to change(AccessToken, :count).by(1) }
   end
 
   context "with invalid params" do
@@ -51,6 +53,43 @@ describe "POST /api/v1/users/sign_in" do
       body = response.body
       expect(body).to have_json_path("errors/password")
       expect(body).to be_json_eql(%("incorrect")).at_path("errors/password/0/error")
+    end
+  end
+end
+
+describe "DELETE /api/v1/users/sign_out" do
+  let(:user) { build(:user) }
+  let(:access_token) { build(:access_token, user: user) }
+  let(:headers) { { "Authorization" => access_token.token } }
+
+  before { access_token.save }
+
+  context "with valid params" do
+    it "should be able to sign out", autodoc: true do
+      is_expected.to eq 200
+      body = response.body
+      expect(body).to have_json_path("user/id")
+      expect(body).to be_json_eql(%("#{user.email}")).at_path("user/email")
+    end
+
+    it { expect { subject }.to change(AccessToken, :count).by(-1) }
+  end
+
+  context "without access token" do
+    let(:headers) { { "Authorization" => nil } }
+    it "return a error" do
+      is_expected.to eq 403
+      body = response.body
+      expect(body).to have_json_path("errors/error")
+    end
+  end
+
+  context "with invalid token" do
+    let(:headers) { { "Authorization" => "invalid token" } }
+    it "return a error" do
+      is_expected.to eq 403
+      body = response.body
+      expect(body).to have_json_path("errors/error")
     end
   end
 end
