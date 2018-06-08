@@ -8,3 +8,5 @@ inherit_gem:
 
 AllCops:
   TargetRubyVersion: 2.5
+DotPosition:
+  EnforcedStyle: leading
