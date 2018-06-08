@@ -9,8 +9,8 @@ class Emoji < ApplicationRecord
 
   scope :keyword_search, ->(keyword) {
     str = "%#{keyword}%"
-    where("name LIKE ? or description LIKE ?", str, str).
-      or(where(id: Tag.select(:emoji_id).keyword_search(keyword).distinct))
+    where("name LIKE ? or description LIKE ?", str, str)
+      .or(where(id: Tag.select(:emoji_id).keyword_search(keyword).distinct))
   }
 
   scope :order_by_newest, -> {
@@ -18,9 +18,9 @@ class Emoji < ApplicationRecord
   }
 
   scope :order_by_popularity, -> {
-    left_joins(:download_logs).
-      group(:id).
-      order("COUNT(download_logs.id) DESC").
-      order_by_newest
+    left_joins(:download_logs)
+      .group(:id)
+      .order("COUNT(download_logs.id) DESC")
+      .order_by_newest
   }
 end
