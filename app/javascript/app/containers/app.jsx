@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <EmojiList emojiList={this.props.emojis.emojiList} />
+        <EmojiList emojiList={this.props.emojis.list} />
       </div>
     );
   }
@@ -36,7 +36,7 @@ const AppContainer = connect(mapStateToProps, mapDispatchProps)(App);
 
 App.propTypes = {
   emojis: PropTypes.shape({
-    emojiList: EmojiListShape.isRequired,
+    list: EmojiListShape.isRequired,
   }).isRequired,
   loadEmojis: PropTypes.func.isRequired,
 };

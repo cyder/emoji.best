@@ -1,7 +1,7 @@
 import * as types from './types';
 
 const initialState = {
-  emojiList: [],
+  list: [],
 };
 
 const emojis = (state = initialState, action) => {
@@ -9,12 +9,12 @@ const emojis = (state = initialState, action) => {
     case types.LOAD:
       return {
         ...state,
-        emojiList: [],
+        list: [],
       };
     case types.SUCCESS_LOAD:
       return {
         ...state,
-        emojiList: action.emojis,
+        list: action.emojis,
       };
     default: return state;
   }
