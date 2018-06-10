@@ -1,12 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Emoji from './emoji';
 import EmojiListShape from './shapes/emoji-list';
 
-const EmojiList = ({ emojiList, loadEmojis }) => (
+const EmojiList = ({ emojiList }) => (
   <section>
-    <button onClick={loadEmojis}>LOAD</button>
     {
       emojiList.map(emoji => (
         <Emoji key={emoji.id} {...emoji} />
@@ -17,7 +15,6 @@ const EmojiList = ({ emojiList, loadEmojis }) => (
 
 EmojiList.propTypes = {
   emojiList: EmojiListShape.isRequired,
-  loadEmojis: PropTypes.func.isRequired,
 };
 
 export default EmojiList;

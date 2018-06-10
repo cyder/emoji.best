@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -9,12 +9,20 @@ import EmojiListShape from '../components/shapes/emoji-list';
 
 import * as Actions from '../redux/modules/reducer';
 
-const App = ({ emojiList, loadEmojis }) => (
-  <div>
-    <Header />
-    <EmojiList emojiList={emojiList} loadEmojis={loadEmojis} />
-  </div>
-);
+class App extends Component {
+  componentWillMount() {
+    this.props.loadEmojis();
+  }
+
+  render() {
+    return (
+      <div>
+        <Header />
+        <EmojiList emojiList={this.props.emojiList} />
+      </div>
+    );
+  }
+}
 
 function mapStateToProps(state) {
   return state;
