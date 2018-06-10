@@ -3,9 +3,10 @@ import { takeEvery, put } from 'redux-saga/effects';
 
 import { LOAD } from './types';
 import { sucessLoadEmojis } from './actions';
+import searchEmojis from '../../../api';
 
 function* sageLoadEmojis() {
-  const json = yield fetch('api/v1/search').then(response => response.json());
+  const json = yield searchEmojis();
   yield put(sucessLoadEmojis(json.emojis));
 }
 
