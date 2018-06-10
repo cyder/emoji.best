@@ -33,11 +33,8 @@ export function sucessLoadEmojis(emojis) {
 }
 
 function* sageLoadEmojis() {
-  yield put(sucessLoadEmojis([
-    { id: 0, name: 'emoji1' },
-    { id: 1, name: 'emoji2' },
-    { id: 2, name: 'emoji3' },
-  ]));
+  const json = yield fetch('api/v1/search').then(response => response.json());
+  yield put(sucessLoadEmojis(json.emojis));
 }
 
 export function* rootSaga() {
