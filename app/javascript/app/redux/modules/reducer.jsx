@@ -1,16 +1,25 @@
+const LOAD = 'LOAD';
+
 const initialState = {
-  emojiList: [
-    { id: 0, name: 'emoji1' },
-    { id: 1, name: 'emoji2' },
-    { id: 2, name: 'emoji3' },
-  ],
+  emojiList: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    default:
-      return state;
+    case LOAD:
+      return {
+        emojiList: [
+          { id: 0, name: 'emoji1' },
+          { id: 1, name: 'emoji2' },
+          { id: 2, name: 'emoji3' },
+        ],
+      };
+    default: return state;
   }
 };
+
+export function loadEmojis() {
+  return { type: LOAD };
+}
 
 export default reducer;

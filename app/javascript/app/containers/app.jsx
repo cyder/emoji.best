@@ -1,14 +1,18 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Header from '../components/header';
 import EmojiList from '../components/emoji-list';
 import EmojiListShape from '../components/shapes/emoji-list';
 
-const App = ({ emojiList }) => (
+import * as Actions from '../redux/modules/reducer';
+
+const App = ({ emojiList, loadEmojis }) => (
   <div>
     <Header />
-    <EmojiList emojiList={emojiList} />
+    <EmojiList emojiList={emojiList} loadEmojis={loadEmojis} />
   </div>
 );
 
@@ -16,10 +20,15 @@ function mapStateToProps(state) {
   return state;
 }
 
-const AppContainer = connect(mapStateToProps)(App);
+function mapDispatchProps(dispatch) {
+  return bindActionCreators({ ...Actions }, dispatch);
+}
+
+const AppContainer = connect(mapStateToProps, mapDispatchProps)(App);
 
 App.propTypes = {
   emojiList: EmojiListShape.isRequired,
+  loadEmojis: PropTypes.func.isRequired,
 };
 
 export default AppContainer;
