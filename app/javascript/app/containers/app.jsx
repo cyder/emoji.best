@@ -7,7 +7,7 @@ import Header from '../components/header';
 import EmojiList from '../components/emoji-list';
 import EmojiListShape from '../components/shapes/emoji-list';
 
-import * as Actions from '../redux/modules/reducer';
+import * as Actions from '../redux/modules/emojis/actions';
 
 class App extends Component {
   componentWillMount() {
@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <EmojiList emojiList={this.props.emojiList} />
+        <EmojiList emojiList={this.props.emojis.emojiList} />
       </div>
     );
   }
@@ -35,7 +35,9 @@ function mapDispatchProps(dispatch) {
 const AppContainer = connect(mapStateToProps, mapDispatchProps)(App);
 
 App.propTypes = {
-  emojiList: EmojiListShape.isRequired,
+  emojis: PropTypes.shape({
+    emojiList: EmojiListShape.isRequired,
+  }).isRequired,
   loadEmojis: PropTypes.func.isRequired,
 };
 
