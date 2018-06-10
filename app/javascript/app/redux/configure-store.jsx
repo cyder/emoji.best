@@ -1,7 +1,12 @@
-import { createStore } from 'redux';
+import 'babel-polyfill';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
-import reducer from './modules/reducer';
+import reducer, { rootSaga } from './modules/reducer';
 
-const store = createStore(reducer);
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(rootSaga);
 
 export default store;
