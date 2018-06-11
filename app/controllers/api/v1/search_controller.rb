@@ -5,7 +5,7 @@ class Api::V1::SearchController < Api::V1::BaseController
   DEFAULT_ORDER = "new".freeze
 
   def index
-    @num = params[:num] || DEFAULT_PAGE_NUM
+    @num = (params[:num] || DEFAULT_PAGE_NUM).to_i
     @order = params[:order] || DEFAULT_ORDER
     items = params[:keyword].present? ? Emoji.keyword_search(params[:keyword]) : Emoji.all
     ordered_items = order_emojis(items, @order)
