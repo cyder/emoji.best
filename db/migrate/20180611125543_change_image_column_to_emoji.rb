@@ -4,6 +4,6 @@ class ChangeImageColumnToEmoji < ActiveRecord::Migration[5.1]
     remove_column :emojis, :large_image_url, :string
     remove_column :emojis, :thumbnail_image_url, :string
     remove_column :emojis, :slack_image_url, :string
-    add_column    :emojis, :image, :string, null: false
+    add_column    :emojis, :image, :string
   end
 end

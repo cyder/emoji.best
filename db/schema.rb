@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20180611125543) do
     t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image", null: false
+    t.string "image"
     t.index ["user_id"], name: "index_emojis_on_user_id"
   end
 
