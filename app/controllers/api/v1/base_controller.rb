@@ -23,6 +23,7 @@ class Api::V1::BaseController < ApplicationController
       render template: "api/v1/errors/forbidden", status: :forbidden
       return
     end
+    access_token.update_expiration
     auto_login(access_token.user)
   end
 end
