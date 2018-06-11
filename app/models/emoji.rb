@@ -23,4 +23,8 @@ class Emoji < ApplicationRecord
       .order("COUNT(download_logs.id) DESC")
       .order_by_newest
   }
+
+  scope :select_range, ->(page, num) {
+    offset(page * num).limit(num)
+  }
 end
