@@ -1,4 +1,5 @@
 class Emoji < ApplicationRecord
+  mount_uploader :image, EmojiUploader
   belongs_to :user
   has_many :download_logs, dependent: :destroy
   has_many :tags, dependent: :destroy

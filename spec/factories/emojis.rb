@@ -3,9 +3,6 @@ FactoryBot.define do
     user
     name "sample_emoji"
     description "sample"
-    original_image_url "orizinal_image"
-    large_image_url "large_image"
-    thumbnail_image_url "thumbnail_image"
-    slack_image_url "slack_image"
+    image Rack::Test::UploadedFile.new(File.join(Rails.root, "spec/fixtures/images/indian.png"))
   end
 end
