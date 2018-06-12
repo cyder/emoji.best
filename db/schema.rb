@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180607061020) do
+ActiveRecord::Schema.define(version: 20180611125543) do
 
   create_table "access_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "token", null: false
@@ -34,12 +34,9 @@ ActiveRecord::Schema.define(version: 20180607061020) do
     t.bigint "user_id", null: false
     t.string "name", null: false
     t.string "description", null: false
-    t.string "original_image_url", null: false
-    t.string "large_image_url", null: false
-    t.string "thumbnail_image_url", null: false
-    t.string "slack_image_url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image", default: "", null: false
     t.index ["user_id"], name: "index_emojis_on_user_id"
   end
 

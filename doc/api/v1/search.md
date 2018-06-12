@@ -28,9 +28,9 @@ X-Frame-Options: SAMEORIGIN
       "description": "sample",
       "number_of_downloaded": 0,
       "images": {
-        "learge_url": "large_image",
-        "thumbnail_url": "thumbnail_image",
-        "slack_url": "slack_image"
+        "large_url": "/uploads/emoji/760/large/keyword%20emoji.png",
+        "thumb_url": "/uploads/emoji/760/thumb/keyword%20emoji.png",
+        "slack_url": "/uploads/emoji/760/slack/keyword%20emoji.png"
       },
       "tags": [
 
@@ -46,9 +46,9 @@ X-Frame-Options: SAMEORIGIN
       "description": "sample",
       "number_of_downloaded": 0,
       "images": {
-        "learge_url": "large_image",
-        "thumbnail_url": "thumbnail_image",
-        "slack_url": "slack_image"
+        "large_url": "/uploads/emoji/759/large/taggedemoji.png",
+        "thumb_url": "/uploads/emoji/759/thumb/taggedemoji.png",
+        "slack_url": "/uploads/emoji/759/slack/taggedemoji.png"
       },
       "tags": [
         {
@@ -67,9 +67,9 @@ X-Frame-Options: SAMEORIGIN
       "description": "sample",
       "number_of_downloaded": 1,
       "images": {
-        "learge_url": "large_image",
-        "thumbnail_url": "thumbnail_image",
-        "slack_url": "slack_image"
+        "large_url": "/uploads/emoji/758/large/downloaded%20emoji.png",
+        "thumb_url": "/uploads/emoji/758/thumb/downloaded%20emoji.png",
+        "slack_url": "/uploads/emoji/758/slack/downloaded%20emoji.png"
       },
       "tags": [
 
@@ -85,9 +85,9 @@ X-Frame-Options: SAMEORIGIN
       "description": "sample",
       "number_of_downloaded": 0,
       "images": {
-        "learge_url": "large_image",
-        "thumbnail_url": "thumbnail_image",
-        "slack_url": "slack_image"
+        "large_url": "/uploads/emoji/757/large/normal%20emoji.png",
+        "thumb_url": "/uploads/emoji/757/thumb/normal%20emoji.png",
+        "slack_url": "/uploads/emoji/757/slack/normal%20emoji.png"
       },
       "tags": [
 
@@ -131,9 +131,9 @@ X-Frame-Options: SAMEORIGIN
       "description": "sample",
       "number_of_downloaded": 0,
       "images": {
-        "learge_url": "large_image",
-        "thumbnail_url": "thumbnail_image",
-        "slack_url": "slack_image"
+        "large_url": "/uploads/emoji/764/large/keyword%20emoji.png",
+        "thumb_url": "/uploads/emoji/764/thumb/keyword%20emoji.png",
+        "slack_url": "/uploads/emoji/764/slack/keyword%20emoji.png"
       },
       "tags": [
 
@@ -177,9 +177,9 @@ X-Frame-Options: SAMEORIGIN
       "description": "sample",
       "number_of_downloaded": 0,
       "images": {
-        "learge_url": "large_image",
-        "thumbnail_url": "thumbnail_image",
-        "slack_url": "slack_image"
+        "large_url": "/uploads/emoji/768/large/keyword%20emoji.png",
+        "thumb_url": "/uploads/emoji/768/thumb/keyword%20emoji.png",
+        "slack_url": "/uploads/emoji/768/slack/keyword%20emoji.png"
       },
       "tags": [
 
@@ -195,9 +195,9 @@ X-Frame-Options: SAMEORIGIN
       "description": "sample",
       "number_of_downloaded": 0,
       "images": {
-        "learge_url": "large_image",
-        "thumbnail_url": "thumbnail_image",
-        "slack_url": "slack_image"
+        "large_url": "/uploads/emoji/767/large/taggedemoji.png",
+        "thumb_url": "/uploads/emoji/767/thumb/taggedemoji.png",
+        "slack_url": "/uploads/emoji/767/slack/taggedemoji.png"
       },
       "tags": [
         {
@@ -216,9 +216,9 @@ X-Frame-Options: SAMEORIGIN
       "description": "sample",
       "number_of_downloaded": 1,
       "images": {
-        "learge_url": "large_image",
-        "thumbnail_url": "thumbnail_image",
-        "slack_url": "slack_image"
+        "large_url": "/uploads/emoji/766/large/downloaded%20emoji.png",
+        "thumb_url": "/uploads/emoji/766/thumb/downloaded%20emoji.png",
+        "slack_url": "/uploads/emoji/766/slack/downloaded%20emoji.png"
       },
       "tags": [
 
@@ -234,9 +234,9 @@ X-Frame-Options: SAMEORIGIN
       "description": "sample",
       "number_of_downloaded": 0,
       "images": {
-        "learge_url": "large_image",
-        "thumbnail_url": "thumbnail_image",
-        "slack_url": "slack_image"
+        "large_url": "/uploads/emoji/765/large/normal%20emoji.png",
+        "thumb_url": "/uploads/emoji/765/thumb/normal%20emoji.png",
+        "slack_url": "/uploads/emoji/765/slack/normal%20emoji.png"
       },
       "tags": [
 
@@ -280,9 +280,9 @@ X-Frame-Options: SAMEORIGIN
       "description": "sample",
       "number_of_downloaded": 1,
       "images": {
-        "learge_url": "large_image",
-        "thumbnail_url": "thumbnail_image",
-        "slack_url": "slack_image"
+        "large_url": "/uploads/emoji/770/large/downloaded%20emoji.png",
+        "thumb_url": "/uploads/emoji/770/thumb/downloaded%20emoji.png",
+        "slack_url": "/uploads/emoji/770/slack/downloaded%20emoji.png"
       },
       "tags": [
 
@@ -298,9 +298,9 @@ X-Frame-Options: SAMEORIGIN
       "description": "sample",
       "number_of_downloaded": 0,
       "images": {
-        "learge_url": "large_image",
-        "thumbnail_url": "thumbnail_image",
-        "slack_url": "slack_image"
+        "large_url": "/uploads/emoji/772/large/keyword%20emoji.png",
+        "thumb_url": "/uploads/emoji/772/thumb/keyword%20emoji.png",
+        "slack_url": "/uploads/emoji/772/slack/keyword%20emoji.png"
       },
       "tags": [
 
@@ -316,9 +316,9 @@ X-Frame-Options: SAMEORIGIN
       "description": "sample",
       "number_of_downloaded": 0,
       "images": {
-        "learge_url": "large_image",
-        "thumbnail_url": "thumbnail_image",
-        "slack_url": "slack_image"
+        "large_url": "/uploads/emoji/771/large/taggedemoji.png",
+        "thumb_url": "/uploads/emoji/771/thumb/taggedemoji.png",
+        "slack_url": "/uploads/emoji/771/slack/taggedemoji.png"
       },
       "tags": [
         {
@@ -337,9 +337,9 @@ X-Frame-Options: SAMEORIGIN
       "description": "sample",
       "number_of_downloaded": 0,
       "images": {
-        "learge_url": "large_image",
-        "thumbnail_url": "thumbnail_image",
-        "slack_url": "slack_image"
+        "large_url": "/uploads/emoji/769/large/normal%20emoji.png",
+        "thumb_url": "/uploads/emoji/769/thumb/normal%20emoji.png",
+        "slack_url": "/uploads/emoji/769/slack/normal%20emoji.png"
       },
       "tags": [
 

@@ -1,5 +1,5 @@
 # Emoji
-## POST /emoji
+## POST /emojis
 Emojiのアップロードを行う
 
 ### request
@@ -17,20 +17,20 @@ Emojiのアップロードを行う
 #### 200 OK
 ```js
 {
-  result: "Success"
-  url: "/emoji"
-  method: "POST"
   emoji: {
     id: :id,
     name: :name,
     description: :description,
     image: {
-        original_url: :origial_url,
         learge_url: :learge_url,
         thumbnail_url: :thumbnail_url,
         slack_url: :slack_url,
-    }
-  }
+    },
+    user: {
+      id: :id,
+      name: :name,
+    },
+  },
 }
 ```
 
