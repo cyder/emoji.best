@@ -1,7 +1,11 @@
 class Emoji < ApplicationRecord
+  mount_uploader :image, EmojiUploader
   belongs_to :user
   has_many :download_logs, dependent: :destroy
   has_many :tags, dependent: :destroy
+  validates :name, presence: true
+  validates :description, presence: true
+  validates :image, presence: true
 
   def number_of_downloaded
     download_logs.count
