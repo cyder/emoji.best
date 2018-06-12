@@ -1,14 +1,6 @@
 class EmojiUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  if Rails.env.development?
-    storage :file
-  elsif Rails.env.test?
-    storage :file
-  else
-    storage :fog
-  end
-
   version :large do
     process resize_to_fill: [512, 512]
   end

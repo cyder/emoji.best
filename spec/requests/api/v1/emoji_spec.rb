@@ -4,7 +4,7 @@ describe "POST /api/v1/emojis" do
   let(:user) { create(:user) }
   let(:access_token) { create(:access_token, user: user) }
   let(:headers) { { "Authorization" => access_token.token } }
-  let(:filepath) { Rails.root.join("spec/fixtures/images/indian.png") }
+  let(:filepath) { Rails.root.join("spec", "fixtures", "images", "indian.png") }
   let(:image) { Rack::Test::UploadedFile.new(filepath) }
   let(:name) { "name" }
   let(:description) { "description" }
