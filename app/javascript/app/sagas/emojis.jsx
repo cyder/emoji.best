@@ -1,9 +1,9 @@
 import 'babel-polyfill';
 import { takeEvery, put } from 'redux-saga/effects';
 
-import { LOAD } from './types';
-import { sucessLoadEmojis } from './actions';
-import searchEmojis from '../../../api';
+import { LOAD } from '../constants/emojis';
+import { sucessLoadEmojis } from '../actions/emojis';
+import searchEmojis from '../api';
 
 function* sageLoadEmojis() {
   const json = yield searchEmojis();

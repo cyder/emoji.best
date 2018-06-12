@@ -7,7 +7,7 @@ import Header from '../components/header';
 import EmojiList from '../components/emoji-list';
 import EmojiListShape from '../components/shapes/emoji-list';
 
-import * as Actions from '../redux/modules/emojis/actions';
+import * as Actions from '../actions/emojis';
 
 class App extends Component {
   componentWillMount() {
