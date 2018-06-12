@@ -32,6 +32,9 @@ gem "jb"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem "carrierwave"
+gem "fog"
+gem "mini_magick"
 gem "sorcery"
 gem "webpacker"
 
