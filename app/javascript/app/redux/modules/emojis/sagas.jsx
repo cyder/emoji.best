@@ -10,6 +10,6 @@ function* sageLoadEmojis() {
   yield put(sucessLoadEmojis(json.emojis));
 }
 
-export default function* emojiSaga() {
+export default function* emojisSaga() {
   yield takeEvery(LOAD, sageLoadEmojis);
 }
