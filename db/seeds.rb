@@ -13,32 +13,11 @@ user = User.create(
   password_confirmation: "password",
 )
 
-Emoji.create(
-  user: user,
-  name: "sample_emoji1",
-  description: "sample",
-  original_image_url: "orizinal_image",
-  large_image_url: "large_image",
-  thumbnail_image_url: "thumbnail_image",
-  slack_image_url: "slack_image",
-)
-
-Emoji.create(
-  user: user,
-  name: "sample_emoji2",
-  description: "sample",
-  original_image_url: "orizinal_image",
-  large_image_url: "large_image",
-  thumbnail_image_url: "thumbnail_image",
-  slack_image_url: "slack_image",
-)
-
-Emoji.create(
-  user: user,
-  name: "sample_emoji3",
-  description: "sample",
-  original_image_url: "orizinal_image",
-  large_image_url: "large_image",
-  thumbnail_image_url: "thumbnail_image",
-  slack_image_url: "slack_image",
-)
+5.times do |no|
+  Emoji.create(
+    user: user,
+    name: "sample_emoji#{no}",
+    description: "sample",
+    image: File.open(Rails.root.join("spec", "fixtures", "images", "indian.png")),
+  )
+end
