@@ -4,9 +4,9 @@
   description: emoji.description,
   number_of_downloaded: emoji.number_of_downloaded,
   images: {
-    large_url: emoji.image.large.url,
-    thumb_url: emoji.image.thumb.url,
-    slack_url: emoji.image.slack.url,
+    large_url: emoji.image_url(:large),
+    thumb_url: emoji.image_url(:thumb),
+    slack_url: emoji.image_url(:slack),
   },
   tags: emoji.tags.map do |tag|
     { id: tag.id, name: tag.name }
