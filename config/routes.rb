@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         delete "sign_out", to: "user_sessions#destroy"
       end
       resources :search, only: [:index]
+      resources :emojis, only: [:create]
     end
   end
 end
