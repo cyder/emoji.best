@@ -16,7 +16,8 @@ const emojis = (state = initialState, action) => {
         ...state,
         list: action.emojis,
       };
-    default: return state;
+    default:
+      return state;
   }
 };
 
