@@ -3,7 +3,9 @@ class Api::V1::DownloadController < Api::V1::BaseController
   ZIP_FILENAME = "emojis.zip".freeze
 
   def index
-    zip_filepath = Rails.root.join("tmp", "uploads", "zip", "#{SecureRandom.uuid}.zip")
+    zip_dir = Rails.root.join("tmp", "uploads", "zip")
+    zip_filepath = zip_dir.join("#{SecureRandom.uuid}.zip")
+    FileUtils.mkdir_p(zip_dir) unless FileTest.exist?(zip_dir)
     emojis = Emoji.where(id: params[:emojis])
     emojis.each {|emoji| emoji.download_logs.create!(user: current_user) }
 
