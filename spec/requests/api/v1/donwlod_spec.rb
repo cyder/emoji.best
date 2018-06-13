@@ -27,4 +27,13 @@ describe "GET /api/v1/download" do
       expect(header["Content-Type"]).to eq "application/zip"
     end
   end
+
+  context "with access token" do
+    let(:user) { create(:user) }
+    let(:access_token) { create(:access_token, user: user) }
+    let(:headers) { { "Authorization" => access_token.token } }
+
+    it { expect { subject }.to change(DownloadLog, :count).by(emojis.size) }
+    it { expect { subject }.to change(user.download_log, :count).by(emojis.size) }
+  end
 end
