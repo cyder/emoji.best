@@ -35,6 +35,7 @@ gem "jb"
 gem "carrierwave"
 gem "fog"
 gem "mini_magick"
+gem "rubyzip"
 gem "sorcery"
 gem "webpacker"
 
