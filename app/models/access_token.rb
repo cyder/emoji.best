@@ -5,7 +5,7 @@ class AccessToken < ApplicationRecord
   scope :before_expired, -> { where("expires_at > ?", Time.current) }
 
   def update_expiration
-    self.expires_at = Time.current.since(1.month) # 30日間有効
+    self.expires_at = 1.month.since # 30日間有効
   end
 
   private
