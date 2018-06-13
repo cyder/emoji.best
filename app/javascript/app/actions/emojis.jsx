@@ -4,6 +4,6 @@ export function loadEmojis() {
   return { type: types.LOAD };
 }
 
-export function sucessLoadEmojis(emojis) {
+export function successLoadEmojis(emojis) {
   return { type: types.SUCCESS_LOAD, emojis };
 }
