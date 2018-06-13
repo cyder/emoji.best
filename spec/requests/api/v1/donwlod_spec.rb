@@ -15,4 +15,16 @@ describe "GET /api/v1/download" do
 
     it { expect { subject }.to change(DownloadLog, :count).by(emojis.size) }
   end
+
+  context "with same name emojis" do
+    let(:name) { "same_name_emoji" }
+    let(:emoji1) { create(:emoji, name: name) }
+    let(:emoji2) { create(:emoji, name: name) }
+
+    it "returns zip file" do
+      is_expected.to eq 200
+      header = response.header
+      expect(header["Content-Type"]).to eq "application/zip"
+    end
+  end
 end

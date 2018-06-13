@@ -9,10 +9,22 @@ class Api::V1::DownloadController < Api::V1::BaseController
 
     Zip::File.open(zip_filepath, Zip::File::CREATE) do |zipfile|
       emojis.each do |emoji|
-        file = emoji.image.slack.file
-        zipfile.add(file.basename, file.path)
+        filepath = emoji.image.slack.file.path
+        filename = filename(emojis, emoji)
+        zipfile.add(filename, filepath)
       end
     end
     send_file(zip_filepath, filename: ZIP_FILENAME)
   end
+
+  private
+
+    def filename(emojis, emoji)
+      file = emoji.image.slack.file
+      if emojis.where(name: emoji.name).size > 1
+        "#{file.basename}(#{emoji.id}).#{file.extension}"
+      else
+        file.filename
+      end
+    end
 end
