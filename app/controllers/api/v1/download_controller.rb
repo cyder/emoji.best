@@ -1,4 +1,5 @@
-class Api::V1::DownloadController < ApplicationController
+class Api::V1::DownloadController < Api::V1::BaseController
+  skip_before_action :require_valid_token, if: -> { request.headers[:Authorization].blank? }
   ZIP_FILENAME = "emojis.zip".freeze
 
   def index
