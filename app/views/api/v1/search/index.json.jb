@@ -1,6 +1,7 @@
 {
   total: @total,
   num: @num,
+  page: @page,
   order: @order,
   emojis: @emojis.map do |emoji|
     render(emoji)

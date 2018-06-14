@@ -56,4 +56,17 @@ describe "GET /api/v1/search" do
       expect(body).to be_json_eql(%("#{downloaded_emoji.name}")).at_path("emojis/0/name")
     end
   end
+
+  context "with page number" do
+    let(:page) { 1 }
+    let(:num) { 1 }
+    let(:params) { { page: page, num: num } }
+
+    it "returns a selected page", autodoc: true do
+      is_expected.to eq 200
+      body = response.body
+      expect(body).to be_json_eql(page).at_path("page")
+      expect(body).to be_json_eql(emojis[-(page * num + 1)].id).at_path("emojis/0/id")
+    end
+  end
 end

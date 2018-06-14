@@ -20,6 +20,7 @@ X-Frame-Options: SAMEORIGIN
 {
   "total": 4,
   "num": 10,
+  "page": 0,
   "order": "new",
   "emojis": [
     {
@@ -123,6 +124,7 @@ X-Frame-Options: SAMEORIGIN
 {
   "total": 4,
   "num": 10,
+  "page": 0,
   "order": "new",
   "emojis": [
     {
@@ -169,6 +171,7 @@ X-Frame-Options: SAMEORIGIN
 {
   "total": 4,
   "num": 10,
+  "page": 0,
   "order": "new",
   "emojis": [
     {
@@ -272,6 +275,7 @@ X-Frame-Options: SAMEORIGIN
 {
   "total": 4,
   "num": 10,
+  "page": 0,
   "order": "popular",
   "emojis": [
     {
@@ -345,7 +349,57 @@ X-Frame-Options: SAMEORIGIN
 
       ],
       "user": {
-        "id": 1664,
+        "id": 2873,
+        "name": "name"
+      }
+    }
+  ]
+}
+```
+
+## GET /api/v1/search
+Returns a selected page.
+
+### Example
+
+#### Request
+```
+GET /api/v1/search?page=1&num=1 HTTP/1.1
+Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+Host: www.example.com
+```
+
+#### Response
+```
+HTTP/1.1 200
+Content-Type: application/json; charset=utf-8
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+
+{
+  "total": 4,
+  "num": 1,
+  "page": 1,
+  "order": "new",
+  "emojis": [
+    {
+      "id": 1227,
+      "name": "taggedemoji",
+      "description": "sample",
+      "number_of_downloaded": 0,
+      "images": {
+        "learge_url": "large_image",
+        "thumbnail_url": "thumbnail_image",
+        "slack_url": "slack_image"
+      },
+      "tags": [
+        {
+          "id": 276,
+          "name": "tag_name"
+        }
+      ],
+      "user": {
+        "id": 2881,
         "name": "name"
       }
     }

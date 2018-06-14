@@ -7,7 +7,7 @@
 {
   keyword: :keywoird, //オプション（指定しなかった場合すべてのEmojiが対象になる）
   order: "new" or "popular" //オプション（デフォルト：new）
-  token: :next_token, //オプション
+  page: :ページ番号, //オプション（デフォルト：0）
   num: :1ページの表示数　//オプション（デフォルト：10）
 }
 ```
@@ -19,7 +19,7 @@
   total: :検索結果数
   num: :1ページの表示数
   order: "new" or "popular"
-  next_token: :次ページのトークン,
+  page: :ページ番号,
   emoji: [
     {
       id: :id,
