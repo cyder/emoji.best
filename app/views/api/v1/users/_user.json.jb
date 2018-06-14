@@ -1,9 +1,15 @@
-{
+json = {
   id: user.id,
   name: user.name,
-  number_of_downloaded: user.number_of_downloaded,
   number_of_uploaded: user.number_of_uploaded,
   upload_emojis: user.emojis.map do |emoji|
     render(emoji)
   end,
 }
+
+if user == current_user
+  json[:email] = user.email
+  json[:number_of_downloaded] = user.number_of_downloaded
+end
+
+json
