@@ -7,6 +7,11 @@ class Emoji < ApplicationRecord
   validates :description, presence: true
   validates :image, presence: true
 
+  module OrderMethod
+    NEW = "new".freeze
+    POPULAR = "popular".freeze
+  end
+
   def number_of_downloaded
     download_logs.count
   end
@@ -26,5 +31,18 @@ class Emoji < ApplicationRecord
       .group(:id)
       .order("COUNT(download_logs.id) DESC")
       .order_by_newest
+  }
+
+  scope :select_range, ->(page, num) {
+    offset(page * num).limit(num)
+  }
+
+  scope :order_emojis, ->(method) {
+    case method
+    when OrderMethod::NEW
+      order_by_newest
+    when OrderMethod::POPULAR
+      order_by_popularity
+    end
   }
 end

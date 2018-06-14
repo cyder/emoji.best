@@ -17,12 +17,13 @@ class Api::V1::BaseController < ApplicationController
   end
 
   def require_valid_token
-    access_token = request.headers[:Authorization]
-    user = User.find_from_access_token(access_token).first
-    if access_token.blank? || user.blank?
+    token = request.headers[:Authorization]
+    access_token = AccessToken.find_by(token: token)
+    if access_token.nil?
       render template: "api/v1/errors/forbidden", status: :forbidden
       return
     end
-    auto_login(user)
+    access_token.update_expiration
+    auto_login(access_token.user)
   end
 end
