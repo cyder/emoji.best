@@ -22,10 +22,12 @@ const TitleArea = styled.div`
 const Title = styled.h1`
   margin-left: 5px;
   font-size: 1.2rem;
+  min-width: 0;
 `;
 
 const Name = styled.span`
   padding: 0 5px 0;
+  word-break: break-all;
 `;
 
 const Img = styled.img`
