@@ -6,7 +6,7 @@ class AccessToken < ApplicationRecord
 
   def update_expiration
     set_expiration
-    self.save
+    self.save!
   end
 
   private
