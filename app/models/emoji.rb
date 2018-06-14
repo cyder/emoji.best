@@ -13,7 +13,7 @@ class Emoji < ApplicationRecord
   end
 
   def number_of_downloaded
-    download_logs.count
+    download_logs.size
   end
 
   scope :keyword_search, ->(keyword) {
