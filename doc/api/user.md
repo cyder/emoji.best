@@ -274,16 +274,13 @@ Userを作成する
 #### 200 OK
 ```js
 {
-  result: "Success"
-  url: "/users/:id"
-  method: "GET"
   user: {
-    name: :name
+    name: :name,
+    number_of_uploaded: :アップロード数,
     upload_emoji: [
       {
         id: :id,
         name: :name,
-        description: :description,
         number_of_downloaded: :number_of_downloaded,
         tag: [
           { id: id, name: :name },
@@ -310,3 +307,36 @@ Userを作成する
 ```
 
 * code: 0, message: There is not this user.
+
+### GET /users/prifle
+自分のユーザ情報を取得
+
+### request
+```js
+{}
+```
+
+### response
+#### 200 OK
+```js
+{
+  user: {
+    name: :name,
+    number_of_uploaded: :アップロード数,
+    number_of_downloaded: :ダウンロード数,
+    email: :email,
+    upload_emoji: [
+      {
+        id: :id,
+        name: :name,
+        number_of_downloaded: :number_of_downloaded,
+        tag: [
+          { id: id, name: :name },
+          ...
+        ]
+      },
+      ...
+    ]
+  }
+}
+```
