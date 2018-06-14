@@ -6,14 +6,16 @@ class Api::V1::DownloadController < Api::V1::BaseController
   ZIP_FILENAME = "emojis.zip".freeze
 
   def index
-    emojis = Emoji.where(id: params[:emojis])
-    emojis.each {|emoji| emoji.download_logs.create!(user: current_user) }
-    files = emojis.map do |emoji|
-      file = emoji.image.slack
-      filename = filename(emojis, emoji)
-      [file, filename]
+    ActiveRecord::Base.transaction do
+      emojis = Emoji.where(id: params[:emojis])
+      emojis.each {|emoji| emoji.download_logs.create!(user: current_user) }
+      files = emojis.map do |emoji|
+        file = emoji.image.slack
+        filename = filename(emojis, emoji)
+        [file, filename]
+      end
+      zipline(files, ZIP_FILENAME)
     end
-    zipline(files, ZIP_FILENAME)
   end
 
   private
