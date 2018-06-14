@@ -80,9 +80,17 @@ describe "GET /api/v1/users/profile" do
     it "return my profile", autodoc: true do
       is_expected.to eq 200
       body = response.body
-      p body
       expect(body).to be_json_eql(user.id).at_path("user/id")
       expect(body).to be_json_eql(%("#{user.email}")).at_path("user/email")
+    end
+  end
+
+  context "without access token" do
+    let(:headers) { { "Authorization" => nil } }
+    it "return a error" do
+      is_expected.to eq 403
+      body = response.body
+      expect(body).to have_json_path("errors/error")
     end
   end
 end
