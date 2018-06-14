@@ -7,6 +7,10 @@ class Api::V1::UsersController < Api::V1::BaseController
     auto_login(@user)
   end
 
+  def profile
+    @user = current_user
+  end
+
   private
 
     def user_params

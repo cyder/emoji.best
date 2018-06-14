@@ -70,3 +70,19 @@ describe "POST /api/v1/users" do
     end
   end
 end
+
+describe "GET /api/v1/users/profile" do
+  let(:user) { create(:user) }
+  let(:access_token) { create(:access_token, user: user) }
+  let(:headers) { { "Authorization" => access_token.token } }
+
+  context "with valid token" do
+    it "return my profile", autodoc: true do
+      is_expected.to eq 200
+      body = response.body
+      p body
+      expect(body).to be_json_eql(user.id).at_path("user/id")
+      expect(body).to be_json_eql(%("#{user.email}")).at_path("user/email")
+    end
+  end
+end
