@@ -1,0 +1,9 @@
+{
+  id: user.id,
+  name: user.name,
+  number_of_downloaded: user.number_of_downloaded,
+  number_of_uploaded: user.number_of_uploaded,
+  upload_emojis: user.emojis.map do |emoji|
+    render(emoji)
+  end,
+}
