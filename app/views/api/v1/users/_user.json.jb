@@ -2,4 +2,6 @@
   id: user.id,
   name: user.name,
   email: user.email,
+  number_of_downloaded: user.number_of_downloaded,
+  number_of_uploaded: user.number_of_uploaded,
 }
