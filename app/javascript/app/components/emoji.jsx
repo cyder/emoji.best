@@ -4,9 +4,7 @@ import styled from 'styled-components';
 import EmojiShape from './shapes/emoji';
 
 const Container = styled.article`
-  margin-bottom: 30px;
-  padding: 10px 15px;
-  width: 28%;
+  padding: 0 5px;
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 5px 0 0 #e7e7e7;
@@ -15,7 +13,7 @@ const Container = styled.article`
 const TitleArea = styled.div`
   display: flex;
   align-items: center;
-  padding-bottom: 10px;
+  padding: 10px;
   border-bottom: 2px solid #eeeeee;
 `;
 
@@ -27,7 +25,7 @@ const Title = styled.h1`
 
 const Name = styled.span`
   padding: 0 5px 0;
-  word-break: break-all;
+  word-break: break-all
 `;
 
 const Img = styled.img`
@@ -36,7 +34,7 @@ const Img = styled.img`
 `;
 
 const Menus = styled.div`
-  padding-top: 10px;
+  padding: 10px;
   color: #909090;
   display: flex;
   justify-content: space-between;
