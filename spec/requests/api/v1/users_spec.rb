@@ -73,14 +73,33 @@ end
 
 describe "GET /api/v1/users/:id" do
   let(:user) { create(:user) }
+  let(:emoji) { build(:emoji, user: user) }
   let(:id) { user.id }
 
-  context "with valid token" do
+  before { emoji.save }
+
+  context "with valid user id" do
     it "return a user profile", autodoc: true do
       is_expected.to eq 200
       body = response.body
       expect(body).to be_json_eql(user.id).at_path("user/id")
       expect(body).to_not have_json_path("user/email")
+    end
+
+    it "return uploaded emojis" do
+      is_expected.to eq 200
+      body = response.body
+      expect(body).to have_json_path("user/upload_emojis")
+      expect(body).to be_json_eql(emoji.id).at_path("user/upload_emojis/0/id")
+    end
+  end
+
+  context "with invalid user id" do
+    let(:id) { "invalid" }
+    it "return a error" do
+      is_expected.to eq 404
+      body = response.body
+      expect(body).to have_json_path("errors/error")
     end
   end
 end
