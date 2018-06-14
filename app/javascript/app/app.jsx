@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import AppContainer from './containers/app';
 import store from './store';
 
+require('./components/css/main');
 require('./components/css/normalize');
 
 const App = () => (
