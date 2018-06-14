@@ -1,4 +1,4 @@
 {
-  user: render(@user),
+  user: render("current_user", user: @user),
   access_token: @access_token,
 }
