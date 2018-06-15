@@ -22,11 +22,17 @@ X-Frame-Options: SAMEORIGIN
 
 {
   "user": {
-    "id": 16,
+    "id": 915,
     "name": "name",
-    "email": "user1@factory.com"
+    "number_of_uploaded": 0,
+    "upload_emojis": [
+
+    ],
+    "email": "user1@factory.com",
+    "number_of_downloaded": 0
   },
-  "access_token": "1021:c91fb3af72a45152fe6b36eed57b5e6f"
+  "access_token": "915:b92d239f92c2ae03bac1f2b676208065"
+}
 ```
 
 ## DELETE /api/v1/users/sign_out
@@ -38,7 +44,7 @@ Should be able to sign out.
 ```
 DELETE /api/v1/users/sign_out HTTP/1.1
 Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-Authorization: 1246:69d775c9fe0a3ae3f761bf6a1c7fb1bc
+Authorization: 919:1a70b9a8fd72782c7c1c25bf1dd50c9f
 Content-Type: application/x-www-form-urlencoded
 Host: www.example.com
 ```
@@ -52,9 +58,14 @@ X-Frame-Options: SAMEORIGIN
 
 {
   "user": {
-    "id": 1246,
+    "id": 919,
     "name": "name",
-    "email": "user1@factory.com"
+    "number_of_uploaded": 0,
+    "upload_emojis": [
+
+    ],
+    "email": "user1@factory.com",
+    "number_of_downloaded": 0
   }
 }
 ```
