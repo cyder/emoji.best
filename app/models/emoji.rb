@@ -19,9 +19,23 @@ class Emoji < ApplicationRecord
     POPULAR = "popular".freeze
   end
 
+  module TargetMethod
+    ALL = "all".freeze
+    TAG = "tag".freeze
+  end
+
   def number_of_downloaded
     download_logs.count
   end
+
+  scope :search_with_target, ->(keyword, target) {
+    case target
+    when TargetMethod::ALL
+      search(keyword)
+    when TargetMethod::TAG
+      search(tag: keyword)
+    end
+  }
 
   scope :order_by_newest, -> {
     order(created_at: :desc, id: :desc)

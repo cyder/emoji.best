@@ -3,6 +3,7 @@
   num: @num,
   page: @page,
   order: @order,
+  target: @target,
   emojis: @emojis.map do |emoji|
     render(emoji)
   end,

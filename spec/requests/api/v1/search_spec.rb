@@ -69,4 +69,16 @@ describe "GET /api/v1/search" do
       expect(body).to be_json_eql(emojis[-(page * num + 1)].id).at_path("emojis/0/id")
     end
   end
+
+  context "with a target" do
+    let(:target) { "tag" }
+    let(:params) { { keyword: tag.name, target: target } }
+
+    it "returns a emojis", autodoc: true do
+      is_expected.to eq 200
+      body = response.body
+      expect(body).to be_json_eql(%("#{target}")).at_path("target")
+      expect(body).to be_json_eql(tag.emoji.id).at_path("emojis/0/id")
+    end
+  end
 end
