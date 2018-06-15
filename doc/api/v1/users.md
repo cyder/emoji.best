@@ -254,16 +254,16 @@ X-Frame-Options: SAMEORIGIN
 }
 ```
 
-## GET /api/v1/users/profile
+## GET /api/v1/users/:id
 Return my profile.
 
 ### Example
 
 #### Request
 ```
-GET /api/v1/users/profile HTTP/1.1
+GET /api/v1/users/1164 HTTP/1.1
 Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-Authorization: 930:afdf71fb1c9b17f184ac1b331f1bf294
+Authorization: 1164:334c6dc94f117abf0731e2b2b9376a22
 Host: www.example.com
 ```
 
@@ -276,13 +276,30 @@ X-Frame-Options: SAMEORIGIN
 
 {
   "user": {
-    "id": 930,
+    "id": 1164,
     "name": "name",
-    "number_of_uploaded": 0,
+    "number_of_uploaded": 1,
     "upload_emojis": [
+      {
+        "id": 490,
+        "name": "sample_emoji",
+        "description": "sample",
+        "number_of_downloaded": 0,
+        "images": {
+          "large_url": "/uploads/emoji/490/large/sample_emoji.png",
+          "thumb_url": "/uploads/emoji/490/thumb/sample_emoji.png",
+          "slack_url": "/uploads/emoji/490/slack/sample_emoji.png"
+        },
+        "tags": [
 
+        ],
+        "user": {
+          "id": 1164,
+          "name": "name"
+        }
+      }
     ],
-    "email": "user1@factory.com",
+    "email": "user3@factory.com",
     "number_of_downloaded": 0
   }
 }
