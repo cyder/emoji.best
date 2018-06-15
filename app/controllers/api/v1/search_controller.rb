@@ -9,7 +9,7 @@ class Api::V1::SearchController < Api::V1::BaseController
     @num = params[:num]&.to_i || DEFAULT_PAGE_SIZE
     @page = params[:page]&.to_i || DEFAULT_PAGE_NUM
     @order = params[:order] || DEFAULT_ORDER
-    items = params[:keyword].present? ? Emoji.keyword_search(params[:keyword]) : Emoji.all
+    items = params[:keyword].present? ? Emoji.search(params[:keyword]) : Emoji.all
     @total = items.size
     @emojis = items.order_emojis(@order).select_range(@page, @num)
   end
