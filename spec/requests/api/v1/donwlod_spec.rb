@@ -34,6 +34,6 @@ describe "GET /api/v1/download" do
     let(:headers) { { "Authorization" => access_token.token } }
 
     it { expect { subject }.to change(DownloadLog, :count).by(emojis.size) }
-    it { expect { subject }.to change(user.download_log, :count).by(emojis.size) }
+    it { expect { subject }.to change(user.download_logs, :count).by(emojis.size) }
   end
 end

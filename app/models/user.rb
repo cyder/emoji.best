@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   has_many :emojis, dependent: :destroy
   has_many :access_tokens, dependent: :destroy
-  has_many :download_log, dependent: :nullify
+  has_many :download_logs, dependent: :nullify
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   validates :name, presence: true
   validates :password, presence: true, length: { minimum: 6 }, confirmation: true
