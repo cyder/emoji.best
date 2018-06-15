@@ -106,7 +106,6 @@ describe "GET /api/v1/users/:id" do
     end
   end
 
-
   context "with invalid user id" do
     let(:id) { "invalid" }
     it "return a error" do
