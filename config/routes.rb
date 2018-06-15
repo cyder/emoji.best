@@ -5,7 +5,6 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:create, :show] do
         collection do
-          get "profile", to: "users#profile"
           post "sign_in", to: "user_sessions#create"
           delete "sign_out", to: "user_sessions#destroy"
         end

@@ -1,5 +1,8 @@
 class Api::V1::UsersController < Api::V1::BaseController
-  skip_before_action :require_valid_token, only: [:create, :show]
+  skip_before_action :require_valid_token, only: [:create]
+  skip_before_action :require_valid_token, if: -> {
+    request.headers[:Authorization].blank? && action_name == "show"
+  }
 
   def create
     @user = User.create! user_params
@@ -9,10 +12,6 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def show
     @user = User.find(params[:id])
-  end
-
-  def profile
-    @user = current_user
   end
 
   private

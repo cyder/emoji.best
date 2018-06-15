@@ -94,22 +94,10 @@ describe "GET /api/v1/users/:id" do
     end
   end
 
-  context "with invalid user id" do
-    let(:id) { "invalid" }
-    it "return a error" do
-      is_expected.to eq 404
-      body = response.body
-      expect(body).to have_json_path("errors/error")
-    end
-  end
-end
-
-describe "GET /api/v1/users/profile" do
-  let(:user) { create(:user) }
-  let(:access_token) { create(:access_token, user: user) }
-  let(:headers) { { "Authorization" => access_token.token } }
-
   context "with valid token" do
+    let(:access_token) { create(:access_token, user: user) }
+    let(:headers) { { "Authorization" => access_token.token } }
+
     it "return my profile", autodoc: true do
       is_expected.to eq 200
       body = response.body
@@ -118,10 +106,11 @@ describe "GET /api/v1/users/profile" do
     end
   end
 
-  context "without access token" do
-    let(:headers) { { "Authorization" => nil } }
+
+  context "with invalid user id" do
+    let(:id) { "invalid" }
     it "return a error" do
-      is_expected.to eq 403
+      is_expected.to eq 404
       body = response.body
       expect(body).to have_json_path("errors/error")
     end
