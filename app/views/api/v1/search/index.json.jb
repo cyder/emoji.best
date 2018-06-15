@@ -1,10 +1,16 @@
-{
+json = {
   total: @total,
   num: @num,
   page: @page,
   order: @order,
-  target: @target,
   emojis: @emojis.map do |emoji|
     render(emoji)
   end,
 }
+
+if @keyword.present?
+  json[:keyword] = @keyword
+  json[:target] = @target
+end
+
+json
