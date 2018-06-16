@@ -3,8 +3,8 @@ class Api::V1::SearchController < Api::V1::BaseController
 
   DEFAULT_PAGE_SIZE = 10
   DEFAULT_PAGE_NUM = 0
-  DEFAULT_ORDER = Emoji::OrderMethod::NEW
-  DEFAULT_TARGET = Emoji::TargetMethod::ALL
+  DEFAULT_ORDER = Emoji::ORDER_METHOD[:new]
+  DEFAULT_TARGET = Emoji::TARGET_METHOD[:all]
 
   def index
     @num = params[:num]&.to_i || DEFAULT_PAGE_SIZE
