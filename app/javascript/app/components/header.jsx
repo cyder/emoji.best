@@ -1,7 +1,12 @@
 import React from 'react';
 
+import SearchForm from './search-form';
+
 const Header = () => (
-  <header>emoji.best</header>
+  <header>
+    <h1>emoji.best</h1>
+    <SearchForm />
+  </header>
 );
 
 export default Header;
