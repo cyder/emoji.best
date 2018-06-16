@@ -17,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header searchEmojis={this.props.searchEmojis} />
         <EmojiList emojiList={this.props.emojis.list} />
       </div>
     );
@@ -39,6 +39,7 @@ App.propTypes = {
     list: EmojiListShape.isRequired,
   }).isRequired,
   loadEmojis: PropTypes.func.isRequired,
+  searchEmojis: PropTypes.func.isRequired,
 };
 
 export default AppContainer;
