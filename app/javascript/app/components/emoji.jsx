@@ -45,7 +45,7 @@ const Menus = styled.div`
 const DownloadCheckBox = styled.div`
   width: 50px;
   height: 50px;
-  background-color: ${props => (props.isAddedToCart ? '#333333' : '#dfdfdf')};
+  background-color: ${props => (props.isAddedToCart ? '#464646' : '#dfdfdf')};
   border-radius: 25px;
   position: absolute;
   top: -20px;
@@ -61,7 +61,6 @@ const DownloadCheckBox = styled.div`
     height: 8px;
     border-left: 5px solid #ffffff;
     border-bottom: 5px solid #ffffff;
-    -webkit-transform: rotate(-45deg);
     transform: rotate(-45deg);
   }
 `;
