@@ -18,7 +18,6 @@ class Api::V1::UserSessionsController < Api::V1::BaseController
     token = request.headers[:Authorization]
     AccessToken.find_by(token: token).destroy
     @user = current_user
-    logout
   end
 
   private
