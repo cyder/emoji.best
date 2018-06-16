@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import Emoji from './emoji';
 import EmojiListShape from './shapes/emoji-list';
+import DownloadCartShape from './shapes/donwload-cart';
 
 const Container = styled.section`
   padding: 0 2%;
@@ -16,7 +18,12 @@ const Emojis = styled.div`
   grid-gap: 50px 5%;
 `;
 
-const EmojiList = ({ list, addEmojiToDownloadCart }) => (
+const EmojiList = ({
+  list,
+  cart,
+  addEmojiToDownloadCart,
+  deleteEmojiFromDownloadCart,
+}) => (
   <Container>
     <h2>All Emojis</h2>
     <Emojis>
@@ -25,7 +32,9 @@ const EmojiList = ({ list, addEmojiToDownloadCart }) => (
           <Emoji
             key={emoji.id}
             emoji={emoji}
+            isAddedToCart={cart.some(value => value.id === emoji.id)}
             addEmojiToDownloadCart={addEmojiToDownloadCart}
+            deleteEmojiFromDownloadCart={deleteEmojiFromDownloadCart}
           />
         ))
       }
@@ -33,6 +42,11 @@ const EmojiList = ({ list, addEmojiToDownloadCart }) => (
   </Container>
 );
 
-EmojiList.propTypes = EmojiListShape;
+EmojiList.propTypes = {
+  list: EmojiListShape.isRequired,
+  cart: DownloadCartShape.isRequired,
+  addEmojiToDownloadCart: PropTypes.func.isRequired,
+  deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
+};
 
 export default EmojiList;

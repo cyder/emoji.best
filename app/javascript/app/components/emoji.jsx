@@ -45,7 +45,7 @@ const Menus = styled.div`
 const DownloadCheckBox = styled.div`
   width: 50px;
   height: 50px;
-  background-color: #dfdfdf;
+  background-color: ${props => (props.isAddedToCart ? '#333333' : '#dfdfdf')};
   border-radius: 25px;
   position: absolute;
   top: -20px;
@@ -66,7 +66,12 @@ const DownloadCheckBox = styled.div`
   }
 `;
 
-const Emoji = ({ emoji, addEmojiToDownloadCart }) => (
+const Emoji = ({
+  emoji,
+  isAddedToCart,
+  addEmojiToDownloadCart,
+  deleteEmojiFromDownloadCart,
+}) => (
   <Container>
     <TitleArea>
       <Img alt={emoji.name} src={emoji.images.thumb_url} />
@@ -76,13 +81,20 @@ const Emoji = ({ emoji, addEmojiToDownloadCart }) => (
       <div>by {emoji.user.name}</div>
       <div>{emoji.number_of_downloaded} Download</div>
     </Menus>
-    <DownloadCheckBox onClick={() => addEmojiToDownloadCart(emoji)} />
+    <DownloadCheckBox
+      isAddedToCart={isAddedToCart}
+      onClick={() => (
+        isAddedToCart ? deleteEmojiFromDownloadCart(emoji) : addEmojiToDownloadCart(emoji)
+      )}
+    />
   </Container>
 );
 
 Emoji.propTypes = {
   emoji: EmojiShape.isRequired,
+  isAddedToCart: PropTypes.bool.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
+  deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
 };
 
 export default Emoji;

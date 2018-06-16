@@ -4,6 +4,6 @@ export function addEmojiToDownloadCart(emoji) {
   return { type: types.ADD, emoji };
 }
 
-export function deleteEmojiToDownloadCart(emoji) {
+export function deleteEmojiFromDownloadCart(emoji) {
   return { type: types.DELETE, emoji };
 }

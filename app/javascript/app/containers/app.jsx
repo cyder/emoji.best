@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/header';
 import EmojiList from '../components/emoji-list';
 import EmojiListShape from '../components/shapes/emoji-list';
+import DownloadCartShape from '../components/shapes/donwload-cart';
 
 import * as EmojiActions from '../actions/emojis';
 import * as DownloadCartActions from '../actions/download-cart';
@@ -21,7 +22,9 @@ class App extends Component {
         <Header />
         <EmojiList
           list={this.props.emojis.list}
+          cart={this.props.downloadCart.list}
           addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
+          deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
         />
       </div>
     );
@@ -46,7 +49,11 @@ App.propTypes = {
     list: EmojiListShape.isRequired,
   }).isRequired,
   loadEmojis: PropTypes.func.isRequired,
+  downloadCart: PropTypes.shape({
+    list: DownloadCartShape.isRequired,
+  }).isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
+  deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
 };
 
 export default AppContainer;
