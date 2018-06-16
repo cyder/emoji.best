@@ -9,7 +9,7 @@ const downloadCart = (state = initialState, action) => {
     case types.ADD:
       return {
         ...state,
-        list: [...state.list, action.emoji],
+        list: [action.emoji, ...state.list],
       };
     case types.DELETE:
       return {
