@@ -8,6 +8,7 @@ const Container = styled.article`
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 5px 0 0 #e7e7e7;
+  position: relative;
 `;
 
 const TitleArea = styled.div`
@@ -40,6 +41,30 @@ const Menus = styled.div`
   justify-content: space-between;
 `;
 
+const DownloadCheckBox = styled.div`
+  width: 50px;
+  height: 50px;
+  background-color: #dfdfdf;
+  border-radius: 25px;
+  position: absolute;
+  top: -20px;
+  right: -20px;
+
+  &::after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 14px;
+    width: 18px;
+    height: 8px;
+    border-left: 5px solid #ffffff;
+    border-bottom: 5px solid #ffffff;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+`;
+
 const Emoji = emoji => (
   <Container>
     <TitleArea>
@@ -50,6 +75,7 @@ const Emoji = emoji => (
       <div>by {emoji.user.name}</div>
       <div>{emoji.number_of_downloaded} Download</div>
     </Menus>
+    <DownloadCheckBox />
   </Container>
 );
 
