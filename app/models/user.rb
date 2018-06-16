@@ -14,4 +14,12 @@ class User < ApplicationRecord
   def activate
     AccessToken.create(user: self)
   end
+
+  def number_of_downloaded
+    download_logs.size
+  end
+
+  def number_of_uploaded
+    emojis.size
+  end
 end
