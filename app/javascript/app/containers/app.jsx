@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import Header from '../components/header';
 import EmojiList from '../components/emoji-list';
+import DownloadCart from '../components/download-cart';
 import EmojiListShape from '../components/shapes/emoji-list';
 import DownloadCartShape from '../components/shapes/donwload-cart';
 
@@ -24,6 +25,10 @@ class App extends Component {
           list={this.props.emojis.list}
           cart={this.props.downloadCart.list}
           addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
+          deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
+        />
+        <DownloadCart
+          list={this.props.downloadCart.list}
           deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
         />
       </div>
