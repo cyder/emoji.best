@@ -7,7 +7,8 @@ import Header from '../components/header';
 import EmojiList from '../components/emoji-list';
 import EmojiListShape from '../components/shapes/emoji-list';
 
-import * as Actions from '../actions/emojis';
+import * as EmojiActions from '../actions/emojis';
+import * as DownloadCartActions from '../actions/download-cart';
 
 class App extends Component {
   componentWillMount() {
@@ -18,7 +19,10 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <EmojiList emojiList={this.props.emojis.list} />
+        <EmojiList
+          list={this.props.emojis.list}
+          addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
+        />
       </div>
     );
   }
@@ -29,7 +33,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchProps(dispatch) {
-  return bindActionCreators({ ...Actions }, dispatch);
+  return bindActionCreators({
+    ...EmojiActions,
+    ...DownloadCartActions,
+  }, dispatch);
 }
 
 const AppContainer = connect(mapStateToProps, mapDispatchProps)(App);
@@ -39,6 +46,7 @@ App.propTypes = {
     list: EmojiListShape.isRequired,
   }).isRequired,
   loadEmojis: PropTypes.func.isRequired,
+  addEmojiToDownloadCart: PropTypes.func.isRequired,
 };
 
 export default AppContainer;

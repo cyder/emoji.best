@@ -16,21 +16,23 @@ const Emojis = styled.div`
   grid-gap: 50px 5%;
 `;
 
-const EmojiList = ({ emojiList }) => (
+const EmojiList = ({ list, addEmojiToDownloadCart }) => (
   <Container>
     <h2>All Emojis</h2>
     <Emojis>
       {
-        emojiList.map(emoji => (
-          <Emoji key={emoji.id} {...emoji} />
+        list.map(emoji => (
+          <Emoji
+            key={emoji.id}
+            emoji={emoji}
+            addEmojiToDownloadCart={addEmojiToDownloadCart}
+          />
         ))
       }
     </Emojis>
   </Container>
 );
 
-EmojiList.propTypes = {
-  emojiList: EmojiListShape.isRequired,
-};
+EmojiList.propTypes = EmojiListShape;
 
 export default EmojiList;

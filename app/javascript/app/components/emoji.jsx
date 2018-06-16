@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import EmojiShape from './shapes/emoji';
 
@@ -65,7 +66,7 @@ const DownloadCheckBox = styled.div`
   }
 `;
 
-const Emoji = emoji => (
+const Emoji = ({ emoji, addEmojiToDownloadCart }) => (
   <Container>
     <TitleArea>
       <Img alt={emoji.name} src={emoji.images.thumb_url} />
@@ -75,10 +76,13 @@ const Emoji = emoji => (
       <div>by {emoji.user.name}</div>
       <div>{emoji.number_of_downloaded} Download</div>
     </Menus>
-    <DownloadCheckBox />
+    <DownloadCheckBox onClick={() => addEmojiToDownloadCart(emoji)} />
   </Container>
 );
 
-Emoji.propTypes = EmojiShape;
+Emoji.propTypes = {
+  emoji: EmojiShape.isRequired,
+  addEmojiToDownloadCart: PropTypes.func.isRequired,
+};
 
 export default Emoji;
