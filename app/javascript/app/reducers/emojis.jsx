@@ -7,6 +7,7 @@ const initialState = {
 const emojis = (state = initialState, action) => {
   switch (action.type) {
     case types.LOAD:
+    case types.SEARCH:
       return {
         ...state,
         list: [],
