@@ -8,26 +8,33 @@ class Api::V1::DownloadController < Api::V1::BaseController
   ZIP_FILENAME = "emojis.zip".freeze
 
   def index
-    ActiveRecord::Base.transaction do
-      emojis = Emoji.where(id: params[:emojis])
-      emojis.each {|emoji| emoji.download_logs.create!(user: current_user) }
-      files = emojis.map do |emoji|
-        file = emoji.image.slack
-        filename = filename(emojis, emoji)
-        [file, filename]
+    emoji_ids = params[:emojis] || []
+    DownloadLog.transaction do
+      emoji_ids.each do |emoji_id|
+        DownloadLog.create!(emoji_id: emoji_id, user: current_user)
       end
-      zipline(files, ZIP_FILENAME)
     end
+
+    files = get_slack_image_files(emoji_ids)
+    zipline(files, ZIP_FILENAME)
   end
 
   private
 
-    def filename(emojis, emoji)
-      file = emoji.image.slack.file
-      if emojis.where(name: emoji.name).size > 1
-        "#{file.basename}(#{emoji.id}).#{file.extension}"
-      else
-        file.filename
+    def get_slack_image_files(emoji_ids)
+      emojis = Emoji.where(id: emoji_ids)
+      files = emojis.group_by(&:name).map do |key, value|
+        value.map.with_index(1) do |emoji, i|
+          image = emoji.image.slack
+          extension = image.file.extension
+          filename = if value.size == 1
+                       "#{key}.#{extension}"
+                     else
+                       "#{key}(#{i}).#{extension}"
+                     end
+          [image, filename]
+        end
       end
+      files.flatten(1)
     end
 end
