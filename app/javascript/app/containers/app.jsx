@@ -18,7 +18,10 @@ class App extends Component {
     return (
       <div>
         <Header searchEmojis={this.props.searchEmojis} />
-        <EmojiList emojiList={this.props.emojis.list} />
+        <EmojiList
+          keyword={this.props.emojis.keyword}
+          list={this.props.emojis.list}
+        />
       </div>
     );
   }
@@ -35,9 +38,7 @@ function mapDispatchProps(dispatch) {
 const AppContainer = connect(mapStateToProps, mapDispatchProps)(App);
 
 App.propTypes = {
-  emojis: PropTypes.shape({
-    list: EmojiListShape.isRequired,
-  }).isRequired,
+  emojis: PropTypes.shape(EmojiListShape).isRequired,
   loadEmojis: PropTypes.func.isRequired,
   searchEmojis: PropTypes.func.isRequired,
 };
