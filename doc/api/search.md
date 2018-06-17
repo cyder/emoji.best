@@ -9,6 +9,7 @@
   order: "new" or "popular" //オプション（デフォルト：new）
   page: :ページ番号, //オプション（デフォルト：0）
   num: :1ページの表示数　//オプション（デフォルト：10）
+  target: :"all" or "tag"　//オプション（デフォルト：all）
 }
 ```
 
@@ -20,6 +21,8 @@
   num: :1ページの表示数
   order: "new" or "popular"
   page: :ページ番号,
+  target: :検索対象,
+  keyword: :検索ワード,
   emoji: [
     {
       id: :id,

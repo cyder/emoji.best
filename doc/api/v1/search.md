@@ -406,3 +406,55 @@ X-Frame-Options: SAMEORIGIN
   ]
 }
 ```
+
+## GET /api/v1/search
+Returns a emojis.
+
+### Example
+
+#### Request
+```
+GET /api/v1/search?keyword=tag_name&target=tag HTTP/1.1
+Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+Host: www.example.com
+```
+
+#### Response
+```
+HTTP/1.1 200
+Content-Type: application/json; charset=utf-8
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+
+{
+  "total": 1,
+  "num": 10,
+  "page": 0,
+  "order": "new",
+  "emojis": [
+    {
+      "id": 1142,
+      "name": "taggedemoji",
+      "description": "sample",
+      "number_of_downloaded": 0,
+      "images": {
+        "large_url": "/uploads/emoji/1142/large/taggedemoji.png",
+        "thumb_url": "/uploads/emoji/1142/thumb/taggedemoji.png",
+        "slack_url": "/uploads/emoji/1142/slack/taggedemoji.png"
+      },
+      "tags": [
+        {
+          "id": 251,
+          "name": "tag_name"
+        }
+      ],
+      "user": {
+        "id": 2153,
+        "name": "name"
+      }
+    }
+  ],
+  "keyword": "tag_name",
+  "target": "tag"
+}
+```
