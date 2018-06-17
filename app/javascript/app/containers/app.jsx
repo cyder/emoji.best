@@ -22,9 +22,8 @@ class App extends Component {
           searchEmojis={this.props.searchEmojis}
         />
         <EmojiList
-          keyword={this.props.emojis.keyword}
-          order={this.props.emojis.order}
-          list={this.props.emojis.list}
+          emojis={this.props.emojis}
+          searchEmojis={this.props.searchEmojis}
         />
       </div>
     );

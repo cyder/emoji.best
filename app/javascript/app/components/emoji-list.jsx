@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import Emoji from './emoji';
 import EmojiListShape from './shapes/emoji-list';
@@ -16,16 +17,20 @@ const Emojis = styled.div`
   grid-gap: 50px 5%;
 `;
 
-const EmojiList = ({ keyword, list }) => (
+const EmojiList = ({ emojis, searchEmojis }) => (
   <Container>
     <h2>
-      {(keyword == null || keyword === '') ?
+      {(emojis.keyword == null || emojis.keyword === '') ?
         'All Emojis' :
-        `Search results : ${keyword}`}
+        `Search results : ${emojis.keyword}`}
     </h2>
+    <select onChange={e => searchEmojis(emojis.keyword, e.target.value)}>
+      <option value="new">New</option>
+      <option value="popular">Popular</option>
+    </select>
     <Emojis>
       {
-        list.map(emoji => (
+        emojis.list.map(emoji => (
           <Emoji key={emoji.id} {...emoji} />
         ))
       }
@@ -33,6 +38,9 @@ const EmojiList = ({ keyword, list }) => (
   </Container>
 );
 
-EmojiList.propTypes = EmojiListShape;
+EmojiList.propTypes = PropTypes.shape({
+  emojis: EmojiListShape,
+  searchEmojis: PropTypes.func.isRequired,
+}).isRequired;
 
 export default EmojiList;
