@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       end
       resources :search, only: [:index]
       resources :emojis, only: [:create]
+      resources :download, only: [:index]
     end
   end
 end
