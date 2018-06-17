@@ -17,9 +17,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header searchEmojis={this.props.searchEmojis} />
+        <Header
+          order={this.props.emojis.order}
+          searchEmojis={this.props.searchEmojis}
+        />
         <EmojiList
           keyword={this.props.emojis.keyword}
+          order={this.props.emojis.order}
           list={this.props.emojis.list}
         />
       </div>
