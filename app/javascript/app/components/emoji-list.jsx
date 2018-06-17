@@ -18,6 +18,10 @@ const Emojis = styled.div`
   grid-gap: 50px 5%;
 `;
 
+const isAddedToCart = (cartList, emoji) => (
+  cartList.some(value => value.id === emoji.id)
+);
+
 const EmojiList = ({
   emojis,
   cart,
@@ -36,7 +40,7 @@ const EmojiList = ({
           <Emoji
             key={emoji.id}
             emoji={emoji}
-            isAddedToCart={cart.list.some(value => value.id === emoji.id)}
+            isAddedToCart={isAddedToCart(cart.list, emoji)}
             addEmojiToDownloadCart={addEmojiToDownloadCart}
             deleteEmojiFromDownloadCart={deleteEmojiFromDownloadCart}
           />
