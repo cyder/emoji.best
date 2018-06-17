@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Emoji from './emoji';
 import EmojiListShape from './shapes/emoji-list';
-import DownloadCartShape from './shapes/donwload-cart';
+import DownloadCartShape from './shapes/download-cart';
 
 const Container = styled.section`
   padding: 0 2%;

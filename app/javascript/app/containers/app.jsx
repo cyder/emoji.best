@@ -7,7 +7,7 @@ import Header from '../components/header';
 import EmojiList from '../components/emoji-list';
 import DownloadCart from '../components/download-cart';
 import EmojiListShape from '../components/shapes/emoji-list';
-import DownloadCartShape from '../components/shapes/donwload-cart';
+import DownloadCartShape from '../components/shapes/download-cart';
 
 import * as EmojiActions from '../actions/emojis';
 import * as DownloadCartActions from '../actions/download-cart';

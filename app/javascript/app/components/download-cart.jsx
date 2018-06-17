@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import DownloadCartShape from './shapes/donwload-cart';
+import DownloadCartShape from './shapes/download-cart';
 
 const Container = styled.section`
   display: ${props => (props.list.length === 0 ? 'none' : 'block')};
