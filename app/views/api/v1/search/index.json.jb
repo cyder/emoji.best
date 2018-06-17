@@ -1,4 +1,4 @@
-{
+json = {
   total: @total,
   num: @num,
   page: @page,
@@ -7,3 +7,10 @@
     render(emoji)
   end,
 }
+
+if @keyword.present?
+  json[:keyword] = @keyword
+  json[:target] = @target
+end
+
+json

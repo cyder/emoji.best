@@ -1,4 +1,6 @@
 class Emoji < ApplicationRecord
+  include SearchCop
+
   mount_uploader :image, EmojiUploader
   belongs_to :user
   has_many :download_logs, dependent: :destroy
@@ -7,19 +9,32 @@ class Emoji < ApplicationRecord
   validates :description, presence: true
   validates :image, presence: true
 
-  module OrderMethod
-    NEW = "new".freeze
-    POPULAR = "popular".freeze
+  search_scope :search do
+    attributes :name, :description
+    attributes tag: "tags.name"
   end
+
+  ORDER_METHOD = {
+    new: "new",
+    popular: "popular",
+  }.map(&:freeze).to_h.freeze
+
+  TARGET_METHOD = {
+    all: "all",
+    tag: "tag",
+  }.map(&:freeze).to_h.freeze
 
   def number_of_downloaded
     download_logs.size
   end
 
-  scope :keyword_search, ->(keyword) {
-    str = "%#{keyword}%"
-    where("name LIKE ? or description LIKE ?", str, str)
-      .or(where(id: Tag.select(:emoji_id).keyword_search(keyword).distinct))
+  scope :search_with_target, ->(keyword, target) {
+    case target
+    when TARGET_METHOD[:all]
+      search(keyword)
+    when TARGET_METHOD[:tag]
+      search(tag: keyword)
+    end
   }
 
   scope :order_by_newest, -> {
@@ -39,9 +54,9 @@ class Emoji < ApplicationRecord
 
   scope :order_emojis, ->(method) {
     case method
-    when OrderMethod::NEW
+    when ORDER_METHOD[:new]
       order_by_newest
-    when OrderMethod::POPULAR
+    when ORDER_METHOD[:popular]
       order_by_popularity
     end
   }

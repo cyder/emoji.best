@@ -46,6 +46,17 @@ describe "GET /api/v1/search" do
     end
   end
 
+  context "with some keywords" do
+    let(:params) { { keyword: "tag emoji" } }
+
+    it "returns tagged_emoji" do
+      is_expected.to eq 200
+      body = response.body
+      expect(body).to be_json_eql(tagged_emoji.id).at_path("emojis/0/id")
+      expect(body).to be_json_eql(%("#{tagged_emoji.name}")).at_path("emojis/0/name")
+    end
+  end
+
   context "with popular order" do
     let(:params) { { order: "popular" } }
 
@@ -67,6 +78,18 @@ describe "GET /api/v1/search" do
       body = response.body
       expect(body).to be_json_eql(page).at_path("page")
       expect(body).to be_json_eql(emojis[-(page * num + 1)].id).at_path("emojis/0/id")
+    end
+  end
+
+  context "with a target" do
+    let(:target) { "tag" }
+    let(:params) { { keyword: tag.name, target: target } }
+
+    it "returns a emojis", autodoc: true do
+      is_expected.to eq 200
+      body = response.body
+      expect(body).to be_json_eql(%("#{target}")).at_path("target")
+      expect(body).to be_json_eql(tag.emoji.id).at_path("emojis/0/id")
     end
   end
 end
