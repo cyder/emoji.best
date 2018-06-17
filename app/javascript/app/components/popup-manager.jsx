@@ -39,7 +39,12 @@ const selectPopup = (
         />
       );
     case 'sign_in':
-      return <SignInPopup />;
+      return (
+        <SignInPopup
+          closePopup={closePopup}
+          showSignUpPopup={showSignUpPopup}
+        />
+      );
     default:
       return null;
   }
