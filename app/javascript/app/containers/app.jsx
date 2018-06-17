@@ -28,7 +28,12 @@ class App extends Component {
           keyword={this.props.emojis.keyword}
           list={this.props.emojis.list}
         />
-        <PopupManager show={this.props.popupManager} />
+        <PopupManager
+          show={this.props.popupManager}
+          closePopup={this.props.closePopup}
+          showSignInPopup={this.props.showSignInPopup}
+          showSignUpPopup={this.props.showSignUpPopup}
+        />
       </div>
     );
   }
@@ -54,6 +59,7 @@ App.propTypes = {
   searchEmojis: PropTypes.func.isRequired,
   showSignInPopup: PropTypes.func.isRequired,
   showSignUpPopup: PropTypes.func.isRequired,
+  closePopup: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {

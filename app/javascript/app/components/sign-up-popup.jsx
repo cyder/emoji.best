@@ -53,8 +53,9 @@ const Message = styled.p`
   text-align: center;
 `;
 
-const Link = styled.span`
+const SwitchButton = styled.span`
   text-decoration: underline;
+  margin: 0 10px;
 `;
 
 const CloseButton = styled.div`
@@ -85,7 +86,7 @@ const CloseButton = styled.div`
   }
 `;
 
-const SignUpPopup = () => (
+const SignUpPopup = ({ closePopup, showSignInPopup }) => (
   <Container>
     <Title>Sign Up</Title>
     <Form>
@@ -95,9 +96,17 @@ const SignUpPopup = () => (
       <TextForm type="password" placeholder="Password (Confirm)" />
       <Button>Sign Up</Button>
     </Form>
-    <Message>Already a member? <Link>Sign In</Link></Message>
-    <CloseButton />
+    <Message>
+      Already a member?
+      <SwitchButton onClick={showSignInPopup}>Sign In</SwitchButton>
+    </Message>
+    <CloseButton onClick={closePopup} />
   </Container>
 );
+
+SignUpPopup.propTypes = {
+  closePopup: PropTypes.func.isRequired,
+  showSignInPopup: PropTypes.func.isRequired,
+};
 
 export default SignUpPopup;

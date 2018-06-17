@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import SignInPopup from './sign-in-popup';
 import SignUpPopup from './sign-up-popup';
 
 const Background = styled.div`
@@ -23,27 +24,45 @@ const Container = styled.div`
   border-radius: 10px;
 `;
 
-const selectPopup = (show) => {
+const selectPopup = (
+  show,
+  closePopup,
+  showSignInPopup,
+  showSignUpPopup,
+) => {
   switch (show) {
     case 'sign_up':
-      return <SignUpPopup />;
+      return (
+        <SignUpPopup
+          closePopup={closePopup}
+          showSignInPopup={showSignInPopup}
+        />
+      );
     case 'sign_in':
-      return 'sign_in';
+      return <SignInPopup />;
     default:
       return null;
   }
 };
 
-const PopupManager = ({ show }) => (
+const PopupManager = ({
+  show,
+  closePopup,
+  showSignInPopup,
+  showSignUpPopup,
+}) => (
   <Background isShow={show !== null}>
     <Container>
-      {selectPopup(show)}
+      {selectPopup(show, closePopup, showSignInPopup, showSignUpPopup)}
     </Container>
   </Background>
 );
 
 PopupManager.propTypes = {
   show: PropTypes.string,
+  closePopup: PropTypes.func.isRequired,
+  showSignInPopup: PropTypes.func.isRequired,
+  showSignUpPopup: PropTypes.func.isRequired,
 };
 
 PopupManager.defaultProps = {
