@@ -27,17 +27,26 @@ const SubTitle = styled.p`
   margin: 10px 0 30px;
 `;
 
-const Header = ({ searchEmojis }) => (
+const Header = ({
+  searchEmojis,
+  showSignInPopup,
+  showSignUpPopup,
+}) => (
   <Container>
     <Title><Logo alt="emoji.best" src={LogoImage} /></Title>
     <SubTitle>{'Let\'s share emojis!!'}</SubTitle>
     <SearchForm searchEmojis={searchEmojis} />
-    <Navigation />
+    <Navigation
+      showSignInPopup={showSignInPopup}
+      showSignUpPopup={showSignUpPopup}
+    />
   </Container>
 );
 
 Header.propTypes = {
   searchEmojis: PropTypes.func.isRequired,
+  showSignInPopup: PropTypes.func.isRequired,
+  showSignUpPopup: PropTypes.func.isRequired,
 };
 
 export default Header;

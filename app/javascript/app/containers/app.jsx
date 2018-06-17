@@ -7,7 +7,8 @@ import Header from '../components/header';
 import EmojiList from '../components/emoji-list';
 import EmojiListShape from '../components/shapes/emoji-list';
 
-import * as Actions from '../actions/emojis';
+import * as EmojisActions from '../actions/emojis';
+import * as PopupManagerActions from '../actions/popup-manager';
 
 class App extends Component {
   componentWillMount() {
@@ -17,7 +18,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header searchEmojis={this.props.searchEmojis} />
+        <Header
+          searchEmojis={this.props.searchEmojis}
+          showSignInPopup={this.props.showSignInPopup}
+          showSignUpPopup={this.props.showSignUpPopup}
+        />
         <EmojiList
           keyword={this.props.emojis.keyword}
           list={this.props.emojis.list}
@@ -32,7 +37,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchProps(dispatch) {
-  return bindActionCreators({ ...Actions }, dispatch);
+  return bindActionCreators({
+    ...EmojisActions,
+    ...PopupManagerActions,
+  }, dispatch);
 }
 
 const AppContainer = connect(mapStateToProps, mapDispatchProps)(App);
@@ -41,6 +49,8 @@ App.propTypes = {
   emojis: PropTypes.shape(EmojiListShape).isRequired,
   loadEmojis: PropTypes.func.isRequired,
   searchEmojis: PropTypes.func.isRequired,
+  showSignInPopup: PropTypes.func.isRequired,
+  showSignUpPopup: PropTypes.func.isRequired,
 };
 
 export default AppContainer;
