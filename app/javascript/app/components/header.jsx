@@ -4,11 +4,13 @@ import styled from 'styled-components';
 import LogoImage from 'images/logo.png';
 
 import SearchForm from './search-form';
+import Navigation from './navigation';
 
 const Container = styled.header`
   color: #ffffff;
   background-color: #2d2d2d;
   padding: 60px 5%;
+  position: relative;
 `;
 
 const Title = styled.header`
@@ -30,6 +32,7 @@ const Header = ({ searchEmojis }) => (
     <Title><Logo alt="emoji.best" src={LogoImage} /></Title>
     <SubTitle>{'Let\'s share emojis!!'}</SubTitle>
     <SearchForm searchEmojis={searchEmojis} />
+    <Navigation />
   </Container>
 );
 
