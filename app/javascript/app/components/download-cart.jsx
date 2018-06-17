@@ -79,11 +79,11 @@ const DownloadButton = styled.button`
   font-weight: bold;
 `;
 
-const DwonloadCart = ({ list, deleteEmojiFromDownloadCart }) => (
-  <Container list={list} >
+const DwonloadCart = ({ cart, deleteEmojiFromDownloadCart }) => (
+  <Container list={cart.list} >
     <List>
       {
-        list.map(emoji => (
+        cart.list.map(emoji => (
           <Emoji key={emoji.id}>
             <Img alt={emoji.name} src={emoji.images.thumb_url} />
             <DeleteButton onClick={() => deleteEmojiFromDownloadCart(emoji)} />
@@ -91,7 +91,7 @@ const DwonloadCart = ({ list, deleteEmojiFromDownloadCart }) => (
         ))
       }
     </List>
-    <Message>choose {list.length} emojis</Message>
+    <Message>choose {cart.list.length} emojis</Message>
     <DownloadButton>download</DownloadButton>
   </Container>
 );
@@ -99,6 +99,6 @@ const DwonloadCart = ({ list, deleteEmojiFromDownloadCart }) => (
 export default DwonloadCart;
 
 DwonloadCart.propTypes = {
-  list: DownloadCartShape.isRequired,
+  cart: DownloadCartShape.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
 };

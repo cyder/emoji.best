@@ -22,14 +22,13 @@ class App extends Component {
       <div>
         <Header searchEmojis={this.props.searchEmojis} />
         <EmojiList
-          keyword={this.props.emojis.keyword}
-          list={this.props.emojis.list}
-          cart={this.props.downloadCart.list}
+          emojis={this.props.emojis}
+          cart={this.props.downloadCart}
           addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
           deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
         />
         <DownloadCart
-          list={this.props.downloadCart.list}
+          cart={this.props.downloadCart}
           deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
         />
       </div>
@@ -51,11 +50,9 @@ function mapDispatchProps(dispatch) {
 const AppContainer = connect(mapStateToProps, mapDispatchProps)(App);
 
 App.propTypes = {
-  emojis: PropTypes.shape(EmojiListShape).isRequired,
+  emojis: EmojiListShape.isRequired,
   loadEmojis: PropTypes.func.isRequired,
-  downloadCart: PropTypes.shape({
-    list: DownloadCartShape.isRequired,
-  }).isRequired,
+  downloadCart: DownloadCartShape.isRequired,
   searchEmojis: PropTypes.func.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,

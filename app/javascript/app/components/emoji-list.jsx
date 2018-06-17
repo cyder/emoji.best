@@ -19,25 +19,24 @@ const Emojis = styled.div`
 `;
 
 const EmojiList = ({
-  keyword,
-  list,
+  emojis,
   cart,
   addEmojiToDownloadCart,
   deleteEmojiFromDownloadCart,
 }) => (
   <Container>
     <h2>
-      {(keyword == null || keyword === '') ?
+      {(emojis.keyword == null || emojis.keyword === '') ?
         'All Emojis' :
-        `Search results : ${keyword}`}
+        `Search results : ${emojis.keyword}`}
     </h2>
     <Emojis>
       {
-        list.map(emoji => (
+        emojis.list.map(emoji => (
           <Emoji
             key={emoji.id}
             emoji={emoji}
-            isAddedToCart={cart.some(value => value.id === emoji.id)}
+            isAddedToCart={cart.list.some(value => value.id === emoji.id)}
             addEmojiToDownloadCart={addEmojiToDownloadCart}
             deleteEmojiFromDownloadCart={deleteEmojiFromDownloadCart}
           />
@@ -48,7 +47,7 @@ const EmojiList = ({
 );
 
 EmojiList.propTypes = {
-  list: EmojiListShape.isRequired,
+  emojis: EmojiListShape.isRequired,
   cart: DownloadCartShape.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
