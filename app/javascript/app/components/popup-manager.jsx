@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import SignUpPopup from './sign-up-popup';
+
 const Background = styled.div`
   display: ${props => (props.isShow ? 'block' : 'none')}
   position: fixed;
@@ -24,7 +26,7 @@ const Container = styled.div`
 const selectPopup = (show) => {
   switch (show) {
     case 'sign_up':
-      return 'sign_up';
+      return <SignUpPopup />;
     case 'sign_in':
       return 'sign_in';
     default:
