@@ -16,12 +16,16 @@ const Emojis = styled.div`
   grid-gap: 50px 5%;
 `;
 
-const EmojiList = ({ emojiList }) => (
+const EmojiList = ({ keyword, list }) => (
   <Container>
-    <h2>All Emojis</h2>
+    <h2>
+      {(keyword == null || keyword === '') ?
+        'All Emojis' :
+        `Search results : ${keyword}`}
+    </h2>
     <Emojis>
       {
-        emojiList.map(emoji => (
+        list.map(emoji => (
           <Emoji key={emoji.id} {...emoji} />
         ))
       }
@@ -29,8 +33,6 @@ const EmojiList = ({ emojiList }) => (
   </Container>
 );
 
-EmojiList.propTypes = {
-  emojiList: EmojiListShape.isRequired,
-};
+EmojiList.propTypes = EmojiListShape;
 
 export default EmojiList;
