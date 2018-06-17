@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import SignInPopup from './sign-in-popup';
 import SignUpPopup from './sign-up-popup';
+import { SIGN_IN_POPUP, SIGN_UP_POPUP } from '../constants/popup-manager';
 
 const Background = styled.div`
   display: ${props => (props.isShow ? 'block' : 'none')}
@@ -31,14 +32,14 @@ const selectPopup = (
   showSignUpPopup,
 ) => {
   switch (show) {
-    case 'sign_up':
+    case SIGN_UP_POPUP:
       return (
         <SignUpPopup
           closePopup={closePopup}
           showSignInPopup={showSignInPopup}
         />
       );
-    case 'sign_in':
+    case SIGN_IN_POPUP:
       return (
         <SignInPopup
           closePopup={closePopup}
