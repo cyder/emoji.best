@@ -19,13 +19,18 @@ const Emojis = styled.div`
 `;
 
 const EmojiList = ({
+  keyword,
   list,
   cart,
   addEmojiToDownloadCart,
   deleteEmojiFromDownloadCart,
 }) => (
   <Container>
-    <h2>All Emojis</h2>
+    <h2>
+      {(keyword == null || keyword === '') ?
+        'All Emojis' :
+        `Search results : ${keyword}`}
+    </h2>
     <Emojis>
       {
         list.map(emoji => (
