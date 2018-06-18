@@ -66,7 +66,7 @@ const Message = styled.p`
   margin: 0;
 `;
 
-const DownloadButton = styled.button`
+const DownloadButton = styled.a`
   display: block;
   width: 240px;
   height: 44px;
@@ -96,7 +96,14 @@ const DwonloadCart = ({
       }
     </List>
     <Message>choose {cart.list.length} emojis</Message>
-    <DownloadButton onClick={() => downloadEmojis(cart.list)}>download</DownloadButton>
+    <DownloadButton
+      href={cart.downloadLink}
+      onClick={() => downloadEmojis(cart.list)}
+      target="_blank"
+      download
+    >
+      download
+    </DownloadButton>
   </Container>
 );
 
