@@ -16,6 +16,11 @@ const downloadCart = (state = initialState, action) => {
         ...state,
         list: state.list.filter(emoji => emoji.id !== action.emoji.id),
       };
+    case types.DOWNLOAD:
+      return {
+        ...state,
+        list: [],
+      };
     default:
       return state;
   }
