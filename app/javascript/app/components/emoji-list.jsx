@@ -16,6 +16,7 @@ const Head = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 `;
 
 const SelectContainer = styled.div`
