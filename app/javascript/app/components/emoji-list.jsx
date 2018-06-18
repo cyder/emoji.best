@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import Emoji from './emoji';
 import EmojiListShape from './shapes/emoji-list';
+import DownloadCartShape from './shapes/download-cart';
 
 const Container = styled.section`
   padding: 0 2%;
@@ -58,7 +59,17 @@ const Emojis = styled.div`
   grid-gap: 50px 5%;
 `;
 
-const EmojiList = ({ emojis, searchEmojis }) => (
+const isAddedToCart = (cartList, emoji) => (
+  cartList.some(value => value.id === emoji.id)
+);
+
+const EmojiList = ({
+  emojis,
+  cart,
+  searchEmojis,
+  addEmojiToDownloadCart,
+  deleteEmojiFromDownloadCart,
+}) => (
   <Container>
     <Head>
       <h2>
@@ -76,16 +87,25 @@ const EmojiList = ({ emojis, searchEmojis }) => (
     <Emojis>
       {
         emojis.list.map(emoji => (
-          <Emoji key={emoji.id} {...emoji} />
+          <Emoji
+            key={emoji.id}
+            emoji={emoji}
+            isAddedToCart={isAddedToCart(cart.list, emoji)}
+            addEmojiToDownloadCart={addEmojiToDownloadCart}
+            deleteEmojiFromDownloadCart={deleteEmojiFromDownloadCart}
+          />
         ))
       }
     </Emojis>
   </Container>
 );
 
-EmojiList.propTypes = PropTypes.shape({
-  emojis: EmojiListShape,
+EmojiList.propTypes = {
+  emojis: EmojiListShape.isRequired,
+  cart: DownloadCartShape.isRequired,
   searchEmojis: PropTypes.func.isRequired,
-}).isRequired;
+  addEmojiToDownloadCart: PropTypes.func.isRequired,
+  deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
+};
 
 export default EmojiList;
