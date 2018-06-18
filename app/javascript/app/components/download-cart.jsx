@@ -75,8 +75,11 @@ const DownloadButton = styled.a`
   background-color: #464646;
   font-size: 1.1rem;
   border: solid 3px #dfdfdf;
-  border-radius: 22px;
+  border-radius: 25px;
   font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  line-height: 44px;
 `;
 
 const DwonloadCart = ({
