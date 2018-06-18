@@ -5,9 +5,12 @@ import PropTypes from 'prop-types';
 
 import Header from '../components/header';
 import EmojiList from '../components/emoji-list';
+import DownloadCart from '../components/download-cart';
 import EmojiListShape from '../components/shapes/emoji-list';
+import DownloadCartShape from '../components/shapes/download-cart';
 
-import * as Actions from '../actions/emojis';
+import * as EmojiActions from '../actions/emojis';
+import * as DownloadCartActions from '../actions/download-cart';
 
 class App extends Component {
   componentWillMount() {
@@ -19,8 +22,14 @@ class App extends Component {
       <div>
         <Header searchEmojis={this.props.searchEmojis} />
         <EmojiList
-          keyword={this.props.emojis.keyword}
-          list={this.props.emojis.list}
+          emojis={this.props.emojis}
+          cart={this.props.downloadCart}
+          addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
+          deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
+        />
+        <DownloadCart
+          cart={this.props.downloadCart}
+          deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
         />
       </div>
     );
@@ -32,15 +41,21 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchProps(dispatch) {
-  return bindActionCreators({ ...Actions }, dispatch);
+  return bindActionCreators({
+    ...EmojiActions,
+    ...DownloadCartActions,
+  }, dispatch);
 }
 
 const AppContainer = connect(mapStateToProps, mapDispatchProps)(App);
 
 App.propTypes = {
-  emojis: PropTypes.shape(EmojiListShape).isRequired,
+  emojis: EmojiListShape.isRequired,
   loadEmojis: PropTypes.func.isRequired,
+  downloadCart: DownloadCartShape.isRequired,
   searchEmojis: PropTypes.func.isRequired,
+  addEmojiToDownloadCart: PropTypes.func.isRequired,
+  deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
 };
 
 export default AppContainer;
