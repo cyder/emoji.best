@@ -2,9 +2,8 @@ import PropTypes from 'prop-types';
 
 import EmojiShape from './emoji';
 
-const EmojiListShape = PropTypes.shape({
-  keyword: PropTypes.string,
+const DownloadCartShape = PropTypes.shape({
   list: PropTypes.arrayOf(EmojiShape.isRequired).isRequired,
 });
 
-export default EmojiListShape;
+export default DownloadCartShape;

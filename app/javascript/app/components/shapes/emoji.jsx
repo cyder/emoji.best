@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const EmojiShape = {
+const EmojiShape = PropTypes.shape({
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   images: PropTypes.shape({
@@ -13,6 +13,6 @@ const EmojiShape = {
     name: PropTypes.string.isRequired,
   }).isRequired,
   number_of_downloaded: PropTypes.number.isRequired,
-};
+});
 
 export default EmojiShape;
