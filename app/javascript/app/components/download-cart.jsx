@@ -82,7 +82,7 @@ const DownloadButton = styled.a`
   line-height: 44px;
 `;
 
-const DwonloadCart = ({
+const DownloadCart = ({
   cart,
   deleteEmojiFromDownloadCart,
   downloadEmojis,
@@ -110,9 +110,9 @@ const DwonloadCart = ({
   </Container>
 );
 
-export default DwonloadCart;
+export default DownloadCart;
 
-DwonloadCart.propTypes = {
+DownloadCart.propTypes = {
   cart: DownloadCartShape.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
   downloadEmojis: PropTypes.func.isRequired,
