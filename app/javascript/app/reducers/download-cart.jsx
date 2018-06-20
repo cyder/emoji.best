@@ -17,7 +17,7 @@ const downloadCart = (state = initialState, action) => {
       };
     }
     case types.DELETE: {
-      const list = state.list.filter(emoji => emoji.id !== action.emoji.id)
+      const list = state.list.filter(emoji => emoji.id !== action.emoji.id);
       return {
         ...state,
         list,
