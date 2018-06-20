@@ -2,6 +2,10 @@
   "name": "emojix",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-brands": "^5.0.13",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/react-fontawesome": "^0.0.20",
     "@rails/webpacker": "^3.4.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-react": "^6.24.1",
