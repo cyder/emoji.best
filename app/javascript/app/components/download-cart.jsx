@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
 
 import DownloadCartShape from './shapes/download-cart';
 
@@ -66,7 +68,7 @@ const Message = styled.p`
   margin: 0;
 `;
 
-const DownloadButton = styled.button`
+const DownloadButton = styled.a`
   display: block;
   width: 240px;
   height: 44px;
@@ -75,11 +77,18 @@ const DownloadButton = styled.button`
   background-color: #464646;
   font-size: 1.1rem;
   border: solid 3px #dfdfdf;
-  border-radius: 22px;
+  border-radius: 25px;
   font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  line-height: 44px;
 `;
 
-const DwonloadCart = ({ cart, deleteEmojiFromDownloadCart }) => (
+const DownloadCart = ({
+  cart,
+  deleteEmojiFromDownloadCart,
+  downloadEmojis,
+}) => (
   <Container list={cart.list} >
     <List>
       {
@@ -92,13 +101,21 @@ const DwonloadCart = ({ cart, deleteEmojiFromDownloadCart }) => (
       }
     </List>
     <Message>choose {cart.list.length} emojis</Message>
-    <DownloadButton>download</DownloadButton>
+    <DownloadButton
+      href={cart.downloadLink}
+      onClick={() => downloadEmojis(cart.list)}
+      target="_blank"
+      download
+    >
+      <FontAwesomeIcon icon={faDownload} /> download
+    </DownloadButton>
   </Container>
 );
 
-export default DwonloadCart;
+export default DownloadCart;
 
-DwonloadCart.propTypes = {
+DownloadCart.propTypes = {
   cart: DownloadCartShape.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
+  downloadEmojis: PropTypes.func.isRequired,
 };
