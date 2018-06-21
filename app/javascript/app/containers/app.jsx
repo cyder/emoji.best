@@ -36,6 +36,7 @@ class App extends Component {
         <DownloadCart
           cart={this.props.downloadCart}
           deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
+          downloadEmojis={this.props.downloadEmojis}
         />
         <PopupManager
           show={this.props.popupManager}
@@ -73,6 +74,7 @@ App.propTypes = {
   showSignInPopup: PropTypes.func.isRequired,
   showSignUpPopup: PropTypes.func.isRequired,
   closePopup: PropTypes.func.isRequired,
+  downloadEmojis: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {

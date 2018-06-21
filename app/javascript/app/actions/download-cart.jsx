@@ -7,3 +7,7 @@ export function addEmojiToDownloadCart(emoji) {
 export function deleteEmojiFromDownloadCart(emoji) {
   return { type: types.DELETE, emoji };
 }
+
+export function downloadEmojis(emojis) {
+  return { type: types.DOWNLOAD, emojis };
+}
