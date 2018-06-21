@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
 
 import EmojiShape from './shapes/emoji';
 
@@ -78,7 +80,7 @@ const Emoji = ({
     </TitleArea>
     <Menus>
       <div>by {emoji.user.name}</div>
-      <div>{emoji.number_of_downloaded} Download</div>
+      <div><FontAwesomeIcon icon={faDownload} /> {emoji.number_of_downloaded}</div>
     </Menus>
     <DownloadCheckBox
       isAddedToCart={isAddedToCart}

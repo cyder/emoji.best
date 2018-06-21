@@ -34,6 +34,7 @@ class App extends Component {
         <DownloadCart
           cart={this.props.downloadCart}
           deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
+          downloadEmojis={this.props.downloadEmojis}
         />
       </div>
     );
@@ -60,6 +61,7 @@ App.propTypes = {
   searchEmojis: PropTypes.func.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
+  downloadEmojis: PropTypes.func.isRequired,
 };
 
 export default AppContainer;
