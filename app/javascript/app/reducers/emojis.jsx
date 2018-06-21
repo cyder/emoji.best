@@ -2,6 +2,7 @@ import * as types from '../constants/emojis';
 
 const initialState = {
   keyword: null,
+  order: 'new',
   list: [],
 };
 
@@ -17,6 +18,7 @@ const emojis = (state = initialState, action) => {
       return {
         ...state,
         keyword: action.keyword,
+        order: action.order,
         list: [],
       };
     case types.SUCCESS_LOAD:

@@ -4,8 +4,8 @@ export function loadEmojis() {
   return { type: types.LOAD };
 }
 
-export function searchEmojis(keyword) {
-  return { type: types.SEARCH, keyword };
+export function searchEmojis(keyword, order) {
+  return { type: types.SEARCH, keyword, order };
 }
 
 export function successLoadEmojis(emojis) {

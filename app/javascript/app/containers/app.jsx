@@ -20,10 +20,14 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header searchEmojis={this.props.searchEmojis} />
+        <Header
+          order={this.props.emojis.order}
+          searchEmojis={this.props.searchEmojis}
+        />
         <EmojiList
           emojis={this.props.emojis}
           cart={this.props.downloadCart}
+          searchEmojis={this.props.searchEmojis}
           addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
           deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
         />

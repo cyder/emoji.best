@@ -12,6 +12,48 @@ const Container = styled.section`
   max-width: 1000px;
 `;
 
+const Head = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const SelectContainer = styled.div`
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-bottom: 4px solid #242424;
+    border-right: 4px solid #242424;
+    transform: rotate(45deg);
+  }
+`;
+
+const Select = styled.select`
+  background-color: #ffffff;
+  border: none;
+  height: 40px;
+  border-radius: 20px;
+  appearance: button;
+  padding: 0 60px 0 20px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #242424;
+
+  &:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #828c9a;
+  }
+`;
+
 const Emojis = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -25,15 +67,24 @@ const isAddedToCart = (cartList, emoji) => (
 const EmojiList = ({
   emojis,
   cart,
+  searchEmojis,
   addEmojiToDownloadCart,
   deleteEmojiFromDownloadCart,
 }) => (
   <Container>
-    <h2>
-      {(emojis.keyword == null || emojis.keyword === '') ?
-        'All Emojis' :
-        `Search results : ${emojis.keyword}`}
-    </h2>
+    <Head>
+      <h2>
+        {(emojis.keyword == null || emojis.keyword === '') ?
+          'All Emojis' :
+          `Search results : ${emojis.keyword}`}
+      </h2>
+      <SelectContainer>
+        <Select onChange={e => searchEmojis(emojis.keyword, e.target.value)}>
+          <option value="new">New</option>
+          <option value="popular">Popular</option>
+        </Select>
+      </SelectContainer>
+    </Head>
     <Emojis>
       {
         emojis.list.map(emoji => (
@@ -53,6 +104,7 @@ const EmojiList = ({
 EmojiList.propTypes = {
   emojis: EmojiListShape.isRequired,
   cart: DownloadCartShape.isRequired,
+  searchEmojis: PropTypes.func.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
 };
