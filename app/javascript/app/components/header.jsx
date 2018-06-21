@@ -28,6 +28,7 @@ const SubTitle = styled.p`
 `;
 
 const Header = ({
+  order,
   searchEmojis,
   showSignInPopup,
   showSignUpPopup,
@@ -35,7 +36,10 @@ const Header = ({
   <Container>
     <Title><Logo alt="emoji.best" src={LogoImage} /></Title>
     <SubTitle>{'Let\'s share emojis!!'}</SubTitle>
-    <SearchForm searchEmojis={searchEmojis} />
+    <SearchForm
+      order={order}
+      searchEmojis={searchEmojis}
+    />
     <Navigation
       showSignInPopup={showSignInPopup}
       showSignUpPopup={showSignUpPopup}
@@ -44,6 +48,7 @@ const Header = ({
 );
 
 Header.propTypes = {
+  order: PropTypes.string.isRequired,
   searchEmojis: PropTypes.func.isRequired,
   showSignInPopup: PropTypes.func.isRequired,
   showSignUpPopup: PropTypes.func.isRequired,

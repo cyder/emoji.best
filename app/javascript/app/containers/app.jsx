@@ -23,6 +23,7 @@ class App extends Component {
     return (
       <div>
         <Header
+          order={this.props.emojis.order}
           searchEmojis={this.props.searchEmojis}
           showSignInPopup={this.props.showSignInPopup}
           showSignUpPopup={this.props.showSignUpPopup}
@@ -30,6 +31,7 @@ class App extends Component {
         <EmojiList
           emojis={this.props.emojis}
           cart={this.props.downloadCart}
+          searchEmojis={this.props.searchEmojis}
           addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
           deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
         />
