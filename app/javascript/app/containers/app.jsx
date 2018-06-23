@@ -22,10 +22,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header
-          showSignInPopup={this.props.showSignInPopup}
-          showSignUpPopup={this.props.showSignUpPopup}
-        />
+        <Header />
         <EmojiList
           emojis={this.props.emojis}
           cart={this.props.downloadCart}
