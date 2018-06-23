@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LogoImage from 'images/logo.png';
 
-import SearchForm from './search-form';
+import SearchForm from '../containers/search-form';
 import Navigation from './navigation';
 
 const Container = styled.header`
@@ -28,18 +28,13 @@ const SubTitle = styled.p`
 `;
 
 const Header = ({
-  order,
-  searchEmojis,
   showSignInPopup,
   showSignUpPopup,
 }) => (
   <Container>
     <Title><Logo alt="emoji.best" src={LogoImage} /></Title>
     <SubTitle>{'Let\'s share emojis!!'}</SubTitle>
-    <SearchForm
-      order={order}
-      searchEmojis={searchEmojis}
-    />
+    <SearchForm />
     <Navigation
       showSignInPopup={showSignInPopup}
       showSignUpPopup={showSignUpPopup}
@@ -48,8 +43,6 @@ const Header = ({
 );
 
 Header.propTypes = {
-  order: PropTypes.string.isRequired,
-  searchEmojis: PropTypes.func.isRequired,
   showSignInPopup: PropTypes.func.isRequired,
   showSignUpPopup: PropTypes.func.isRequired,
 };

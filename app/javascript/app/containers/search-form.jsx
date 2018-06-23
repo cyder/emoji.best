@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+
+import * as EmojisActions from '../actions/emojis';
 
 const Input = styled.input`
   display: block;
@@ -48,9 +52,19 @@ class SearchForm extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return state.emojis;
+}
+
+function mapDispatchProps(dispatch) {
+  return bindActionCreators(EmojisActions, dispatch);
+}
+
+const SearchFormContainer = connect(mapStateToProps, mapDispatchProps)(SearchForm);
+
 SearchForm.propTypes = {
   order: PropTypes.string.isRequired,
   searchEmojis: PropTypes.func.isRequired,
 };
 
-export default SearchForm;
+export default SearchFormContainer;

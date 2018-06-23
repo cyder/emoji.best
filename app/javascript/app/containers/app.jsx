@@ -23,8 +23,6 @@ class App extends Component {
     return (
       <div>
         <Header
-          order={this.props.emojis.order}
-          searchEmojis={this.props.searchEmojis}
           showSignInPopup={this.props.showSignInPopup}
           showSignUpPopup={this.props.showSignUpPopup}
         />
