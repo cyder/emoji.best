@@ -32,9 +32,9 @@ class Emoji < ApplicationRecord
   scope :search_with_target, ->(keyword, target) {
     case target
     when TARGET_METHOD[:all]
-      search(keyword)
+      search(keyword).group("emojis.id, tags.id")
     when TARGET_METHOD[:tag]
-      search(tag: keyword)
+      search(tag: keyword).group("emojis.id, tags.id")
     end
   }
 
