@@ -1,13 +1,57 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import Emoji from './emoji';
 import EmojiListShape from './shapes/emoji-list';
+import DownloadCartShape from './shapes/download-cart';
 
 const Container = styled.section`
   padding: 0 2%;
   margin: 0 auto;
   max-width: 1000px;
+`;
+
+const Head = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const SelectContainer = styled.div`
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-bottom: 4px solid #242424;
+    border-right: 4px solid #242424;
+    transform: rotate(45deg);
+  }
+`;
+
+const Select = styled.select`
+  background-color: #ffffff;
+  border: none;
+  height: 40px;
+  border-radius: 20px;
+  appearance: button;
+  padding: 0 60px 0 20px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #242424;
+
+  &:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #828c9a;
+  }
 `;
 
 const Emojis = styled.div`
@@ -16,23 +60,53 @@ const Emojis = styled.div`
   grid-gap: 50px 5%;
 `;
 
-const EmojiList = ({ keyword, list }) => (
+const isAddedToCart = (cartList, emoji) => (
+  cartList.some(value => value.id === emoji.id)
+);
+
+const EmojiList = ({
+  emojis,
+  cart,
+  searchEmojis,
+  addEmojiToDownloadCart,
+  deleteEmojiFromDownloadCart,
+}) => (
   <Container>
-    <h2>
-      {(keyword == null || keyword === '') ?
-        'All Emojis' :
-        `Search results : ${keyword}`}
-    </h2>
+    <Head>
+      <h2>
+        {(emojis.keyword == null || emojis.keyword === '') ?
+          'All Emojis' :
+          `Search results : ${emojis.keyword}`}
+      </h2>
+      <SelectContainer>
+        <Select onChange={e => searchEmojis(emojis.keyword, e.target.value)}>
+          <option value="new">New</option>
+          <option value="popular">Popular</option>
+        </Select>
+      </SelectContainer>
+    </Head>
     <Emojis>
       {
-        list.map(emoji => (
-          <Emoji key={emoji.id} {...emoji} />
+        emojis.list.map(emoji => (
+          <Emoji
+            key={emoji.id}
+            emoji={emoji}
+            isAddedToCart={isAddedToCart(cart.list, emoji)}
+            addEmojiToDownloadCart={addEmojiToDownloadCart}
+            deleteEmojiFromDownloadCart={deleteEmojiFromDownloadCart}
+          />
         ))
       }
     </Emojis>
   </Container>
 );
 
-EmojiList.propTypes = EmojiListShape;
+EmojiList.propTypes = {
+  emojis: EmojiListShape.isRequired,
+  cart: DownloadCartShape.isRequired,
+  searchEmojis: PropTypes.func.isRequired,
+  addEmojiToDownloadCart: PropTypes.func.isRequired,
+  deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
+};
 
 export default EmojiList;

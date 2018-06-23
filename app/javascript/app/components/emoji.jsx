@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
 
 import EmojiShape from './shapes/emoji';
 
@@ -8,6 +11,7 @@ const Container = styled.article`
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 5px 0 0 #e7e7e7;
+  position: relative;
 `;
 
 const TitleArea = styled.div`
@@ -40,7 +44,35 @@ const Menus = styled.div`
   justify-content: space-between;
 `;
 
-const Emoji = emoji => (
+const DownloadCheckBox = styled.div`
+  width: 50px;
+  height: 50px;
+  background-color: ${props => (props.isAddedToCart ? '#464646' : '#dfdfdf')};
+  border-radius: 25px;
+  position: absolute;
+  top: -20px;
+  right: -20px;
+
+  &::after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 14px;
+    width: 18px;
+    height: 8px;
+    border-left: 5px solid #ffffff;
+    border-bottom: 5px solid #ffffff;
+    transform: rotate(-45deg);
+  }
+`;
+
+const Emoji = ({
+  emoji,
+  isAddedToCart,
+  addEmojiToDownloadCart,
+  deleteEmojiFromDownloadCart,
+}) => (
   <Container>
     <TitleArea>
       <Img alt={emoji.name} src={emoji.images.thumb_url} />
@@ -48,11 +80,22 @@ const Emoji = emoji => (
     </TitleArea>
     <Menus>
       <div>by {emoji.user.name}</div>
-      <div>{emoji.number_of_downloaded} Download</div>
+      <div><FontAwesomeIcon icon={faDownload} /> {emoji.number_of_downloaded}</div>
     </Menus>
+    <DownloadCheckBox
+      isAddedToCart={isAddedToCart}
+      onClick={() => (
+        isAddedToCart ? deleteEmojiFromDownloadCart(emoji) : addEmojiToDownloadCart(emoji)
+      )}
+    />
   </Container>
 );
 
-Emoji.propTypes = EmojiShape;
+Emoji.propTypes = {
+  emoji: EmojiShape.isRequired,
+  isAddedToCart: PropTypes.bool.isRequired,
+  addEmojiToDownloadCart: PropTypes.func.isRequired,
+  deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
+};
 
 export default Emoji;
