@@ -35,17 +35,11 @@ const Navigation = ({
   </Container>
 );
 
-function mapStateToProps(state) {
-  return state;
-}
-
 function mapDispatchProps(dispatch) {
-  return bindActionCreators({
-    ...PopupManagerActions,
-  }, dispatch);
+  return bindActionCreators(PopupManagerActions, dispatch);
 }
 
-const NavigationContainer = connect(mapStateToProps, mapDispatchProps)(Navigation);
+const NavigationContainer = connect(null, mapDispatchProps)(Navigation);
 
 Navigation.propTypes = {
   showSignInPopup: PropTypes.func.isRequired,

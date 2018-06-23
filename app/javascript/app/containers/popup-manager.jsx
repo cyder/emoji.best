@@ -68,13 +68,11 @@ const PopupManager = ({
 );
 
 function mapStateToProps(state) {
-  return state;
+  return { popupManager: state.popupManager };
 }
 
 function mapDispatchProps(dispatch) {
-  return bindActionCreators({
-    ...PopupManagerActions,
-  }, dispatch);
+  return bindActionCreators(PopupManagerActions, dispatch);
 }
 
 const PopupManagerContainer = connect(mapStateToProps, mapDispatchProps)(PopupManager);
