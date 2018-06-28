@@ -1,10 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LogoImage from 'images/logo.png';
 
-import SearchForm from './search-form';
-import Navigation from './navigation';
+import SearchForm from '../containers/search-form';
+import Navigation from '../containers/navigation';
 
 const Container = styled.header`
   color: #ffffff;
@@ -27,31 +26,13 @@ const SubTitle = styled.p`
   margin: 10px 0 30px;
 `;
 
-const Header = ({
-  order,
-  searchEmojis,
-  showSignInPopup,
-  showSignUpPopup,
-}) => (
+const Header = () => (
   <Container>
     <Title><Logo alt="emoji.best" src={LogoImage} /></Title>
     <SubTitle>{'Let\'s share emojis!!'}</SubTitle>
-    <SearchForm
-      order={order}
-      searchEmojis={searchEmojis}
-    />
-    <Navigation
-      showSignInPopup={showSignInPopup}
-      showSignUpPopup={showSignUpPopup}
-    />
+    <SearchForm />
+    <Navigation />
   </Container>
 );
-
-Header.propTypes = {
-  order: PropTypes.string.isRequired,
-  searchEmojis: PropTypes.func.isRequired,
-  showSignInPopup: PropTypes.func.isRequired,
-  showSignUpPopup: PropTypes.func.isRequired,
-};
 
 export default Header;

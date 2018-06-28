@@ -1,9 +1,12 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import SignInPopup from './sign-in-popup';
-import SignUpPopup from './sign-up-popup';
+import SignInPopup from '../components/sign-in-popup';
+import SignUpPopup from '../components/sign-up-popup';
+import * as PopupManagerActions from '../actions/popup-manager';
 import { SIGN_IN_POPUP, SIGN_UP_POPUP } from '../constants/popup-manager';
 
 const Background = styled.div`
@@ -52,27 +55,37 @@ const selectPopup = (
 };
 
 const PopupManager = ({
-  show,
+  popupManager,
   closePopup,
   showSignInPopup,
   showSignUpPopup,
 }) => (
-  <Background isShow={show !== null}>
+  <Background isShow={popupManager !== null}>
     <Container>
-      {selectPopup(show, closePopup, showSignInPopup, showSignUpPopup)}
+      {selectPopup(popupManager, closePopup, showSignInPopup, showSignUpPopup)}
     </Container>
   </Background>
 );
 
+function mapStateToProps(state) {
+  return { popupManager: state.popupManager };
+}
+
+function mapDispatchProps(dispatch) {
+  return bindActionCreators(PopupManagerActions, dispatch);
+}
+
+const PopupManagerContainer = connect(mapStateToProps, mapDispatchProps)(PopupManager);
+
 PopupManager.propTypes = {
-  show: PropTypes.string,
+  popupManager: PropTypes.string,
   closePopup: PropTypes.func.isRequired,
   showSignInPopup: PropTypes.func.isRequired,
   showSignUpPopup: PropTypes.func.isRequired,
 };
 
 PopupManager.defaultProps = {
-  show: null,
+  popupManager: null,
 };
 
-export default PopupManager;
+export default PopupManagerContainer;

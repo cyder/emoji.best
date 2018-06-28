@@ -1,6 +1,10 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
+import * as PopupManagerActions from '../actions/popup-manager';
 
 const Container = styled.nav`
   position: absolute;
@@ -31,9 +35,15 @@ const Navigation = ({
   </Container>
 );
 
+function mapDispatchProps(dispatch) {
+  return bindActionCreators(PopupManagerActions, dispatch);
+}
+
+const NavigationContainer = connect(null, mapDispatchProps)(Navigation);
+
 Navigation.propTypes = {
   showSignInPopup: PropTypes.func.isRequired,
   showSignUpPopup: PropTypes.func.isRequired,
 };
 
-export default Navigation;
+export default NavigationContainer;

@@ -6,13 +6,12 @@ import PropTypes from 'prop-types';
 import Header from '../components/header';
 import EmojiList from '../components/emoji-list';
 import DownloadCart from '../components/download-cart';
-import PopupManager from '../components/popup-manager';
+import PopupManager from '../containers/popup-manager';
 import EmojiListShape from '../components/shapes/emoji-list';
 import DownloadCartShape from '../components/shapes/download-cart';
 
 import * as EmojisActions from '../actions/emojis';
 import * as DownloadCartActions from '../actions/download-cart';
-import * as PopupManagerActions from '../actions/popup-manager';
 
 class App extends Component {
   componentWillMount() {
@@ -22,12 +21,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header
-          order={this.props.emojis.order}
-          searchEmojis={this.props.searchEmojis}
-          showSignInPopup={this.props.showSignInPopup}
-          showSignUpPopup={this.props.showSignUpPopup}
-        />
+        <Header />
         <EmojiList
           emojis={this.props.emojis}
           cart={this.props.downloadCart}
@@ -40,12 +34,7 @@ class App extends Component {
           deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
           downloadEmojis={this.props.downloadEmojis}
         />
-        <PopupManager
-          show={this.props.popupManager}
-          closePopup={this.props.closePopup}
-          showSignInPopup={this.props.showSignInPopup}
-          showSignUpPopup={this.props.showSignUpPopup}
-        />
+        <PopupManager />
       </div>
     );
   }
@@ -59,7 +48,6 @@ function mapDispatchProps(dispatch) {
   return bindActionCreators({
     ...EmojisActions,
     ...DownloadCartActions,
-    ...PopupManagerActions,
   }, dispatch);
 }
 
@@ -68,19 +56,11 @@ const AppContainer = connect(mapStateToProps, mapDispatchProps)(App);
 App.propTypes = {
   emojis: EmojiListShape.isRequired,
   downloadCart: DownloadCartShape.isRequired,
-  popupManager: PropTypes.string,
   loadEmojis: PropTypes.func.isRequired,
   searchEmojis: PropTypes.func.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
-  showSignInPopup: PropTypes.func.isRequired,
-  showSignUpPopup: PropTypes.func.isRequired,
-  closePopup: PropTypes.func.isRequired,
   downloadEmojis: PropTypes.func.isRequired,
-};
-
-App.defaultProps = {
-  popupManager: null,
 };
 
 export default AppContainer;
