@@ -1,5 +1,6 @@
 class Api::V1::BaseController < ApplicationController
   before_action :require_valid_token
+  protect_from_forgery with: :null_session
 
   rescue_from ActiveRecord::RecordInvalid do |e|
     errors = e.record.errors.details
