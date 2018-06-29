@@ -1,5 +1,10 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import * as PopupManagerActions from '../actions/popup-manager';
+import * as UserActions from '../actions/user';
 
 import {
   Container,
@@ -10,7 +15,7 @@ import {
   Message,
   SwitchButton,
   CloseButton,
-} from './css/popup';
+} from '../components/css/popup';
 
 const SignInPopup = ({ closePopup, showSignUpPopup }) => (
   <Container>
@@ -28,9 +33,22 @@ const SignInPopup = ({ closePopup, showSignUpPopup }) => (
   </Container>
 );
 
+function mapStateToProps(state) {
+  return { user: state.user };
+}
+
+function mapDispatchProps(dispatch) {
+  return bindActionCreators({
+    ...PopupManagerActions,
+    ...UserActions,
+  }, dispatch);
+}
+
+const SignInPopupContainer = connect(mapStateToProps, mapDispatchProps)(SignInPopup);
+
 SignInPopup.propTypes = {
   closePopup: PropTypes.func.isRequired,
   showSignUpPopup: PropTypes.func.isRequired,
 };
 
-export default SignInPopup;
+export default SignInPopupContainer;
