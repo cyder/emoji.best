@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
+import { addUrlProps, UrlQueryParamTypes, UrlUpdateTypes } from 'react-url-query';
 
 import * as EmojisActions from '../actions/emojis';
 
@@ -58,8 +58,7 @@ function mapDispatchProps(dispatch) {
 }
 
 const urlPropsQueryConfig = {
-  keyword: { type: UrlQueryParamTypes.string },
-  order: { type: UrlQueryParamTypes.string },
+  keyword: { type: UrlQueryParamTypes.string, updateType: UrlUpdateTypes.pushIn },
 };
 
 const SearchFormContainer = addUrlProps({

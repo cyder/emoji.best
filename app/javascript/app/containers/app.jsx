@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
+import { addUrlProps, UrlQueryParamTypes, UrlUpdateTypes } from 'react-url-query';
 
 import Header from '../components/header';
 import EmojiList from '../components/emoji-list';
@@ -61,8 +61,8 @@ function mapDispatchProps(dispatch) {
 }
 
 const urlPropsQueryConfig = {
-  keyword: { type: UrlQueryParamTypes.string },
-  order: { type: UrlQueryParamTypes.string },
+  keyword: { type: UrlQueryParamTypes.string, updateType: UrlUpdateTypes.pushIn },
+  order: { type: UrlQueryParamTypes.string, updateType: UrlUpdateTypes.pushIn },
 };
 
 const AppContainer = addUrlProps({
