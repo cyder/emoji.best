@@ -1,7 +1,7 @@
 import * as types from '../constants/emojis';
 
 export function loadEmojis() {
-  return { type: types.LOAD };
+  return { type: types.LOAD, keyword: null, order: 'new' };
 }
 
 export function searchEmojis(keyword, order) {
@@ -11,9 +11,9 @@ export function searchEmojis(keyword, order) {
 export function loadNextEmojis(page, keyword, order) {
   return {
     type: types.LOAD_NEXT,
-    page,
     keyword,
     order,
+    page,
   };
 }
 
