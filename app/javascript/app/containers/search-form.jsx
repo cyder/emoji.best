@@ -32,7 +32,7 @@ class SearchForm extends Component {
 
   onKeyDown(e) {
     if (e.key === 'Enter') {
-      this.props.searchEmojis(this.state.keyword, this.props.order);
+      this.props.onChangeKeyword(this.state.keyword);
     }
   }
 
@@ -70,6 +70,7 @@ SearchForm.propTypes = {
   keyword: PropTypes.string,
   order: PropTypes.string,
   searchEmojis: PropTypes.func.isRequired,
+  onChangeKeyword: PropTypes.func.isRequired,
 };
 
 SearchForm.defaultProps = {

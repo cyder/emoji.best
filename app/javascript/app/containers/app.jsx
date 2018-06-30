@@ -28,9 +28,9 @@ class App extends Component {
           keyword={this.props.keyword}
           order={this.props.order}
           cart={this.props.downloadCart}
-          searchEmojis={this.props.searchEmojis}
           addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
           deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
+          onChangeOrder={this.props.onChangeOrder}
         />
         <DownloadCart
           cart={this.props.downloadCart}
@@ -72,6 +72,7 @@ App.propTypes = {
   downloadEmojis: PropTypes.func.isRequired,
   keyword: PropTypes.string,
   order: PropTypes.string,
+  onChangeOrder: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
