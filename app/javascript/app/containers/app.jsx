@@ -9,11 +9,18 @@ import DownloadCart from '../components/download-cart';
 import PopupManager from '../containers/popup-manager';
 import EmojiListShape from '../components/shapes/emoji-list';
 import DownloadCartShape from '../components/shapes/download-cart';
+import { STATUS } from '../constants/emojis';
 
 import * as EmojisActions from '../actions/emojis';
 import * as DownloadCartActions from '../actions/download-cart';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onScrolled = this.onScrolled.bind(this);
+  }
+
   componentWillMount() {
     this.props.loadEmojis();
   }
@@ -27,10 +34,14 @@ class App extends Component {
   }
 
   onScrolled() {
-    const body = window.document.body;
+    const offset = 200;
+    const { body } = window.document;
     const html = window.document.documentElement;
     const scrollTop = body.scrollTop || html.scrollTop;
     const scrollBottom = html.scrollHeight - html.clientHeight - scrollTop;
+    if (this.props.emojis.status === STATUS.SHOWING && scrollBottom < offset) {
+      this.props.loadNextEmojis(this.props.emojis.lastPage + 1, this.props.emojis.keyword, this.props.emojis.order);
+    }
   }
 
   render() {
@@ -73,6 +84,7 @@ App.propTypes = {
   downloadCart: DownloadCartShape.isRequired,
   loadEmojis: PropTypes.func.isRequired,
   searchEmojis: PropTypes.func.isRequired,
+  loadNextEmojis: PropTypes.func.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
   downloadEmojis: PropTypes.func.isRequired,
