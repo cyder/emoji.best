@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import ReactResizeDetector from 'react-resize-detector';
 
 import Header from '../components/header';
 import EmojiList from '../components/emoji-list';
@@ -18,7 +19,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.onScrolled = this.onScrolled.bind(this);
+    this.onChanged = this.onChanged.bind(this);
   }
 
   componentWillMount() {
@@ -26,14 +27,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.onScrolled);
+    window.addEventListener('scroll', this.onChanged);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScrolled);
+    window.removeEventListener('scroll', this.onChanged);
   }
 
-  onScrolled() {
+  onChanged() {
     const offset = 200;
     const { body } = window.document;
     const html = window.document.documentElement;
@@ -49,13 +50,15 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <EmojiList
-          emojis={this.props.emojis}
-          cart={this.props.downloadCart}
-          searchEmojis={this.props.searchEmojis}
-          addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
-          deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
-        />
+        <ReactResizeDetector handleHeight onResize={this.onChanged}>
+          <EmojiList
+            emojis={this.props.emojis}
+            cart={this.props.downloadCart}
+            searchEmojis={this.props.searchEmojis}
+            addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
+            deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
+          />
+        </ReactResizeDetector>
         <DownloadCart
           cart={this.props.downloadCart}
           deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
