@@ -68,14 +68,11 @@ const SearchFormContainer = addUrlProps({
 
 SearchForm.propTypes = {
   keyword: PropTypes.string,
-  order: PropTypes.string,
-  searchEmojis: PropTypes.func.isRequired,
   onChangeKeyword: PropTypes.func.isRequired,
 };
 
 SearchForm.defaultProps = {
   keyword: null,
-  order: null,
 };
 
 export default SearchFormContainer;
