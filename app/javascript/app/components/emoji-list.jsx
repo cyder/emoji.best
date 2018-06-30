@@ -66,6 +66,8 @@ const isAddedToCart = (cartList, emoji) => (
 
 const EmojiList = ({
   emojis,
+  keyword,
+  order,
   cart,
   searchEmojis,
   addEmojiToDownloadCart,
@@ -74,12 +76,14 @@ const EmojiList = ({
   <Container>
     <Head>
       <h2>
-        {(emojis.keyword == null || emojis.keyword === '') ?
+        {(keyword == null || keyword === '') ?
           'All Emojis' :
-          `Search results : ${emojis.keyword}`}
+          `Search results : ${keyword}`}
       </h2>
       <SelectContainer>
-        <Select onChange={e => searchEmojis(emojis.keyword, e.target.value)}>
+        <Select
+          onChange={e => searchEmojis(keyword, e.target.value)}
+        >
           <option value="new">New</option>
           <option value="popular">Popular</option>
         </Select>
@@ -103,10 +107,17 @@ const EmojiList = ({
 
 EmojiList.propTypes = {
   emojis: EmojiListShape.isRequired,
+  keyword: PropTypes.string,
+  order: PropTypes.string,
   cart: DownloadCartShape.isRequired,
   searchEmojis: PropTypes.func.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
+};
+
+EmojiList.defaultProps = {
+  keyword: null,
+  order: null,
 };
 
 export default EmojiList;

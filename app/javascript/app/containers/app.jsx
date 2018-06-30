@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 
 import Header from '../components/header';
 import EmojiList from '../components/emoji-list';
@@ -15,7 +16,7 @@ import * as DownloadCartActions from '../actions/download-cart';
 
 class App extends Component {
   componentWillMount() {
-    this.props.loadEmojis();
+    this.props.searchEmojis(this.props.keyword, this.props.order);
   }
 
   render() {
@@ -24,6 +25,8 @@ class App extends Component {
         <Header />
         <EmojiList
           emojis={this.props.emojis}
+          keyword={this.props.keyword}
+          order={this.props.order}
           cart={this.props.downloadCart}
           searchEmojis={this.props.searchEmojis}
           addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
@@ -51,16 +54,29 @@ function mapDispatchProps(dispatch) {
   }, dispatch);
 }
 
-const AppContainer = connect(mapStateToProps, mapDispatchProps)(App);
+const urlPropsQueryConfig = {
+  keyword: { type: UrlQueryParamTypes.string },
+  order: { type: UrlQueryParamTypes.string },
+};
+
+const AppContainer = addUrlProps({
+  urlPropsQueryConfig,
+})(connect(mapStateToProps, mapDispatchProps)(App));
 
 App.propTypes = {
   emojis: EmojiListShape.isRequired,
   downloadCart: DownloadCartShape.isRequired,
-  loadEmojis: PropTypes.func.isRequired,
   searchEmojis: PropTypes.func.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
   downloadEmojis: PropTypes.func.isRequired,
+  keyword: PropTypes.string,
+  order: PropTypes.string,
+};
+
+App.defaultProps = {
+  keyword: null,
+  order: null,
 };
 
 export default AppContainer;

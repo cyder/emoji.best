@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 
 import * as EmojisActions from '../actions/emojis';
 
@@ -23,7 +24,7 @@ const Input = styled.input`
 class SearchForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { keyword: '' };
+    this.state = { keyword: props.keyword || '' };
 
     this.onKeyDown = this.onKeyDown.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -52,19 +53,28 @@ class SearchForm extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return state.emojis;
-}
-
 function mapDispatchProps(dispatch) {
   return bindActionCreators(EmojisActions, dispatch);
 }
 
-const SearchFormContainer = connect(mapStateToProps, mapDispatchProps)(SearchForm);
+const urlPropsQueryConfig = {
+  keyword: { type: UrlQueryParamTypes.string },
+  order: { type: UrlQueryParamTypes.string },
+};
+
+const SearchFormContainer = addUrlProps({
+  urlPropsQueryConfig,
+})(connect(null, mapDispatchProps)(SearchForm));
 
 SearchForm.propTypes = {
-  order: PropTypes.string.isRequired,
+  keyword: PropTypes.string,
+  order: PropTypes.string,
   searchEmojis: PropTypes.func.isRequired,
+};
+
+SearchForm.defaultProps = {
+  keyword: null,
+  order: null,
 };
 
 export default SearchFormContainer;
