@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import * as PopupManagerActions from '../actions/popup-manager';
-import * as UserActions from '../actions/user';
+import * as MyselfActions from '../actions/myself';
 
 import {
   Container,
@@ -60,13 +60,13 @@ class SignInPopup extends Component {
 }
 
 function mapStateToProps(state) {
-  return { user: state.user };
+  return { myself: state.myself };
 }
 
 function mapDispatchProps(dispatch) {
   return bindActionCreators({
     ...PopupManagerActions,
-    ...UserActions,
+    ...MyselfActions,
   }, dispatch);
 }
 

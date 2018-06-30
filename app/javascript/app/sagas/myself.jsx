@@ -1,8 +1,8 @@
 import 'babel-polyfill';
 import { takeEvery, put } from 'redux-saga/effects';
 
-import { SIGNIN } from '../constants/user';
-import { successSignIn } from '../actions/user';
+import { SIGNIN } from '../constants/myself';
+import { successSignIn } from '../actions/myself';
 import { signIn } from '../api';
 
 function* sageSignIn(action) {
