@@ -31,7 +31,7 @@ const emojis = (state = initialState, action) => {
     case types.SUCCESS_LOAD:
       return {
         ...state,
-        status: types.STATUS.SHOWING,
+        status: action.status,
         list: [...state.list, ...action.emojis],
       };
     default:
