@@ -40,7 +40,8 @@ class App extends Component {
     const scrollTop = body.scrollTop || html.scrollTop;
     const scrollBottom = html.scrollHeight - html.clientHeight - scrollTop;
     if (this.props.emojis.status === STATUS.SHOWING && scrollBottom < offset) {
-      this.props.loadNextEmojis(this.props.emojis.lastPage + 1, this.props.emojis.keyword, this.props.emojis.order);
+      const page = this.props.emojis.lastPage + 1;
+      this.props.loadNextEmojis(page, this.props.emojis.keyword, this.props.emojis.order);
     }
   }
 
