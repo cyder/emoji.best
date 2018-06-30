@@ -5,9 +5,9 @@ const initialState = null;
 const popupManager = (state = initialState, action) => {
   switch (action.type) {
     case types.SHOW_SIGN_UP:
-      return types.SIGN_UP_POPUP;
+      return types.POPUP.SIGN_UP;
     case types.SHOW_SIGN_IN:
-      return types.SIGN_IN_POPUP;
+      return types.POPUP.SIGN_IN;
     case types.CLOSE:
       if (action.target === null || action.target === state) {
         return null;

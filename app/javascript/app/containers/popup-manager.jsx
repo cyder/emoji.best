@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import SignInPopup from '../containers/sign-in-popup';
 import SignUpPopup from '../containers/sign-up-popup';
-import { SIGN_IN_POPUP, SIGN_UP_POPUP } from '../constants/popup-manager';
+import { POPUP } from '../constants/popup-manager';
 
 const Background = styled.div`
   display: ${props => (props.isShow ? 'block' : 'none')}
@@ -28,9 +28,9 @@ const Container = styled.div`
 
 const selectPopup = (show) => {
   switch (show) {
-    case SIGN_UP_POPUP:
+    case POPUP.SIGN_UP:
       return (<SignUpPopup />);
-    case SIGN_IN_POPUP:
+    case POPUP.SIGN_IN:
       return (<SignInPopup />);
     default:
       return null;
