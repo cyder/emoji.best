@@ -8,7 +8,7 @@ import faUser from '@fortawesome/fontawesome-free-solid/faUser';
 import faCloudUploadAlt from '@fortawesome/fontawesome-free-solid/faCloudUploadAlt';
 
 import * as PopupManagerActions from '../actions/popup-manager';
-import UserShape from '../components/shapes/user';
+import { STATUS } from '../constants/myself';
 
 const Container = styled.nav`
   position: absolute;
@@ -28,21 +28,21 @@ const Item = styled.li`
 `;
 
 const Navigation = ({
-  user,
+  status,
   showSignInPopup,
   showSignUpPopup,
 }) => (
   <Container>
     {
-      user === null ? (
-        <List>
-          <Item onClick={showSignInPopup}>Sign In</Item>
-          <Item onClick={showSignUpPopup}>Sign Up</Item>
-        </List>
-      ) : (
+      status === STATUS.SIGNIN ? (
         <List>
           <Item><FontAwesomeIcon icon={faCloudUploadAlt} /> Upload</Item>
           <Item><FontAwesomeIcon icon={faUser} /></Item>
+        </List>
+      ) : (
+        <List>
+          <Item onClick={showSignInPopup}>Sign In</Item>
+          <Item onClick={showSignUpPopup}>Sign Up</Item>
         </List>
       )
     }
@@ -50,7 +50,7 @@ const Navigation = ({
 );
 
 function mapStateToProps(state) {
-  return { user: state.myself.user };
+  return { status: state.myself.status };
 }
 
 function mapDispatchProps(dispatch) {
@@ -60,13 +60,9 @@ function mapDispatchProps(dispatch) {
 const NavigationContainer = connect(mapStateToProps, mapDispatchProps)(Navigation);
 
 Navigation.propTypes = {
-  user: UserShape,
+  status: PropTypes.string.isRequired,
   showSignInPopup: PropTypes.func.isRequired,
   showSignUpPopup: PropTypes.func.isRequired,
-};
-
-Navigation.defaultProps = {
-  user: null,
 };
 
 export default NavigationContainer;
