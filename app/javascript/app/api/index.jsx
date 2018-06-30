@@ -2,14 +2,20 @@ const COMMON_URL = 'api/v1/';
 const SEARCH = 'search';
 const DOWNLOAD = 'download';
 
+function get(path, data = null) {
+  const params = new URLSearchParams(data);
+  const uri = `${path}?${params.toString()}`;
+
+  return fetch(uri).then(response => response.json());
+}
+
 export function searchEmojis(order, keyword = null) {
-  const params = new URLSearchParams();
-  params.set('order', order);
-  if (keyword != null) params.set('keyword', keyword);
+  const data = { order };
+  if (keyword != null) data.keyword = keyword;
 
-  const path = `${COMMON_URL}${SEARCH}?${params.toString()}`;
+  const path = `${COMMON_URL}${SEARCH}`;
 
-  return fetch(path).then(response => response.json());
+  return get(path, data);
 }
 
 export function downloadEmojisLink(emojis) {
