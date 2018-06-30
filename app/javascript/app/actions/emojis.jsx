@@ -1,10 +1,6 @@
 import { pushInUrlQuery } from 'react-url-query';
 import * as types from '../constants/emojis';
 
-export function loadEmojis() {
-  return { type: types.LOAD };
-}
-
 export function searchEmojis(keyword, order) {
   pushInUrlQuery('keyword', keyword);
   pushInUrlQuery('order', order);
