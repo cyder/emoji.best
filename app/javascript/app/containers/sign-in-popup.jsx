@@ -53,7 +53,7 @@ class SignInPopup extends Component {
           Not a member?
           <SwitchButton onClick={this.props.showSignUpPopup}>Sign Up</SwitchButton>
         </Message>
-        <CloseButton onClick={this.props.closePopup} />
+        <CloseButton onClick={() => this.props.closePopup()} />
       </Container>
     );
   }

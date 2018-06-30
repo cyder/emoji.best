@@ -31,7 +31,7 @@ const SignUpPopup = ({ closePopup, showSignInPopup }) => (
       Already a member?
       <SwitchButton onClick={showSignInPopup}>Sign In</SwitchButton>
     </Message>
-    <CloseButton onClick={closePopup} />
+    <CloseButton onClick={() => closePopup()} />
   </Container>
 );
 

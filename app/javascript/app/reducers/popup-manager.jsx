@@ -9,7 +9,10 @@ const popupManager = (state = initialState, action) => {
     case types.SHOW_SIGN_IN:
       return types.SIGN_IN_POPUP;
     case types.CLOSE:
-      return null;
+      if (action.target === null || action.target === state) {
+        return null;
+      }
+      return state;
     default:
       return state;
   }
