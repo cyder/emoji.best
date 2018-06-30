@@ -19,6 +19,12 @@ class App extends Component {
     this.props.searchEmojis(this.props.keyword, this.props.order);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.keyword !== this.props.keyword || nextProps.order !== this.props.order) {
+      this.props.searchEmojis(nextProps.keyword, nextProps.order);
+    }
+  }
+
   render() {
     return (
       <div>
