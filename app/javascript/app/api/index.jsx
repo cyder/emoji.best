@@ -1,6 +1,7 @@
 const COMMON_URL = 'api/v1/';
 const SEARCH = 'search';
 const DOWNLOAD = 'download';
+const SIGNIN = 'users/sign_in';
 
 const csrfToken = document.querySelector('meta[name=csrf-token]').content;
 
@@ -41,4 +42,12 @@ export function downloadEmojisLink(emojis) {
   const params = new URLSearchParams();
   emojis.forEach(emoji => params.append('emojis[]', emoji.id));
   return `${COMMON_URL}${DOWNLOAD}?${params.toString()}`;
+}
+
+export function signIn(email, password) {
+  const path = `${COMMON_URL}${SIGNIN}`;
+  const data = {
+    user: { email, password },
+  };
+  return post(path, data);
 }
