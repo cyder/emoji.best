@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -63,47 +63,60 @@ const Emojis = styled.div`
 const isAddedToCart = (cartList, emoji) => (
   cartList.some(value => value.id === emoji.id)
 );
+class EmojiList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { order: props.order || 'new' };
 
-const EmojiList = ({
-  emojis,
-  keyword,
-  order,
-  cart,
-  searchEmojis,
-  addEmojiToDownloadCart,
-  deleteEmojiFromDownloadCart,
-}) => (
-  <Container>
-    <Head>
-      <h2>
-        {(keyword == null || keyword === '') ?
-          'All Emojis' :
-          `Search results : ${keyword}`}
-      </h2>
-      <SelectContainer>
-        <Select
-          onChange={e => searchEmojis(keyword, e.target.value)}
-        >
-          <option value="new">New</option>
-          <option value="popular">Popular</option>
-        </Select>
-      </SelectContainer>
-    </Head>
-    <Emojis>
-      {
-        emojis.list.map(emoji => (
-          <Emoji
-            key={emoji.id}
-            emoji={emoji}
-            isAddedToCart={isAddedToCart(cart.list, emoji)}
-            addEmojiToDownloadCart={addEmojiToDownloadCart}
-            deleteEmojiFromDownloadCart={deleteEmojiFromDownloadCart}
-          />
-        ))
-      }
-    </Emojis>
-  </Container>
-);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({ order: e.target.value });
+    this.props.searchEmojis(this.props.keyword, e.target.value);
+  }
+
+  render() {
+    const {
+      emojis,
+      keyword,
+      cart,
+      addEmojiToDownloadCart,
+      deleteEmojiFromDownloadCart,
+    } = this.props;
+
+    return (
+      <Container>
+        <Head>
+          <h2>
+            {(keyword == null || keyword === '') ?
+              'All Emojis' :
+              `Search results : ${keyword}`}
+          </h2>
+          <SelectContainer>
+            <Select onChange={this.onChange} value={this.state.order} >
+              <option value="new">New</option>
+              <option value="popular">Popular</option>
+            </Select>
+          </SelectContainer>
+        </Head>
+        <Emojis>
+          {
+            emojis.list.map(emoji => (
+              <Emoji
+                key={emoji.id}
+                emoji={emoji}
+                isAddedToCart={isAddedToCart(cart.list, emoji)}
+                addEmojiToDownloadCart={addEmojiToDownloadCart}
+                deleteEmojiFromDownloadCart={deleteEmojiFromDownloadCart}
+              />
+            ))
+          }
+        </Emojis>
+      </Container>
+    );
+  }
+}
 
 EmojiList.propTypes = {
   emojis: EmojiListShape.isRequired,
