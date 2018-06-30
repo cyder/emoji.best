@@ -18,6 +18,21 @@ class App extends Component {
     this.props.loadEmojis();
   }
 
+  componentDidMount() {
+    window.addEventListener('scroll', this.onScrolled);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScrolled);
+  }
+
+  onScrolled() {
+    const body = window.document.body;
+    const html = window.document.documentElement;
+    const scrollTop = body.scrollTop || html.scrollTop;
+    const scrollBottom = html.scrollHeight - html.clientHeight - scrollTop;
+  }
+
   render() {
     return (
       <div>
