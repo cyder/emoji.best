@@ -2,8 +2,9 @@ const COMMON_URL = 'api/v1/';
 const SEARCH = 'search';
 const DOWNLOAD = 'download';
 
-export function searchEmojis(order, keyword) {
+export function searchEmojis(order, keyword, page = 0) {
   const params = new URLSearchParams();
+  params.set('page', page);
   if (order != null) params.set('order', order);
   if (keyword != null) params.set('keyword', keyword);
 
