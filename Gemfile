@@ -45,6 +45,7 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem "autodoc"
+  gem "bullet"
   gem "capybara", "~> 2.13"
   gem "codecov", require: false
   gem "factory_bot_rails"
@@ -55,7 +56,6 @@ group :development, :test do
   gem "rubocop"
   gem "selenium-webdriver"
   gem "simplecov", require: false
-  gem 'bullet'
 end
 
 group :development do
