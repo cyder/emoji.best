@@ -29,8 +29,8 @@ function post(path, data) {
   return fetch(path, { ...params }).then(response => response.json());
 }
 
-export function searchEmojis(order, keyword = null) {
-  const data = { order };
+export function searchEmojis(order, keyword = null, page = 0) {
+  const data = { order, page };
   if (keyword != null) data.keyword = keyword;
 
   const path = `${COMMON_URL}${SEARCH}`;

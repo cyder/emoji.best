@@ -13,7 +13,7 @@ user = User.create(
   password_confirmation: "password",
 )
 
-5.times do |no|
+100.times do |no|
   Emoji.create(
     user: user,
     name: "sample_emoji#{no}",
