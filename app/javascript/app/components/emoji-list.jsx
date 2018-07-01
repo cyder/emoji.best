@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import LoadingImage from 'images/loading.png';
 
 import Emoji from './emoji';
 import EmojiListShape from './shapes/emoji-list';
@@ -58,6 +59,24 @@ const Emojis = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 50px 5%;
+  margin-bottom: 50px;
+`;
+
+const Loading = styled.div`
+  display: ${props => (props.isShow ? 'block' : 'none')}
+  text-align:center;
+  margin: 20px 0;
+`;
+
+const LoadingIcon = styled.img`
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite;
+
+  @keyframes spin {
+    0%  {transform: rotate(0);}
+    100%  {transform: rotate(360deg);}
+  }
 `;
 
 const isAddedToCart = (cartList, emoji) => (
@@ -98,6 +117,9 @@ const EmojiList = ({
         ))
       }
     </Emojis>
+    <Loading isShow={emojis.status === 'loading'}>
+      <LoadingIcon alt="loading" src={LoadingImage} />
+    </Loading>
   </Container>
 );
 
