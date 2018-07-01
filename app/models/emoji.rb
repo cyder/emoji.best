@@ -34,7 +34,7 @@ class Emoji < ApplicationRecord
     when TARGET_METHOD[:all]
       search(keyword).group("emojis.id, tags.id")
     when TARGET_METHOD[:tag]
-      search(tag: keyword).group("emojis.id, tags.id")
+      joins(:tags).where("tags.name = ?", keyword)
     end
   }
 
