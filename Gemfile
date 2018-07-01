@@ -55,6 +55,7 @@ group :development, :test do
   gem "rubocop"
   gem "selenium-webdriver"
   gem "simplecov", require: false
+  gem 'bullet'
 end
 
 group :development do
