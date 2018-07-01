@@ -85,9 +85,13 @@ const isAddedToCart = (cartList, emoji) => (
 class EmojiList extends Component {
   constructor(props) {
     super(props);
-    this.state = { order: props.order || 'new' };
+    this.state = { order: 'new' };
 
     this.onChange = this.onChange.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.state.order = nextProps.order || 'new';
   }
 
   onChange(e) {

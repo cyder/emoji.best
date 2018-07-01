@@ -30,6 +30,10 @@ class SearchForm extends Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.state.keyword = nextProps.keyword || '';
+  }
+
   onKeyDown(e) {
     if (e.key === 'Enter') {
       this.props.onChangeKeyword(this.state.keyword);
