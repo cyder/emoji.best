@@ -1,8 +1,9 @@
 class Api::V1::TagsController < Api::V1::BaseController
   def create
-    @tag = Emoji.find(params[:emoji_id]).tags.build tag_params
-    @tag.user = current_user
-    @tag.save!
+    @tag = Tag.create!(tag_params.merge({
+      emoji: Emoji.find(params[:emoji_id]),
+      user: current_user,
+    }))
   end
 
   def destroy
