@@ -2,6 +2,7 @@ const COMMON_URL = 'api/v1/';
 const SEARCH = 'search';
 const DOWNLOAD = 'download';
 const SIGNIN = 'users/sign_in';
+const SIGNUP = 'users';
 
 const csrfToken = document.querySelector('meta[name=csrf-token]').content;
 
@@ -48,6 +49,19 @@ export function signIn(email, password) {
   const path = `${COMMON_URL}${SIGNIN}`;
   const data = {
     user: { email, password },
+  };
+  return post(path, data);
+}
+
+export function signUp(name, email, password, passwordConfirm) {
+  const path = `${COMMON_URL}${SIGNUP}`;
+  const data = {
+    user: {
+      name,
+      email,
+      password,
+      password_confirmation: passwordConfirm,
+    },
   };
   return post(path, data);
 }

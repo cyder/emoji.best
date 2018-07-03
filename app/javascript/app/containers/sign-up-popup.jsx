@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -17,23 +17,64 @@ import {
   CloseButton,
 } from '../components/css/popup';
 
-const SignUpPopup = ({ closePopup, showSignInPopup }) => (
-  <Container>
-    <Title>Sign Up</Title>
-    <Form>
-      <TextForm type="name" placeholder="Username" />
-      <TextForm type="email" placeholder="Email" />
-      <TextForm type="password" placeholder="Password" />
-      <TextForm type="password" placeholder="Password (Confirm)" />
-      <Button>Sign Up</Button>
-    </Form>
-    <Message>
-      Already a member?
-      <SwitchButton onClick={showSignInPopup}>Sign In</SwitchButton>
-    </Message>
-    <CloseButton onClick={() => closePopup()} />
-  </Container>
-);
+class SignUpPopup extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      password: '',
+      passwordConfirm: '',
+    };
+
+    this.submit = this.submit.bind(this);
+  }
+
+  submit() {
+    this.props.signUp(
+      this.state.name,
+      this.state.email,
+      this.state.password,
+      this.state.passwordConfirm,
+    );
+  }
+
+  render() {
+    return (
+      <Container>
+        <Title>Sign Up</Title>
+        <Form>
+          <TextForm
+            type="name"
+            placeholder="Username"
+            onChange={e => this.setState({ name: e.target.value })}
+          />
+          <TextForm
+            type="email"
+            placeholder="Email"
+            onChange={e => this.setState({ email: e.target.value })}
+          />
+          <TextForm
+            type="password"
+            placeholder="Password"
+            onChange={e => this.setState({ password: e.target.value })}
+          />
+          <TextForm
+            type="password"
+            placeholder="Password (Confirm)"
+            onChange={e => this.setState({ passwordConfirm: e.target.value })}
+          />
+          <Button onClick={this.submit}>Sign Up</Button>
+        </Form>
+        <Message>
+          Already a member?
+          <SwitchButton onClick={this.props.showSignInPopup}>Sign In</SwitchButton>
+        </Message>
+        <CloseButton onClick={() => this.props.closePopup()} />
+      </Container>
+    );
+  }
+}
 
 function mapStateToProps(state) {
   return { myself: state.myself };
@@ -51,6 +92,7 @@ const SignUpPopupContainer = connect(mapStateToProps, mapDispatchProps)(SignUpPo
 SignUpPopup.propTypes = {
   closePopup: PropTypes.func.isRequired,
   showSignInPopup: PropTypes.func.isRequired,
+  signUp: PropTypes.func.isRequired,
 };
 
 export default SignUpPopupContainer;
