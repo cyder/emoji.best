@@ -1,5 +1,5 @@
 class Api::V1::TagsController < Api::V1::BaseController
-  before_action :set_emoji
+  before_action :set_emoji, only: [:create, :destroy]
 
   def create
     @tag = Tag.create!(tag_params.merge({
