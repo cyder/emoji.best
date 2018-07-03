@@ -9,11 +9,13 @@ const initialState = {
 const myself = (state = initialState, action) => {
   switch (action.type) {
     case types.SIGNIN:
+    case types.SIGNUP:
       return {
         ...state,
         status: types.STATUS.LOADING,
       };
     case types.SUCCESS_SIGNIN:
+    case types.SUCCESS_SIGNUP:
       return {
         ...state,
         status: types.STATUS.SIGNIN,
