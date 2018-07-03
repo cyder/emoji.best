@@ -12,9 +12,9 @@ describe "POST /api/v1/emojis/:emoji_id/tags" do
   context "with valid params" do
     it "returns a tag", autodoc: true do
       is_expected.to eq 200
-      body = response.body
-      expect(body).to be_json_eql(%("#{name}")).at_path("tag/name")
-      expect(body).to be_json_eql(emoji_id).at_path("tag/emoji/id")
+      json = JSON.parse(response.body)
+      expect(json["tag"]["name"]).to eq name
+      expect(json["tag"]["emoji"]["id"]).to eq emoji_id
     end
 
     it { expect { subject }.to change(Tag, :count).by(1) }
@@ -25,9 +25,8 @@ describe "POST /api/v1/emojis/:emoji_id/tags" do
 
     it "returns a invalid name error" do
       is_expected.to eq 400
-      body = response.body
-      expect(body).to have_json_path("errors/name")
-      expect(body).to be_json_eql(%("blank")).at_path("errors/name/0/error")
+      json = JSON.parse(response.body)
+      expect(json["errors"]["name"][0]["error"]).to eq "blank"
     end
   end
 
@@ -36,8 +35,8 @@ describe "POST /api/v1/emojis/:emoji_id/tags" do
 
     it "returns a invalid name error" do
       is_expected.to eq 404
-      body = response.body
-      expect(body).to have_json_path("errors/error")
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
     end
   end
 
@@ -46,8 +45,8 @@ describe "POST /api/v1/emojis/:emoji_id/tags" do
 
     it "return a error" do
       is_expected.to eq 403
-      body = response.body
-      expect(body).to have_json_path("errors/error")
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
     end
   end
 end
@@ -66,8 +65,8 @@ describe "DELETE /api/v1/emojis/:emoji_id/tags/:id" do
   context "with valid params" do
     it "returns a emoij", autodoc: true do
       is_expected.to eq 200
-      body = response.body
-      expect(body).to be_json_eql(emoji_id).at_path("emoji/id")
+      json = JSON.parse(response.body)
+      expect(json["emoji"]["id"]).to eq emoji_id
     end
 
     it { expect { subject }.to change(Tag, :count).by(-1) }
@@ -78,8 +77,8 @@ describe "DELETE /api/v1/emojis/:emoji_id/tags/:id" do
 
     it "returns a invalid name error" do
       is_expected.to eq 404
-      body = response.body
-      expect(body).to have_json_path("errors/error")
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
     end
   end
 
@@ -88,8 +87,8 @@ describe "DELETE /api/v1/emojis/:emoji_id/tags/:id" do
 
     it "returns a invalid name error" do
       is_expected.to eq 404
-      body = response.body
-      expect(body).to have_json_path("errors/error")
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
     end
   end
 
@@ -98,8 +97,8 @@ describe "DELETE /api/v1/emojis/:emoji_id/tags/:id" do
 
     it "return a error" do
       is_expected.to eq 403
-      body = response.body
-      expect(body).to have_json_path("errors/error")
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
     end
   end
 end
