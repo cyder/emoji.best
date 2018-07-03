@@ -14,6 +14,6 @@ class Api::V1::SearchController < Api::V1::BaseController
     @keyword = params[:keyword]&.gsub(/[[:blank:]]+/, " ")&.strip
     items = @keyword.present? ? Emoji.search_with_target(@keyword, @target) : Emoji.all
     @total = items.size
-    @emojis = items.order_emojis(@order).select_range(@page, @num)
+    @emojis = items.order_emojis(@order).select_range(@page, @num).includes([:tags, :user])
   end
 end

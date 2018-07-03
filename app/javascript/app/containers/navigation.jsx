@@ -3,8 +3,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faUser from '@fortawesome/fontawesome-free-solid/faUser';
+import faCloudUploadAlt from '@fortawesome/fontawesome-free-solid/faCloudUploadAlt';
 
 import * as PopupManagerActions from '../actions/popup-manager';
+import { STATUS } from '../constants/myself';
 
 const Container = styled.nav`
   position: absolute;
@@ -24,24 +28,39 @@ const Item = styled.li`
 `;
 
 const Navigation = ({
+  status,
   showSignInPopup,
   showSignUpPopup,
 }) => (
   <Container>
-    <List>
-      <Item onClick={showSignInPopup}>Sign In</Item>
-      <Item onClick={showSignUpPopup}>Sign Up</Item>
-    </List>
+    {
+      status === STATUS.SIGNIN ? (
+        <List>
+          <Item><FontAwesomeIcon icon={faCloudUploadAlt} /> Upload</Item>
+          <Item><FontAwesomeIcon icon={faUser} /></Item>
+        </List>
+      ) : (
+        <List>
+          <Item onClick={showSignInPopup}>Sign In</Item>
+          <Item onClick={showSignUpPopup}>Sign Up</Item>
+        </List>
+      )
+    }
   </Container>
 );
+
+function mapStateToProps(state) {
+  return { status: state.myself.status };
+}
 
 function mapDispatchProps(dispatch) {
   return bindActionCreators(PopupManagerActions, dispatch);
 }
 
-const NavigationContainer = connect(null, mapDispatchProps)(Navigation);
+const NavigationContainer = connect(mapStateToProps, mapDispatchProps)(Navigation);
 
 Navigation.propTypes = {
+  status: PropTypes.string.isRequired,
   showSignInPopup: PropTypes.func.isRequired,
   showSignUpPopup: PropTypes.func.isRequired,
 };

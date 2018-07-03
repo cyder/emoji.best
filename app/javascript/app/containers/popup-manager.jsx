@@ -1,13 +1,11 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import SignInPopup from '../components/sign-in-popup';
-import SignUpPopup from '../components/sign-up-popup';
-import * as PopupManagerActions from '../actions/popup-manager';
-import { SIGN_IN_POPUP, SIGN_UP_POPUP } from '../constants/popup-manager';
+import SignInPopup from '../containers/sign-in-popup';
+import SignUpPopup from '../containers/sign-up-popup';
+import { POPUP } from '../constants/popup-manager';
 
 const Background = styled.div`
   display: ${props => (props.isShow ? 'block' : 'none')}
@@ -28,41 +26,21 @@ const Container = styled.div`
   border-radius: 10px;
 `;
 
-const selectPopup = (
-  show,
-  closePopup,
-  showSignInPopup,
-  showSignUpPopup,
-) => {
+const selectPopup = (show) => {
   switch (show) {
-    case SIGN_UP_POPUP:
-      return (
-        <SignUpPopup
-          closePopup={closePopup}
-          showSignInPopup={showSignInPopup}
-        />
-      );
-    case SIGN_IN_POPUP:
-      return (
-        <SignInPopup
-          closePopup={closePopup}
-          showSignUpPopup={showSignUpPopup}
-        />
-      );
+    case POPUP.SIGN_UP:
+      return (<SignUpPopup />);
+    case POPUP.SIGN_IN:
+      return (<SignInPopup />);
     default:
       return null;
   }
 };
 
-const PopupManager = ({
-  popupManager,
-  closePopup,
-  showSignInPopup,
-  showSignUpPopup,
-}) => (
+const PopupManager = ({ popupManager }) => (
   <Background isShow={popupManager !== null}>
     <Container>
-      {selectPopup(popupManager, closePopup, showSignInPopup, showSignUpPopup)}
+      {selectPopup(popupManager)}
     </Container>
   </Background>
 );
@@ -71,17 +49,10 @@ function mapStateToProps(state) {
   return { popupManager: state.popupManager };
 }
 
-function mapDispatchProps(dispatch) {
-  return bindActionCreators(PopupManagerActions, dispatch);
-}
-
-const PopupManagerContainer = connect(mapStateToProps, mapDispatchProps)(PopupManager);
+const PopupManagerContainer = connect(mapStateToProps)(PopupManager);
 
 PopupManager.propTypes = {
   popupManager: PropTypes.string,
-  closePopup: PropTypes.func.isRequired,
-  showSignInPopup: PropTypes.func.isRequired,
-  showSignUpPopup: PropTypes.func.isRequired,
 };
 
 PopupManager.defaultProps = {
