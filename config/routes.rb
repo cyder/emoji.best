@@ -10,7 +10,9 @@ Rails.application.routes.draw do
         end
       end
       resources :search, only: [:index]
-      resources :emojis, only: [:create]
+      resources :emojis, only: [:create] do
+        resources :tags, only: [:create, :destroy]
+      end
       resources :download, only: [:index]
     end
   end
