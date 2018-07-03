@@ -1,20 +1,53 @@
 const COMMON_URL = 'api/v1/';
 const SEARCH = 'search';
 const DOWNLOAD = 'download';
+const SIGNIN = 'users/sign_in';
+
+const csrfToken = document.querySelector('meta[name=csrf-token]').content;
+
+function get(path, data = null) {
+  const params = new URLSearchParams(data);
+  const uri = `${path}?${params.toString()}`;
+
+  return fetch(uri).then(response => response.json());
+}
+
+function post(path, data) {
+  const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'X-CSRF-Token': csrfToken,
+  };
+  const body = JSON.stringify(data);
+  const params = {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers,
+    body,
+  };
+
+  return fetch(path, { ...params }).then(response => response.json());
+}
 
 export function searchEmojis(order, keyword = null, page = 0) {
-  const params = new URLSearchParams();
-  params.set('order', order);
-  params.set('page', page);
-  if (keyword != null) params.set('keyword', keyword);
+  const data = { order, page };
+  if (keyword != null) data.keyword = keyword;
 
-  const path = `${COMMON_URL}${SEARCH}?${params.toString()}`;
+  const path = `${COMMON_URL}${SEARCH}`;
 
-  return fetch(path).then(response => response.json());
+  return get(path, data);
 }
 
 export function downloadEmojisLink(emojis) {
   const params = new URLSearchParams();
   emojis.forEach(emoji => params.append('emojis[]', emoji.id));
   return `${COMMON_URL}${DOWNLOAD}?${params.toString()}`;
+}
+
+export function signIn(email, password) {
+  const path = `${COMMON_URL}${SIGNIN}`;
+  const data = {
+    user: { email, password },
+  };
+  return post(path, data);
 }

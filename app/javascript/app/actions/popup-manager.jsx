@@ -8,6 +8,6 @@ export function showSignUpPopup() {
   return { type: types.SHOW_SIGN_UP };
 }
 
-export function closePopup() {
-  return { type: types.CLOSE };
+export function closePopup(target = null) {
+  return { type: types.CLOSE, target };
 }
