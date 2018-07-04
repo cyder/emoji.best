@@ -23,9 +23,24 @@ export function successSignUp(user, accessToken) {
 }
 
 export function failedSignIn(status) {
-  return { type: types.FAILED_SIGNIN, status };
+  const errorMessage = (() => {
+    switch (status) {
+      case 400:
+      case 404:
+        return 'Invalid email or password.';
+      default:
+        return 'Unknown Error';
+    }
+  })();
+  return { type: types.FAILED_SIGNIN, errorMessage };
 }
 
 export function failedSignUp(status) {
-  return { type: types.FAILED_SIGNUP, status };
+  const errorMessage = (() => {
+    switch (status) {
+      case 400: return 'An error occurred. This email may already be in use.';
+      default: return 'Unknown Error';
+    }
+  })();
+  return { type: types.FAILED_SIGNUP, errorMessage };
 }

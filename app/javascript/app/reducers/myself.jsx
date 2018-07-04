@@ -4,6 +4,7 @@ const initialState = {
   status: types.STATUS.SIGNOUT,
   user: null,
   accessToken: null,
+  errorMessage: null,
 };
 
 const myself = (state = initialState, action) => {
@@ -13,6 +14,7 @@ const myself = (state = initialState, action) => {
       return {
         ...state,
         status: types.STATUS.LOADING,
+        errorMessage: null,
       };
     case types.SUCCESS_SIGNIN:
     case types.SUCCESS_SIGNUP:
@@ -27,6 +29,7 @@ const myself = (state = initialState, action) => {
       return {
         ...state,
         status: types.STATUS.SIGNOUT,
+        errorMessage: action.errorMessage,
       };
     default:
       return state;
