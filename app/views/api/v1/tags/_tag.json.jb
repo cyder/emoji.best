@@ -1,0 +1,6 @@
+{
+  id: tag.id,
+  name: tag.name,
+  user_id: tag.user.id,
+  emoji: render(tag.emoji),
+}
