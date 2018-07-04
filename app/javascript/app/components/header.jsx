@@ -30,7 +30,7 @@ const Title = styled.header`
 `;
 
 const Logo = styled.img`
-  width: 360px;
+  height: 70px;
 `;
 
 const SubTitle = styled.p`
