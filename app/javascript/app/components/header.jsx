@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import HeaderBackImage from 'images/header-back.jpg';
 import LogoImage1 from 'images/logo/logo1.png';
 import LogoImage2 from 'images/logo/logo2.png';
 import LogoImage3 from 'images/logo/logo3.png';
@@ -17,7 +18,9 @@ import Navigation from '../containers/navigation';
 
 const Container = styled.header`
   color: #ffffff;
-  background-color: #2d2d2d;
+  background-image: url(${HeaderBackImage});
+  background-position: center;
+  background-size: cover;
   padding: 60px 5%;
   position: relative;
 `;
