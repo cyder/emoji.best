@@ -22,6 +22,12 @@ const myself = (state = initialState, action) => {
         user: action.user,
         accessToken: action.accessToken,
       };
+    case types.FAILED_SIGNIN:
+    case types.FAILED_SIGNUP:
+      return {
+        ...state,
+        status: types.STATUS.SIGNOUT,
+      };
     default:
       return state;
   }

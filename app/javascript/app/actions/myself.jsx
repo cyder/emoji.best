@@ -21,3 +21,11 @@ export function successSignIn(user, accessToken) {
 export function successSignUp(user, accessToken) {
   return { type: types.SUCCESS_SIGNUP, user, accessToken };
 }
+
+export function failedSignIn(status) {
+  return { type: types.FAILED_SIGNIN, status };
+}
+
+export function failedSignUp(status) {
+  return { type: types.FAILED_SIGNUP, status };
+}
