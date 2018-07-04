@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faUser from '@fortawesome/fontawesome-free-solid/faUser';
 
 import UserShape from '../components/shapes/user';
+import * as MyselfActions from '../actions/myself';
 
 const Container = styled.span`
   position: relative;
@@ -80,7 +82,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, accessToken, signOut } = this.props;
     return (
       <Container>
         <FontAwesomeIcon
@@ -99,7 +101,7 @@ class Profile extends Component {
           <Info><Number>{ user.number_of_downloaded }</Number> Download</Info>
           <Hr />
           <Button>Edit Profile</Button>
-          <Button>Sign Out</Button>
+          <Button onClick={() => signOut(accessToken)} >Sign Out</Button>
         </Popup>
       </Container>
     );
@@ -107,17 +109,19 @@ class Profile extends Component {
 }
 
 function mapStateToProps(state) {
-  return { user: state.myself.user };
+  return { ...state.myself };
 }
 
 function mapDispatchProps(dispatch) {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({ ...MyselfActions }, dispatch);
 }
 
 const ProfileContainer = connect(mapStateToProps, mapDispatchProps)(Profile);
 
 Profile.propTypes = {
   user: UserShape.isRequired,
+  accessToken: PropTypes.string.isRequired,
+  signOut: PropTypes.func.isRequired,
 };
 
 export default ProfileContainer;
