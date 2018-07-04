@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faUser from '@fortawesome/fontawesome-free-solid/faUser';
 import faCloudUploadAlt from '@fortawesome/fontawesome-free-solid/faCloudUploadAlt';
 
 import * as PopupManagerActions from '../actions/popup-manager';
 import { STATUS } from '../constants/myself';
+import Profile from './profile';
 
 const Container = styled.nav`
   position: absolute;
@@ -37,7 +37,7 @@ const Navigation = ({
       status === STATUS.SIGNIN ? (
         <List>
           <Item><FontAwesomeIcon icon={faCloudUploadAlt} /> Upload</Item>
-          <Item><FontAwesomeIcon icon={faUser} /></Item>
+          <Item><Profile /></Item>
         </List>
       ) : (
         <List>
