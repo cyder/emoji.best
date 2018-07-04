@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactResizeDetector from 'react-resize-detector';
+import { addUrlProps, UrlQueryParamTypes, UrlUpdateTypes } from 'react-url-query';
 
 import Header from '../components/header';
 import EmojiList from '../components/emoji-list';
@@ -23,11 +24,17 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.props.loadEmojis();
+    this.props.searchEmojis(this.props.keyword, this.props.order);
   }
 
   componentDidMount() {
     window.addEventListener('scroll', this.onChanged);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.keyword !== this.props.keyword || nextProps.order !== this.props.order) {
+      this.props.searchEmojis(nextProps.keyword, nextProps.order);
+    }
   }
 
   componentWillUnmount() {
@@ -42,7 +49,7 @@ class App extends Component {
     const scrollBottom = html.scrollHeight - html.clientHeight - scrollTop;
     if (this.props.emojis.status === STATUS.SHOWING && scrollBottom < offset) {
       const page = this.props.emojis.lastPage + 1;
-      this.props.loadNextEmojis(page, this.props.emojis.keyword, this.props.emojis.order);
+      this.props.loadNextEmojis(page, this.props.keyword, this.props.order);
     }
   }
 
@@ -53,10 +60,13 @@ class App extends Component {
         <ReactResizeDetector handleHeight onResize={this.onChanged}>
           <EmojiList
             emojis={this.props.emojis}
+            keyword={this.props.keyword}
+            order={this.props.order}
             cart={this.props.downloadCart}
             searchEmojis={this.props.searchEmojis}
             addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
             deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
+            onChangeOrder={this.props.onChangeOrder}
           />
         </ReactResizeDetector>
         <DownloadCart
@@ -81,17 +91,31 @@ function mapDispatchProps(dispatch) {
   }, dispatch);
 }
 
-const AppContainer = connect(mapStateToProps, mapDispatchProps)(App);
+const urlPropsQueryConfig = {
+  keyword: { type: UrlQueryParamTypes.string, updateType: UrlUpdateTypes.pushIn },
+  order: { type: UrlQueryParamTypes.string, updateType: UrlUpdateTypes.pushIn },
+};
+
+const AppContainer = addUrlProps({
+  urlPropsQueryConfig,
+})(connect(mapStateToProps, mapDispatchProps)(App));
 
 App.propTypes = {
   emojis: EmojiListShape.isRequired,
   downloadCart: DownloadCartShape.isRequired,
-  loadEmojis: PropTypes.func.isRequired,
   searchEmojis: PropTypes.func.isRequired,
   loadNextEmojis: PropTypes.func.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
   downloadEmojis: PropTypes.func.isRequired,
+  keyword: PropTypes.string,
+  order: PropTypes.string,
+  onChangeOrder: PropTypes.func.isRequired,
+};
+
+App.defaultProps = {
+  keyword: null,
+  order: null,
 };
 
 export default AppContainer;
