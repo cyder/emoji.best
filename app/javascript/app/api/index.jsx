@@ -3,21 +3,28 @@ const SEARCH = 'search';
 const DOWNLOAD = 'download';
 const SIGNIN = 'users/sign_in';
 const SIGNUP = 'users';
+const SIGNOUT = 'users/sign_out';
 
 const csrfToken = document.querySelector('meta[name=csrf-token]').content;
 
-function get(path, data = null) {
+function get(path, data = null, accessToken = null) {
+  const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    Authorization: accessToken,
+  };
   const params = new URLSearchParams(data);
   const uri = `${path}?${params.toString()}`;
 
-  return fetch(uri).then(response => response.json());
+  return fetch(uri, { headers }).then(response => response.json());
 }
 
-function post(path, data) {
+function post(path, data = null, accessToken = null) {
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'X-CSRF-Token': csrfToken,
+    Authorization: accessToken,
   };
   const body = JSON.stringify(data);
   const params = {
@@ -25,6 +32,22 @@ function post(path, data) {
     credentials: 'same-origin',
     headers,
     body,
+  };
+
+  return fetch(path, { ...params }).then(response => response.json());
+}
+
+function deleteFetch(path, accessToken) {
+  const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'X-CSRF-Token': csrfToken,
+    Authorization: accessToken,
+  };
+  const params = {
+    method: 'DELETE',
+    credentials: 'same-origin',
+    headers,
   };
 
   return fetch(path, { ...params }).then(response => response.json());
@@ -64,4 +87,9 @@ export function signUp(name, email, password, passwordConfirm) {
     },
   };
   return post(path, data);
+}
+
+export function signOut(accessToken) {
+  const path = `${COMMON_URL}${SIGNOUT}`;
+  return deleteFetch(path, accessToken);
 }
