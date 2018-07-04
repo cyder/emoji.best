@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
 
@@ -12,6 +13,12 @@ const Container = styled.article`
   border-radius: 10px;
   box-shadow: 0 5px 0 0 #e7e7e7;
   position: relative;
+`;
+
+const DetailLink = styled(Link)`
+  display: block;
+  color: inherit;
+  text-decoration: none;
 `;
 
 const TitleArea = styled.div`
@@ -74,14 +81,16 @@ const Emoji = ({
   deleteEmojiFromDownloadCart,
 }) => (
   <Container>
-    <TitleArea>
-      <Img alt={emoji.name} src={emoji.images.thumb_url} />
-      <Title>:<Name>{emoji.name}</Name>:</Title>
-    </TitleArea>
-    <Menus>
-      <div>by {emoji.user.name}</div>
-      <div><FontAwesomeIcon icon={faDownload} /> {emoji.number_of_downloaded}</div>
-    </Menus>
+    <DetailLink to={`/emoji/${emoji.id}`} >
+      <TitleArea>
+        <Img alt={emoji.name} src={emoji.images.thumb_url} />
+        <Title>:<Name>{emoji.name}</Name>:</Title>
+      </TitleArea>
+      <Menus>
+        <div>by {emoji.user.name}</div>
+        <div><FontAwesomeIcon icon={faDownload} /> {emoji.number_of_downloaded}</div>
+      </Menus>
+    </DetailLink>
     <DownloadCheckBox
       isAddedToCart={isAddedToCart}
       onClick={() => (
