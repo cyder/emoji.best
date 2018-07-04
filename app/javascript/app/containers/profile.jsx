@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -11,10 +11,20 @@ const Container = styled.span`
   position: relative;
 `;
 
-const Icon = styled.span`
+const Back = styled.div`
+  display: ${props => (props.isShow ? 'block' : 'none')}
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
 `;
 
 const Popup = styled.div`
+  display: ${props => (props.isShow ? 'block' : 'none')}
   position: absolute;
   min-width: 240px;
   background-color: #ffffff;
@@ -23,6 +33,7 @@ const Popup = styled.div`
   border-radius: 10px;
   border: solid 3px #dfdfdf;
   line-height: normal;
+  z-index: 100;
 `;
 
 const Name = styled.h2`
@@ -60,23 +71,40 @@ const Hr = styled.hr`
   border: solid 1px #dfdfdf;
 `;
 
-const Profile = ({ user }) => (
-  <Container>
-    <Icon>
-      <FontAwesomeIcon icon={faUser} />
-    </Icon>
-    <Popup >
-      <Name>{ user.name }</Name>
-      <Email>{ user.email }</Email>
-      <Hr />
-      <Info><Number>{ user.number_of_uploaded }</Number> Upload</Info>
-      <Info><Number>{ user.number_of_downloaded }</Number> Download</Info>
-      <Hr />
-      <Button>Edit Profile</Button>
-      <Button>Sign Out</Button>
-    </Popup>
-  </Container>
-);
+class Profile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isShowPopup: false,
+    };
+  }
+
+  render() {
+    const { user } = this.props;
+    return (
+      <Container>
+        <FontAwesomeIcon
+          onClick={() => this.setState({ isShowPopup: true })}
+          icon={faUser}
+        />
+        <Back
+          onClick={() => this.setState({ isShowPopup: false })}
+          isShow={this.state.isShowPopup}
+        />
+        <Popup isShow={this.state.isShowPopup}>
+          <Name>{ user.name }</Name>
+          <Email>{ user.email }</Email>
+          <Hr />
+          <Info><Number>{ user.number_of_uploaded }</Number> Upload</Info>
+          <Info><Number>{ user.number_of_downloaded }</Number> Download</Info>
+          <Hr />
+          <Button>Edit Profile</Button>
+          <Button>Sign Out</Button>
+        </Popup>
+      </Container>
+    );
+  }
+}
 
 function mapStateToProps(state) {
   return { user: state.myself.user };
