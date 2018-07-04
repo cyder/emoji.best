@@ -7,6 +7,7 @@ import EmptyImage from 'images/empty.png';
 import Emoji from './emoji';
 import EmojiListShape from './shapes/emoji-list';
 import DownloadCartShape from './shapes/download-cart';
+import { STATUS } from '../constants/emojis';
 
 const Container = styled.section`
   padding: 0 2%;
@@ -127,10 +128,10 @@ const EmojiList = ({
         ))
       }
     </Emojis>
-    <Loading isShow={emojis.status === 'loading'}>
+    <Loading isShow={emojis.status === STATUS.LOADING}>
       <LoadingIcon alt="loading" src={LoadingImage} />
     </Loading>
-    <EmptyView isShow={emojis.list.length === 0 && emojis.status !== 'loading'}>
+    <EmptyView isShow={emojis.list.length === 0 && emojis.status !== STATUS.LOADING}>
       <img alt="No Result found" src={EmptyImage} />
       <EmptyMessage>Oops! No Result found.</EmptyMessage>
     </EmptyView>
