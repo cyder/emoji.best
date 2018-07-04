@@ -8,10 +8,6 @@ import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
 import EmojiShape from './shapes/emoji';
 
 const Container = styled.article`
-  padding: 0 5px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 5px 0 0 #e7e7e7;
   position: relative;
 `;
 
@@ -19,6 +15,10 @@ const DetailLink = styled(Link)`
   display: block;
   color: inherit;
   text-decoration: none;
+  padding: 0 5px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 0 0 #e7e7e7;
 `;
 
 const TitleArea = styled.div`
