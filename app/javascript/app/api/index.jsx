@@ -27,7 +27,14 @@ function post(path, data) {
     body,
   };
 
-  return fetch(path, { ...params }).then(response => response.json());
+  return fetch(path, { ...params })
+    .then((response) => {
+      if (!response.ok) {
+        throw response.status;
+      }
+      return response;
+    })
+    .then(response => response.json());
 }
 
 export function searchEmojis(order, keyword = null, page = 0) {

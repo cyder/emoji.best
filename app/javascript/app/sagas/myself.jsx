@@ -8,20 +8,21 @@ import { POPUP } from '../constants/popup-manager';
 import { signIn, signUp } from '../api';
 
 function* sageSignIn(action) {
-  const json = yield signIn(action.email, action.password);
-  yield put(successSignIn(json.user, json.access_token));
-  yield put(closePopup(POPUP.SIGN_IN));
+  yield signIn(action.email, action.password)
+    .then((json) => {
+      put(successSignIn(json.user, json.access_token));
+      put(closePopup(POPUP.SIGN_IN));
+    })
+    .catch(() => {});
 }
 
 function* sageSignUp(action) {
-  const json = yield signUp(
-    action.name,
-    action.email,
-    action.password,
-    action.passwordConfirm,
-  );
-  yield put(successSignUp(json.user, json.access_token));
-  yield put(closePopup(POPUP.SIGN_UP));
+  yield signUp(action.name, action.email, action.password, action.passwordConfirm)
+    .then((json) => {
+      put(successSignUp(json.user, json.access_token));
+      put(closePopup(POPUP.SIGN_UP));
+    })
+    .catch(() => {});
 }
 
 export default function* emojisSaga() {
