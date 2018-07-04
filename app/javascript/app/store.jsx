@@ -12,7 +12,7 @@ const sagaMiddleware = createSagaMiddleware();
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['downloadCart'],
+  whitelist: ['downloadCart', 'myself'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

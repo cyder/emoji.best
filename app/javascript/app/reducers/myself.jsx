@@ -16,6 +16,8 @@ const myself = (state = initialState, action) => {
         status: types.STATUS.LOADING,
         errorMessage: null,
       };
+    case types.SIGNOUT:
+      return initialState;
     case types.SUCCESS_SIGNIN:
     case types.SUCCESS_SIGNUP:
       return {

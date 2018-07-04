@@ -1,9 +1,5 @@
 import * as types from '../constants/emojis';
 
-export function loadEmojis() {
-  return { type: types.LOAD, keyword: null, order: 'new' };
-}
-
 export function searchEmojis(keyword, order) {
   return { type: types.SEARCH, keyword, order };
 }
