@@ -53,8 +53,9 @@ function deleteFetch(path, accessToken) {
   return fetch(path, { ...params }).then(response => response.json());
 }
 
-export function searchEmojis(order, keyword = null, page = 0) {
-  const data = { order, page };
+export function searchEmojis(order, keyword, page = 0) {
+  const data = { page };
+  if (order != null) data.order = order;
   if (keyword != null) data.keyword = keyword;
 
   const path = `${COMMON_URL}${SEARCH}`;
