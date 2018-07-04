@@ -31,6 +31,11 @@ const myself = (state = initialState, action) => {
         status: types.STATUS.SIGNOUT,
         errorMessage: action.errorMessage,
       };
+    case types.CLEAR_ERROR:
+      return {
+        ...state,
+        errorMessage: null,
+      };
     default:
       return state;
   }

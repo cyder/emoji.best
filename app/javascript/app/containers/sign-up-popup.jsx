@@ -31,6 +31,10 @@ class SignUpPopup extends Component {
     this.submit = this.submit.bind(this);
   }
 
+  componentWillUnmount() {
+    this.props.clearError();
+  }
+
   submit() {
     this.props.signUp(
       this.state.name,
@@ -97,6 +101,7 @@ SignUpPopup.propTypes = {
   closePopup: PropTypes.func.isRequired,
   showSignInPopup: PropTypes.func.isRequired,
   signUp: PropTypes.func.isRequired,
+  clearError: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
 };
 

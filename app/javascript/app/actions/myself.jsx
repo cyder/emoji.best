@@ -44,3 +44,7 @@ export function failedSignUp(status) {
   })();
   return { type: types.FAILED_SIGNUP, errorMessage };
 }
+
+export function clearError() {
+  return { type: types.CLEAR_ERROR };
+}
