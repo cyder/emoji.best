@@ -14,10 +14,18 @@ export function signUp(name, email, password, passwordConfirm) {
   };
 }
 
+export function signOut(accessToken) {
+  return { type: types.SIGNOUT, accessToken };
+}
+
 export function successSignIn(user, accessToken) {
   return { type: types.SUCCESS_SIGNIN, user, accessToken };
 }
 
 export function successSignUp(user, accessToken) {
   return { type: types.SUCCESS_SIGNUP, user, accessToken };
+}
+
+export function successSignOut() {
+  return { type: types.SUCCESS_SIGNOUT };
 }
