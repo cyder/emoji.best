@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  root to: "app#index"
-
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :users, only: [:create, :show] do
@@ -15,5 +13,10 @@ Rails.application.routes.draw do
       end
       resources :download, only: [:index]
     end
+    root to: "error#render_404"
+    get "/*path", to: "error#render_404"
   end
+
+  root to: "app#index"
+  get "/*path", to: "app#index"
 end

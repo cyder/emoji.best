@@ -1,4 +1,4 @@
-const COMMON_URL = 'api/v1/';
+const COMMON_URL = '/api/v1/';
 const SEARCH = 'search';
 const DOWNLOAD = 'download';
 const SIGNIN = 'users/sign_in';
