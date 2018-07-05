@@ -2,7 +2,9 @@ class Api::V1::EmojisController < Api::V1::BaseController
   skip_before_action :require_valid_token, only: :show
 
   def create
-    @emoji = current_user.emojis.create! emoji_params
+    @emoji = current_user.emojis.build emoji_params
+    @emoji.remote_image_url = params[:emoji][:image]
+    @emoji.save!
   end
 
   def show
@@ -25,6 +27,6 @@ class Api::V1::EmojisController < Api::V1::BaseController
   private
 
     def emoji_params
-      params.require(:emoji).permit(:name, :description, :image)
+      params.require(:emoji).permit(:name, :description)
     end
 end
