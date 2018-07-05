@@ -34,7 +34,14 @@ function post(path, data = null, accessToken = null) {
     body,
   };
 
-  return fetch(path, { ...params }).then(response => response.json());
+  return fetch(path, { ...params })
+    .then((response) => {
+      if (!response.ok) {
+        throw response.status;
+      }
+      return response;
+    })
+    .then(response => response.json());
 }
 
 function deleteFetch(path, accessToken) {
