@@ -18,9 +18,8 @@ class Api::V1::EmojisController < Api::V1::BaseController
       render template: "api/v1/errors/error", locals: { errors: errors }, status: :bad_request
       return
     end
-    file = image.tempfile
     uploader = TmpEmojiUploader.new
-    uploader.store!(file)
+    uploader.store!(image.tempfile)
     @url = uploader.url
   end
 
