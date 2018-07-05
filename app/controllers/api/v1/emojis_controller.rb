@@ -9,6 +9,13 @@ class Api::V1::EmojisController < Api::V1::BaseController
     @emoji = Emoji.find(params[:id])
   end
 
+  def upload
+    file = params[:image].tempfile
+    uploader = TmpEmojiUploader.new
+    uploader.store!(file)
+    @url = uploader.url
+  end
+
   private
 
     def emoji_params
