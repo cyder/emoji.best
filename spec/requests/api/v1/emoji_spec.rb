@@ -39,3 +39,27 @@ describe "POST /api/v1/emojis" do
     end
   end
 end
+
+describe "GET /api/v1/emojis/:id" do
+  context "with valid id" do
+    let(:emoji) { create(:emoji) }
+    let(:id) { emoji.id }
+
+    it "returns a emoji", autodoc: true do
+      is_expected.to eq 200
+      json = JSON.parse(response.body)
+      expect(json["emoji"]["id"]).to eq id
+      expect(json["emoji"]["name"]).to eq emoji.name
+    end
+  end
+
+  context "with invalid id" do
+    let(:id) { "invalid" }
+
+    it "returns a 404 error" do
+      is_expected.to eq 404
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
+    end
+  end
+end

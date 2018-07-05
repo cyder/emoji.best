@@ -37,6 +37,42 @@ X-Frame-Options: SAMEORIGIN
     ],
     "user": {
       "id": 1897,
+
+## GET /api/v1/emojis/:id
+Returns a emoji.
+
+### Example
+
+#### Request
+```
+GET /api/v1/emojis/949 HTTP/1.1
+Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+Host: www.example.com
+```
+
+#### Response
+```
+HTTP/1.1 200
+Content-Type: application/json; charset=utf-8
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+
+{
+  "emoji": {
+    "id": 949,
+    "name": "sample_emoji",
+    "description": "sample",
+    "number_of_downloaded": 0,
+    "images": {
+      "large_url": "/uploads/emoji/949/large/sample_emoji.png",
+      "thumb_url": "/uploads/emoji/949/thumb/sample_emoji.png",
+      "slack_url": "/uploads/emoji/949/slack/sample_emoji.png"
+    },
+    "tags": [
+
+    ],
+    "user": {
+      "id": 1823,
       "name": "name"
     }
   }
