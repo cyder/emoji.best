@@ -1,5 +1,6 @@
 const COMMON_URL = '/api/v1/';
 const SEARCH = 'search';
+const EMOJI = 'emojis';
 const DOWNLOAD = 'download';
 const SIGNIN = 'users/sign_in';
 const SIGNUP = 'users';
@@ -61,6 +62,12 @@ export function searchEmojis(order, keyword, page = 0) {
   const path = `${COMMON_URL}${SEARCH}`;
 
   return get(path, data);
+}
+
+export function getEmoji(id) {
+  const path = `${COMMON_URL}${EMOJI}/${id}`;
+
+  return get(path);
 }
 
 export function downloadEmojisLink(emojis) {
