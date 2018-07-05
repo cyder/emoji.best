@@ -12,6 +12,7 @@ import LogoImage8 from 'images/logo/logo8.png';
 import LogoImage9 from 'images/logo/logo9.png';
 import LogoImage10 from 'images/logo/logo10.png';
 import LogoImage11 from 'images/logo/logo11.png';
+import LogoImage12 from 'images/logo/logo12.png';
 
 import SearchForm from '../containers/search-form';
 import Navigation from '../containers/navigation';
@@ -52,6 +53,7 @@ const selectLogoImage = () => {
     LogoImage9,
     LogoImage10,
     LogoImage11,
+    LogoImage12,
   ];
   const id = Math.floor(Math.random() * LogoImages.length);
   return LogoImages[id];
