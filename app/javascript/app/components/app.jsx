@@ -3,13 +3,13 @@ import { Route } from 'react-router-dom';
 
 import MainContent from '../containers/main-content';
 import PopupManager from '../containers/popup-manager';
-import EmojiDetail from '../containers/emoji-detail';
+import EmojiDetailPopup from '../containers/emoji-detail-popup';
 
 const App = () => (
   <div>
     <MainContent />
     <PopupManager />
-    <Route path="/emoji/:id" component={EmojiDetail} />
+    <Route path="/emoji/:id" component={EmojiDetailPopup} />
   </div>
 );
 
