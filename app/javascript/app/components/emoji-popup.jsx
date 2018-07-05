@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
+import PropTypes from 'prop-types';
 
+import { CloseButton } from '../components/css/popup';
 import EmojiShape from './shapes/emoji';
 
 const Content = styled.div`
@@ -67,7 +69,7 @@ const DownloadButton = styled.a`
   line-height: 38px;
 `;
 
-const EmojiPopup = ({ emoji }) => (
+const EmojiPopup = ({ emoji, history }) => (
   <article>
     <Content>
       <Img alt={emoji.name} src={emoji.images.thumb_url} />
@@ -91,10 +93,14 @@ const EmojiPopup = ({ emoji }) => (
     >
       <FontAwesomeIcon icon={faDownload} /> download
     </DownloadButton>
+    <CloseButton onClick={() => history.push('/')} />
   </article>
 );
 
 EmojiPopup.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   emoji: EmojiShape.isRequired,
 };
 

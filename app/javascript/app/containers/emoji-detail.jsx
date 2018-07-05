@@ -15,12 +15,15 @@ class EmojiDetail extends Component {
   }
 
   render() {
+    const { history } = this.props;
     const { status, emoji } = this.props.emoji;
     return (
       <Background isShow>
         <Container>
           {
-            status === STATUS.SHOWING ? (<EmojiPopup emoji={emoji} />) : null
+            status === STATUS.SHOWING
+              ? (<EmojiPopup emoji={emoji} history={history} />)
+              : null
           }
         </Container>
       </Background>
@@ -39,6 +42,9 @@ function mapDispatchProps(dispatch) {
 }
 
 EmojiDetail.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
