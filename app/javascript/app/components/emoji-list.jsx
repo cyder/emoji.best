@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import LoadingImage from 'images/loading.png';
+import EmptyImage from 'images/empty.png';
 
 import Emoji from './emoji';
 import EmojiListShape from './shapes/emoji-list';
 import DownloadCartShape from './shapes/download-cart';
+import { STATUS } from '../constants/emojis';
 
 const Container = styled.section`
   padding: 0 2%;
@@ -79,6 +81,15 @@ const LoadingIcon = styled.img`
   }
 `;
 
+const EmptyView = styled.div`
+  display: ${props => (props.isShow ? 'block' : 'none')}
+  text-align: center;
+`;
+
+const EmptyMessage = styled.h2`
+  font-size: 2rem;
+`;
+
 const isAddedToCart = (cartList, emoji) => (
   cartList.some(value => value.id === emoji.id)
 );
@@ -138,6 +149,10 @@ class EmojiList extends Component {
         <Loading isShow={emojis.status === 'loading'}>
           <LoadingIcon alt="loading" src={LoadingImage} />
         </Loading>
+        <EmptyView isShow={emojis.list.length === 0 && emojis.status !== STATUS.LOADING}>
+          <img alt="No Result found" src={EmptyImage} />
+          <EmptyMessage>Oops! No Result found.</EmptyMessage>
+        </EmptyView>
       </Container>
     );
   }
