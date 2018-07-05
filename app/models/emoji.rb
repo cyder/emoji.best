@@ -65,6 +65,6 @@ class Emoji < ApplicationRecord
   private
 
     def replace_space
-      self.name.tr!(" ", "_")
+      self.name&.tr!(" ", "_")
     end
 end
