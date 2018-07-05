@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
 import emojis from './emojis';
 import emoji from './emoji';
@@ -12,4 +13,5 @@ export default combineReducers({
   downloadCart,
   popupManager,
   myself,
+  router: routerReducer,
 });
