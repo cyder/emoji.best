@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactResizeDetector from 'react-resize-detector';
-import { addUrlProps, UrlQueryParamTypes, UrlUpdateTypes } from 'react-url-query';
 
 import EmojiList from '../components/emoji-list';
 import DownloadCart from '../components/download-cart';
@@ -57,7 +56,7 @@ class MainCopntent extends Component {
     const scrollBottom = html.scrollHeight - html.clientHeight - scrollTop;
     if (this.props.emojis.status === STATUS.SHOWING && scrollBottom < offset) {
       const page = this.props.emojis.lastPage + 1;
-      this.props.loadNextEmojis(page, this.props.keyword, this.props.order);
+      this.props.loadNextEmojis(page, this.props.emojis.keyword, this.props.emojis.order);
     }
   }
 
@@ -72,7 +71,7 @@ class MainCopntent extends Component {
             searchEmojis={this.props.searchEmojis}
             addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
             deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
-            onChangeOrder={this.props.onChangeOrder}
+            pushUrl={this.props.pushUrl}
           />
         </ReactResizeDetector>
         <DownloadCart
@@ -96,14 +95,7 @@ function mapDispatchProps(dispatch) {
   }, dispatch);
 }
 
-const urlPropsQueryConfig = {
-  keyword: { type: UrlQueryParamTypes.string, updateType: UrlUpdateTypes.pushIn },
-  order: { type: UrlQueryParamTypes.string, updateType: UrlUpdateTypes.pushIn },
-};
-
-const MainCopntentContainer = addUrlProps({
-  urlPropsQueryConfig,
-})(connect(mapStateToProps, mapDispatchProps)(MainCopntent));
+const MainCopntentContainer = connect(mapStateToProps, mapDispatchProps)(MainCopntent);
 
 MainCopntent.propTypes = {
   emojis: EmojiListShape.isRequired,
@@ -113,20 +105,13 @@ MainCopntent.propTypes = {
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
   downloadEmojis: PropTypes.func.isRequired,
-  keyword: PropTypes.string,
-  order: PropTypes.string,
-  onChangeOrder: PropTypes.func.isRequired,
+  pushUrl: PropTypes.func.isRequired,
   router: PropTypes.shape({
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
       search: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
-};
-
-MainCopntent.defaultProps = {
-  keyword: null,
-  order: null,
 };
 
 export default MainCopntentContainer;

@@ -107,7 +107,7 @@ class EmojiList extends Component {
 
   onChange(e) {
     this.setState({ order: e.target.value });
-    this.props.onChangeOrder(e.target.value);
+    this.props.pushUrl(this.props.emojis.keyword, e.target.value);
   }
 
   render() {
@@ -163,7 +163,7 @@ EmojiList.propTypes = {
   cart: DownloadCartShape.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
-  onChangeOrder: PropTypes.func.isRequired,
+  pushUrl: PropTypes.func.isRequired,
 };
 
 export default EmojiList;
