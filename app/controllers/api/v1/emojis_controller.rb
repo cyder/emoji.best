@@ -9,6 +9,12 @@ class Api::V1::EmojisController < Api::V1::BaseController
     @emoji = Emoji.find(params[:id])
   end
 
+  def update
+  end
+
+  def destroy
+  end
+
   private
 
     def emoji_params
