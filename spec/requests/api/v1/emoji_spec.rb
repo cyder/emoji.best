@@ -63,3 +63,39 @@ describe "GET /api/v1/emojis/:id" do
     end
   end
 end
+
+describe "POST /api/v1/emojis/upload" do
+  let(:access_token) { create(:access_token, user: create(:user)) }
+  let(:headers) { { "Authorization" => access_token.token } }
+  let(:filepath) { Rails.root.join("spec", "fixtures", "images", "indian.png") }
+  let(:image) { Rack::Test::UploadedFile.new(filepath) }
+  let(:params) { { image: image } }
+
+  context "with valid image" do
+    it "returns a url", autodoc: true do
+      is_expected.to eq 200
+      json = JSON.parse(response.body)
+      expect(json["url"]).to be_present
+    end
+  end
+
+  context "with invalid image" do
+    let(:params) { { image: "invalid" } }
+
+    it "returns a url" do
+      is_expected.to eq 400
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
+    end
+  end
+
+  context "without access token" do
+    let(:headers) { { "Authorization" => nil } }
+
+    it "return a error" do
+      is_expected.to eq 403
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
+    end
+  end
+end
