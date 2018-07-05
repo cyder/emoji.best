@@ -7,7 +7,6 @@ import * as PopupManagerActions from '../actions/popup-manager';
 import * as MyselfActions from '../actions/myself';
 
 import {
-  Container,
   Title,
   Form,
   TextForm,
@@ -34,7 +33,7 @@ class SignInPopup extends Component {
 
   render() {
     return (
-      <Container>
+      <div>
         <Title>Sign In</Title>
         <Form>
           <TextForm
@@ -54,7 +53,7 @@ class SignInPopup extends Component {
           <SwitchButton onClick={this.props.showSignUpPopup}>Sign Up</SwitchButton>
         </Message>
         <CloseButton onClick={() => this.props.closePopup()} />
-      </Container>
+      </div>
     );
   }
 }
