@@ -63,3 +63,109 @@ describe "GET /api/v1/emojis/:id" do
     end
   end
 end
+
+describe "PATCH /api/v1/emojis/:id" do
+  let(:user) { create(:user) }
+  let(:access_token) { create(:access_token, user: user) }
+  let(:id) { create(:emoji, user: user).id }
+  let(:headers) { { "Authorization" => access_token.token } }
+  let(:name) { "changed_name" }
+  let(:description) { "changed_description" }
+  let(:params) { { emoji: { name: name, description: description } } }
+
+  context "with valid params" do
+    it "returns a emoji", autodoc: true do
+      is_expected.to eq 200
+      json = JSON.parse(response.body)
+      expect(json["emoji"]["id"]).to eq id
+      expect(json["emoji"]["name"]).to eq name
+    end
+  end
+
+  context "with invalid params" do
+    let(:params) { { emoji: { name: nil } } }
+
+    it "returns a invalid name error" do
+      is_expected.to eq 400
+      json = JSON.parse(response.body)
+      expect(json["errors"]["name"]).to be_present
+      expect(json["errors"]["name"][0]["error"]).to eq "blank"
+    end
+  end
+
+  context "with invalid id" do
+    let(:id) { "invalid" }
+
+    it "returns a 404 error" do
+      is_expected.to eq 404
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
+    end
+  end
+
+  context "with not my emoji id" do
+    let(:id) { create(:emoji).id }
+
+    it "returns a 404 error" do
+      is_expected.to eq 404
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
+    end
+  end
+
+  context "without access token" do
+    let(:headers) { { "Authorization" => nil } }
+    it "return a error" do
+      is_expected.to eq 403
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
+    end
+  end
+end
+
+describe "DELETE /api/v1/emojis/:id" do
+  let(:user) { create(:user) }
+  let(:access_token) { create(:access_token, user: user) }
+  let(:emoji) { build(:emoji, user: user) }
+  let(:id) { emoji.id }
+  let(:headers) { { "Authorization" => access_token.token } }
+
+  before { emoji.save }
+
+  context "with valid params" do
+    it "returns a 200", autodoc: true do
+      is_expected.to eq 200
+    end
+
+    it { expect { subject }.to change(Emoji, :count).by(-1) }
+  end
+
+  context "with invalid id" do
+    let(:id) { "invalid" }
+
+    it "returns a 404 error" do
+      is_expected.to eq 404
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
+    end
+  end
+
+  context "with not my emoji id" do
+    let(:id) { create(:emoji).id }
+
+    it "returns a 404 error" do
+      is_expected.to eq 404
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
+    end
+  end
+
+  context "without access token" do
+    let(:headers) { { "Authorization" => nil } }
+    it "return a error" do
+      is_expected.to eq 403
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
+    end
+  end
+end
