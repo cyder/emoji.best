@@ -23,7 +23,8 @@ class MainCopntent extends Component {
   }
 
   componentWillMount() {
-    this.props.searchEmojis(this.props.keyword, this.props.order);
+    const params = new URLSearchParams(this.props.router.location.search);
+    this.props.searchEmojis(params.get('keyword'), params.get('order'));
   }
 
   componentDidMount() {
@@ -31,8 +32,16 @@ class MainCopntent extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.keyword !== this.props.keyword || nextProps.order !== this.props.order) {
-      this.props.searchEmojis(nextProps.keyword, nextProps.order);
+    const params = new URLSearchParams(nextProps.router.location.search);
+    const keyword = params.get('keyword');
+    const order = params.get('order');
+    const isChangeKeyword = keyword !== nextProps.emojis.keyword;
+    const isChangeOrder = order !== nextProps.emojis.order;
+    const isChangedParams = isChangeKeyword || isChangeOrder;
+    const isRootLocation = nextProps.router.location.pathname === '/';
+
+    if (isChangedParams && isRootLocation) {
+      this.props.searchEmojis(keyword, order);
     }
   }
 
@@ -59,8 +68,6 @@ class MainCopntent extends Component {
         <ReactResizeDetector handleHeight onResize={this.onChanged}>
           <EmojiList
             emojis={this.props.emojis}
-            keyword={this.props.keyword}
-            order={this.props.order}
             cart={this.props.downloadCart}
             searchEmojis={this.props.searchEmojis}
             addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
@@ -109,6 +116,12 @@ MainCopntent.propTypes = {
   keyword: PropTypes.string,
   order: PropTypes.string,
   onChangeOrder: PropTypes.func.isRequired,
+  router: PropTypes.shape({
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+      search: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 MainCopntent.defaultProps = {

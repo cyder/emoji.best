@@ -57,6 +57,10 @@ class SearchForm extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return { keyword: state.emojis.keyword };
+}
+
 function mapDispatchProps(dispatch) {
   return bindActionCreators(EmojisActions, dispatch);
 }
@@ -67,7 +71,7 @@ const urlPropsQueryConfig = {
 
 const SearchFormContainer = addUrlProps({
   urlPropsQueryConfig,
-})(connect(null, mapDispatchProps)(SearchForm));
+})(connect(mapStateToProps, mapDispatchProps)(SearchForm));
 
 SearchForm.propTypes = {
   keyword: PropTypes.string,
