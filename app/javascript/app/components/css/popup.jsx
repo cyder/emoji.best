@@ -99,3 +99,10 @@ export const CloseButton = styled.div`
     transform: rotate(-45deg);
   }
 `;
+
+export const ErrorMessage = styled.p`
+  display: ${props => (props.isShow ? 'block' : 'none')}
+  text-align: center;
+  margin: 0 0 10px;
+  color: #f44336;
+`;

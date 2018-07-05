@@ -14,6 +14,7 @@ import {
   Message,
   SwitchButton,
   CloseButton,
+  ErrorMessage,
 } from '../components/css/popup';
 
 class SignUpPopup extends Component {
@@ -27,6 +28,10 @@ class SignUpPopup extends Component {
     };
 
     this.submit = this.submit.bind(this);
+  }
+
+  componentWillUnmount() {
+    this.props.clearError();
   }
 
   submit() {
@@ -43,6 +48,9 @@ class SignUpPopup extends Component {
       <div>
         <Title>Sign Up</Title>
         <Form>
+          <ErrorMessage isShow={this.props.errorMessage !== null}>
+            {this.props.errorMessage}
+          </ErrorMessage>
           <TextForm
             type="name"
             placeholder="Username"
@@ -76,7 +84,7 @@ class SignUpPopup extends Component {
 }
 
 function mapStateToProps(state) {
-  return { myself: state.myself };
+  return { errorMessage: state.myself.errorMessage };
 }
 
 function mapDispatchProps(dispatch) {
@@ -92,6 +100,12 @@ SignUpPopup.propTypes = {
   closePopup: PropTypes.func.isRequired,
   showSignInPopup: PropTypes.func.isRequired,
   signUp: PropTypes.func.isRequired,
+  clearError: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string,
+};
+
+SignUpPopup.defaultProps = {
+  errorMessage: null,
 };
 
 export default SignUpPopupContainer;
