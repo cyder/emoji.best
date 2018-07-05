@@ -81,7 +81,7 @@ const Emoji = ({
   deleteEmojiFromDownloadCart,
 }) => (
   <Container>
-    <DetailLink to={`/emoji/${emoji.id}`} >
+    <DetailLink to={{ pathname: `/emoji/${emoji.id}`, state: 'popup' }} >
       <TitleArea>
         <Img alt={emoji.name} src={emoji.images.thumb_url} />
         <Title>:<Name>{emoji.name}</Name>:</Title>

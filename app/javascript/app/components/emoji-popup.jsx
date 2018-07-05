@@ -69,7 +69,7 @@ const DownloadButton = styled.a`
   line-height: 38px;
 `;
 
-const EmojiPopup = ({ emoji, history }) => (
+const EmojiPopup = ({ emoji, onClose }) => (
   <article>
     <Content>
       <Img alt={emoji.name} src={emoji.images.thumb_url} />
@@ -93,14 +93,12 @@ const EmojiPopup = ({ emoji, history }) => (
     >
       <FontAwesomeIcon icon={faDownload} /> download
     </DownloadButton>
-    <CloseButton onClick={() => history.push('/')} />
+    <CloseButton onClick={onClose} />
   </article>
 );
 
 EmojiPopup.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
+  onClose: PropTypes.func.isRequired,
   emoji: EmojiShape.isRequired,
 };
 

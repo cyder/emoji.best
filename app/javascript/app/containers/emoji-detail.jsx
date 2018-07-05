@@ -12,17 +12,26 @@ import * as EmojiActions from '../actions/emoji';
 class EmojiDetail extends Component {
   componentWillMount() {
     this.props.getEmoji(this.props.match.params.id);
+
+    this.onClose = this.onClose.bind(this);
+  }
+
+  onClose() {
+    if (this.props.history.location.state === undefined) {
+      this.props.history.push('/');
+    } else {
+      this.props.history.goBack();
+    }
   }
 
   render() {
-    const { history } = this.props;
     const { status, emoji } = this.props.emoji;
     return (
       <Background isShow>
         <Container>
           {
             status === STATUS.SHOWING
-              ? (<EmojiPopup emoji={emoji} history={history} />)
+              ? (<EmojiPopup emoji={emoji} onClose={this.onClose} />)
               : null
           }
         </Container>
@@ -44,6 +53,10 @@ function mapDispatchProps(dispatch) {
 EmojiDetail.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      state: PropTypes.string,
+    }).isRequired,
   }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
