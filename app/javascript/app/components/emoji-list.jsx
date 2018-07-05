@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import LoadingImage from 'images/loading.png';
+import EmptyImage from 'images/empty.png';
 
 import Emoji from './emoji';
 import EmojiListShape from './shapes/emoji-list';
 import DownloadCartShape from './shapes/download-cart';
+import { STATUS } from '../constants/emojis';
 
 const Container = styled.section`
   padding: 0 2%;
@@ -79,56 +81,97 @@ const LoadingIcon = styled.img`
   }
 `;
 
+const EmptyView = styled.div`
+  display: ${props => (props.isShow ? 'block' : 'none')}
+  text-align: center;
+`;
+
+const EmptyMessage = styled.h2`
+  font-size: 2rem;
+`;
+
 const isAddedToCart = (cartList, emoji) => (
   cartList.some(value => value.id === emoji.id)
 );
+class EmojiList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { order: 'new' };
 
-const EmojiList = ({
-  emojis,
-  cart,
-  searchEmojis,
-  addEmojiToDownloadCart,
-  deleteEmojiFromDownloadCart,
-}) => (
-  <Container>
-    <Head>
-      <h2>
-        {(emojis.keyword == null || emojis.keyword === '') ?
-          'All Emojis' :
-          `Search results : ${emojis.keyword}`}
-      </h2>
-      <SelectContainer>
-        <Select onChange={e => searchEmojis(emojis.keyword, e.target.value)}>
-          <option value="new">New</option>
-          <option value="popular">Popular</option>
-        </Select>
-      </SelectContainer>
-    </Head>
-    <Emojis>
-      {
-        emojis.list.map(emoji => (
-          <Emoji
-            key={emoji.id}
-            emoji={emoji}
-            isAddedToCart={isAddedToCart(cart.list, emoji)}
-            addEmojiToDownloadCart={addEmojiToDownloadCart}
-            deleteEmojiFromDownloadCart={deleteEmojiFromDownloadCart}
-          />
-        ))
-      }
-    </Emojis>
-    <Loading isShow={emojis.status === 'loading'}>
-      <LoadingIcon alt="loading" src={LoadingImage} />
-    </Loading>
-  </Container>
-);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.state.order = nextProps.order || 'new';
+  }
+
+  onChange(e) {
+    this.setState({ order: e.target.value });
+    this.props.onChangeOrder(e.target.value);
+  }
+
+  render() {
+    const {
+      emojis,
+      keyword,
+      cart,
+      addEmojiToDownloadCart,
+      deleteEmojiFromDownloadCart,
+    } = this.props;
+
+    return (
+      <Container>
+        <Head>
+          <h2>
+            {(keyword == null || keyword === '') ?
+              'All Emojis' :
+              `Search results : ${keyword}`}
+          </h2>
+          <SelectContainer>
+            <Select onChange={this.onChange} value={this.state.order} >
+              <option value="new">New</option>
+              <option value="popular">Popular</option>
+            </Select>
+          </SelectContainer>
+        </Head>
+        <Emojis>
+          {
+            emojis.list.map(emoji => (
+              <Emoji
+                key={emoji.id}
+                emoji={emoji}
+                isAddedToCart={isAddedToCart(cart.list, emoji)}
+                addEmojiToDownloadCart={addEmojiToDownloadCart}
+                deleteEmojiFromDownloadCart={deleteEmojiFromDownloadCart}
+              />
+            ))
+          }
+        </Emojis>
+        <Loading isShow={emojis.status === 'loading'}>
+          <LoadingIcon alt="loading" src={LoadingImage} />
+        </Loading>
+        <EmptyView isShow={emojis.list.length === 0 && emojis.status !== STATUS.LOADING}>
+          <img alt="No Result found" src={EmptyImage} />
+          <EmptyMessage>Oops! No Result found.</EmptyMessage>
+        </EmptyView>
+      </Container>
+    );
+  }
+}
 
 EmojiList.propTypes = {
   emojis: EmojiListShape.isRequired,
+  keyword: PropTypes.string,
+  order: PropTypes.string,
   cart: DownloadCartShape.isRequired,
-  searchEmojis: PropTypes.func.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
+  onChangeOrder: PropTypes.func.isRequired,
+};
+
+EmojiList.defaultProps = {
+  keyword: null,
+  order: null,
 };
 
 export default EmojiList;
