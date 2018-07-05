@@ -1,10 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react'
+import { PersistGate } from 'redux-persist/integration/react';
 import { RouterToUrlQuery } from 'react-url-query';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import AppContainer from './containers/app';
+import AppComponent from './components/app';
 import store, { persistor } from './store';
 
 require('./components/css/main');
@@ -15,7 +15,7 @@ const App = () => (
     <PersistGate loading={null} persistor={persistor}>
       <Router>
         <RouterToUrlQuery>
-          <AppContainer />
+          <AppComponent />
         </RouterToUrlQuery>
       </Router>
     </PersistGate>

@@ -5,18 +5,17 @@ import PropTypes from 'prop-types';
 import ReactResizeDetector from 'react-resize-detector';
 import { addUrlProps, UrlQueryParamTypes, UrlUpdateTypes } from 'react-url-query';
 
-import Header from '../components/header';
 import EmojiList from '../components/emoji-list';
 import DownloadCart from '../components/download-cart';
-import PopupManager from '../containers/popup-manager';
 import EmojiListShape from '../components/shapes/emoji-list';
 import DownloadCartShape from '../components/shapes/download-cart';
+import Header from '../components/header';
 import { STATUS } from '../constants/emojis';
 
 import * as EmojisActions from '../actions/emojis';
 import * as DownloadCartActions from '../actions/download-cart';
 
-class App extends Component {
+class MainCopntent extends Component {
   constructor(props) {
     super(props);
 
@@ -74,7 +73,6 @@ class App extends Component {
           deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
           downloadEmojis={this.props.downloadEmojis}
         />
-        <PopupManager />
       </div>
     );
   }
@@ -96,11 +94,11 @@ const urlPropsQueryConfig = {
   order: { type: UrlQueryParamTypes.string, updateType: UrlUpdateTypes.pushIn },
 };
 
-const AppContainer = addUrlProps({
+const MainCopntentContainer = addUrlProps({
   urlPropsQueryConfig,
-})(connect(mapStateToProps, mapDispatchProps)(App));
+})(connect(mapStateToProps, mapDispatchProps)(MainCopntent));
 
-App.propTypes = {
+MainCopntent.propTypes = {
   emojis: EmojiListShape.isRequired,
   downloadCart: DownloadCartShape.isRequired,
   searchEmojis: PropTypes.func.isRequired,
@@ -113,9 +111,9 @@ App.propTypes = {
   onChangeOrder: PropTypes.func.isRequired,
 };
 
-App.defaultProps = {
+MainCopntent.defaultProps = {
   keyword: null,
   order: null,
 };
 
-export default AppContainer;
+export default MainCopntentContainer;
