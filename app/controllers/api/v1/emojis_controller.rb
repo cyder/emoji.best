@@ -14,8 +14,8 @@ class Api::V1::EmojisController < Api::V1::BaseController
   def upload
     image = params[:image]
     unless image.instance_of?(ActionDispatch::Http::UploadedFile)
-      error = "bad request"
-      render template: "api/v1/errors/error", locals: { errors: error }, status: :bad_request
+      errors = { image: "bad request" }
+      render template: "api/v1/errors/error", locals: { errors: errors }, status: :bad_request
       return
     end
     file = image.tempfile

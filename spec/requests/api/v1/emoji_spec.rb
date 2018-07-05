@@ -84,7 +84,7 @@ describe "POST /api/v1/emojis/upload" do
     it "returns a url" do
       is_expected.to eq 400
       json = JSON.parse(response.body)
-      expect(json["errors"]["error"]).to be_present
+      expect(json["errors"]["image"]).to be_present
     end
   end
 
