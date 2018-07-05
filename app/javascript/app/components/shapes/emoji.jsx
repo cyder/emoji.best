@@ -5,6 +5,7 @@ import UserShape from './user';
 const EmojiShape = PropTypes.shape({
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   images: PropTypes.shape({
     large_url: PropTypes.string.isRequired,
     slack_url: PropTypes.string.isRequired,

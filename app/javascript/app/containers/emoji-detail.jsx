@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import EmojiPopup from '../components/emoji-popup';
 import EmojiShape from '../components/shapes/emoji';
 import { Background, Container } from '../components/css/popup';
 import { STATUS } from '../constants/emoji';
@@ -19,7 +20,7 @@ class EmojiDetail extends Component {
       <Background isShow>
         <Container>
           {
-            status === STATUS.SHOWING ? (<h1>{ emoji.name }</h1>) : null
+            status === STATUS.SHOWING ? (<EmojiPopup emoji={emoji} />) : null
           }
         </Container>
       </Background>
