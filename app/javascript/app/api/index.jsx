@@ -1,6 +1,7 @@
 const COMMON_URL = 'api/v1/';
 const SEARCH = 'search';
 const DOWNLOAD = 'download';
+const CHECK = 'users/check';
 const SIGNIN = 'users/sign_in';
 const SIGNUP = 'users';
 const SIGNOUT = 'users/sign_out';
@@ -74,6 +75,11 @@ export function downloadEmojisLink(emojis) {
   const params = new URLSearchParams();
   emojis.forEach(emoji => params.append('emojis[]', emoji.id));
   return `${COMMON_URL}${DOWNLOAD}?${params.toString()}`;
+}
+
+export function check(accessToken) {
+  const path = `${COMMON_URL}${CHECK}`;
+  return get(path, null, accessToken);
 }
 
 export function signIn(email, password) {
