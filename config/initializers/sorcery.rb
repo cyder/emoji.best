@@ -66,7 +66,7 @@ Rails.application.config.sorcery.configure do |config|
   # What providers are supported by this app, i.e. [:twitter, :facebook, :github, :linkedin, :xing, :google, :liveid, :salesforce, :slack] .
   # Default: `[]`
   #
-  config.external_providers = [:twitter]
+  config.external_providers = [:twitter, :facebook, :google]
 
   # You can change it by your local ca_file. i.e. '/etc/pki/tls/certs/ca-bundle.crt'
   # Path to ca_file. By default use a internal ca-bundle.crt.
@@ -100,17 +100,17 @@ Rails.application.config.sorcery.configure do |config|
   #
   config.twitter.key = ENV["TWITTER_KEY"]
   config.twitter.secret = ENV["TWITTER_SECRET"]
-  config.twitter.callback_url = ENV["TWITTER_CALLBACK"]
+  config.twitter.callback_url = "http://localhost:3000/oauth/callback?provider=twitter"
   config.twitter.user_info_mapping = { name: "name" }
-  #
-  # config.facebook.key = ""
-  # config.facebook.secret = ""
-  # config.facebook.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=facebook"
-  # config.facebook.user_info_mapping = {:email => "name"}
-  # config.facebook.access_permissions = ["email", "publish_actions"]
-  # config.facebook.display = "page"
-  # config.facebook.api_version = "v2.3"
-  # config.facebook.parse = :json
+
+  config.facebook.key = ENV["FACEBOOK_KEY"]
+  config.facebook.secret = ENV["FACEBOOK_SECRET"]
+  config.facebook.callback_url = "http://localhost:3000/oauth/callback?provider=facebook"
+  config.facebook.user_info_mapping = { name: "name" }
+  config.facebook.access_permissions = ["publish_actions"]
+  config.facebook.display = "page"
+  config.facebook.api_version = "v3.0"
+  config.facebook.parse = :json
   #
   # config.github.key = ""
   # config.github.secret = ""
@@ -127,11 +127,11 @@ Rails.application.config.sorcery.configure do |config|
   # config.wechat.secret = ""
   # config.wechat.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=wechat"
   #
-  # config.google.key = ""
-  # config.google.secret = ""
-  # config.google.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=google"
-  # config.google.user_info_mapping = {:email => "email", :username => "name"}
-  # config.google.scope = "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+  config.google.key = ENV["GOOGLE_KEY"]
+  config.google.secret = ENV["GOOGLE_SECRET"]
+  config.google.callback_url = "http://localhost:3000/oauth/callback?provider=google"
+  config.google.user_info_mapping = { name: "name" }
+  config.google.scope = "https://www.googleapis.com/auth/userinfo.profile"
   #
   # For Microsoft Graph, the key will be your App ID, and the secret will be your app password/public key.
   # The callback URL "can't contain a query string or invalid special characters", see: https://docs.microsoft.com/en-us/azure/active-directory/active-directory-v2-limitations#restrictions-on-redirect-uris
