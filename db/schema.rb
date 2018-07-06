@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20180706051555) do
     t.string "uid", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
+    t.index ["provider", "uid", "user_id"], name: "index_authentications_on_provider_and_uid_and_user_id"
   end
 
   create_table "download_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
