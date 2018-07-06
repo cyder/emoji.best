@@ -15,11 +15,11 @@ port        ENV.fetch("PORT") { 3000 }
 #
 environment ENV.fetch("RAILS_ENV") { "development" }
 
-if "development" == ENV.fetch("RAILS_ENV") { "development" }
-  ssl_bind '0.0.0.0', '3001', {
+if ENV.fetch("RAILS_ENV") { "development" } == "development"
+  ssl_bind "0.0.0.0", "3001", {
     key: "test-server.key",
     cert: "test-server.crt",
-    verify_mode: "none"
+    verify_mode: "none",
   }
 end
 
