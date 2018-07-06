@@ -10,6 +10,6 @@ class OauthsController < ApplicationController
       @user = create_from(provider)
       auto_login(@user)
     end
-    redirect_to controller: "api/v1/user_sessions", action: "index"
+    cookies[:access_token] = @user.activate.token
   end
 end
