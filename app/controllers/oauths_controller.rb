@@ -6,13 +6,10 @@ class OauthsController < ApplicationController
   def callback
     provider = params[:provider]
     @user = login_from(provider)
-    if @user
-      redirect_to root_path
-    else
+    unless @user
       @user = create_from(provider)
-
       auto_login(@user)
-      redirect_to root_path
     end
+    redirect_to controller: "api/v1/user_sessions", action: "index"
   end
 end
