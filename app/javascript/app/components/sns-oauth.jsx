@@ -30,8 +30,10 @@ class SnsOauth extends Component {
 
   onCloseWindow() {
     const accessToken = Cookies.get('access_token');
-    Cookies.remove('access_token');
-    this.props.check(accessToken);
+    if (accessToken !== undefined) {
+      Cookies.remove('access_token');
+      this.props.check(accessToken);
+    }
   }
 
   openWindow(path) {
