@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root to: "app#index"
 
+  post "oauth/callback", to: "oauths#callback"
+  get "oauth/callback", to: "oauths#callback"
+  get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
+
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :users, only: [:create, :show] do
