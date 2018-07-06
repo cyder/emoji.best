@@ -8,5 +8,6 @@ class SorceryExternal < ActiveRecord::Migration[5.1]
     end
 
     add_index :authentications, [:provider, :uid]
+    change_column :users, :email, :string, null: true
   end
 end
