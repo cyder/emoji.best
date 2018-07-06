@@ -3,7 +3,6 @@ class Api::V1::UserSessionsController < Api::V1::BaseController
 
   def check
     @user = current_user
-    @access_token = @user.activate.token
   end
 
   def create

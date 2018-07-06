@@ -1,4 +1,3 @@
 {
   user: render(@user),
-  access_token: @access_token,
 }
