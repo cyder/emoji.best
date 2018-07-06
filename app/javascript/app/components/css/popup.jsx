@@ -65,12 +65,13 @@ export const TextForm = styled.input`
 export const Button = styled.button`
   display: block;
   width: 100%;
-  height: 44px;
-  margin: 20px 0 10px;
+  height: 50px;
+  margin: 15px 0 10px;
   color: #ffffff;
   background-color: #464646;
-  border: solid 3px #dfdfdf;
-  border-radius: 22px;
+  border: solid 3px rgba(255, 255, 255, 0.8);
+  border-radius: 25px;
+  box-sizing: border-box;
 `;
 
 export const Message = styled.p`

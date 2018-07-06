@@ -2,22 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import { Button, Form } from './css/popup';
+
 const Cookies = require('js-cookie');
-
-export const Container = styled.div`
-  width: 300px;
-  padding: 20px 100px 10px;
-`;
-
-export const Button = styled.button`
-  display: block;
-  width: 100%;
-  height: 44px;
-  margin: 10px 0;
-  color: #ffffff;
-  border: solid 3px #dfdfdf;
-  border-radius: 22px;
-`;
 
 export const TwitterButton = styled(Button)`
   background-color: #65cce9;
@@ -62,7 +49,7 @@ class SnsOauth extends Component {
 
   render() {
     return (
-      <Container>
+      <Form>
         <TwitterButton onClick={() => this.openWindow('/oauth/twitter')}>
           { this.props.caption } with Twitter
         </TwitterButton>
@@ -72,7 +59,7 @@ class SnsOauth extends Component {
         <GoogleButton onClick={() => this.openWindow('/oauth/google')}>
           { this.props.caption } with Google
         </GoogleButton>
-      </Container>
+      </Form>
     );
   }
 }
