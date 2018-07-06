@@ -1,5 +1,40 @@
 require "rails_helper"
 
+describe "GET /api/v1/users/check" do
+  let(:user) { create(:user) }
+  let(:access_token) { create(:access_token, user: user) }
+  let(:headers) { { "Authorization" => access_token.token } }
+
+  context "with valid access token" do
+    it "return return a user", autodoc: true do
+      is_expected.to eq 200
+      json = JSON.parse(response.body)
+      expect(json["user"]["id"]).to eq user.id
+      expect(json["user"]["name"]).to eq user.name
+    end
+  end
+
+  context "with invalid access token" do
+    let(:headers) { { "Authorization" => "invalid" } }
+
+    it "return return a user" do
+      is_expected.to eq 403
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
+    end
+  end
+
+  context "without access token" do
+    let(:headers) { { "Authorization" => nil } }
+
+    it "return return a user" do
+      is_expected.to eq 403
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
+    end
+  end
+end
+
 describe "POST /api/v1/users/sign_in" do
   let(:user) { build(:user) }
   let(:params) { { user: { email: email, password: password } } }
