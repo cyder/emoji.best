@@ -14,8 +14,8 @@ function get(path, data = null, accessToken = null) {
     'Content-Type': 'application/json',
     Authorization: accessToken,
   };
-  const params = new URLSearchParams(data);
-  const uri = `${path}?${params.toString()}`;
+  const params = data !== null ? new URLSearchParams(data) : null;
+  const uri = params !== null ? `${path}?${params.toString()}` : path;
 
   return fetch(uri, { headers }).then(response => response.json());
 }
