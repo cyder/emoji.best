@@ -3,12 +3,15 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import SnsOauth from '../components/sns-oauth';
 import * as PopupManagerActions from '../actions/popup-manager';
 import * as MyselfActions from '../actions/myself';
 
 import {
   Container,
   Title,
+  OrContainer,
+  Or,
   Form,
   TextForm,
   Button,
@@ -41,6 +44,8 @@ class SignInPopup extends Component {
     return (
       <Container>
         <Title>Sign In</Title>
+        <SnsOauth />
+        <OrContainer><Or>OR</Or></OrContainer>
         <Form>
           <ErrorMessage isShow={this.props.errorMessage !== null}>
             {this.props.errorMessage}

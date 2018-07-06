@@ -14,6 +14,34 @@ export const Title = styled.h2`
   border-bottom: 2px solid #f0f0f0;
 `;
 
+export const OrContainer = styled.div`
+  text-align: center;
+`;
+
+export const Or = styled.span`
+  position: relative;
+  line-height: 1rem;
+  color: #c0c0c0;
+
+  &::after, &::before {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0.5rem;
+    width: 140px;
+    height: 2px;
+    background-color: #f5f5f5;
+  }
+
+  &::after {
+    left: -150px;
+  }
+
+  &::before {
+    right: -150px;
+  }
+`;
+
 export const Form = styled.div`
   width: 300px;
   padding: 10px 100px;
