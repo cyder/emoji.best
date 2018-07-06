@@ -18,6 +18,7 @@ function* sageCheck(action) {
     const json = yield check(action.accessToken);
     yield put(successSignIn(json.user, action.accessToken));
     yield put(closePopup(POPUP.SIGN_IN));
+    yield put(closePopup(POPUP.SIGN_UP));
   } catch (status) {
     yield put(failedSignIn(status));
   }

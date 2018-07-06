@@ -51,7 +51,7 @@ class SnsOauth extends Component {
     return (
       <Container>
         <Button onClick={() => this.openWindow('/oauth/twitter')}>
-          Sign in with Twitter
+          { this.props.caption } with Twitter
         </Button>
       </Container>
     );
@@ -60,6 +60,7 @@ class SnsOauth extends Component {
 
 SnsOauth.propTypes = {
   check: PropTypes.func.isRequired,
+  caption: PropTypes.string.isRequired,
 };
 
 export default SnsOauth;

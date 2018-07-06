@@ -44,7 +44,10 @@ class SignInPopup extends Component {
     return (
       <Container>
         <Title>Sign In</Title>
-        <SnsOauth check={this.props.check} />
+        <SnsOauth
+          caption="Sign in"
+          check={this.props.check}
+        />
         <OrContainer><Or>OR</Or></OrContainer>
         <Form>
           <ErrorMessage isShow={this.props.errorMessage !== null}>
