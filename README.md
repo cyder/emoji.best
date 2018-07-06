@@ -85,7 +85,7 @@ rails db:migrate
 rails db:seed
 ```
 
-5. 環境変数を設定いする。
+5. 環境変数を設定する。
 ```sh
 cp .env.sample .env
 vim .env
