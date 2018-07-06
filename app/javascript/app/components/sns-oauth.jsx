@@ -15,9 +15,20 @@ export const Button = styled.button`
   height: 44px;
   margin: 10px 0;
   color: #ffffff;
-  background-color: #65cce9;
   border: solid 3px #dfdfdf;
   border-radius: 22px;
+`;
+
+export const TwitterButton = styled(Button)`
+  background-color: #65cce9;
+`;
+
+export const FacebookButton = styled(Button)`
+  background-color: #4e83b7;
+`;
+
+export const GoogleButton = styled(Button)`
+  background-color: #d47b5f;
 `;
 
 class SnsOauth extends Component {
@@ -52,9 +63,15 @@ class SnsOauth extends Component {
   render() {
     return (
       <Container>
-        <Button onClick={() => this.openWindow('/oauth/twitter')}>
+        <TwitterButton onClick={() => this.openWindow('/oauth/twitter')}>
           { this.props.caption } with Twitter
-        </Button>
+        </TwitterButton>
+        <FacebookButton onClick={() => this.openWindow('/oauth/facebook')}>
+          { this.props.caption } with Facebook
+        </FacebookButton>
+        <GoogleButton onClick={() => this.openWindow('/oauth/google')}>
+          { this.props.caption } with Google
+        </GoogleButton>
       </Container>
     );
   }
