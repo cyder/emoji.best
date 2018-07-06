@@ -44,7 +44,7 @@ class SignInPopup extends Component {
     return (
       <Container>
         <Title>Sign In</Title>
-        <SnsOauth />
+        <SnsOauth check={this.props.check} />
         <OrContainer><Or>OR</Or></OrContainer>
         <Form>
           <ErrorMessage isShow={this.props.errorMessage !== null}>
@@ -88,6 +88,7 @@ const SignInPopupContainer = connect(mapStateToProps, mapDispatchProps)(SignInPo
 SignInPopup.propTypes = {
   closePopup: PropTypes.func.isRequired,
   showSignUpPopup: PropTypes.func.isRequired,
+  check: PropTypes.func.isRequired,
   signIn: PropTypes.func.isRequired,
   clearError: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
