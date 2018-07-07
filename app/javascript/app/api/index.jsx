@@ -4,6 +4,7 @@ const DOWNLOAD = 'download';
 const SIGNIN = 'users/sign_in';
 const SIGNUP = 'users';
 const SIGNOUT = 'users/sign_out';
+const EMOJIS_UPLOAD = 'emojis/upload';
 
 const csrfToken = document.querySelector('meta[name=csrf-token]').content;
 
@@ -27,6 +28,35 @@ function post(path, data = null, accessToken = null) {
     Authorization: accessToken,
   };
   const body = JSON.stringify(data);
+  const params = {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers,
+    body,
+  };
+
+  return fetch(path, { ...params })
+    .then((response) => {
+      if (!response.ok) {
+        throw response.status;
+      }
+      return response;
+    })
+    .then(response => response.json());
+}
+
+function postData(path, data, accessToken = null) {
+  const headers = {
+    Accept: 'application/json',
+    'X-CSRF-Token': csrfToken,
+    Authorization: accessToken,
+  };
+
+  const body = new FormData();
+  Object.keys(data).forEach(key => (
+    body.append(key, data[key])
+  ));
+
   const params = {
     method: 'POST',
     credentials: 'same-origin',
@@ -74,6 +104,12 @@ export function downloadEmojisLink(emojis) {
   const params = new URLSearchParams();
   emojis.forEach(emoji => params.append('emojis[]', emoji.id));
   return `${COMMON_URL}${DOWNLOAD}?${params.toString()}`;
+}
+
+export function uploadEmoji(image, accessToken) {
+  const path = `${COMMON_URL}${EMOJIS_UPLOAD}`;
+  const data = { image };
+  return postData(path, data, accessToken);
 }
 
 export function signIn(email, password) {
