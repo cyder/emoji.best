@@ -100,5 +100,9 @@ vim .env
 yarn start
 ```
 
+6. [https://localhost:3035/sockjs-node/info?t=1503127986584net::ERR_INSECURE_RESPONSE](https://localhost:3035/sockjs-node/info?t=1503127986584net::ERR_INSECURE_RESPONSE) にアクセスし、SSL例外を承認する。
+
+7. [https://localhost:3001](https://localhost:3001) を開く
+
 ## 著者
 * [森 篤史](@Mori-Atsushi)
