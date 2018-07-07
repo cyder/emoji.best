@@ -5,6 +5,6 @@ if Rails.env.production?
 else
   CarrierWave.configure do |config|
     config.storage = :file
-    config.asset_host = "http://localhost:3000"
+    config.asset_host = ENV["DOMAIN_NAME"]
   end
 end
