@@ -4,6 +4,7 @@ const DOWNLOAD = 'download';
 const SIGNIN = 'users/sign_in';
 const SIGNUP = 'users';
 const SIGNOUT = 'users/sign_out';
+const EMOJIS = 'emojis';
 const EMOJIS_UPLOAD = 'emojis/upload';
 
 const csrfToken = document.querySelector('meta[name=csrf-token]').content;
@@ -110,6 +111,18 @@ export function uploadEmoji(image, accessToken) {
   const path = `${COMMON_URL}${EMOJIS_UPLOAD}`;
   const data = { image };
   return postData(path, data, accessToken);
+}
+
+export function saveEmoji(name, description, image, accessToken) {
+  const path = `${COMMON_URL}${EMOJIS}`;
+  const data = {
+    emoji: {
+      name,
+      description,
+      image,
+    },
+  };
+  return post(path, data, accessToken);
 }
 
 export function signIn(email, password) {

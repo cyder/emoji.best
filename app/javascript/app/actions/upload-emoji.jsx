@@ -45,7 +45,7 @@ export function successSaveEmoji(id, data) {
     id,
     name: data.name,
     description: data.description,
-    image: data.image.thumb_url,
+    image: data.images.thumb_url,
     status: types.STATUS.UPLOADING,
   };
   return { type: types.SUCCESS_SAVE, emoji };
