@@ -19,10 +19,6 @@ const Container = styled.div`
   position: relative;;
 `;
 
-const Content = styled.div`
-  padding: 20px 5%;
-`;
-
 const EmojiDropzone = styled(Dropzone)`
   width: auto;
   margin-bottom: 20px;
@@ -31,6 +27,7 @@ const EmojiDropzone = styled(Dropzone)`
   color: #c4c4c4;
   text-align: center;
   padding: 40px 20px;
+  margin: 20px 5% 10px;
 `;
 
 const DropzoneMessage = styled.p`
@@ -39,6 +36,10 @@ const DropzoneMessage = styled.p`
 `;
 
 const Emojis = styled.div`
+  max-height: 40vh;
+  overflow-y: auto;
+  padding: 10px 5% 0;
+  margin-bottom: 10px;
 `;
 
 const UploadIcon = styled.div`
@@ -67,6 +68,7 @@ const UploadButton = styled.button`
   font-weight: bold;
   text-decoration: none;
   text-align: center;
+  margin-bottom: 20px;
 `;
 
 class UploadPopup extends Component {
@@ -100,28 +102,26 @@ class UploadPopup extends Component {
     return (
       <Container>
         <Title>Upload</Title>
-        <Content>
-          <EmojiDropzone onDrop={accepted => this.onDrop(accepted)}>
-            <UploadIcon><FontAwesomeIcon icon={faCloudUploadAlt} /></UploadIcon>
-            <DropzoneMessage>Drag and drop or click here</DropzoneMessage>
-          </EmojiDropzone>
-          <Emojis>
-            {
-              emojis.map(emoji => (
-                <UploadEmoji
-                  key={emoji.id}
-                  emoji={emoji}
-                  saveEmoji={saveEmoji}
-                  deleteEmoji={deleteEmoji}
-                  isSaved={this.state.isSaved}
-                  accessToken={accessToken}
-                />
-              ))
-            }
-          </Emojis>
-          <UploadMessage>choose {emojis.length} emojis</UploadMessage>
-          <UploadButton onClick={this.onSubmit}>Upload</UploadButton>
-        </Content>
+        <EmojiDropzone onDrop={accepted => this.onDrop(accepted)}>
+          <UploadIcon><FontAwesomeIcon icon={faCloudUploadAlt} /></UploadIcon>
+          <DropzoneMessage>Drag and drop or click here</DropzoneMessage>
+        </EmojiDropzone>
+        <Emojis>
+          {
+            emojis.map(emoji => (
+              <UploadEmoji
+                key={emoji.id}
+                emoji={emoji}
+                saveEmoji={saveEmoji}
+                deleteEmoji={deleteEmoji}
+                isSaved={this.state.isSaved}
+                accessToken={accessToken}
+              />
+            ))
+          }
+        </Emojis>
+        <UploadMessage>choose {emojis.length} emojis</UploadMessage>
+        <UploadButton onClick={this.onSubmit}>Upload</UploadButton>
         <CloseButton onClick={() => this.props.closePopup()} />
       </Container>
     );
