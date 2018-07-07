@@ -12,11 +12,17 @@ const uploadEmoji = (state = initialState, action) => {
         emojis: [...state.emojis, action.emoji],
       };
     case types.SAVE:
-    case types.SUCCESS_UPLOAD:
-    case types.SUCCESS_SAVE: {
+    case types.SUCCESS_UPLOAD: {
       const emojis = state.emojis.map(emoji => (
         emoji.id === action.emoji.id ? action.emoji : emoji
       ));
+      return {
+        ...state,
+        emojis,
+      };
+    }
+    case types.SUCCESS_SAVE: {
+      const emojis = state.emojis.filter(emoji => emoji.id !== action.id);
       return {
         ...state,
         emojis,

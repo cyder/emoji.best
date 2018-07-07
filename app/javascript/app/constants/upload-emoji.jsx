@@ -7,6 +7,5 @@ export const STATUS = {
   UPLOADING: 'UPLOADING',
   UPLOADED: 'UPLOADED',
   SAVING: 'SAVING',
-  SAVED: 'SAVED',
   ERROR: 'ERROR',
 };

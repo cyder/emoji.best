@@ -40,13 +40,6 @@ export function successUploadEmoji(id, url) {
   return { type: types.SUCCESS_UPLOAD, emoji };
 }
 
-export function successSaveEmoji(id, data) {
-  const emoji = {
-    id,
-    name: data.name,
-    description: data.description,
-    image: data.images.thumb_url,
-    status: types.STATUS.UPLOADING,
-  };
-  return { type: types.SUCCESS_SAVE, emoji };
+export function successSaveEmoji(id) {
+  return { type: types.SUCCESS_SAVE, id };
 }

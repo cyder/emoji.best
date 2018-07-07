@@ -12,8 +12,8 @@ function* sageUploadEmoji(action) {
 
 function* sageSaveEmoji(action) {
   const { name, description, image } = action.emoji;
-  const json = yield saveEmoji(name, description, image, action.accessToken);
-  yield put(successSaveEmoji(action.emoji.id, json.emoji));
+  yield saveEmoji(name, description, image, action.accessToken);
+  yield put(successSaveEmoji(action.emoji.id));
 }
 
 export default function* uploadEmojiSaga() {
