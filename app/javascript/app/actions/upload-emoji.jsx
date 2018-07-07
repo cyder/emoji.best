@@ -2,7 +2,7 @@ import * as types from '../constants/upload-emoji';
 
 const uuidv4 = require('uuid/v4');
 
-export function uploadEmoji(image) {
+export function uploadEmoji(image, accessToken) {
   const emoji = {
     id: uuidv4(),
     name: null,
@@ -10,10 +10,15 @@ export function uploadEmoji(image) {
     image: null,
     status: types.STATUS.UPLOADING,
   };
-  return { type: types.UPLOAD, emoji, image };
+  return {
+    type: types.UPLOAD,
+    emoji,
+    image,
+    accessToken,
+  };
 }
 
-export function saveEmoji(id, name, description, url) {
+export function saveEmoji(id, name, description, url, accessToken) {
   const emoji = {
     id,
     name,
@@ -21,7 +26,7 @@ export function saveEmoji(id, name, description, url) {
     image: url,
     status: types.STATUS.SAVING,
   };
-  return { type: types.SAVE, emoji };
+  return { type: types.SAVE, emoji, accessToken };
 }
 
 export function successUploadEmoji(id, url) {

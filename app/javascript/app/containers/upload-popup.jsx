@@ -76,7 +76,7 @@ class UploadPopup extends Component {
   }
 
   onDrop(files) {
-    files.forEach(file => this.props.uploadEmoji(file));
+    files.forEach(file => this.props.uploadEmoji(file, this.props.accessToken));
   }
 
   render() {
@@ -108,6 +108,7 @@ class UploadPopup extends Component {
 function mapStateToProps(state) {
   return {
     ...state.uploadEmoji,
+    accessToken: state.myself.accessToken,
   };
 }
 
@@ -126,6 +127,7 @@ UploadPopup.propTypes = {
   emojis: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
   }).isRequired).isRequired,
+  accessToken: PropTypes.string.isRequired,
 };
 
 export default UploadPopupContainer;
