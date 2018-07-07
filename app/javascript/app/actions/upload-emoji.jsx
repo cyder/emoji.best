@@ -1,7 +1,10 @@
 import * as types from '../constants/upload-emoji';
 
+const uuidv4 = require('uuid/v4');
+
 export function uploadEmoji(image) {
   const emoji = {
+    id: uuidv4(),
     name: null,
     description: null,
     image: null,
