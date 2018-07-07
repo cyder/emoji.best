@@ -107,8 +107,8 @@ Rails.application.config.sorcery.configure do |config|
   config.facebook.secret = ENV["FACEBOOK_SECRET"]
   config.facebook.callback_url = "#{ENV["DOMAIN_NAME"]}/oauth/callback?provider=facebook"
   config.facebook.user_info_mapping = { name: "name" }
-  config.facebook.access_permissions = ["publish_actions"]
-  config.facebook.display = "page"
+  config.facebook.access_permissions = ["public_profile"]
+  config.facebook.display = "popup"
   config.facebook.api_version = "v3.0"
   config.facebook.parse = :json
   #
