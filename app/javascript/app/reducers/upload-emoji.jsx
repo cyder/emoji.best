@@ -21,6 +21,7 @@ const uploadEmoji = (state = initialState, action) => {
         emojis,
       };
     }
+    case types.DELETE:
     case types.SUCCESS_SAVE: {
       const emojis = state.emojis.filter(emoji => emoji.id !== action.id);
       return {

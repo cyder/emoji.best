@@ -90,7 +90,13 @@ class UploadPopup extends Component {
   }
 
   render() {
-    const { emojis, saveEmoji, accessToken } = this.props;
+    const {
+      emojis,
+      saveEmoji,
+      deleteEmoji,
+      accessToken,
+    } = this.props;
+
     return (
       <Container>
         <Title>Upload</Title>
@@ -106,6 +112,7 @@ class UploadPopup extends Component {
                   key={emoji.id}
                   emoji={emoji}
                   saveEmoji={saveEmoji}
+                  deleteEmoji={deleteEmoji}
                   isSaved={this.state.isSaved}
                   accessToken={accessToken}
                 />
@@ -141,6 +148,7 @@ UploadPopup.propTypes = {
   closePopup: PropTypes.func.isRequired,
   uploadEmoji: PropTypes.func.isRequired,
   saveEmoji: PropTypes.func.isRequired,
+  deleteEmoji: PropTypes.func.isRequired,
   emojis: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
   }).isRequired).isRequired,

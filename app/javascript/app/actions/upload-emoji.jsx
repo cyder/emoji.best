@@ -29,6 +29,10 @@ export function saveEmoji(id, name, description, url, accessToken) {
   return { type: types.SAVE, emoji, accessToken };
 }
 
+export function deleteEmoji(id) {
+  return { type: types.DELETE, id };
+}
+
 export function successUploadEmoji(id, url) {
   const emoji = {
     id,

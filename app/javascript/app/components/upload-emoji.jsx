@@ -15,6 +15,7 @@ const Container = styled.div`
   border-radius: 10px;
   padding: 5px;
   margin-bottom: 10px;
+  position: relative;
 `;
 
 const Image = styled.img`
@@ -59,6 +60,27 @@ const TextForm = styled.input`
   }
 `;
 
+const DeleteButton = styled.div`
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: -12px;
+  left: -12px;
+  border-radius: 15px;
+  background-color: #464646;
+
+  &::after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 13px;
+    left: 7px;
+    width: 16px;
+    height: 4px;
+    background-color: #ffffff;
+  }
+`;
+
 class UploadEmoji extends Component {
   constructor(props) {
     super(props);
@@ -78,7 +100,7 @@ class UploadEmoji extends Component {
   }
 
   render() {
-    const { status, image } = this.props.emoji;
+    const { id, status, image } = this.props.emoji;
 
     return (
       <div>
@@ -111,6 +133,9 @@ class UploadEmoji extends Component {
                       onChange={e => this.setState({ description: e.target.value })}
                     />
                   </Description>
+                  <DeleteButton
+                    onClick={() => this.props.deleteEmoji(id)}
+                  />
                 </Container>
               );
             }
@@ -130,6 +155,7 @@ UploadEmoji.propTypes = {
     description: PropTypes.string,
   }).isRequired,
   saveEmoji: PropTypes.func.isRequired,
+  deleteEmoji: PropTypes.func.isRequired,
   isSaved: PropTypes.bool.isRequired,
   accessToken: PropTypes.string.isRequired,
 };
