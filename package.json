@@ -35,7 +35,7 @@
     "webpack-dev-server": "2.11.2"
   },
   "scripts": {
-    "start": "rails s & bin/webpack-dev-server",
+    "start": "bundle exec pumactl start & bin/webpack-dev-server",
     "build": "bin/webpack",
     "lint": "eslint --ext .jsx,.js app/javascript/"
   }
