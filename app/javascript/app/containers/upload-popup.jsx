@@ -7,8 +7,9 @@ import styled from 'styled-components';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faCloudUploadAlt from '@fortawesome/fontawesome-free-solid/faCloudUploadAlt';
 
+import UploadEmoji from '../components/upload-emoji';
 import * as PopupManagerActions from '../actions/popup-manager';
-import * as MyselfActions from '../actions/myself';
+import * as UploadEmojiActions from '../actions/upload-emoji';
 
 import { Title, CloseButton } from '../components/css/popup';
 
@@ -35,6 +36,9 @@ const EmojiDropzone = styled(Dropzone)`
 const DropzoneMessage = styled.p`
   font-size: 1.2rem;
   margin: 0 0 10px;
+`;
+
+const Emojis = styled.div`
 `;
 
 const UploadIcon = styled.div`
@@ -68,20 +72,31 @@ const UploadButton = styled.button`
 class UploadPopup extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.onDrop = this.onDrop.bind(this);
+  }
+
+  onDrop(files) {
+    files.forEach(file => this.props.uploadEmoji(file));
   }
 
   render() {
+    const { emojis } = this.props;
     return (
       <Container>
         <Title>Upload</Title>
         <Content>
-          <EmojiDropzone>
+          <EmojiDropzone onDrop={accepted => this.onDrop(accepted)}>
             <UploadIcon><FontAwesomeIcon icon={faCloudUploadAlt} /></UploadIcon>
             <DropzoneMessage>Drag and drop or click here</DropzoneMessage>
           </EmojiDropzone>
-          <UploadMessage>choose 0 emojis</UploadMessage>
+          <Emojis>
+            {
+              emojis.map(emoji => (
+                <UploadEmoji key={emoji.id} emoji={emoji} />
+              ))
+            }
+          </Emojis>
+          <UploadMessage>choose {emojis.length} emojis</UploadMessage>
           <UploadButton>Upload</UploadButton>
         </Content>
         <CloseButton onClick={() => this.props.closePopup()} />
@@ -91,12 +106,15 @@ class UploadPopup extends Component {
 }
 
 function mapStateToProps(state) {
-  return { };
+  return {
+    ...state.uploadEmoji,
+  };
 }
 
 function mapDispatchProps(dispatch) {
   return bindActionCreators({
     ...PopupManagerActions,
+    ...UploadEmojiActions,
   }, dispatch);
 }
 
@@ -104,6 +122,10 @@ const UploadPopupContainer = connect(mapStateToProps, mapDispatchProps)(UploadPo
 
 UploadPopup.propTypes = {
   closePopup: PropTypes.func.isRequired,
+  uploadEmoji: PropTypes.func.isRequired,
+  emojis: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
 };
 
 export default UploadPopupContainer;
