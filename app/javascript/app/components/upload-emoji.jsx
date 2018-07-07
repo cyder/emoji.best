@@ -63,9 +63,18 @@ class UploadEmoji extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      description: "",
+      name: this.props.emoji.name,
+      description: this.props.emoji.description,
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isSaved !== this.props.isSaved && nextProps.isSaved) {
+      const { emoji, accessToken } = this.props;
+      const { id, image } = emoji;
+      const { name, description } = this.state;
+      this.props.saveEmoji(id, name, description, image, accessToken);
+    }
   }
 
   render() {
@@ -86,11 +95,19 @@ class UploadEmoji extends Component {
               <Image src={image} />
               <Name>
                 emoji name
-                <TextForm placeholder="input emoji name" />
+                <TextForm
+                  type="text"
+                  placeholder="input emoji name"
+                  onChange={e => this.setState({ name: e.target.value })}
+                />
               </Name>
               <Description>
                 description
-                <TextForm placeholder="input description" />
+                <TextForm
+                  type="text"
+                  placeholder="input description"
+                  onChange={e => this.setState({ description: e.target.value })}
+                />
               </Description>
             </Container>
           );
@@ -108,7 +125,12 @@ UploadEmoji.propTypes = {
     id: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     image: PropTypes.string,
+    name: PropTypes.string,
+    description: PropTypes.string,
   }).isRequired,
+  saveEmoji: PropTypes.func.isRequired,
+  isSaved: PropTypes.bool.isRequired,
+  accessToken: PropTypes.string.isRequired,
 };
 
 export default UploadEmoji;

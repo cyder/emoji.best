@@ -72,15 +72,25 @@ const UploadButton = styled.button`
 class UploadPopup extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isSaved: false,
+    };
+
     this.onDrop = this.onDrop.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onDrop(files) {
     files.forEach(file => this.props.uploadEmoji(file, this.props.accessToken));
   }
 
+  onSubmit() {
+    this.setState({ isSaved: true });
+    this.props.closePopup();
+  }
+
   render() {
-    const { emojis } = this.props;
+    const { emojis, saveEmoji, accessToken } = this.props;
     return (
       <Container>
         <Title>Upload</Title>
@@ -92,12 +102,18 @@ class UploadPopup extends Component {
           <Emojis>
             {
               emojis.map(emoji => (
-                <UploadEmoji key={emoji.id} emoji={emoji} />
+                <UploadEmoji
+                  key={emoji.id}
+                  emoji={emoji}
+                  saveEmoji={saveEmoji}
+                  isSaved={this.state.isSaved}
+                  accessToken={accessToken}
+                />
               ))
             }
           </Emojis>
           <UploadMessage>choose {emojis.length} emojis</UploadMessage>
-          <UploadButton>Upload</UploadButton>
+          <UploadButton onClick={this.onSubmit}>Upload</UploadButton>
         </Content>
         <CloseButton onClick={() => this.props.closePopup()} />
       </Container>
@@ -124,6 +140,7 @@ const UploadPopupContainer = connect(mapStateToProps, mapDispatchProps)(UploadPo
 UploadPopup.propTypes = {
   closePopup: PropTypes.func.isRequired,
   uploadEmoji: PropTypes.func.isRequired,
+  saveEmoji: PropTypes.func.isRequired,
   emojis: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
   }).isRequired).isRequired,
