@@ -15,7 +15,7 @@ class Api::V1::EmojisController < Api::V1::BaseController
   end
 
   def destroy
-    current_user.emojis.find(params[:id]).destroy
+    current_user.emojis.find(params[:id]).destroy!
   end
 
   private
