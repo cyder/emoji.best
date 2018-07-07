@@ -63,8 +63,8 @@ class UploadEmoji extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.emoji.name,
-      description: this.props.emoji.description,
+      name: this.props.emoji.name || '',
+      description: this.props.emoji.description || '',
     };
   }
 
@@ -80,42 +80,43 @@ class UploadEmoji extends Component {
   render() {
     const { status, image } = this.props.emoji;
 
-    const Html = () => {
-      switch (status) {
-        case STATUS.UPLOADING:
-          return (
-            <Container status={status}>
-              <LoadingIcon><FontAwesomeIcon icon={faCircleNotch} spin /></LoadingIcon>
-              <div>Uploading...</div>
-            </Container>
-          );
-        default:
-          return (
-            <Container status={status}>
-              <Image src={image} />
-              <Name>
-                emoji name
-                <TextForm
-                  type="text"
-                  placeholder="input emoji name"
-                  onChange={e => this.setState({ name: e.target.value })}
-                />
-              </Name>
-              <Description>
-                description
-                <TextForm
-                  type="text"
-                  placeholder="input description"
-                  onChange={e => this.setState({ description: e.target.value })}
-                />
-              </Description>
-            </Container>
-          );
-      }
-    };
-
     return (
-      <Html />
+      <div>
+        {(() => {
+          switch (status) {
+            case STATUS.UPLOADING:
+              return (
+                <Container status={status}>
+                  <LoadingIcon><FontAwesomeIcon icon={faCircleNotch} spin /></LoadingIcon>
+                  <div>Uploading...</div>
+                </Container>
+              );
+            default:
+              return (
+                <Container status={status}>
+                  <Image src={image} />
+                  <Name>
+                    emoji name
+                    <TextForm
+                      type="text"
+                      placeholder="input emoji name"
+                      onChange={e => this.setState({ name: e.target.value })}
+                    />
+                  </Name>
+                  <Description>
+                    description
+                    <TextForm
+                      type="text"
+                      placeholder="input description"
+                      onChange={e => this.setState({ description: e.target.value })}
+                    />
+                  </Description>
+                </Container>
+              );
+            }
+          })()
+        }
+      </div>
     );
   }
 }
