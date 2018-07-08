@@ -82,13 +82,18 @@ class UploadPopup extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.emojis.length === 0 && this.state.isSaved) {
+      this.props.closePopup();
+    }
+  }
+
   onDrop(files) {
     files.forEach(file => this.props.uploadEmoji(file, this.props.accessToken));
   }
 
   onSubmit() {
     this.setState({ isSaved: true });
-    this.props.closePopup();
   }
 
   render() {
