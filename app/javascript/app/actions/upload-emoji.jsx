@@ -3,9 +3,10 @@ import * as types from '../constants/upload-emoji';
 const uuidv4 = require('uuid/v4');
 
 export function uploadEmoji(image, accessToken) {
+  const filename = image.name.replace(/\.[^/.]+$/, '');
   const emoji = {
     id: uuidv4(),
-    name: null,
+    name: filename,
     description: null,
     image: null,
     status: types.STATUS.UPLOADING,

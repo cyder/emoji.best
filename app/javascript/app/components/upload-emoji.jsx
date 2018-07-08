@@ -122,6 +122,7 @@ class UploadEmoji extends Component {
                     <TextForm
                       type="text"
                       placeholder="input emoji name"
+                      value={this.state.name}
                       onChange={e => this.setState({ name: e.target.value })}
                     />
                   </Name>
@@ -130,6 +131,7 @@ class UploadEmoji extends Component {
                     <TextForm
                       type="text"
                       placeholder="input description"
+                      value={this.state.description}
                       onChange={e => this.setState({ description: e.target.value })}
                     />
                   </Description>
