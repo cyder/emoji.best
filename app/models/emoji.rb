@@ -7,7 +7,6 @@ class Emoji < ApplicationRecord
   has_many :download_logs, dependent: :destroy
   has_many :tags, dependent: :destroy
   validates :name, presence: true, format: { with: /\A[a-z0-9\-+_]+\z/ }
-  validates :description, presence: true
   validates :image, presence: true
 
   search_scope :search do
