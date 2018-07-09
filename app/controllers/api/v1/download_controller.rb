@@ -8,7 +8,7 @@ class Api::V1::DownloadController < Api::V1::BaseController
   ZIP_FILENAME = "emojis.zip".freeze
 
   def index
-    emoji = Emoji.find_by(params[:emoji_id])
+    emoji = Emoji.find(params[:emoji_id])
     emoji.download_logs.create(user: current_user)
     image = emoji.image.slack
     send_file image.file.path
