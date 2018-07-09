@@ -23,6 +23,15 @@ class Api::V1::EmojisController < Api::V1::BaseController
     @url = uploader.url
   end
 
+  def update
+    @emoji = current_user.emojis.find(params[:id])
+    @emoji.update! emoji_params
+  end
+
+  def destroy
+    current_user.emojis.find(params[:id]).destroy!
+  end
+
   private
 
     def emoji_params

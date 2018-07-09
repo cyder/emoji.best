@@ -10,7 +10,7 @@ Rails.application.routes.draw do
         end
       end
       resources :search, only: [:index]
-      resources :emojis, only: [:create, :show] do
+      resources :emojis, only: [:create, :show, :update, :destroy] do
         resources :tags, only: [:create, :destroy]
         collection do
           post "upload", to: :upload
