@@ -1,8 +1,8 @@
 import { pushUrlQuery } from 'react-url-query';
 import * as types from '../constants/emojis';
 
-export function pushUrl(keyword, order) {
-  pushUrlQuery({ keyword, order });
+export function pushUrl(keyword, order, target = null) {
+  pushUrlQuery({ keyword, order, target });
   return { type: types.PUSH_URL };
 }
 

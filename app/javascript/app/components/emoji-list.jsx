@@ -129,7 +129,7 @@ class EmojiList extends Component {
 
   onChange(e) {
     this.setState({ order: e.target.value });
-    this.props.pushUrl(this.props.emojis.keyword, e.target.value);
+    this.props.pushUrl(this.props.emojis.keyword, e.target.value, this.props.emojis.target);
   }
 
   render() {
