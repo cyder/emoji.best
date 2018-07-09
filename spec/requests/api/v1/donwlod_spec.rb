@@ -1,5 +1,19 @@
 require "rails_helper"
 
+describe "GET /api/v1/emojis/:id/download" do
+  let(:id) { create(:emoji).id }
+
+  context "with valid params" do
+    it "returns image file", autodoc: true do
+      is_expected.to eq 200
+      header = response.header
+      expect(header["Content-Type"]).to eq "image/png"
+    end
+
+    it { expect { subject }.to change(DownloadLog, :count).by(1) }
+  end
+end
+
 describe "GET /api/v1/download" do
   let(:emoji1) { create(:emoji, name: "emoji1") }
   let(:emoji2) { create(:emoji, name: "emoji2") }
