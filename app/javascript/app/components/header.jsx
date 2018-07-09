@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import HeaderBackImage from 'images/header-back.jpg';
+import PropTypes from 'prop-types';
 import LogoImage1 from 'images/logo/logo1.png';
 import LogoImage2 from 'images/logo/logo2.png';
 import LogoImage3 from 'images/logo/logo3.png';
@@ -18,12 +19,19 @@ import SearchForm from '../containers/search-form';
 import Navigation from '../containers/navigation';
 
 const Container = styled.header`
+  display: ${props => (props.isSmall ? 'flex' : 'block')};
   color: #ffffff;
-  background-image: url(${HeaderBackImage});
+  background-color: #2d2d2d;
+  background-image:  ${props => (props.isSmall ? 'none' : `url(${HeaderBackImage})`)};
   background-position: center;
   background-size: cover;
-  padding: 60px 5%;
-  position: relative;
+  padding: ${props => (props.isSmall ? '10px 0' : '60px 5%')};
+  position: ${props => (props.isSmall ? 'fixed' : 'relative')};
+  ${props => (props.isSmall ? `
+    width: 100%;
+    z-index: 1000;
+    align-items: center;
+  ` : null)};
 `;
 
 const Title = styled.header`
@@ -31,13 +39,33 @@ const Title = styled.header`
 `;
 
 const Logo = styled.img`
-  height: 70px;
+  ${props => (props.isSmall ? `
+    margin: 0 20px;
+    width: 200px
+  ` : `
+    height: 70px;
+  `)};
 `;
 
 const SubTitle = styled.p`
+  display: ${props => (props.isSmall ? 'none' : 'block')};
   text-align: center;
   font-size: 1.5rem;
   margin: 10px 0 30px;
+`;
+
+const SearchFormArea = styled.div`
+  width: ${props => (props.isSmall ? '400px' : '100%')};
+  max-width: 800px;
+  margin: ${props => (props.isSmall ? '0 auto 0 0' : '0 auto')};
+`;
+
+const NavigationArea = styled.nav`
+  position: ${props => (props.isSmall ? 'relative' : 'absolute')};
+  top: 0;
+  right: 0;
+  font-size: 1.2rem;
+  line-height: 3.6rem;
 `;
 
 const selectLogoImage = () => {
@@ -66,15 +94,24 @@ class Header extends Component {
   }
 
   render() {
+    const { isSmall } = this.props;
     return (
-      <Container>
-        <Title><Logo alt="emoji.best" src={this.state.logoImage} /></Title>
-        <SubTitle>{'Let\'s share emojis!!'}</SubTitle>
-        <SearchForm />
-        <Navigation />
+      <Container isSmall={isSmall} >
+        <Title><Logo alt="emoji.best" src={this.state.logoImage} isSmall={isSmall} /></Title>
+        <SubTitle isSmall={isSmall} >{'Let\'s share emojis!!'}</SubTitle>
+        <SearchFormArea isSmall={isSmall} >
+          <SearchForm />
+        </SearchFormArea>
+        <NavigationArea isSmall={isSmall}>
+          <Navigation />
+        </NavigationArea>
       </Container>
     );
   }
 }
+
+Header.propTypes = {
+  isSmall: PropTypes.bool.isRequired,
+};
 
 export default Header;

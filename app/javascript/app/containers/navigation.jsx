@@ -10,14 +10,6 @@ import * as PopupManagerActions from '../actions/popup-manager';
 import { STATUS } from '../constants/myself';
 import Profile from './profile';
 
-const Container = styled.nav`
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 1.2rem;
-  line-height: 3.6rem;
-`;
-
 const List = styled.ul`
   margin: 0 10px;
 `;
@@ -32,7 +24,7 @@ const Navigation = ({
   showSignInPopup,
   showSignUpPopup,
 }) => (
-  <Container>
+  <div>
     {
       status === STATUS.SIGNIN ? (
         <List>
@@ -46,7 +38,7 @@ const Navigation = ({
         </List>
       )
     }
-  </Container>
+  </div>
 );
 
 function mapStateToProps(state) {
