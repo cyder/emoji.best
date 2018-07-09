@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180701141522) do
+ActiveRecord::Schema.define(version: 20180709034219) do
 
   create_table "access_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "token", null: false
@@ -39,6 +39,16 @@ ActiveRecord::Schema.define(version: 20180701141522) do
     t.string "image", default: "", null: false
     t.integer "download_logs_count", default: 0, null: false
     t.index ["user_id"], name: "index_emojis_on_user_id"
+  end
+
+  create_table "search_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.bigint "user_id"
+    t.string "keyword", null: false
+    t.string "order", null: false
+    t.string "target", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_search_logs_on_user_id"
   end
 
   create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
