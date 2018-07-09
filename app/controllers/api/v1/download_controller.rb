@@ -7,7 +7,7 @@ class Api::V1::DownloadController < Api::V1::BaseController
   }
   ZIP_FILENAME = "emojis.zip".freeze
 
-  def index
+  def zip
     emoji_ids = params[:emojis] || []
     DownloadLog.transaction do
       emoji_ids.each do |emoji_id|

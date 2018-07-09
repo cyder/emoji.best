@@ -16,7 +16,7 @@ Rails.application.routes.draw do
           post "upload", to: :upload
         end
       end
-      resources :download, only: [:index]
+      get "download", to: "download#zip"
     end
   end
 end
