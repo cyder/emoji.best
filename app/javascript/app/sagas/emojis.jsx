@@ -6,7 +6,7 @@ import { successLoadEmojis } from '../actions/emojis';
 import { searchEmojis } from '../api';
 
 function* sageSearchEmojis(action) {
-  const json = yield searchEmojis(action.order, action.keyword, action.page);
+  const json = yield searchEmojis(action.order, action.keyword, action.page, action.target);
   yield put(successLoadEmojis(json.emojis));
 }
 

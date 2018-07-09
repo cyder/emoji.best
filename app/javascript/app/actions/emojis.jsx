@@ -6,8 +6,13 @@ export function pushUrl(keyword, order) {
   return { type: types.PUSH_URL };
 }
 
-export function searchEmojis(keyword, order) {
-  return { type: types.SEARCH, keyword, order };
+export function searchEmojis(keyword, order, target = 'all') {
+  return {
+    type: types.SEARCH,
+    keyword,
+    order,
+    target,
+  };
 }
 
 export function loadNextEmojis(page, keyword, order) {
