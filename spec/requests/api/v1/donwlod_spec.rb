@@ -12,6 +12,16 @@ describe "GET /api/v1/emojis/:id/download" do
 
     it { expect { subject }.to change(DownloadLog, :count).by(1) }
   end
+
+  context "with invalid params" do
+    let(:id) { "invalid" }
+
+    it "returns 404 error" do
+      is_expected.to eq 404
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
+    end
+  end
 end
 
 describe "GET /api/v1/download" do
