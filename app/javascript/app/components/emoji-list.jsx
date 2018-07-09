@@ -102,18 +102,17 @@ class EmojiList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.state.order = nextProps.order || 'new';
+    this.state.order = nextProps.emojis.order || 'new';
   }
 
   onChange(e) {
     this.setState({ order: e.target.value });
-    this.props.onChangeOrder(e.target.value);
+    this.props.pushUrl(this.props.emojis.keyword, e.target.value);
   }
 
   render() {
     const {
       emojis,
-      keyword,
       cart,
       addEmojiToDownloadCart,
       deleteEmojiFromDownloadCart,
@@ -123,9 +122,9 @@ class EmojiList extends Component {
       <Container>
         <Head>
           <h2>
-            {(keyword == null || keyword === '') ?
+            {(emojis.keyword == null || emojis.keyword === '') ?
               'All Emojis' :
-              `Search results : ${keyword}`}
+              `Search results : ${emojis.keyword}`}
           </h2>
           <SelectContainer>
             <Select onChange={this.onChange} value={this.state.order} >
@@ -161,17 +160,10 @@ class EmojiList extends Component {
 
 EmojiList.propTypes = {
   emojis: EmojiListShape.isRequired,
-  keyword: PropTypes.string,
-  order: PropTypes.string,
   cart: DownloadCartShape.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
-  onChangeOrder: PropTypes.func.isRequired,
-};
-
-EmojiList.defaultProps = {
-  keyword: null,
-  order: null,
+  pushUrl: PropTypes.func.isRequired,
 };
 
 export default EmojiList;
