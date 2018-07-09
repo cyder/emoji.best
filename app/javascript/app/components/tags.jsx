@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faTag from '@fortawesome/fontawesome-free-solid/faTag';
@@ -34,26 +34,45 @@ const TagIcon = styled.div`
   margin: auto;
 `;
 
-const Tags = ({ tags }) => (
-  <div>
-    <TagTitle>Tag</TagTitle>
-    <List>
-      {
-        tags.map(tag => (
-          <Tag key={tag.name}>
-            { tag.name }
-            <TagIcon><FontAwesomeIcon icon={faTag} /></TagIcon>
-          </Tag>
-        ))
-      }
-    </List>
-  </div>
-);
+class Tags extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick(tag) {
+    const params = new URLSearchParams({
+      keyword: tag.name,
+      target: 'tag',
+    });
+    this.props.push(`/?${params.toString()}`);
+  }
+
+  render() {
+    return (
+      <div>
+        <TagTitle>Tag</TagTitle>
+        <List>
+          {
+            this.props.tags.map(tag => (
+              <Tag key={tag.name} onClick={() => this.onClick(tag)}>
+                { tag.name }
+                <TagIcon><FontAwesomeIcon icon={faTag} /></TagIcon>
+              </Tag>
+            ))
+          }
+        </List>
+      </div>
+    );
+  }
+}
 
 Tags.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
   }).isRequired).isRequired,
+  push: PropTypes.func.isRequired,
 };
 
 export default Tags;
