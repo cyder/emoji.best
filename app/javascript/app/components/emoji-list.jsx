@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import LoadingImage from 'images/loading.png';
 import EmptyImage from 'images/empty.png';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faTag from '@fortawesome/fontawesome-free-solid/faTag';
 
 import Emoji from './emoji';
 import EmojiListShape from './shapes/emoji-list';
@@ -20,6 +22,26 @@ const Head = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+`;
+
+const Tag = styled.div`
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  border: solid 2px #242424;
+  padding: 0 25px 0 50px;
+  line-height: 2.4rem;
+  border-radius: 1.2rem;
+  margin: 0 15px;
+`;
+
+const TagIcon = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10px;
+  height: 2.2rem;
+  margin: auto;
 `;
 
 const SelectContainer = styled.div`
@@ -122,9 +144,22 @@ class EmojiList extends Component {
       <Container>
         <Head>
           <h2>
-            {(emojis.keyword == null || emojis.keyword === '') ?
-              'All Emojis' :
-              `Search results : ${emojis.keyword}`}
+            {(() => {
+              if (emojis.keyword === null || emojis.keyword === '') {
+                return 'All Emojis';
+              }
+              if (emojis.target === 'tag') {
+                return (
+                  <div>
+                    Search results :
+                    <Tag>
+                      {emojis.keyword}<TagIcon><FontAwesomeIcon icon={faTag} /></TagIcon>
+                    </Tag>
+                  </div>
+                );
+              }
+              return `Search results : ${emojis.keyword}`;
+            })()}
           </h2>
           <SelectContainer>
             <Select onChange={this.onChange} value={this.state.order} >
