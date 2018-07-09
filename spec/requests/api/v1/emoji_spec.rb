@@ -55,7 +55,7 @@ describe "GET /api/v1/emojis/:id" do
   end
 
   context "with invalid id" do
-    let(:id) { "invalid" }
+    let(:id) { -1 }
 
     it "returns a 404 error" do
       is_expected.to eq 404
@@ -131,7 +131,7 @@ describe "PATCH /api/v1/emojis/:id" do
   end
 
   context "with invalid id" do
-    let(:id) { "invalid" }
+    let(:id) { -1 }
 
     it "returns a 404 error" do
       is_expected.to eq 404
@@ -178,7 +178,7 @@ describe "DELETE /api/v1/emojis/:id" do
   end
 
   context "with invalid id" do
-    let(:id) { "invalid" }
+    let(:id) { -1 }
 
     it "returns a 404 error" do
       is_expected.to eq 404
