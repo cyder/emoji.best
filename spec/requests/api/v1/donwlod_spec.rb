@@ -14,7 +14,7 @@ describe "GET /api/v1/emojis/:id/download" do
   end
 
   context "with invalid params" do
-    let(:id) { "invalid" }
+    let(:id) { -1 }
 
     it "returns 404 error" do
       is_expected.to eq 404
