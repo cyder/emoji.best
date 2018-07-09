@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  root to: "app#index"
-
   post "oauth/callback", to: "oauths#callback"
   get "oauth/callback", to: "oauths#callback"
   get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
@@ -23,5 +21,10 @@ Rails.application.routes.draw do
       end
       resources :download, only: [:index]
     end
+    root to: "error#render_404"
+    get "/*path", to: "error#render_404"
   end
+
+  root to: "app#index"
+  get "/*path", to: "app#index"
 end

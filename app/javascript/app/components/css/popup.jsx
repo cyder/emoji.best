@@ -1,8 +1,23 @@
 
 import styled from 'styled-components';
 
-export const Container = styled.section`
-  position: relative;
+export const Background = styled.div`
+  display: ${props => (props.isShow ? 'block' : 'none')}
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+`;
+
+export const Container = styled.div`
+  background-color: #ffffff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  border-radius: 10px;
 `;
 
 export const Title = styled.h2`
