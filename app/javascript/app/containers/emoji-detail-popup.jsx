@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import EmojiDetail from '../components/emoji-detail';
+import EmojiError from '../components/emoji-error';
 import EmojiShape from '../components/shapes/emoji';
 import { Background, Container } from '../components/css/popup';
 import { STATUS } from '../constants/emoji';
@@ -30,9 +31,16 @@ class EmojiDetailPopup extends Component {
       <Background isShow>
         <Container>
           {
-            status === STATUS.SHOWING
-              ? (<EmojiDetail emoji={emoji} onClose={this.onClose} />)
-              : null
+            (() => {
+              switch (status) {
+                case STATUS.SHOWING:
+                  return (<EmojiDetail emoji={emoji} onClose={this.onClose} />);
+                case STATUS.ERROR:
+                  return (<EmojiError onClose={this.onClose} />);
+                default:
+                  return null;
+              }
+            })()
           }
         </Container>
       </Background>
