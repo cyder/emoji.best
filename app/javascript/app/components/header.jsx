@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import HeaderBackImage from 'images/header-back.jpg';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import LogoImage1 from 'images/logo/logo1.png';
 import LogoImage2 from 'images/logo/logo2.png';
 import LogoImage3 from 'images/logo/logo3.png';
