@@ -19,6 +19,12 @@ const emoji = (state = initialState, action) => {
         status: types.STATUS.SHOWING,
         emoji: action.emoji,
       };
+    case types.FAILED_GET:
+      return {
+        ...state,
+        status: types.STATUS.ERROR,
+        emoji: null,
+      };
     default:
       return state;
   }
