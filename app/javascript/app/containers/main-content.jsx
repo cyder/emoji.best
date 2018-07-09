@@ -19,6 +19,7 @@ class MainCopntent extends Component {
     super(props);
 
     this.onChanged = this.onChanged.bind(this);
+    this.isSmallHeader = this.isSmallHeader.bind(this);
   }
 
   componentWillMount() {
@@ -60,10 +61,15 @@ class MainCopntent extends Component {
     }
   }
 
+  isSmallHeader() {
+    const { keyword } = this.props.emojis;
+    return (keyword !== null && keyword !== '');
+  }
+
   render() {
     return (
       <div>
-        <Header />
+        <Header isSmall={this.isSmallHeader()} />
         <ReactResizeDetector handleHeight onResize={this.onChanged}>
           <EmojiList
             emojis={this.props.emojis}

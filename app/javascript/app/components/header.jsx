@@ -68,6 +68,10 @@ const NavigationArea = styled.nav`
   line-height: 3.6rem;
 `;
 
+const Background = styled.div`
+  height: ${props => (props.isSmall ? '77px' : '0')};
+`;
+
 const selectLogoImage = () => {
   const LogoImages = [
     LogoImage1,
@@ -96,16 +100,21 @@ class Header extends Component {
   render() {
     const { isSmall } = this.props;
     return (
-      <Container isSmall={isSmall} >
-        <Title><Logo alt="emoji.best" src={this.state.logoImage} isSmall={isSmall} /></Title>
-        <SubTitle isSmall={isSmall} >{'Let\'s share emojis!!'}</SubTitle>
-        <SearchFormArea isSmall={isSmall} >
-          <SearchForm />
-        </SearchFormArea>
-        <NavigationArea isSmall={isSmall}>
-          <Navigation />
-        </NavigationArea>
-      </Container>
+      <div>
+        <Container isSmall={isSmall} >
+          <Title>
+            <Logo alt="emoji.best" src={this.state.logoImage} isSmall={isSmall} />
+          </Title>
+          <SubTitle isSmall={isSmall} >{'Let\'s share emojis!!'}</SubTitle>
+          <SearchFormArea isSmall={isSmall} >
+            <SearchForm />
+          </SearchFormArea>
+          <NavigationArea isSmall={isSmall}>
+            <Navigation />
+          </NavigationArea>
+        </Container>
+        <Background isSmall={isSmall} />
+      </div>
     );
   }
 }
