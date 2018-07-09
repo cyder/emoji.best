@@ -17,7 +17,14 @@ function get(path, data = null, accessToken = null) {
   const params = data !== null ? new URLSearchParams(data) : null;
   const uri = params !== null ? `${path}?${params.toString()}` : path;
 
-  return fetch(uri, { headers }).then(response => response.json());
+  return fetch(uri, { headers })
+    .then((response) => {
+      if (!response.ok) {
+        throw response.status;
+      }
+      return response;
+    })
+    .then(response => response.json());
 }
 
 function post(path, data = null, accessToken = null) {
