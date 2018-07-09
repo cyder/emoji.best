@@ -8,6 +8,13 @@ describe Emoji do
     end
   end
 
+  context "without description" do
+    it "is valid with correct param" do
+      emoji = build(:emoji, description: nil)
+      expect(emoji).to be_valid
+    end
+  end
+
   it "is invalid with ひらがな name" do
     emoji = build(:emoji, name: "えもじ")
     expect(emoji).to_not be_valid
