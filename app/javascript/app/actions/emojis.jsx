@@ -6,7 +6,7 @@ export function pushUrl(keyword, order, target = null) {
   return { type: types.PUSH_URL };
 }
 
-export function searchEmojis(keyword, order, target = 'all') {
+export function searchEmojis(keyword, order, target = null) {
   return {
     type: types.SEARCH,
     keyword,
