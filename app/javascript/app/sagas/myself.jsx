@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import { takeEvery, put } from 'redux-saga/effects';
 
-import { CHECK, SIGNIN, SIGNUP, SIGNOUT } from '../constants/myself';
+import { AUTH, SIGNIN, SIGNUP, SIGNOUT } from '../constants/myself';
 import {
   successSignIn,
   successSignUp,
@@ -11,11 +11,11 @@ import {
 } from '../actions/myself';
 import { closePopup } from '../actions/popup-manager';
 import { POPUP } from '../constants/popup-manager';
-import { check, signIn, signUp, signOut } from '../api';
+import { authentication, signIn, signUp, signOut } from '../api';
 
-function* sageCheck(action) {
+function* sageAuthentication(action) {
   try {
-    const json = yield check(action.accessToken);
+    const json = yield authentication(action.accessToken);
     yield put(successSignIn(json.user, action.accessToken));
     yield put(closePopup(POPUP.SIGN_IN));
     yield put(closePopup(POPUP.SIGN_UP));
@@ -55,7 +55,7 @@ function* sageSignOut(action) {
 }
 
 export default function* emojisSaga() {
-  yield takeEvery(CHECK, sageCheck);
+  yield takeEvery(AUTH, sageAuthentication);
   yield takeEvery(SIGNIN, sageSignIn);
   yield takeEvery(SIGNUP, sageSignUp);
   yield takeEvery(SIGNOUT, sageSignOut);

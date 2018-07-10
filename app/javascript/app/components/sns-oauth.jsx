@@ -30,7 +30,7 @@ class SnsOauth extends Component {
     const accessToken = Cookies.get('access_token');
     if (accessToken !== undefined) {
       Cookies.remove('access_token');
-      this.props.check(accessToken);
+      this.props.authentication(accessToken);
     }
   }
 
@@ -65,7 +65,7 @@ class SnsOauth extends Component {
 }
 
 SnsOauth.propTypes = {
-  check: PropTypes.func.isRequired,
+  authentication: PropTypes.func.isRequired,
   caption: PropTypes.string.isRequired,
 };
 

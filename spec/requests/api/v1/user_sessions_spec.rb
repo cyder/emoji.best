@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "GET /api/v1/users/check" do
+describe "GET /api/v1/users/authentication" do
   let(:user) { create(:user) }
   let(:access_token) { create(:access_token, user: user) }
   let(:headers) { { "Authorization" => access_token.token } }

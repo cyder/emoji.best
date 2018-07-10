@@ -1,7 +1,7 @@
 import * as types from '../constants/myself';
 
-export function check(accessToken) {
-  return { type: types.CHECK, accessToken };
+export function authentication(accessToken) {
+  return { type: types.AUTH, accessToken };
 }
 
 export function signIn(email, password) {

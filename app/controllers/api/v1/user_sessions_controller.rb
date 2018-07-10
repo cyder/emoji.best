@@ -1,7 +1,7 @@
 class Api::V1::UserSessionsController < Api::V1::BaseController
   skip_before_action :require_valid_token, only: [:create]
 
-  def check
+  def authentication
     @user = current_user
   end
 
