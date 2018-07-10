@@ -83,7 +83,7 @@ class Tags extends Component {
           {
             this.props.tags.map(tag => (
               <Tag
-                key={tag.name}
+                key={tag.id}
                 onClick={() => this.onClick(tag)}
                 isEditing={isEditing}
               >
@@ -100,6 +100,7 @@ class Tags extends Component {
 
 Tags.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   push: PropTypes.func.isRequired,
