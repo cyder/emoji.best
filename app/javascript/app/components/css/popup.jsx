@@ -1,8 +1,8 @@
 
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Background = styled.div`
-  display: ${props => (props.isShow ? 'block' : 'none')}
   position: fixed;
   top: 0;
   right: 0;
@@ -67,7 +67,7 @@ export const Message = styled.p`
   text-align: center;
 `;
 
-export const SwitchButton = styled.span`
+export const SwitchLink = styled(Link)`
   text-decoration: underline;
   margin: 0 10px;
 `;

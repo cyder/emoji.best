@@ -11,12 +11,16 @@ import UploadEmoji from '../components/upload-emoji';
 import * as PopupManagerActions from '../actions/popup-manager';
 import * as UploadEmojiActions from '../actions/upload-emoji';
 
-import { Title, CloseButton } from '../components/css/popup';
+import {
+  Background,
+  Container,
+  Title,
+  CloseButton,
+} from '../components/css/popup';
 
-const Container = styled.div`
+const UploadContainer = styled(Container)`
   width: 80vw;
   max-width: 660px;
-  position: relative;;
 `;
 
 const EmojiDropzone = styled(Dropzone)`
@@ -78,6 +82,7 @@ class UploadPopup extends Component {
       isSaved: false,
     };
 
+    this.onClose = this.onClose.bind(this);
     this.onDrop = this.onDrop.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -90,6 +95,14 @@ class UploadPopup extends Component {
 
   onDrop(files) {
     files.forEach(file => this.props.uploadEmoji(file, this.props.accessToken));
+  }
+
+  onClose() {
+    if (this.props.history.location.state === undefined) {
+      this.props.history.push('/');
+    } else {
+      this.props.history.goBack();
+    }
   }
 
   onSubmit() {
@@ -105,30 +118,32 @@ class UploadPopup extends Component {
     } = this.props;
 
     return (
-      <Container>
-        <Title>Upload</Title>
-        <EmojiDropzone onDrop={accepted => this.onDrop(accepted)}>
-          <UploadIcon><FontAwesomeIcon icon={faCloudUploadAlt} /></UploadIcon>
-          <DropzoneMessage>Drag and drop or click here</DropzoneMessage>
-        </EmojiDropzone>
-        <Emojis>
-          {
-            emojis.map(emoji => (
-              <UploadEmoji
-                key={emoji.id}
-                emoji={emoji}
-                saveEmoji={saveEmoji}
-                deleteEmoji={deleteEmoji}
-                isSaved={this.state.isSaved}
-                accessToken={accessToken}
-              />
-            ))
-          }
-        </Emojis>
-        <UploadMessage>choose {emojis.length} emojis</UploadMessage>
-        <UploadButton onClick={this.onSubmit}>Upload</UploadButton>
-        <CloseButton onClick={() => this.props.closePopup()} />
-      </Container>
+      <Background>
+        <UploadContainer>
+          <Title>Upload</Title>
+          <EmojiDropzone onDrop={accepted => this.onDrop(accepted)}>
+            <UploadIcon><FontAwesomeIcon icon={faCloudUploadAlt} /></UploadIcon>
+            <DropzoneMessage>Drag and drop or click here</DropzoneMessage>
+          </EmojiDropzone>
+          <Emojis>
+            {
+              emojis.map(emoji => (
+                <UploadEmoji
+                  key={emoji.id}
+                  emoji={emoji}
+                  saveEmoji={saveEmoji}
+                  deleteEmoji={deleteEmoji}
+                  isSaved={this.state.isSaved}
+                  accessToken={accessToken}
+                />
+              ))
+            }
+          </Emojis>
+          <UploadMessage>choose {emojis.length} emojis</UploadMessage>
+          <UploadButton onClick={this.onSubmit}>Upload</UploadButton>
+          <CloseButton onClick={this.onClose} />
+        </UploadContainer>
+      </Background>
     );
   }
 }
@@ -150,6 +165,13 @@ function mapDispatchProps(dispatch) {
 const UploadPopupContainer = connect(mapStateToProps, mapDispatchProps)(UploadPopup);
 
 UploadPopup.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      state: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
   closePopup: PropTypes.func.isRequired,
   uploadEmoji: PropTypes.func.isRequired,
   saveEmoji: PropTypes.func.isRequired,
