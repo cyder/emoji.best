@@ -1,3 +1,4 @@
+export const AUTH = 'myself/AUTH';
 export const SIGNIN = 'myself/SIGNIN';
 export const SIGNUP = 'myself/SIGNUP';
 export const SIGNOUT = 'myself/SIGNOUT';

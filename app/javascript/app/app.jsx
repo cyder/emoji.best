@@ -1,11 +1,12 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react'
+import { PersistGate } from 'redux-persist/integration/react';
 import { RouterToUrlQuery } from 'react-url-query';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
 
-import AppContainer from './containers/app';
+import AppComponent from './components/app';
 import store, { persistor } from './store';
+import history from './history';
 
 require('./components/css/main');
 require('./components/css/normalize');
@@ -13,11 +14,11 @@ require('./components/css/normalize');
 const App = () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <Router>
+      <ConnectedRouter history={history}>
         <RouterToUrlQuery>
-          <AppContainer />
+          <AppComponent />
         </RouterToUrlQuery>
-      </Router>
+      </ConnectedRouter>
     </PersistGate>
   </Provider>
 );

@@ -3,6 +3,9 @@ import * as types from '../constants/emojis';
 const initialState = {
   status: types.STATUS.EMPTY,
   lastPage: 0,
+  order: null,
+  keyword: null,
+  target: null,
   list: [],
 };
 
@@ -13,6 +16,9 @@ const emojis = (state = initialState, action) => {
         ...state,
         lastPage: 0,
         status: types.STATUS.LOADING,
+        keyword: action.keyword,
+        order: action.order,
+        target: action.target,
         list: [],
       };
     case types.LOAD_NEXT:
