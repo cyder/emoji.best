@@ -93,8 +93,8 @@ function deleteFetch(path, accessToken) {
   return fetch(path, { ...params }).then(response => response.json());
 }
 
-export function searchEmojis(order, keyword, page = 0) {
-  const data = { page };
+export function searchEmojis(order, keyword, page = 0, target = 'all') {
+  const data = { page, target };
   if (order != null) data.order = order;
   if (keyword != null) data.keyword = keyword;
 
