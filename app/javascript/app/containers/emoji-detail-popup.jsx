@@ -34,7 +34,13 @@ class EmojiDetailPopup extends Component {
             (() => {
               switch (status) {
                 case STATUS.SHOWING:
-                  return (<EmojiDetail emoji={emoji} onClose={this.onClose} />);
+                  return (
+                    <EmojiDetail
+                      emoji={emoji}
+                      onClose={this.onClose}
+                      push={this.props.history.push}
+                    />
+                  );
                 case STATUS.ERROR:
                   return (<EmojiError onClose={this.onClose} />);
                 default:
