@@ -20,6 +20,9 @@ import LogoImage12 from 'images/logo/logo12.png';
 import SearchForm from '../containers/search-form';
 import Navigation from '../containers/navigation';
 
+const normalHeaderHeight = 310;
+const smallHeaderHeight = 77;
+
 const Container = styled.header`
   display: ${props => (props.isSmall ? 'flex' : 'block')};
   color: #ffffff;
@@ -27,8 +30,10 @@ const Container = styled.header`
   background-image:  ${props => (props.isSmall ? 'none' : `url(${HeaderBackImage})`)};
   background-position: center;
   background-size: cover;
-  padding: ${props => (props.isSmall ? '10px 0' : '60px 5%')};
+  padding: ${props => (props.isSmall ? '0' : '60px 5% 0')};
+  height: ${props => (props.isSmall ? smallHeaderHeight : normalHeaderHeight)}px;
   position: ${props => (props.isSmall ? 'fixed' : 'relative')};
+  box-sizing: border-box;
   ${props => (props.isSmall ? `
     width: 100%;
     z-index: 10;
@@ -73,10 +78,10 @@ const NavigationArea = styled.nav`
 const Background = styled.div`
   height: ${(props) => {
     if (props.isSmall) {
-      return props.isLarge ? '300px' : '77px';
+      return props.isLarge ? normalHeaderHeight : smallHeaderHeight;
     }
     return '0';
-  }}}
+  }}px;
 `;
 
 const selectLogoImage = () => {
@@ -138,7 +143,7 @@ class Header extends Component {
     if (keyword !== null && keyword !== '') {
       this.setState({ isSmall: true });
       this.setState({ isLargeSpace: false });
-    } else if (scrollTop > 300) {
+    } else if (scrollTop > normalHeaderHeight) {
       this.setState({ isSmall: true });
       this.setState({ isLargeSpace: true });
     } else {
