@@ -77,6 +77,7 @@ const EmojiPopup = ({
   emoji,
   onClose,
   push,
+  addTag,
   deleteTag,
   accessToken,
 }) => (
@@ -103,6 +104,7 @@ const EmojiPopup = ({
             emoji={emoji}
             push={push}
             deleteTag={deleteTag}
+            addTag={addTag}
             accessToken={accessToken}
           />
         ) : null
@@ -123,6 +125,7 @@ EmojiPopup.propTypes = {
   onClose: PropTypes.func.isRequired,
   emoji: EmojiShape.isRequired,
   push: PropTypes.func.isRequired,
+  addTag: PropTypes.func.isRequired,
   deleteTag: PropTypes.func.isRequired,
   accessToken: PropTypes.string,
 };

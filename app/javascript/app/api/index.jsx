@@ -110,6 +110,14 @@ export function getEmoji(id) {
   return get(path);
 }
 
+export function createTag(emojiId, name, accessToken) {
+  const path = `${COMMON_URL}${EMOJI}/${emojiId}/${TAGS}`;
+  const data = {
+    tag: { name },
+  };
+  return post(path, data, accessToken);
+}
+
 export function deleteTag(emojiId, tagId, accessToken) {
   const path = `${COMMON_URL}${EMOJI}/${emojiId}/${TAGS}/${tagId}`;
   return deleteFetch(path, accessToken);

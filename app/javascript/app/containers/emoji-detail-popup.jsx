@@ -37,6 +37,7 @@ class EmojiDetailPopup extends Component {
                   onClose={this.onClose}
                   push={this.props.history.push}
                   deleteTag={this.props.deleteTag}
+                  addTag={this.props.addTag}
                   accessToken={this.props.accessToken}
                 />
               ) : null
@@ -78,8 +79,13 @@ EmojiDetailPopup.propTypes = {
     emoji: EmojiShape,
   }).isRequired,
   getEmoji: PropTypes.func.isRequired,
+  addTag: PropTypes.func.isRequired,
   deleteTag: PropTypes.func.isRequired,
   accessToken: PropTypes.string,
+};
+
+EmojiDetailPopup.defaultProps = {
+  accessToken: undefined,
 };
 
 const EmojiDetailPopupContainer = connect(mapStateToProps, mapDispatchProps)(EmojiDetailPopup);

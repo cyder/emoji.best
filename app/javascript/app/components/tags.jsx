@@ -100,6 +100,7 @@ class Tags extends Component {
     };
 
     this.onClick = this.onClick.bind(this);
+    this.onClickAddTagButton = this.onClickAddTagButton.bind(this);
   }
 
   onClick(tag) {
@@ -112,9 +113,19 @@ class Tags extends Component {
     }
   }
 
+  onClickAddTagButton() {
+    const { addTag, emoji, accessToken } = this.props;
+    addTag(emoji.id, this.state.newTagName, accessToken);
+    this.setState({ newTagName: '' });
+  }
+
   render() {
-    const { isEditing } = this.state;
-    const { emoji, deleteTag, accessToken } = this.props;
+    const { isEditing, newTagName } = this.state;
+    const {
+      emoji,
+      deleteTag,
+      accessToken,
+    } = this.props;
 
     return (
       <div>
@@ -150,9 +161,11 @@ class Tags extends Component {
             type="text"
             placeholder="new tag"
             onChange={e => this.setState({ newTagName: e.target.value })}
-            value={this.state.newTagName}
+            value={newTagName}
           />
-          <AddButton>add</AddButton>
+          <AddButton onClick={this.onClickAddTagButton}>
+            add
+          </AddButton>
         </AddForm>
       </div>
     );
@@ -168,6 +181,7 @@ Tags.propTypes = {
     }).isRequired).isRequired,
   }).isRequired,
   push: PropTypes.func.isRequired,
+  addTag: PropTypes.func.isRequired,
   deleteTag: PropTypes.func.isRequired,
   accessToken: PropTypes.string,
 };

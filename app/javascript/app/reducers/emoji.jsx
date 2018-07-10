@@ -19,6 +19,14 @@ const emoji = (state = initialState, action) => {
         status: types.STATUS.SHOWING,
         emoji: action.emoji,
       };
+    case types.SUCCESS_ADD_TAG:
+      return {
+        ...state,
+        emoji: {
+          ...state.emoji,
+          tags: [...state.emoji.tags, action.tag],
+        },
+      };
     case types.DELETE_TAG: {
       const tags = state.emoji.tags.filter(tag => tag.id !== action.tagId);
       return {
