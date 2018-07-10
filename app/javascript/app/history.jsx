@@ -3,7 +3,7 @@ import ReactGA from 'react-ga';
 
 const history = createHistory();
 
-ReactGA.initialize('UA-000000-01');
+ReactGA.initialize('UA-100551872-3');
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 history.listen((location) => {
