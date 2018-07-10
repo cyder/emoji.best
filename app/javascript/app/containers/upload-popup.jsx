@@ -88,7 +88,7 @@ class UploadPopup extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.emojis.length === 0 && this.state.isSaved) {
-      this.props.closePopup();
+      this.props.history.push('/');
     }
   }
 
@@ -170,7 +170,6 @@ UploadPopup.propTypes = {
       state: PropTypes.string,
     }).isRequired,
   }).isRequired,
-  closePopup: PropTypes.func.isRequired,
   uploadEmoji: PropTypes.func.isRequired,
   saveEmoji: PropTypes.func.isRequired,
   deleteEmoji: PropTypes.func.isRequired,
