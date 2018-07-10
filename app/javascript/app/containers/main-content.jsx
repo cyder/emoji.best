@@ -17,9 +17,14 @@ import * as DownloadCartActions from '../actions/download-cart';
 class MainCopntent extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isSmallHeader: false,
+      isLargeSpace: true,
+    };
 
+    this.onScroll = this.onScroll.bind(this);
     this.onChanged = this.onChanged.bind(this);
-    this.isSmallHeader = this.isSmallHeader.bind(this);
+    this.checkHeader = this.checkHeader.bind(this);
   }
 
   componentWillMount() {
@@ -28,7 +33,7 @@ class MainCopntent extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.onChanged);
+    window.addEventListener('scroll', this.onScroll);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -43,10 +48,16 @@ class MainCopntent extends Component {
     if (isChangedParams && isRootLocation) {
       this.props.searchEmojis(keyword, order);
     }
+    this.checkHeader();
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.onChanged);
+    window.removeEventListener('scroll', this.onScroll);
+  }
+
+  onScroll() {
+    this.onChanged();
+    this.checkHeader();
   }
 
   onChanged() {
@@ -61,15 +72,27 @@ class MainCopntent extends Component {
     }
   }
 
-  isSmallHeader() {
+  checkHeader() {
+    const { body } = window.document;
+    const html = window.document.documentElement;
+    const scrollTop = body.scrollTop || html.scrollTop;
+
     const { keyword } = this.props.emojis;
-    return (keyword !== null && keyword !== '');
+    if (keyword !== null && keyword !== '') {
+      this.setState({ isSmallHeader: true });
+      this.setState({ isLargeSpace: false });
+    } else if (scrollTop > 300) {
+      this.setState({ isSmallHeader: true });
+      this.setState({ isLargeSpace: true });
+    } else {
+      this.setState({ isSmallHeader: false });
+    }
   }
 
   render() {
     return (
       <div>
-        <Header isSmall={this.isSmallHeader()} />
+        <Header isSmall={this.state.isSmallHeader} isLargeSpace={this.state.isLargeSpace} />
         <ReactResizeDetector handleHeight onResize={this.onChanged}>
           <EmojiList
             emojis={this.props.emojis}

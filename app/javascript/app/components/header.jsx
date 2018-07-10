@@ -35,7 +35,7 @@ const Container = styled.header`
   ` : null)};
 `;
 
-const Title = styled.header`
+const Title = styled.div`
   text-align: center;
 `;
 
@@ -70,7 +70,12 @@ const NavigationArea = styled.nav`
 `;
 
 const Background = styled.div`
-  height: ${props => (props.isSmall ? '77px' : '0')};
+  height: ${(props) => {
+    if (props.isSmall) {
+      return props.isLarge ? '300px' : '77px';
+    }
+    return '0';
+  }}}
 `;
 
 const selectLogoImage = () => {
@@ -99,12 +104,14 @@ class Header extends Component {
   }
 
   render() {
-    const { isSmall } = this.props;
+    const { isSmall, isLargeSpace } = this.props;
     return (
       <div>
         <Container isSmall={isSmall} >
           <Title>
-            <Logo alt="emoji.best" src={this.state.logoImage} isSmall={isSmall} />
+            <Link to="/">
+              <Logo alt="emoji.best" src={this.state.logoImage} isSmall={isSmall} />
+            </Link>
           </Title>
           <SubTitle isSmall={isSmall} >{'Let\'s share emojis!!'}</SubTitle>
           <SearchFormArea isSmall={isSmall} >
@@ -114,7 +121,7 @@ class Header extends Component {
             <Navigation />
           </NavigationArea>
         </Container>
-        <Background isSmall={isSmall} />
+        <Background isSmall={isSmall} isLarge={isLargeSpace} />
       </div>
     );
   }
@@ -122,6 +129,7 @@ class Header extends Component {
 
 Header.propTypes = {
   isSmall: PropTypes.bool.isRequired,
+  isLargeSpace: PropTypes.bool.isRequired,
 };
 
 export default Header;
