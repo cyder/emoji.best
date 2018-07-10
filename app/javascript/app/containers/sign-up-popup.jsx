@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import * as PopupManagerActions from '../actions/popup-manager';
 import * as MyselfActions from '../actions/myself';
 
 import {
@@ -104,7 +103,6 @@ function mapStateToProps(state) {
 
 function mapDispatchProps(dispatch) {
   return bindActionCreators({
-    ...PopupManagerActions,
     ...MyselfActions,
   }, dispatch);
 }
@@ -119,7 +117,6 @@ SignUpPopup.propTypes = {
       state: PropTypes.string,
     }).isRequired,
   }).isRequired,
-  showSignInPopup: PropTypes.func.isRequired,
   signUp: PropTypes.func.isRequired,
   clearError: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,

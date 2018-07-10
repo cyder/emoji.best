@@ -10,7 +10,6 @@ import {
   failedSignIn,
   failedSignUp,
 } from '../actions/myself';
-import { POPUP } from '../constants/popup-manager';
 import { signIn, signUp, signOut } from '../api';
 
 function* sageSignIn(action) {

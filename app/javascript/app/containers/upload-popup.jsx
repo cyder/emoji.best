@@ -8,7 +8,6 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faCloudUploadAlt from '@fortawesome/fontawesome-free-solid/faCloudUploadAlt';
 
 import UploadEmoji from '../components/upload-emoji';
-import * as PopupManagerActions from '../actions/popup-manager';
 import * as UploadEmojiActions from '../actions/upload-emoji';
 
 import {
@@ -157,7 +156,6 @@ function mapStateToProps(state) {
 
 function mapDispatchProps(dispatch) {
   return bindActionCreators({
-    ...PopupManagerActions,
     ...UploadEmojiActions,
   }, dispatch);
 }
