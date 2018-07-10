@@ -4,15 +4,19 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
 import PropTypes from 'prop-types';
 
+import Tags from './tags';
 import { CloseButton } from '../components/css/popup';
 import EmojiShape from './shapes/emoji';
 
 const Content = styled.div`
-  display: flex;
   max-width: 660px;
   width: 80vw;
-  padding: 40px 20px 10px;
+  padding: 40px 40px 20px;
   border-bottom: 2px solid #eeeeee;
+`;
+
+const FlexBox = styled.div`
+  display: flex;
 `;
 
 const Img = styled.img`
@@ -98,22 +102,30 @@ const EmojiPopup = ({
   isAddedToCart,
   deleteEmojiFromDownloadCart,
   addEmojiToDownloadCart,
+  push,
 }) => (
   <article>
     <Content>
-      <Img alt={emoji.name} src={emoji.images.thumb_url} />
-      <Info>
-        <TitleArea>
-          <div>
-            <Title>:<Name>{ emoji.name }</Name>:</Title>
-            <UserName>by { emoji.user.name }</UserName>
-          </div>
-          <Download>
-            <FontAwesomeIcon icon={faDownload} /> {emoji.number_of_downloaded}
-          </Download>
-        </TitleArea>
-        <p>{ emoji.description }</p>
-      </Info>
+      <FlexBox>
+        <Img alt={emoji.name} src={emoji.images.thumb_url} />
+        <Info>
+          <TitleArea>
+            <div>
+              <Title>:<Name>{ emoji.name }</Name>:</Title>
+              <UserName>by { emoji.user.name }</UserName>
+            </div>
+            <Download>
+              <FontAwesomeIcon icon={faDownload} /> {emoji.number_of_downloaded}
+            </Download>
+          </TitleArea>
+          <p>{ emoji.description }</p>
+        </Info>
+      </FlexBox>
+      {
+        emoji.tags.length > 0 ? (
+          <Tags tags={emoji.tags} push={push} />
+        ) : null
+      }
     </Content>
     <DownloadButton
       href={emoji.images.slack_url}
@@ -138,6 +150,7 @@ EmojiPopup.propTypes = {
   isAddedToCart: PropTypes.bool.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
 };
 
 export default EmojiPopup;

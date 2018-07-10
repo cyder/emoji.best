@@ -42,6 +42,7 @@ class EmojiDetailPopup extends Component {
                   addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
                   deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
                   isAddedToCart={list.some(value => value.id === emoji.id)}
+                  push={this.props.history.push}
                 />
               ) : null
           }
