@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faTag from '@fortawesome/fontawesome-free-solid/faTag';
 import faPencilAlt from '@fortawesome/fontawesome-free-solid/faPencilAlt';
+import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
 import PropTypes from 'prop-types';
 
 const TitleArea = styled.div`
@@ -50,6 +51,21 @@ const TagIcon = styled.div`
   margin: auto;
 `;
 
+const DeleteButton = styled.button`
+  display: ${props => (props.isEditing ? 'block' : 'none')};
+  border: none;
+  background: transparent;
+  width: 1.2rem;
+  height: 1.2rem;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 6px;
+  height: 1.6rem;
+  margin: auto;
+`;
+
 class Tags extends Component {
   constructor(props) {
     super(props);
@@ -61,11 +77,13 @@ class Tags extends Component {
   }
 
   onClick(tag) {
-    const params = new URLSearchParams({
-      keyword: tag.name,
-      target: 'tag',
-    });
-    this.props.push(`/?${params.toString()}`);
+    if (!this.state.isEditing) {
+      const params = new URLSearchParams({
+        keyword: tag.name,
+        target: 'tag',
+      });
+      this.props.push(`/?${params.toString()}`);
+    }
   }
 
   render() {
@@ -89,6 +107,9 @@ class Tags extends Component {
               >
                 { tag.name }
                 <TagIcon><FontAwesomeIcon icon={faTag} /></TagIcon>
+                <DeleteButton isEditing={isEditing}>
+                  <FontAwesomeIcon icon={faTimes} />
+                </DeleteButton>
               </Tag>
             ))
           }
