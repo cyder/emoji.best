@@ -17,6 +17,7 @@ const TagTitle = styled.h3`
 `;
 
 const EditButton = styled.button`
+  display: ${props => (props.isShow ? 'block' : 'none')};
   border: none;
   background-color: #464646;
   color: #ffffff;
@@ -136,7 +137,10 @@ class Tags extends Component {
       <div>
         <TitleArea>
           <TagTitle>Tag</TagTitle>
-          <EditButton onClick={() => this.setState({ isEditing: !isEditing })}>
+          <EditButton
+            isShow={accessToken !== null}
+            onClick={() => this.setState({ isEditing: !isEditing })}
+          >
             <FontAwesomeIcon icon={faPencilAlt} />
             { isEditing ? ' complete' : ' edit tag' }
           </EditButton>
@@ -197,7 +201,7 @@ Tags.propTypes = {
 };
 
 Tags.defaultProps = {
-  accessToken: undefined,
+  accessToken: null,
 };
 
 export default Tags;
