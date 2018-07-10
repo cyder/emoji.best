@@ -19,6 +19,16 @@ const emoji = (state = initialState, action) => {
         status: types.STATUS.SHOWING,
         emoji: action.emoji,
       };
+    case types.DELETE_TAG: {
+      const tags = state.emoji.tags.filter(tag => tag.id !== action.id);
+      return {
+        ...state,
+        emoji: {
+          ...state.emoji,
+          tags,
+        },
+      };
+    }
     default:
       return state;
   }
