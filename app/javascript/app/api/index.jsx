@@ -2,6 +2,7 @@ const COMMON_URL = '/api/v1/';
 const SEARCH = 'search';
 const EMOJI = 'emojis';
 const DOWNLOAD = 'download';
+const AUTH = 'users/authentication';
 const SIGNIN = 'users/sign_in';
 const SIGNUP = 'users';
 const SIGNOUT = 'users/sign_out';
@@ -92,8 +93,8 @@ function deleteFetch(path, accessToken) {
   return fetch(path, { ...params }).then(response => response.json());
 }
 
-export function searchEmojis(order, keyword, page = 0) {
-  const data = { page };
+export function searchEmojis(order, keyword, page = 0, target = 'all') {
+  const data = { page, target };
   if (order != null) data.order = order;
   if (keyword != null) data.keyword = keyword;
 
@@ -130,6 +131,11 @@ export function saveEmoji(name, description, image, accessToken) {
     },
   };
   return post(path, data, accessToken);
+}
+
+export function authentication(accessToken) {
+  const path = `${COMMON_URL}${AUTH}`;
+  return get(path, null, accessToken);
 }
 
 export function signIn(email, password) {

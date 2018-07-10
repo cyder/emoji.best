@@ -23,7 +23,7 @@ class MainCopntent extends Component {
 
   componentWillMount() {
     const params = new URLSearchParams(this.props.router.location.search);
-    this.props.searchEmojis(params.get('keyword'), params.get('order'));
+    this.props.searchEmojis(params.get('keyword'), params.get('order'), params.get('target'));
   }
 
   componentDidMount() {
@@ -34,13 +34,15 @@ class MainCopntent extends Component {
     const params = new URLSearchParams(nextProps.router.location.search);
     const keyword = params.get('keyword');
     const order = params.get('order');
+    const target = params.get('target');
     const isChangeKeyword = keyword !== nextProps.emojis.keyword;
     const isChangeOrder = order !== nextProps.emojis.order;
-    const isChangedParams = isChangeKeyword || isChangeOrder;
+    const isChangeTarget = target !== nextProps.emojis.target;
+    const isChangedParams = isChangeKeyword || isChangeOrder || isChangeTarget;
     const isRootLocation = nextProps.router.location.pathname === '/';
 
     if (isChangedParams && isRootLocation) {
-      this.props.searchEmojis(keyword, order);
+      this.props.searchEmojis(keyword, order, target);
     }
   }
 
@@ -54,9 +56,10 @@ class MainCopntent extends Component {
     const html = window.document.documentElement;
     const scrollTop = body.scrollTop || html.scrollTop;
     const scrollBottom = html.scrollHeight - html.clientHeight - scrollTop;
+    const { keyword, order, target } = this.props.emojis;
     if (this.props.emojis.status === STATUS.SHOWING && scrollBottom < offset) {
       const page = this.props.emojis.lastPage + 1;
-      this.props.loadNextEmojis(page, this.props.emojis.keyword, this.props.emojis.order);
+      this.props.loadNextEmojis(page, keyword, order, target);
     }
   }
 

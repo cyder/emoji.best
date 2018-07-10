@@ -31,8 +31,13 @@ class EmojiDetailPopup extends Component {
         <Container>
           {
             status === STATUS.SHOWING
-              ? (<EmojiDetail emoji={emoji} onClose={this.onClose} />)
-              : null
+              ? (
+                <EmojiDetail
+                  emoji={emoji}
+                  onClose={this.onClose}
+                  push={this.props.history.push}
+                />
+              ) : null
           }
         </Container>
       </Background>

@@ -3,12 +3,15 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import SnsOauth from '../components/sns-oauth';
 import * as MyselfActions from '../actions/myself';
 
 import {
   Background,
   Container,
   Title,
+  OrContainer,
+  Or,
   Form,
   TextForm,
   Button,
@@ -59,6 +62,11 @@ class SignUpPopup extends Component {
       <Background>
         <Container>
           <Title>Sign Up</Title>
+          <SnsOauth
+            caption="Sign up"
+            authentication={this.props.authentication}
+          />
+          <OrContainer><Or>OR</Or></OrContainer>
           <Form>
             <ErrorMessage isShow={this.props.errorMessage !== null}>
               {this.props.errorMessage}
@@ -119,6 +127,7 @@ SignUpPopup.propTypes = {
       callbackUrl: PropTypes.string,
     }).isRequired,
   }).isRequired,
+  authentication: PropTypes.func.isRequired,
   signUp: PropTypes.func.isRequired,
   clearError: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,

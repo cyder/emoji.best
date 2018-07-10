@@ -1,5 +1,9 @@
 import * as types from '../constants/myself';
 
+export function authentication(accessToken) {
+  return { type: types.AUTH, accessToken };
+}
+
 export function signIn(email, password, callbackUrl = '/') {
   return {
     type: types.SIGNIN,

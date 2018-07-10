@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import { takeEvery, put } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 
-import { SIGNIN, SIGNUP, SIGNOUT } from '../constants/myself';
+import { AUTH, SIGNIN, SIGNUP, SIGNOUT } from '../constants/myself';
 import {
   successSignIn,
   successSignUp,
@@ -10,7 +10,17 @@ import {
   failedSignIn,
   failedSignUp,
 } from '../actions/myself';
-import { signIn, signUp, signOut } from '../api';
+import { authentication, signIn, signUp, signOut } from '../api';
+
+function* sageAuthentication(action) {
+  try {
+    const json = yield authentication(action.accessToken);
+    yield put(successSignIn(json.user, action.accessToken));
+    yield put(push(action.callbackUrl));
+  } catch (status) {
+    yield put(failedSignIn(status));
+  }
+}
 
 function* sageSignIn(action) {
   try {
@@ -43,6 +53,7 @@ function* sageSignOut(action) {
 }
 
 export default function* emojisSaga() {
+  yield takeEvery(AUTH, sageAuthentication);
   yield takeEvery(SIGNIN, sageSignIn);
   yield takeEvery(SIGNUP, sageSignUp);
   yield takeEvery(SIGNOUT, sageSignOut);

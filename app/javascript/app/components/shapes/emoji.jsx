@@ -11,6 +11,9 @@ const EmojiShape = PropTypes.shape({
     slack_url: PropTypes.string.isRequired,
     thumb_url: PropTypes.string.isRequired,
   }).isRequired,
+  tags: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
   user: UserShape.isRequired,
   number_of_downloaded: PropTypes.number.isRequired,
 });

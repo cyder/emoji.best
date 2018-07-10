@@ -85,7 +85,17 @@ rails db:migrate
 rails db:seed
 ```
 
-5. サーバを起動する
+5. 環境変数を設定する。
+```sh
+cp .env.sample .env
+vim .env
+```
+以下からAPI keyを取得する
+* [Twitter](https://apps.twitter.com/)
+* [Facebook](https://developers.facebook.com/)
+* [Google](https://console.developers.google.com/apis/dashboard)
+
+6. サーバを起動する
 ```sh
 yarn start
 ```
