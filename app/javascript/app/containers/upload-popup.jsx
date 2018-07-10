@@ -6,6 +6,7 @@ import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faCloudUploadAlt from '@fortawesome/fontawesome-free-solid/faCloudUploadAlt';
+import { replace } from 'react-router-redux';
 
 import UploadEmoji from '../components/upload-emoji';
 import * as UploadEmojiActions from '../actions/upload-emoji';
@@ -84,6 +85,12 @@ class UploadPopup extends Component {
     this.onClose = this.onClose.bind(this);
     this.onDrop = this.onDrop.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    if (this.props.accessToken === null) {
+      this.props.history.replace('/signin');
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -166,6 +173,7 @@ const UploadPopupContainer = connect(mapStateToProps, mapDispatchProps)(UploadPo
 UploadPopup.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
+    replace: PropTypes.func.isRequired,
     goBack: PropTypes.func.isRequired,
     location: PropTypes.shape({
       state: PropTypes.string,
@@ -178,7 +186,11 @@ UploadPopup.propTypes = {
   emojis: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
   }).isRequired).isRequired,
-  accessToken: PropTypes.string.isRequired,
+  accessToken: PropTypes.string,
+};
+
+UploadPopup.defaultProps = {
+  accessToken: null,
 };
 
 export default UploadPopupContainer;
