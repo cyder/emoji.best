@@ -30,7 +30,7 @@ const Container = styled.header`
   position: ${props => (props.isSmall ? 'fixed' : 'relative')};
   ${props => (props.isSmall ? `
     width: 100%;
-    z-index: 1000;
+    z-index: 10;
     align-items: center;
   ` : null)};
 `;
