@@ -8,6 +8,8 @@ const popupManager = (state = initialState, action) => {
       return types.POPUP.SIGN_UP;
     case types.SHOW_SIGN_IN:
       return types.POPUP.SIGN_IN;
+    case types.SHOW_UPLOAD:
+      return types.POPUP.UPLOAD;
     case types.CLOSE:
       if (action.target === null || action.target === state) {
         return null;

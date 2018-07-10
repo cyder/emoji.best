@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import SignInPopup from '../containers/sign-in-popup';
 import SignUpPopup from '../containers/sign-up-popup';
+import UploadPopup from '../containers/upload-popup';
 import { Background, Container } from '../components/css/popup';
 import { POPUP } from '../constants/popup-manager';
 
@@ -13,6 +14,8 @@ const selectPopup = (show) => {
       return (<SignUpPopup />);
     case POPUP.SIGN_IN:
       return (<SignInPopup />);
+    case POPUP.UPLOAD:
+      return (<UploadPopup />);
     default:
       return null;
   }
