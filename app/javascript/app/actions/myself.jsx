@@ -1,16 +1,22 @@
 import * as types from '../constants/myself';
 
-export function signIn(email, password) {
-  return { type: types.SIGNIN, email, password };
+export function signIn(email, password, callbackUrl = '/') {
+  return {
+    type: types.SIGNIN,
+    email,
+    password,
+    callbackUrl,
+  };
 }
 
-export function signUp(name, email, password, passwordConfirm) {
+export function signUp(name, email, password, passwordConfirm, callbackUrl = '/') {
   return {
     type: types.SIGNUP,
     name,
     email,
     password,
     passwordConfirm,
+    callbackUrl,
   };
 }
 

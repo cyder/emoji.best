@@ -16,7 +16,7 @@ function* sageSignIn(action) {
   try {
     const json = yield signIn(action.email, action.password);
     yield put(successSignIn(json.user, json.access_token));
-    yield put(push('/'));
+    yield put(push(action.callbackUrl));
   } catch (status) {
     yield put(failedSignIn(status));
   }
@@ -31,7 +31,7 @@ function* sageSignUp(action) {
       action.passwordConfirm,
     );
     yield put(successSignUp(json.user, json.access_token));
-    yield put(push('/'));
+    yield put(push(action.callbackUrl));
   } catch (status) {
     yield put(failedSignUp(status));
   }

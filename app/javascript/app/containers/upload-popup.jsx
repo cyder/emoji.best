@@ -88,7 +88,8 @@ class UploadPopup extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.emojis.length === 0 && this.state.isSaved) {
-      this.props.history.push('/');
+      const callbackUrl = nextProps.history.location.callbackUrl || '/';
+      this.props.history.push(callbackUrl);
     }
   }
 
@@ -168,6 +169,7 @@ UploadPopup.propTypes = {
     goBack: PropTypes.func.isRequired,
     location: PropTypes.shape({
       state: PropTypes.string,
+      callbackUrl: PropTypes.string,
     }).isRequired,
   }).isRequired,
   uploadEmoji: PropTypes.func.isRequired,

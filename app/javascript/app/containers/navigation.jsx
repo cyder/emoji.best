@@ -26,13 +26,17 @@ const Item = styled.li`
   margin: 0 10px;
 `;
 
-const Navigation = ({ status }) => (
+const Navigation = ({ status, location }) => (
   <Container>
     {
       status === STATUS.SIGNIN ? (
         <List>
           <Item>
-            <Link to={{ pathname: '/upload', state: 'popup' }}>
+            <Link to={{
+              pathname: '/upload',
+              state: 'popup',
+              callbackUrl: location.pathname + location.search,
+            }}>
               <FontAwesomeIcon icon={faCloudUploadAlt} /> Upload
             </Link>
           </Item>
@@ -40,8 +44,24 @@ const Navigation = ({ status }) => (
         </List>
       ) : (
         <List>
-          <Item><Link to={{ pathname: '/signin', state: 'popup' }}>Sign In</Link></Item>
-          <Item><Link to={{ pathname: '/signup', state: 'popup' }}>Sign Up</Link></Item>
+          <Item>
+            <Link to={{
+              pathname: '/signin',
+              state: 'popup',
+              callbackUrl: location.pathname + location.search,
+            }}>
+              Sign In
+            </Link>
+          </Item>
+          <Item>
+            <Link to={{
+              pathname: '/signup',
+              state: 'popup',
+              callbackUrl: location.pathname + location.search,
+            }}>
+              Sign Up
+            </Link>
+          </Item>
         </List>
       )
     }
@@ -49,7 +69,10 @@ const Navigation = ({ status }) => (
 );
 
 function mapStateToProps(state) {
-  return { status: state.myself.status };
+  return {
+    status: state.myself.status,
+    location: state.router.location,
+  };
 }
 
 const NavigationContainer = connect(mapStateToProps)(Navigation);

@@ -50,6 +50,7 @@ class SignUpPopup extends Component {
       this.state.email,
       this.state.password,
       this.state.passwordConfirm,
+      this.props.history.location.callbackUrl,
     );
   }
 
@@ -115,6 +116,7 @@ SignUpPopup.propTypes = {
     goBack: PropTypes.func.isRequired,
     location: PropTypes.shape({
       state: PropTypes.string,
+      callbackUrl: PropTypes.string,
     }).isRequired,
   }).isRequired,
   signUp: PropTypes.func.isRequired,
