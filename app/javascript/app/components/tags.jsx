@@ -66,11 +66,37 @@ const DeleteButton = styled.button`
   margin: auto;
 `;
 
+const AddForm = styled.div`
+  display: ${props => (props.isEditing ? 'block' : 'none')};
+  height: 30px;
+  margin: 10px 0;
+`;
+
+const AddInput = styled.input`
+  background-color: #f5f5f5;
+  border: none;
+  height: 100%;
+  border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px;
+  padding: 0 10px 0 15px;
+`;
+
+const AddButton = styled.button`
+  border: none;
+  background-color: #464646;
+  color: #ffffff;
+  height: 100%;
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 0 15px 0 10px;
+`;
+
 class Tags extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isEditing: false,
+      newTagName: '',
     };
 
     this.onClick = this.onClick.bind(this);
@@ -119,6 +145,15 @@ class Tags extends Component {
             ))
           }
         </List>
+        <AddForm isEditing={isEditing}>
+          <AddInput
+            type="text"
+            placeholder="new tag"
+            onChange={e => this.setState({ newTagName: e.target.value })}
+            value={this.state.newTagName}
+          />
+          <AddButton>add</AddButton>
+        </AddForm>
       </div>
     );
   }
