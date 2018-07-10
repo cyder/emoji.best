@@ -35,6 +35,7 @@ db/*.sqlite3
 *.sassc
 .redcar/
 .sass-cache
+.env
 /coverage.data
 /coverage/
 /db/*.javadb/

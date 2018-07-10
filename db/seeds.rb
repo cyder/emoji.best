@@ -13,6 +13,21 @@ user = User.create(
   password_confirmation: "password",
 )
 
+emoji = Emoji.create(
+  user: user,
+  name: "sample_emoji_with_tag",
+  description: "with tag",
+  image: File.open(Rails.root.join("spec", "fixtures", "images", "indian.png")),
+)
+
+5.times do |no|
+  Tag.create(
+    user: user,
+    emoji: emoji,
+    name: "sample tag#{no}",
+  )
+end
+
 100.times do |no|
   Emoji.create(
     user: user,

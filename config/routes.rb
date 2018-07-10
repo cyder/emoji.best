@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-  root to: "app#index"
+  post "oauth/callback", to: "oauths#callback"
+  get "oauth/callback", to: "oauths#callback"
+  get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :users, only: [:create, :show] do
         collection do
+          get "authentication", to: "user_sessions#authentication"
           post "sign_in", to: "user_sessions#create"
           delete "sign_out", to: "user_sessions#destroy"
         end
@@ -18,5 +21,10 @@ Rails.application.routes.draw do
       end
       resources :download, only: [:index]
     end
+    root to: "error#render_404"
+    get "/*path", to: "error#render_404"
   end
+
+  root to: "app#index"
+  get "/*path", to: "app#index"
 end
