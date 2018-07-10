@@ -15,12 +15,13 @@ export function searchEmojis(keyword, order, target = null) {
   };
 }
 
-export function loadNextEmojis(page, keyword, order) {
+export function loadNextEmojis(page, keyword, order, target = null) {
   return {
     type: types.LOAD_NEXT,
     keyword,
     order,
     page,
+    target,
   };
 }
 
