@@ -73,7 +73,13 @@ const DownloadButton = styled.a`
   line-height: 38px;
 `;
 
-const EmojiPopup = ({ emoji, onClose, push }) => (
+const EmojiPopup = ({
+  emoji,
+  onClose,
+  push,
+  deleteTag,
+  accessToken,
+}) => (
   <article>
     <Content>
       <FlexBox>
@@ -93,7 +99,12 @@ const EmojiPopup = ({ emoji, onClose, push }) => (
       </FlexBox>
       {
         emoji.tags.length > 0 ? (
-          <Tags tags={emoji.tags} push={push} />
+          <Tags
+            tags={emoji.tags}
+            push={push}
+            deleteTag={deleteTag}
+            accessToken={accessToken}
+          />
         ) : null
       }
     </Content>
@@ -112,6 +123,12 @@ EmojiPopup.propTypes = {
   onClose: PropTypes.func.isRequired,
   emoji: EmojiShape.isRequired,
   push: PropTypes.func.isRequired,
+  deleteTag: PropTypes.func.isRequired,
+  accessToken: PropTypes.string,
+};
+
+EmojiPopup.defaultProps = {
+  accessToken: undefined,
 };
 
 export default EmojiPopup;

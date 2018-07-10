@@ -88,6 +88,8 @@ class Tags extends Component {
 
   render() {
     const { isEditing } = this.state;
+    const { tags, deleteTag, accessToken } = this.props;
+
     return (
       <div>
         <TitleArea>
@@ -99,7 +101,7 @@ class Tags extends Component {
         </TitleArea>
         <List>
           {
-            this.props.tags.map(tag => (
+            tags.map(tag => (
               <Tag
                 key={tag.id}
                 onClick={() => this.onClick(tag)}
@@ -107,7 +109,10 @@ class Tags extends Component {
               >
                 { tag.name }
                 <TagIcon><FontAwesomeIcon icon={faTag} /></TagIcon>
-                <DeleteButton isEditing={isEditing}>
+                <DeleteButton
+                  isEditing={isEditing}
+                  onClick={() => deleteTag(tag.id, accessToken)}
+                >
                   <FontAwesomeIcon icon={faTimes} />
                 </DeleteButton>
               </Tag>
@@ -125,6 +130,12 @@ Tags.propTypes = {
     name: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   push: PropTypes.func.isRequired,
+  deleteTag: PropTypes.func.isRequired,
+  accessToken: PropTypes.string,
+};
+
+Tags.defaultProps = {
+  accessToken: undefined,
 };
 
 export default Tags;
