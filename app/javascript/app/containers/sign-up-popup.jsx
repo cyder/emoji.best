@@ -65,6 +65,7 @@ class SignUpPopup extends Component {
           <SnsOauth
             caption="Sign up"
             authentication={this.props.authentication}
+            callbackUrl={this.props.history.location.callbackUrl}
           />
           <OrContainer><Or>OR</Or></OrContainer>
           <Form>
