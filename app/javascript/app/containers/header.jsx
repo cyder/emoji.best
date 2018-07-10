@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import HeaderBackImage from 'images/header-back.jpg';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LogoImage1 from 'images/logo/logo1.png';
 import LogoImage2 from 'images/logo/logo2.png';
@@ -100,11 +101,54 @@ const selectLogoImage = () => {
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = { logoImage: selectLogoImage() };
+    this.state = {
+      logoImage: selectLogoImage(),
+      isSmall: false,
+      isLargeSpace: true,
+    };
+
+    this.onScroll = this.onScroll.bind(this);
+    this.checkHeader = this.checkHeader.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.onScroll);
+    this.checkHeader(this.props.keyword);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.keyword !== nextProps.keyword) {
+      this.checkHeader(nextProps.keyword);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+  }
+
+  onScroll() {
+    this.checkHeader(this.props.keyword);
+  }
+
+  checkHeader(keyword) {
+    const { body } = window.document;
+    const html = window.document.documentElement;
+    const scrollTop = body.scrollTop || html.scrollTop;
+
+    if (keyword !== null && keyword !== '') {
+      this.setState({ isSmall: true });
+      this.setState({ isLargeSpace: false });
+    } else if (scrollTop > 300) {
+      this.setState({ isSmall: true });
+      this.setState({ isLargeSpace: true });
+    } else {
+      this.setState({ isSmall: false });
+    }
   }
 
   render() {
-    const { isSmall, isLargeSpace } = this.props;
+    const { isSmall, isLargeSpace } = this.state;
+
     return (
       <div>
         <Container isSmall={isSmall} >
@@ -127,9 +171,20 @@ class Header extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    keyword: state.emojis.keyword,
+  };
+}
+
+const HeaderContainer = connect(mapStateToProps)(Header);
+
 Header.propTypes = {
-  isSmall: PropTypes.bool.isRequired,
-  isLargeSpace: PropTypes.bool.isRequired,
+  keyword: PropTypes.string,
 };
 
-export default Header;
+Header.defaultProps = {
+  keyword: null,
+};
+
+export default HeaderContainer;

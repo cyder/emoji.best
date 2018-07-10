@@ -8,7 +8,7 @@ import EmojiList from '../components/emoji-list';
 import DownloadCart from '../components/download-cart';
 import EmojiListShape from '../components/shapes/emoji-list';
 import DownloadCartShape from '../components/shapes/download-cart';
-import Header from '../components/header';
+import Header from '../containers/header';
 import { STATUS } from '../constants/emojis';
 
 import * as EmojisActions from '../actions/emojis';
@@ -17,14 +17,8 @@ import * as DownloadCartActions from '../actions/download-cart';
 class MainCopntent extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isSmallHeader: false,
-      isLargeSpace: true,
-    };
 
-    this.onScroll = this.onScroll.bind(this);
     this.onChanged = this.onChanged.bind(this);
-    this.checkHeader = this.checkHeader.bind(this);
   }
 
   componentWillMount() {
@@ -33,7 +27,7 @@ class MainCopntent extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.onScroll);
+    window.addEventListener('scroll', this.onChanged);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -48,16 +42,10 @@ class MainCopntent extends Component {
     if (isChangedParams && isRootLocation) {
       this.props.searchEmojis(keyword, order);
     }
-    this.checkHeader();
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll);
-  }
-
-  onScroll() {
-    this.onChanged();
-    this.checkHeader();
+    window.removeEventListener('scroll', this.onChanged);
   }
 
   onChanged() {
@@ -72,27 +60,10 @@ class MainCopntent extends Component {
     }
   }
 
-  checkHeader() {
-    const { body } = window.document;
-    const html = window.document.documentElement;
-    const scrollTop = body.scrollTop || html.scrollTop;
-
-    const { keyword } = this.props.emojis;
-    if (keyword !== null && keyword !== '') {
-      this.setState({ isSmallHeader: true });
-      this.setState({ isLargeSpace: false });
-    } else if (scrollTop > 300) {
-      this.setState({ isSmallHeader: true });
-      this.setState({ isLargeSpace: true });
-    } else {
-      this.setState({ isSmallHeader: false });
-    }
-  }
-
   render() {
     return (
       <div>
-        <Header isSmall={this.state.isSmallHeader} isLargeSpace={this.state.isLargeSpace} />
+        <Header />
         <ReactResizeDetector handleHeight onResize={this.onChanged}>
           <EmojiList
             emojis={this.props.emojis}
