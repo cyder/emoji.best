@@ -100,7 +100,7 @@ const EmojiPopup = ({
       {
         emoji.tags.length > 0 ? (
           <Tags
-            tags={emoji.tags}
+            emoji={emoji}
             push={push}
             deleteTag={deleteTag}
             accessToken={accessToken}

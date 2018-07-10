@@ -20,7 +20,7 @@ const emoji = (state = initialState, action) => {
         emoji: action.emoji,
       };
     case types.DELETE_TAG: {
-      const tags = state.emoji.tags.filter(tag => tag.id !== action.id);
+      const tags = state.emoji.tags.filter(tag => tag.id !== action.tagId);
       return {
         ...state,
         emoji: {

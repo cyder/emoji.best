@@ -88,7 +88,7 @@ class Tags extends Component {
 
   render() {
     const { isEditing } = this.state;
-    const { tags, deleteTag, accessToken } = this.props;
+    const { emoji, deleteTag, accessToken } = this.props;
 
     return (
       <div>
@@ -101,7 +101,7 @@ class Tags extends Component {
         </TitleArea>
         <List>
           {
-            tags.map(tag => (
+            emoji.tags.map(tag => (
               <Tag
                 key={tag.id}
                 onClick={() => this.onClick(tag)}
@@ -111,7 +111,7 @@ class Tags extends Component {
                 <TagIcon><FontAwesomeIcon icon={faTag} /></TagIcon>
                 <DeleteButton
                   isEditing={isEditing}
-                  onClick={() => deleteTag(tag.id, accessToken)}
+                  onClick={() => deleteTag(emoji.id, tag.id, accessToken)}
                 >
                   <FontAwesomeIcon icon={faTimes} />
                 </DeleteButton>
@@ -125,10 +125,13 @@ class Tags extends Component {
 }
 
 Tags.propTypes = {
-  tags: PropTypes.arrayOf(PropTypes.shape({
+  emoji: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
+    tags: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired).isRequired,
+  }).isRequired,
   push: PropTypes.func.isRequired,
   deleteTag: PropTypes.func.isRequired,
   accessToken: PropTypes.string,

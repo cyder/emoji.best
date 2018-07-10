@@ -8,6 +8,11 @@ export function successGetEmoji(emoji) {
   return { type: types.SUCCESS_GET, emoji };
 }
 
-export function deleteTag(id, accessToken) {
-  return { type: types.DELETE_TAG, id, accessToken };
+export function deleteTag(emojiId, tagId, accessToken) {
+  return {
+    type: types.DELETE_TAG,
+    emojiId,
+    tagId,
+    accessToken,
+  };
 }
