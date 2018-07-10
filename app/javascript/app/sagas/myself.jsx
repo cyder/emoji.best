@@ -1,5 +1,6 @@
 import 'babel-polyfill';
 import { takeEvery, put } from 'redux-saga/effects';
+import { push } from 'react-router-redux';
 
 import { SIGNIN, SIGNUP, SIGNOUT } from '../constants/myself';
 import {
@@ -9,7 +10,6 @@ import {
   failedSignIn,
   failedSignUp,
 } from '../actions/myself';
-import { closePopup } from '../actions/popup-manager';
 import { POPUP } from '../constants/popup-manager';
 import { signIn, signUp, signOut } from '../api';
 
@@ -17,7 +17,7 @@ function* sageSignIn(action) {
   try {
     const json = yield signIn(action.email, action.password);
     yield put(successSignIn(json.user, json.access_token));
-    yield put(closePopup(POPUP.SIGN_IN));
+    yield put(push('/'));
   } catch (status) {
     yield put(failedSignIn(status));
   }
@@ -32,7 +32,7 @@ function* sageSignUp(action) {
       action.passwordConfirm,
     );
     yield put(successSignUp(json.user, json.access_token));
-    yield put(closePopup(POPUP.SIGN_UP));
+    yield put(push('/'));
   } catch (status) {
     yield put(failedSignUp(status));
   }
