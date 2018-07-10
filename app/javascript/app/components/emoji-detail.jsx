@@ -98,17 +98,13 @@ const EmojiPopup = ({
           <p>{ emoji.description }</p>
         </Info>
       </FlexBox>
-      {
-        emoji.tags.length > 0 ? (
-          <Tags
-            emoji={emoji}
-            push={push}
-            deleteTag={deleteTag}
-            addTag={addTag}
-            accessToken={accessToken}
-          />
-        ) : null
-      }
+      <Tags
+        emoji={emoji}
+        push={push}
+        deleteTag={deleteTag}
+        addTag={addTag}
+        accessToken={accessToken}
+      />
     </Content>
     <DownloadButton
       href={emoji.images.slack_url}

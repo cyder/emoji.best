@@ -91,6 +91,11 @@ const AddButton = styled.button`
   padding: 0 15px 0 10px;
 `;
 
+const EmptyMessage = styled.p`
+  display: ${props => (props.isEmpty ? 'block' : 'none')};
+  margin-top: 0;
+`;
+
 class Tags extends Component {
   constructor(props) {
     super(props);
@@ -156,6 +161,11 @@ class Tags extends Component {
             ))
           }
         </List>
+        <EmptyMessage
+          isEmpty={emoji.tags.length === 0}
+        >
+          Still Empty.
+        </EmptyMessage>
         <AddForm isEditing={isEditing}>
           <AddInput
             type="text"
