@@ -8,6 +8,10 @@ export function successGetEmoji(emoji) {
   return { type: types.SUCCESS_GET, emoji };
 }
 
+export function failedGetEmoji() {
+  return { type: types.FAILED_GET };
+}
+
 export function addTag(emojiId, name, accessToken) {
   return {
     type: types.ADD_TAG,
