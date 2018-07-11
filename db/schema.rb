@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180709034219) do
+ActiveRecord::Schema.define(version: 20180711110946) do
 
   create_table "access_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "token", null: false
@@ -77,6 +77,9 @@ ActiveRecord::Schema.define(version: 20180709034219) do
     t.string "salt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "twitter"
+    t.string "facebook"
+    t.string "google"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
