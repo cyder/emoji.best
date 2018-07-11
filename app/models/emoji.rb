@@ -61,6 +61,12 @@ class Emoji < ApplicationRecord
     end
   }
 
+  def self.find_with_logging!(id, user = nil)
+    emoji = self.find(id)
+    emoji.download_logs.create!(user: user)
+    emoji
+  end
+
   private
 
     def replace_space
