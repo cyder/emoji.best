@@ -9,7 +9,7 @@ class Api::V1::SearchController < Api::V1::BaseController
   DEFAULT_TARGET = Emoji::TARGET_METHOD[:all]
 
   def index
-    check_params
+    set_params
 
     # keywordが指定されており、最初のページのときは検索ログを残す
     if @keyword.present? && @page == DEFAULT_PAGE_NUM
@@ -23,7 +23,7 @@ class Api::V1::SearchController < Api::V1::BaseController
 
   private
 
-    def check_params
+    def set_params
       @num = params[:num]&.to_i || DEFAULT_PAGE_SIZE
       @page = params[:page]&.to_i || DEFAULT_PAGE_NUM
       @order = params[:order] || DEFAULT_ORDER
