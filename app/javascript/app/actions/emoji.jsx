@@ -7,3 +7,7 @@ export function getEmoji(id) {
 export function successGetEmoji(emoji) {
   return { type: types.SUCCESS_GET, emoji };
 }
+
+export function failedGetEmoji() {
+  return { type: types.FAILED_GET };
+}
