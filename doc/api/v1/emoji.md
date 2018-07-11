@@ -93,7 +93,7 @@ Returns a url.
 ```
 POST /api/v1/emojis/upload HTTP/1.1
 Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
-Authorization: 2392:ee20487712e97e6a21f5ccf144a7dd47
+Authorization: 27:5ab2ee7c19ecab6d2ea760bb71736cb0
 Content-Type: multipart/form-data; boundary=----------XnJLe9ZIbbGUYtzPQJ16u1
 Host: www.example.com
 
@@ -108,6 +108,76 @@ X-Content-Type-Options: nosniff
 X-Frame-Options: SAMEORIGIN
 
 {
-  "url": "/uploads/tmp/efe30aef-c866-4baa-a428-1100f7c9e868.png"
+  "url": "/uploads/tmp/a1a1dc4f-3bb8-45dd-9e20-bbf13a446470.png"
+}
+```
+
+## PATCH /api/v1/emojis/:id
+changed_description
+
+### Example
+
+#### Request
+```
+PATCH /api/v1/emojis/16 HTTP/1.1
+Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+Authorization: 29:0de32576835e7af5417dc0337ee33706
+Content-Type: application/x-www-form-urlencoded
+Host: www.example.com
+
+emoji[name]=changed_name&emoji[description]=changed_description
+```
+
+#### Response
+```
+HTTP/1.1 200
+Content-Type: application/json; charset=utf-8
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+
+{
+  "emoji": {
+    "id": 16,
+    "name": "changed_name",
+    "description": "changed_description",
+    "number_of_downloaded": 0,
+    "images": {
+      "large_url": "/uploads/emoji/16/large/sample_emoji.png",
+      "thumb_url": "/uploads/emoji/16/thumb/sample_emoji.png",
+      "slack_url": "/uploads/emoji/16/slack/sample_emoji.png"
+    },
+    "tags": [
+
+    ],
+    "user": {
+      "id": 29,
+      "name": "name"
+    }
+  }
+}
+```
+
+## DELETE /api/v1/emojis/:id
+Returns a 200.
+
+### Example
+
+#### Request
+```
+DELETE /api/v1/emojis/20 HTTP/1.1
+Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+Authorization: 35:e1903d8c6abe5846086163324581f6ac
+Content-Type: application/x-www-form-urlencoded
+Host: www.example.com
+```
+
+#### Response
+```
+HTTP/1.1 200
+Content-Type: application/json; charset=utf-8
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+
+{
 }
 ```

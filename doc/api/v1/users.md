@@ -206,6 +206,107 @@ X-Frame-Options: SAMEORIGIN
 }
 ```
 
+## PUT /api/v1/users
+Returns a user.
+
+### Example
+
+#### Request
+```
+PUT /api/v1/users HTTP/1.1
+Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+Authorization: 370:ffb5ad4e2f978b8f2edffdd4b7740690
+Content-Type: application/x-www-form-urlencoded
+Host: www.example.com
+
+user[email]=changed%40email.com
+```
+
+#### Response
+```
+HTTP/1.1 200
+Content-Type: application/json; charset=utf-8
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+
+{
+  "user": {
+    "id": 370,
+    "name": "name",
+    "number_of_uploaded": 0,
+    "upload_emojis": [
+
+    ],
+    "email": "changed@email.com",
+    "number_of_downloaded": 0
+  },
+  "access_token": null
+}
+```
+
+## PUT /api/v1/users
+Returns a user.
+
+### Example
+
+#### Request
+```
+PUT /api/v1/users HTTP/1.1
+Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+Authorization: 371:28abda8d816a48ac0ee1ef9f6801913a
+Content-Type: application/x-www-form-urlencoded
+Host: www.example.com
+
+user[password]=new+password&user[password_confirmation]=new+password
+```
+
+#### Response
+```
+HTTP/1.1 200
+Content-Type: application/json; charset=utf-8
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+
+{
+  "user": {
+    "id": 371,
+    "name": "name",
+    "number_of_uploaded": 0,
+    "upload_emojis": [
+
+    ],
+    "email": "user2@factory.com",
+    "number_of_downloaded": 0
+  },
+  "access_token": null
+}
+```
+
+## DELETE /api/v1/users
+Returns 200.
+
+### Example
+
+#### Request
+```
+DELETE /api/v1/users HTTP/1.1
+Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+Authorization: 374:1d322820d9ca8655c18334734769fd1a
+Content-Type: application/x-www-form-urlencoded
+Host: www.example.com
+```
+
+#### Response
+```
+HTTP/1.1 200
+Content-Type: application/json; charset=utf-8
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+
+{
+}
+```
+
 ## GET /api/v1/users/:id
 Return a user profile.
 

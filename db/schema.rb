@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180701141522) do
+ActiveRecord::Schema.define(version: 20180709034219) do
 
   create_table "access_tokens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "token", null: false
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 20180701141522) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_access_tokens_on_user_id"
+  end
+
+  create_table "authentications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.integer "user_id", null: false
+    t.string "provider", null: false
+    t.string "uid", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["provider", "uid", "user_id"], name: "index_authentications_on_provider_and_uid_and_user_id"
   end
 
   create_table "download_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
@@ -33,12 +42,22 @@ ActiveRecord::Schema.define(version: 20180701141522) do
   create_table "emojis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.bigint "user_id", null: false
     t.string "name", null: false
-    t.string "description", null: false
+    t.string "description", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image", default: "", null: false
     t.integer "download_logs_count", default: 0, null: false
     t.index ["user_id"], name: "index_emojis_on_user_id"
+  end
+
+  create_table "search_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.bigint "user_id"
+    t.string "keyword", null: false
+    t.string "order", null: false
+    t.string "target", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_search_logs_on_user_id"
   end
 
   create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
@@ -53,7 +72,7 @@ ActiveRecord::Schema.define(version: 20180701141522) do
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "name", null: false
-    t.string "email", null: false
+    t.string "email"
     t.string "crypted_password"
     t.string "salt"
     t.datetime "created_at", null: false

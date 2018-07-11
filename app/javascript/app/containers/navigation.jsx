@@ -31,12 +31,15 @@ const Navigation = ({
   status,
   showSignInPopup,
   showSignUpPopup,
+  showUploadPopup,
 }) => (
   <Container>
     {
       status === STATUS.SIGNIN ? (
         <List>
-          <Item><FontAwesomeIcon icon={faCloudUploadAlt} /> Upload</Item>
+          <Item onClick={showUploadPopup}>
+            <FontAwesomeIcon icon={faCloudUploadAlt} /> Upload
+          </Item>
           <Item><Profile /></Item>
         </List>
       ) : (
@@ -63,6 +66,7 @@ Navigation.propTypes = {
   status: PropTypes.string.isRequired,
   showSignInPopup: PropTypes.func.isRequired,
   showSignUpPopup: PropTypes.func.isRequired,
+  showUploadPopup: PropTypes.func.isRequired,
 };
 
 export default NavigationContainer;
