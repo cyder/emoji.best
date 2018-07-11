@@ -101,12 +101,12 @@ Rails.application.config.sorcery.configure do |config|
   config.twitter.key = ENV["TWITTER_KEY"]
   config.twitter.secret = ENV["TWITTER_SECRET"]
   config.twitter.callback_url = "#{ENV["DOMAIN_NAME"]}/oauth/callback?provider=twitter"
-  config.twitter.user_info_mapping = { name: "name" }
+  config.twitter.user_info_mapping = { name: "name", twitter: "screen_name" }
 
   config.facebook.key = ENV["FACEBOOK_KEY"]
   config.facebook.secret = ENV["FACEBOOK_SECRET"]
   config.facebook.callback_url = "#{ENV["DOMAIN_NAME"]}/oauth/callback?provider=facebook"
-  config.facebook.user_info_mapping = { name: "name" }
+  config.facebook.user_info_mapping = { name: "name", facebook: "id" }
   config.facebook.access_permissions = ["public_profile"]
   config.facebook.display = "popup"
   config.facebook.api_version = "v3.0"
@@ -130,8 +130,8 @@ Rails.application.config.sorcery.configure do |config|
   config.google.key = ENV["GOOGLE_KEY"]
   config.google.secret = ENV["GOOGLE_SECRET"]
   config.google.callback_url = "#{ENV["DOMAIN_NAME"]}/oauth/callback?provider=google"
-  config.google.user_info_mapping = { name: "name" }
-  config.google.scope = "https://www.googleapis.com/auth/userinfo.profile"
+  config.google.user_info_mapping = { name: "name", google: "email" }
+  config.google.scope = "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
   #
   # For Microsoft Graph, the key will be your App ID, and the secret will be your app password/public key.
   # The callback URL "can't contain a query string or invalid special characters", see: https://docs.microsoft.com/en-us/azure/active-directory/active-directory-v2-limitations#restrictions-on-redirect-uris
