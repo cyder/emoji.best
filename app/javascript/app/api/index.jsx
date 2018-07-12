@@ -15,7 +15,7 @@ function get(path, data = null, accessToken = null) {
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    Authorization: accessToken,
+    Authorization: accessToken || '',
   };
   const params = data !== null ? new URLSearchParams(data) : null;
   const uri = params !== null ? `${path}?${params.toString()}` : path;
@@ -35,7 +35,7 @@ function post(path, data = null, accessToken = null) {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'X-CSRF-Token': csrfToken,
-    Authorization: accessToken,
+    Authorization: accessToken || '',
   };
   const body = JSON.stringify(data);
   const params = {
@@ -59,7 +59,7 @@ function postData(path, data, accessToken = null) {
   const headers = {
     Accept: 'application/json',
     'X-CSRF-Token': csrfToken,
-    Authorization: accessToken,
+    Authorization: accessToken || '',
   };
 
   const body = new FormData();
@@ -84,12 +84,12 @@ function postData(path, data, accessToken = null) {
     .then(response => response.json());
 }
 
-function deleteFetch(path, accessToken) {
+function deleteFetch(path, accessToken = null) {
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'X-CSRF-Token': csrfToken,
-    Authorization: accessToken,
+    Authorization: accessToken || '',
   };
   const params = {
     method: 'DELETE',
