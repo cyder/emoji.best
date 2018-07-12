@@ -28,7 +28,7 @@ class EmojiDetailPopup extends Component {
   render() {
     const { status, emoji } = this.props.emoji;
     return (
-      <Background isShow>
+      <Background>
         <Container>
           {
             (() => {

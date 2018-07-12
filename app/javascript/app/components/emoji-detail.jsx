@@ -68,7 +68,6 @@ const DownloadButton = styled.a`
   border: solid 3px #dfdfdf;
   border-radius: 25px;
   font-weight: bold;
-  text-decoration: none;
   text-align: center;
   line-height: 38px;
 `;
