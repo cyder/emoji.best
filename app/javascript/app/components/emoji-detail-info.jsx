@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
+import faPencilAlt from '@fortawesome/fontawesome-free-solid/faPencilAlt';
+import faTrashAlt from '@fortawesome/fontawesome-free-solid/faTrashAlt';
 import PropTypes from 'prop-types';
 
 import EmojiShape from './shapes/emoji';
@@ -48,6 +50,24 @@ const Download = styled.div`
   color: #8d8d8d;
 `;
 
+const Button = styled.button`
+  display: ${props => (props.isShow ? 'inline-block' : 'none')};
+  border: none;
+  background-color: #464646;
+  color: #ffffff;
+  line-height: 1rem;
+  border-radius: 0.9rem;
+  padding: 0.3rem 15px 0.5rem 10px;
+  margin-right: 10px;
+`;
+
+const EditButton = styled(Button)`
+`;
+
+const DeleteButton = styled(Button)`
+  background-color: #d32f2f;
+`;
+
 class EmojiDetailInfo extends Component {
   constructor(props) {
     super(props);
@@ -74,6 +94,12 @@ class EmojiDetailInfo extends Component {
             </Download>
           </TitleArea>
           <p>{ emoji.description }</p>
+          <EditButton isShow>
+            <FontAwesomeIcon icon={faPencilAlt} /> edit emoji
+          </EditButton>
+          <DeleteButton isShow>
+            <FontAwesomeIcon icon={faTrashAlt} /> delete emoji
+          </DeleteButton>
         </Info>
       </Container>
     );
