@@ -45,7 +45,7 @@ export function failedUploadEmoji(id, message) {
 }
 
 export function failedSaveEmoji(id, message) {
-  const status = types.STATUS.UPLOAD_ERROR;
+  const status = types.STATUS.SAVE_ERROR;
   return {
     type: types.FAILED_SAVE,
     id,

@@ -8,13 +8,13 @@ import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
 import { STATUS } from '../constants/upload-emoji';
 
 const Container = styled.div`
-  display: flex;
   align-items: center;
   border: ${(props) => {
     switch (props.status) {
       case STATUS.UPLOADING:
         return 'none';
       case STATUS.UPLOAD_ERROR:
+      case STATUS.SAVE_ERROR:
         return 'solid 3px #d32f2f';
       default:
         return 'solid 3px #c4c4c4';
@@ -27,6 +27,10 @@ const Container = styled.div`
   ${props => (
     props.status === STATUS.UPLOAD_ERROR ? 'color: #d32f2f' : null
   )}
+`;
+
+const FlexBox = styled.div`
+  display: flex;
 `;
 
 const Image = styled.img`
@@ -92,6 +96,15 @@ const DeleteButton = styled.div`
   }
 `;
 
+const ErrorMessage = styled.p`
+  color: #d32f2f;
+  text-align: center;
+  margin: 5px;
+  display: ${props => (
+    props.status === STATUS.SAVE_ERROR ? 'block' : 'none'
+  )}
+`;
+
 class UploadEmoji extends Component {
   constructor(props) {
     super(props);
@@ -119,57 +132,62 @@ class UploadEmoji extends Component {
     } = this.props.emoji;
 
     return (
-      <div>
+      <Container status={status}>
         {(() => {
           switch (status) {
             case STATUS.UPLOADING:
               return (
-                <Container status={status}>
+                <FlexBox>
                   <Icon><FontAwesomeIcon icon={faCircleNotch} spin /></Icon>
                   <div>Uploading...</div>
-                </Container>
+                </FlexBox>
               );
             case STATUS.UPLOAD_ERROR:
               return (
-                <Container status={status}>
+                <FlexBox>
                   <Icon><FontAwesomeIcon icon={faTimes} /></Icon>
                   <div>{ errorMessage }</div>
                   <DeleteButton
                     onClick={() => this.props.deleteEmoji(id)}
                   />
-                </Container>
+                </FlexBox>
               );
             default:
               return (
-                <Container status={status}>
-                  <Image src={image} />
-                  <Name>
-                    emoji name
-                    <TextForm
-                      type="text"
-                      placeholder="input emoji name"
-                      value={this.state.name}
-                      onChange={e => this.setState({ name: e.target.value })}
+                <div>
+                  <ErrorMessage status={this.props.emoji.status}>
+                    {this.props.emoji.errorMessage}
+                  </ErrorMessage>
+                  <FlexBox>
+                    <Image src={image} />
+                    <Name>
+                      emoji name
+                      <TextForm
+                        type="text"
+                        placeholder="input emoji name"
+                        value={this.state.name}
+                        onChange={e => this.setState({ name: e.target.value })}
+                      />
+                    </Name>
+                    <Description>
+                      description
+                      <TextForm
+                        type="text"
+                        placeholder="input description"
+                        value={this.state.description}
+                        onChange={e => this.setState({ description: e.target.value })}
+                      />
+                    </Description>
+                    <DeleteButton
+                      onClick={() => this.props.deleteEmoji(id)}
                     />
-                  </Name>
-                  <Description>
-                    description
-                    <TextForm
-                      type="text"
-                      placeholder="input description"
-                      value={this.state.description}
-                      onChange={e => this.setState({ description: e.target.value })}
-                    />
-                  </Description>
-                  <DeleteButton
-                    onClick={() => this.props.deleteEmoji(id)}
-                  />
-                </Container>
+                  </FlexBox>
+                </div>
               );
             }
           })()
         }
-      </div>
+      </Container>
     );
   }
 }

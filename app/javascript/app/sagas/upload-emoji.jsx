@@ -20,7 +20,7 @@ function* sageSaveEmoji(action) {
     yield saveEmoji(name, description, image, action.accessToken);
     yield put(successSaveEmoji(action.emoji.id));
   } catch (status) {
-    yield put(failedSaveEmoji(action.emoji.id, 'error'));
+    yield put(failedSaveEmoji(action.emoji.id, 'server error'));
   }
 }
 
