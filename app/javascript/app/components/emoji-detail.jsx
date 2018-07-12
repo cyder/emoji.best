@@ -61,7 +61,7 @@ const EmojiPopup = ({
   onClose,
   addTag,
   deleteTag,
-  accessToken,
+  myself,
   isAddedToCart,
   deleteEmojiFromDownloadCart,
   addEmojiToDownloadCart,
@@ -71,7 +71,7 @@ const EmojiPopup = ({
     <Content>
       <EmojiDetailInfo
         emoji={emoji}
-        accessToken={accessToken}
+        myself={myself}
         editEmoji={editEmoji}
         deleteEmoji={deleteEmoji}
         push={push}
@@ -81,7 +81,7 @@ const EmojiPopup = ({
         push={push}
         deleteTag={deleteTag}
         addTag={addTag}
-        accessToken={accessToken}
+        accessToken={myself.accessToken}
       />
     </Content>
     <DownloadButton
@@ -112,11 +112,9 @@ EmojiPopup.propTypes = {
   push: PropTypes.func.isRequired,
   addTag: PropTypes.func.isRequired,
   deleteTag: PropTypes.func.isRequired,
-  accessToken: PropTypes.string,
-};
-
-EmojiPopup.defaultProps = {
-  accessToken: null,
+  myself: PropTypes.shape({
+    accessToken: PropTypes.string,
+  }).isRequired,
 };
 
 export default EmojiPopup;

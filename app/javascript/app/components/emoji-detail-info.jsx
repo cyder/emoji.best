@@ -7,6 +7,7 @@ import faTrashAlt from '@fortawesome/fontawesome-free-solid/faTrashAlt';
 import PropTypes from 'prop-types';
 
 import EmojiShape from './shapes/emoji';
+import UserShape from './shapes/user';
 
 const Container = styled.div`
   display: flex;
@@ -121,22 +122,31 @@ class EmojiDetailInfo extends Component {
 
     this.onClickEditButton = this.onClickEditButton.bind(this);
     this.onClickDeleteButton = this.onClickDeleteButton.bind(this);
+    this.isMyEmoji = this.isMyEmoji.bind(this);
   }
 
   onClickEditButton() {
     if (this.state.isEditing) {
-      const { emoji, accessToken } = this.props;
+      const { emoji, myself } = this.props;
       const { id } = emoji;
       const { name, description } = this.state;
-      this.props.editEmoji(id, name, description, accessToken);
+      this.props.editEmoji(id, name, description, myself.accessToken);
     }
     this.setState({ isEditing: !this.state.isEditing });
   }
 
   onClickDeleteButton() {
-    const { emoji, accessToken } = this.props;
-    this.props.deleteEmoji(emoji.id, accessToken);
+    const { emoji, myself } = this.props;
+    this.props.deleteEmoji(emoji.id, myself.accessToken);
     this.props.push('/');
+  }
+
+  isMyEmoji() {
+    const { myself, emoji } = this.props;
+    if (myself.user !== null) {
+      return myself.user.id === emoji.user.id;
+    }
+    return false;
   }
 
   render() {
@@ -175,14 +185,14 @@ class EmojiDetailInfo extends Component {
               <Description>{ emoji.description }</Description>
           }
           <EditButton
-            isShow
+            isShow={this.isMyEmoji()}
             onClick={this.onClickEditButton}
           >
             <FontAwesomeIcon icon={faPencilAlt} />
             { isEditing ? ' save' : ' edit emoji' }
           </EditButton>
           <DeleteButton
-            isShow
+            isShow={this.isMyEmoji()}
             onClick={this.onClickDeleteButton}
             disabled={isEditing}
           >
@@ -196,14 +206,13 @@ class EmojiDetailInfo extends Component {
 
 EmojiDetailInfo.propTypes = {
   emoji: EmojiShape.isRequired,
-  accessToken: PropTypes.string,
   editEmoji: PropTypes.func.isRequired,
   deleteEmoji: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
-};
-
-EmojiDetailInfo.defaultProps = {
-  accessToken: null,
+  myself: PropTypes.shape({
+    accessToken: PropTypes.string,
+    user: UserShape,
+  }).isRequired,
 };
 
 export default EmojiDetailInfo;

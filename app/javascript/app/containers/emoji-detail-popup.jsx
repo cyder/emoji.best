@@ -50,7 +50,7 @@ class EmojiDetailPopup extends Component {
                       push={this.props.history.push}
                       deleteTag={this.props.deleteTag}
                       addTag={this.props.addTag}
-                      accessToken={this.props.accessToken}
+                      myself={this.props.myself}
                     />
                   );
                 case STATUS.ERROR:
@@ -70,7 +70,7 @@ function mapStateToProps(state) {
   return {
     emoji: state.emoji,
     downloadCart: state.downloadCart,
-    accessToken: state.myself.accessToken,
+    myself: state.myself,
   };
 }
 
@@ -106,11 +106,7 @@ EmojiDetailPopup.propTypes = {
   downloadCart: DownloadCartShape.isRequired,
   addTag: PropTypes.func.isRequired,
   deleteTag: PropTypes.func.isRequired,
-  accessToken: PropTypes.string,
-};
-
-EmojiDetailPopup.defaultProps = {
-  accessToken: undefined,
+  myself: PropTypes.shape().isRequired,
 };
 
 const EmojiDetailPopupContainer = connect(mapStateToProps, mapDispatchProps)(EmojiDetailPopup);
