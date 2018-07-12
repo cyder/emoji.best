@@ -1,12 +1,11 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faCloudUploadAlt from '@fortawesome/fontawesome-free-solid/faCloudUploadAlt';
 
-import * as PopupManagerActions from '../actions/popup-manager';
 import { STATUS } from '../constants/myself';
 import Profile from './profile';
 
@@ -21,6 +20,7 @@ const Item = styled.li`
 
 const Navigation = ({
   status,
+  location,
   showSignInPopup,
   showSignUpPopup,
 }) => (
@@ -28,13 +28,37 @@ const Navigation = ({
     {
       status === STATUS.SIGNIN ? (
         <List>
-          <Item><FontAwesomeIcon icon={faCloudUploadAlt} /> Upload</Item>
+          <Item>
+            <Link to={{
+              pathname: '/upload',
+              state: 'popup',
+              callbackUrl: location.pathname + location.search,
+            }}>
+              <FontAwesomeIcon icon={faCloudUploadAlt} /> Upload
+            </Link>
+          </Item>
           <Item><Profile /></Item>
         </List>
       ) : (
         <List>
-          <Item onClick={showSignInPopup}>Sign In</Item>
-          <Item onClick={showSignUpPopup}>Sign Up</Item>
+          <Item>
+            <Link to={{
+              pathname: '/signin',
+              state: 'popup',
+              callbackUrl: location.pathname + location.search,
+            }}>
+              Sign In
+            </Link>
+          </Item>
+          <Item>
+            <Link to={{
+              pathname: '/signup',
+              state: 'popup',
+              callbackUrl: location.pathname + location.search,
+            }}>
+              Sign Up
+            </Link>
+          </Item>
         </List>
       )
     }
@@ -42,19 +66,16 @@ const Navigation = ({
 );
 
 function mapStateToProps(state) {
-  return { status: state.myself.status };
+  return {
+    status: state.myself.status,
+    location: state.router.location,
+  };
 }
 
-function mapDispatchProps(dispatch) {
-  return bindActionCreators(PopupManagerActions, dispatch);
-}
-
-const NavigationContainer = connect(mapStateToProps, mapDispatchProps)(Navigation);
+const NavigationContainer = connect(mapStateToProps)(Navigation);
 
 Navigation.propTypes = {
   status: PropTypes.string.isRequired,
-  showSignInPopup: PropTypes.func.isRequired,
-  showSignUpPopup: PropTypes.func.isRequired,
 };
 
 export default NavigationContainer;

@@ -1,8 +1,8 @@
 
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Background = styled.div`
-  display: ${props => (props.isShow ? 'block' : 'none')}
   position: fixed;
   top: 0;
   right: 0;
@@ -30,6 +30,34 @@ export const Title = styled.h2`
   border-bottom: 2px solid #f0f0f0;
 `;
 
+export const OrContainer = styled.div`
+  text-align: center;
+`;
+
+export const Or = styled.span`
+  position: relative;
+  line-height: 1rem;
+  color: #c0c0c0;
+
+  &::after, &::before {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0.5rem;
+    width: 140px;
+    height: 2px;
+    background-color: #f5f5f5;
+  }
+
+  &::after {
+    left: -150px;
+  }
+
+  &::before {
+    right: -150px;
+  }
+`;
+
 export const Form = styled.div`
   width: 300px;
   padding: 10px 100px;
@@ -53,12 +81,13 @@ export const TextForm = styled.input`
 export const Button = styled.button`
   display: block;
   width: 100%;
-  height: 44px;
-  margin: 20px 0 10px;
+  height: 50px;
+  margin: 15px 0 10px;
   color: #ffffff;
   background-color: #464646;
-  border: solid 3px #dfdfdf;
-  border-radius: 22px;
+  border: solid 3px rgba(255, 255, 255, 0.8);
+  border-radius: 25px;
+  box-sizing: border-box;
 `;
 
 export const Message = styled.p`
@@ -68,7 +97,7 @@ export const Message = styled.p`
   text-align: center;
 `;
 
-export const SwitchButton = styled.span`
+export const SwitchLink = styled(Link)`
   text-decoration: underline;
   margin: 0 10px;
 `;

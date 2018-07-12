@@ -33,6 +33,7 @@ gem "jb"
 # gem 'capistrano-rails', group: :development
 
 gem "carrierwave"
+gem "dotenv-rails"
 gem "fog"
 gem "mini_magick"
 gem "search_cop"

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import EmojiDetail from '../components/emoji-detail';
+import EmojiError from '../components/emoji-error';
 import EmojiShape from '../components/shapes/emoji';
 import { Background, Container } from '../components/css/popup';
 import { STATUS } from '../constants/emoji';
@@ -27,12 +28,28 @@ class EmojiDetailPopup extends Component {
   render() {
     const { status, emoji } = this.props.emoji;
     return (
-      <Background isShow>
+      <Background>
         <Container>
           {
-            status === STATUS.SHOWING
-              ? (<EmojiDetail emoji={emoji} onClose={this.onClose} />)
-              : null
+            (() => {
+              switch (status) {
+                case STATUS.SHOWING:
+                  return (
+                    <EmojiDetail
+                      emoji={emoji}
+                      onClose={this.onClose}
+                      push={this.props.history.push}
+                      deleteTag={this.props.deleteTag}
+                      addTag={this.props.addTag}
+                      accessToken={this.props.accessToken}
+                    />
+                  );
+                case STATUS.ERROR:
+                  return (<EmojiError onClose={this.onClose} />);
+                default:
+                  return null;
+              }
+            })()
           }
         </Container>
       </Background>
@@ -41,7 +58,10 @@ class EmojiDetailPopup extends Component {
 }
 
 function mapStateToProps(state) {
-  return { emoji: state.emoji };
+  return {
+    emoji: state.emoji,
+    accessToken: state.myself.accessToken,
+  };
 }
 
 function mapDispatchProps(dispatch) {
@@ -68,6 +88,13 @@ EmojiDetailPopup.propTypes = {
     emoji: EmojiShape,
   }).isRequired,
   getEmoji: PropTypes.func.isRequired,
+  addTag: PropTypes.func.isRequired,
+  deleteTag: PropTypes.func.isRequired,
+  accessToken: PropTypes.string,
+};
+
+EmojiDetailPopup.defaultProps = {
+  accessToken: undefined,
 };
 
 const EmojiDetailPopupContainer = connect(mapStateToProps, mapDispatchProps)(EmojiDetailPopup);

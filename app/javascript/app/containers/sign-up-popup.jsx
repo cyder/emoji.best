@@ -3,16 +3,20 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import * as PopupManagerActions from '../actions/popup-manager';
+import SnsOauth from '../components/sns-oauth';
 import * as MyselfActions from '../actions/myself';
 
 import {
+  Background,
+  Container,
   Title,
+  OrContainer,
+  Or,
   Form,
   TextForm,
   Button,
   Message,
-  SwitchButton,
+  SwitchLink,
   CloseButton,
   ErrorMessage,
 } from '../components/css/popup';
@@ -27,11 +31,20 @@ class SignUpPopup extends Component {
       passwordConfirm: '',
     };
 
+    this.onClose = this.onClose.bind(this);
     this.submit = this.submit.bind(this);
   }
 
   componentWillUnmount() {
     this.props.clearError();
+  }
+
+  onClose() {
+    if (this.props.history.location.state === undefined) {
+      this.props.history.push('/');
+    } else {
+      this.props.history.goBack();
+    }
   }
 
   submit() {
@@ -40,45 +53,56 @@ class SignUpPopup extends Component {
       this.state.email,
       this.state.password,
       this.state.passwordConfirm,
+      this.props.history.location.callbackUrl,
     );
   }
 
   render() {
     return (
-      <div>
-        <Title>Sign Up</Title>
-        <Form>
-          <ErrorMessage isShow={this.props.errorMessage !== null}>
-            {this.props.errorMessage}
-          </ErrorMessage>
-          <TextForm
-            type="name"
-            placeholder="Username"
-            onChange={e => this.setState({ name: e.target.value })}
+      <Background>
+        <Container>
+          <Title>Sign Up</Title>
+          <SnsOauth
+            caption="Sign up"
+            authentication={this.props.authentication}
+            callbackUrl={this.props.history.location.callbackUrl}
           />
-          <TextForm
-            type="email"
-            placeholder="Email"
-            onChange={e => this.setState({ email: e.target.value })}
-          />
-          <TextForm
-            type="password"
-            placeholder="Password"
-            onChange={e => this.setState({ password: e.target.value })}
-          />
-          <TextForm
-            type="password"
-            placeholder="Password (Confirm)"
-            onChange={e => this.setState({ passwordConfirm: e.target.value })}
-          />
-          <Button onClick={this.submit}>Sign Up</Button>
-        </Form>
-        <Message>
-          Already a member?
-          <SwitchButton onClick={this.props.showSignInPopup}>Sign In</SwitchButton>
-        </Message>
-        <CloseButton onClick={() => this.props.closePopup()} />
-      </div>
+          <OrContainer><Or>OR</Or></OrContainer>
+          <Form>
+            <ErrorMessage isShow={this.props.errorMessage !== null}>
+              {this.props.errorMessage}
+            </ErrorMessage>
+            <TextForm
+              type="name"
+              placeholder="Username"
+              onChange={e => this.setState({ name: e.target.value })}
+            />
+            <TextForm
+              type="email"
+              placeholder="Email"
+              onChange={e => this.setState({ email: e.target.value })}
+            />
+            <TextForm
+              type="password"
+              placeholder="Password"
+              onChange={e => this.setState({ password: e.target.value })}
+            />
+            <TextForm
+              type="password"
+              placeholder="Password (Confirm)"
+              onChange={e => this.setState({ passwordConfirm: e.target.value })}
+            />
+            <Button onClick={this.submit}>Sign Up</Button>
+          </Form>
+          <Message>
+            Already a member?
+            <SwitchLink to={{ pathname: '/signin', state: 'popup' }} replace>
+              Sign In
+            </SwitchLink>
+          </Message>
+          <CloseButton onClick={this.onClose} />
+        </Container>
+      </Background>
     );
   }
 }
@@ -89,7 +113,6 @@ function mapStateToProps(state) {
 
 function mapDispatchProps(dispatch) {
   return bindActionCreators({
-    ...PopupManagerActions,
     ...MyselfActions,
   }, dispatch);
 }
@@ -97,8 +120,15 @@ function mapDispatchProps(dispatch) {
 const SignUpPopupContainer = connect(mapStateToProps, mapDispatchProps)(SignUpPopup);
 
 SignUpPopup.propTypes = {
-  closePopup: PropTypes.func.isRequired,
-  showSignInPopup: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      state: PropTypes.string,
+      callbackUrl: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+  authentication: PropTypes.func.isRequired,
   signUp: PropTypes.func.isRequired,
   clearError: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,

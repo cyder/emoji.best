@@ -2,14 +2,18 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 import MainContent from '../containers/main-content';
-import PopupManager from '../containers/popup-manager';
 import EmojiDetailPopup from '../containers/emoji-detail-popup';
+import SignInPopup from '../containers/sign-in-popup';
+import SignUpPopup from '../containers/sign-up-popup';
+import UploadPopup from '../containers/upload-popup';
 
 const App = () => (
   <div>
     <MainContent />
-    <PopupManager />
     <Route path="/emoji/:id" component={EmojiDetailPopup} />
+    <Route path="/signin" component={SignInPopup} />
+    <Route path="/signup" component={SignUpPopup} />
+    <Route path="/upload" component={UploadPopup} />
   </div>
 );
 

@@ -14,6 +14,15 @@ class Api::V1::UsersController < Api::V1::BaseController
     @user = User.find(params[:id])
   end
 
+  def update
+    @user = current_user
+    @user.update! user_params
+  end
+
+  def destroy
+    current_user.destroy!
+  end
+
   private
 
     def user_params

@@ -2,9 +2,13 @@ const COMMON_URL = '/api/v1/';
 const SEARCH = 'search';
 const EMOJI = 'emojis';
 const DOWNLOAD = 'download';
+const AUTH = 'users/authentication';
 const SIGNIN = 'users/sign_in';
 const SIGNUP = 'users';
 const SIGNOUT = 'users/sign_out';
+const EMOJIS = 'emojis';
+const EMOJIS_UPLOAD = 'emojis/upload';
+const TAGS = 'tags';
 
 const csrfToken = document.querySelector('meta[name=csrf-token]').content;
 
@@ -12,12 +16,19 @@ function get(path, data = null, accessToken = null) {
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    Authorization: accessToken,
+    Authorization: accessToken || '',
   };
   const params = data !== null ? new URLSearchParams(data) : null;
   const uri = params !== null ? `${path}?${params.toString()}` : path;
 
-  return fetch(uri, { headers }).then(response => response.json());
+  return fetch(uri, { headers })
+    .then((response) => {
+      if (!response.ok) {
+        throw response.status;
+      }
+      return response;
+    })
+    .then(response => response.json());
 }
 
 function post(path, data = null, accessToken = null) {
@@ -25,7 +36,7 @@ function post(path, data = null, accessToken = null) {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'X-CSRF-Token': csrfToken,
-    Authorization: accessToken,
+    Authorization: accessToken || '',
   };
   const body = JSON.stringify(data);
   const params = {
@@ -45,12 +56,41 @@ function post(path, data = null, accessToken = null) {
     .then(response => response.json());
 }
 
-function deleteFetch(path, accessToken) {
+function postData(path, data, accessToken = null) {
+  const headers = {
+    Accept: 'application/json',
+    'X-CSRF-Token': csrfToken,
+    Authorization: accessToken || '',
+  };
+
+  const body = new FormData();
+  Object.keys(data).forEach(key => (
+    body.append(key, data[key])
+  ));
+
+  const params = {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers,
+    body,
+  };
+
+  return fetch(path, { ...params })
+    .then((response) => {
+      if (!response.ok) {
+        throw response.status;
+      }
+      return response;
+    })
+    .then(response => response.json());
+}
+
+function deleteFetch(path, accessToken = null) {
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'X-CSRF-Token': csrfToken,
-    Authorization: accessToken,
+    Authorization: accessToken || '',
   };
   const params = {
     method: 'DELETE',
@@ -61,10 +101,11 @@ function deleteFetch(path, accessToken) {
   return fetch(path, { ...params }).then(response => response.json());
 }
 
-export function searchEmojis(order, keyword, page = 0) {
+export function searchEmojis(order, keyword, page = 0, target = null) {
   const data = { page };
   if (order != null) data.order = order;
   if (keyword != null) data.keyword = keyword;
+  if (target != null) data.target = target;
 
   const path = `${COMMON_URL}${SEARCH}`;
 
@@ -77,10 +118,46 @@ export function getEmoji(id) {
   return get(path);
 }
 
+export function createTag(emojiId, name, accessToken) {
+  const path = `${COMMON_URL}${EMOJI}/${emojiId}/${TAGS}`;
+  const data = {
+    tag: { name },
+  };
+  return post(path, data, accessToken);
+}
+
+export function deleteTag(emojiId, tagId, accessToken) {
+  const path = `${COMMON_URL}${EMOJI}/${emojiId}/${TAGS}/${tagId}`;
+  return deleteFetch(path, accessToken);
+}
+
 export function downloadEmojisLink(emojis) {
   const params = new URLSearchParams();
   emojis.forEach(emoji => params.append('emojis[]', emoji.id));
   return `${COMMON_URL}${DOWNLOAD}?${params.toString()}`;
+}
+
+export function uploadEmoji(image, accessToken) {
+  const path = `${COMMON_URL}${EMOJIS_UPLOAD}`;
+  const data = { image };
+  return postData(path, data, accessToken);
+}
+
+export function saveEmoji(name, description, image, accessToken) {
+  const path = `${COMMON_URL}${EMOJIS}`;
+  const data = {
+    emoji: {
+      name,
+      description,
+      image,
+    },
+  };
+  return post(path, data, accessToken);
+}
+
+export function authentication(accessToken) {
+  const path = `${COMMON_URL}${AUTH}`;
+  return get(path, null, accessToken);
 }
 
 export function signIn(email, password) {

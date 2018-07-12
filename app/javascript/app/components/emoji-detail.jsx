@@ -4,15 +4,19 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
 import PropTypes from 'prop-types';
 
+import Tags from './tags';
 import { CloseButton } from '../components/css/popup';
 import EmojiShape from './shapes/emoji';
 
 const Content = styled.div`
-  display: flex;
   max-width: 660px;
   width: 80vw;
-  padding: 40px 20px 10px;
+  padding: 40px 40px 20px;
   border-bottom: 2px solid #eeeeee;
+`;
+
+const FlexBox = styled.div`
+  display: flex;
 `;
 
 const Img = styled.img`
@@ -64,27 +68,42 @@ const DownloadButton = styled.a`
   border: solid 3px #dfdfdf;
   border-radius: 25px;
   font-weight: bold;
-  text-decoration: none;
   text-align: center;
   line-height: 38px;
 `;
 
-const EmojiPopup = ({ emoji, onClose }) => (
+const EmojiPopup = ({
+  emoji,
+  onClose,
+  push,
+  addTag,
+  deleteTag,
+  accessToken,
+}) => (
   <article>
     <Content>
-      <Img alt={emoji.name} src={emoji.images.thumb_url} />
-      <Info>
-        <TitleArea>
-          <div>
-            <Title>:<Name>{ emoji.name }</Name>:</Title>
-            <UserName>by { emoji.user.name }</UserName>
-          </div>
-          <Download>
-            <FontAwesomeIcon icon={faDownload} /> {emoji.number_of_downloaded}
-          </Download>
-        </TitleArea>
-        <p>{ emoji.description }</p>
-      </Info>
+      <FlexBox>
+        <Img alt={emoji.name} src={emoji.images.thumb_url} />
+        <Info>
+          <TitleArea>
+            <div>
+              <Title>:<Name>{ emoji.name }</Name>:</Title>
+              <UserName>by { emoji.user.name }</UserName>
+            </div>
+            <Download>
+              <FontAwesomeIcon icon={faDownload} /> {emoji.number_of_downloaded}
+            </Download>
+          </TitleArea>
+          <p>{ emoji.description }</p>
+        </Info>
+      </FlexBox>
+      <Tags
+        emoji={emoji}
+        push={push}
+        deleteTag={deleteTag}
+        addTag={addTag}
+        accessToken={accessToken}
+      />
     </Content>
     <DownloadButton
       href={emoji.images.slack_url}
@@ -100,6 +119,14 @@ const EmojiPopup = ({ emoji, onClose }) => (
 EmojiPopup.propTypes = {
   onClose: PropTypes.func.isRequired,
   emoji: EmojiShape.isRequired,
+  push: PropTypes.func.isRequired,
+  addTag: PropTypes.func.isRequired,
+  deleteTag: PropTypes.func.isRequired,
+  accessToken: PropTypes.string,
+};
+
+EmojiPopup.defaultProps = {
+  accessToken: undefined,
 };
 
 export default EmojiPopup;

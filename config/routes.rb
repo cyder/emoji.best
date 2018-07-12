@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
+  post "oauth/callback", to: "oauths#callback"
+  get "oauth/callback", to: "oauths#callback"
+  get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
+
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :users, only: [:create, :show] do
-        collection do
-          post "sign_in", to: "user_sessions#create"
-          delete "sign_out", to: "user_sessions#destroy"
-        end
+      resource :users, only: [:create, :update, :destroy] do
+        get "authentication", to: "user_sessions#authentication"
+        post "sign_in", to: "user_sessions#create"
+        delete "sign_out", to: "user_sessions#destroy"
       end
+      resources :users, only: :show
       resources :search, only: [:index]
       resources :emojis, only: [:create, :show, :update, :destroy] do
         resources :tags, only: [:create, :destroy]

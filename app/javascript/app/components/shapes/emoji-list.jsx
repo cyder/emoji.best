@@ -7,6 +7,7 @@ const EmojiListShape = PropTypes.shape({
   lastPage: PropTypes.number.isRequired,
   keyword: PropTypes.string,
   order: PropTypes.string,
+  target: PropTypes.string,
   list: PropTypes.arrayOf(EmojiShape.isRequired).isRequired,
 });
 

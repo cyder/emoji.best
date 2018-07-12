@@ -33,6 +33,8 @@ describe "GET /api/v1/search" do
       expect(body).to be_json_eql(keyword_emoji.id).at_path("emojis/0/id")
       expect(body).to be_json_eql(%("#{keyword_emoji.name}")).at_path("emojis/0/name")
     end
+
+    it { expect { subject }.to change(SearchLog, :count).by(1) }
   end
 
   context "with new order" do
