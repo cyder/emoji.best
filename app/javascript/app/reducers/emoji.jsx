@@ -13,6 +13,20 @@ const emoji = (state = initialState, action) => {
         status: types.STATUS.LOADING,
         emoji: null,
       };
+    case types.EDIT:
+      return {
+        ...state,
+        emoji: {
+          ...state.emoji,
+          name: action.name,
+          description: action.description,
+        },
+      };
+    case types.DELETE:
+      return {
+        status: types.STATUS.DELETED,
+        emoji: null,
+      };
     case types.SUCCESS_GET:
       return {
         ...state,

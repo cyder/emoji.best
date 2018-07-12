@@ -41,6 +41,8 @@ class EmojiDetailPopup extends Component {
                   return (
                     <EmojiDetail
                       emoji={emoji}
+                      editEmoji={this.props.editEmoji}
+                      deleteEmoji={this.props.deleteEmoji}
                       onClose={this.onClose}
                       addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
                       deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
@@ -97,6 +99,8 @@ EmojiDetailPopup.propTypes = {
     emoji: EmojiShape,
   }).isRequired,
   getEmoji: PropTypes.func.isRequired,
+  editEmoji: PropTypes.func.isRequired,
+  deleteEmoji: PropTypes.func.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
   downloadCart: DownloadCartShape.isRequired,

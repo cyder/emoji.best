@@ -56,6 +56,8 @@ const DownloadCheckBox = styled.div`
 
 const EmojiPopup = ({
   emoji,
+  editEmoji,
+  deleteEmoji,
   onClose,
   addTag,
   deleteTag,
@@ -70,6 +72,8 @@ const EmojiPopup = ({
       <EmojiDetailInfo
         emoji={emoji}
         accessToken={accessToken}
+        editEmoji={editEmoji}
+        deleteEmoji={deleteEmoji}
       />
       <Tags
         emoji={emoji}
@@ -99,6 +103,8 @@ const EmojiPopup = ({
 EmojiPopup.propTypes = {
   onClose: PropTypes.func.isRequired,
   emoji: EmojiShape.isRequired,
+  editEmoji: PropTypes.func.isRequired,
+  deleteEmoji: PropTypes.func.isRequired,
   isAddedToCart: PropTypes.bool.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,

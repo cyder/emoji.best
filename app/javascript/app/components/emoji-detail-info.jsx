@@ -115,11 +115,29 @@ class EmojiDetailInfo extends Component {
     super(props);
     this.state = {
       isEditing: false,
+      name: this.props.emoji.name,
+      description: this.props.emoji.description,
     };
+
+    this.onClickEditButton = this.onClickEditButton.bind(this);
+    this.onClickDeleteButton = this.onClickDeleteButton.bind(this);
+  }
+
+  onClickEditButton() {
+    if (this.state.isEditing) {
+      const { id } = this.props.emoji;
+      const { name, description } = this.state;
+      this.props.editEmoji(id, name, description);
+    }
+    this.setState({ isEditing: !this.state.isEditing });
+  }
+
+  onClickDeleteButton() {
+    this.props.deleteEmoji(this.props.emoji.id);
   }
 
   render() {
-    const { isEditing } = this.state;
+    const { isEditing, name, description } = this.state;
     const { emoji } = this.props;
 
     return (
@@ -130,9 +148,13 @@ class EmojiDetailInfo extends Component {
             <div>
               <Title>
                 {
-                  isEditing
-                    ? <NameForm type="text" value={emoji.name} />
-                    : <Name>:<NameText>{ emoji.name }</NameText>:</Name>
+                  isEditing ?
+                    <NameForm
+                      type="text"
+                      value={name}
+                      onChange={e => this.setState({ name: e.target.value })}
+                    /> :
+                    <Name>:<NameText>{ emoji.name }</NameText>:</Name>
                 }
               </Title>
               <UserName>by { emoji.user.name }</UserName>
@@ -142,19 +164,23 @@ class EmojiDetailInfo extends Component {
             </Download>
           </TitleArea>
           {
-            isEditing
-              ? <DescriptionForm value={emoji.description} />
-              : <Description>{ emoji.description }</Description>
+            isEditing ?
+              <DescriptionForm
+                value={description}
+                onChange={e => this.setState({ description: e.target.value })}
+              /> :
+              <Description>{ emoji.description }</Description>
           }
           <EditButton
             isShow
-            onClick={() => this.setState({ isEditing: !isEditing })}
+            onClick={this.onClickEditButton}
           >
             <FontAwesomeIcon icon={faPencilAlt} />
             { isEditing ? ' save' : ' edit emoji' }
           </EditButton>
           <DeleteButton
             isShow
+            onClick={this.onClickDeleteButton}
             disabled={isEditing}
           >
             <FontAwesomeIcon icon={faTrashAlt} /> delete emoji
@@ -168,6 +194,8 @@ class EmojiDetailInfo extends Component {
 EmojiDetailInfo.propTypes = {
   emoji: EmojiShape.isRequired,
   accessToken: PropTypes.string,
+  editEmoji: PropTypes.func.isRequired,
+  deleteEmoji: PropTypes.func.isRequired,
 };
 
 EmojiDetailInfo.defaultProps = {
