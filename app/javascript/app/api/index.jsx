@@ -8,6 +8,7 @@ const SIGNUP = 'users';
 const SIGNOUT = 'users/sign_out';
 const EMOJIS = 'emojis';
 const EMOJIS_UPLOAD = 'emojis/upload';
+const TAGS = 'tags';
 
 const csrfToken = document.querySelector('meta[name=csrf-token]').content;
 
@@ -115,6 +116,19 @@ export function getEmoji(id) {
   const path = `${COMMON_URL}${EMOJI}/${id}`;
 
   return get(path);
+}
+
+export function createTag(emojiId, name, accessToken) {
+  const path = `${COMMON_URL}${EMOJI}/${emojiId}/${TAGS}`;
+  const data = {
+    tag: { name },
+  };
+  return post(path, data, accessToken);
+}
+
+export function deleteTag(emojiId, tagId, accessToken) {
+  const path = `${COMMON_URL}${EMOJI}/${emojiId}/${TAGS}/${tagId}`;
+  return deleteFetch(path, accessToken);
 }
 
 export function downloadEmojisLink(emojis) {
