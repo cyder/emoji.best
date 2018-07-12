@@ -21,6 +21,20 @@ const uploadEmoji = (state = initialState, action) => {
         emojis,
       };
     }
+    case types.FAILED_UPLOAD:
+    case types.FAILED_SAVE: {
+      const emojis = state.emojis.map(emoji => (
+        emoji.id === action.id ? {
+          ...emoji,
+          status: action.status,
+          errorMessage: action.message,
+        } : emoji
+      ));
+      return {
+        ...state,
+        emojis,
+      };
+    }
     case types.DELETE:
     case types.SUCCESS_SAVE: {
       const emojis = state.emojis.filter(emoji => emoji.id !== action.id);

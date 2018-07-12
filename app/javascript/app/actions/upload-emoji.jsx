@@ -34,6 +34,26 @@ export function deleteEmoji(id) {
   return { type: types.DELETE, id };
 }
 
+export function failedUploadEmoji(id, message) {
+  const status = types.STATUS.UPLOAD_ERROR;
+  return {
+    type: types.FAILED_UPLOAD,
+    id,
+    message,
+    status,
+  };
+}
+
+export function failedSaveEmoji(id, message) {
+  const status = types.STATUS.UPLOAD_ERROR;
+  return {
+    type: types.FAILED_SAVE,
+    id,
+    message,
+    status,
+  };
+}
+
 export function successUploadEmoji(id, url) {
   const emoji = {
     id,
