@@ -74,6 +74,7 @@ const EmojiPopup = ({
         accessToken={accessToken}
         editEmoji={editEmoji}
         deleteEmoji={deleteEmoji}
+        push={push}
       />
       <Tags
         emoji={emoji}

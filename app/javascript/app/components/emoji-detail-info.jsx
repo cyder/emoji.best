@@ -136,6 +136,7 @@ class EmojiDetailInfo extends Component {
   onClickDeleteButton() {
     const { emoji, accessToken } = this.props;
     this.props.deleteEmoji(emoji.id, accessToken);
+    this.props.push('/');
   }
 
   render() {
@@ -198,6 +199,7 @@ EmojiDetailInfo.propTypes = {
   accessToken: PropTypes.string,
   editEmoji: PropTypes.func.isRequired,
   deleteEmoji: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
 };
 
 EmojiDetailInfo.defaultProps = {
