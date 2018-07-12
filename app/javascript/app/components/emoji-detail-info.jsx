@@ -33,6 +33,31 @@ const Title = styled.h1`
   margin: 0;
 `;
 
+const Name = styled.div`
+  display: block;
+  padding: 6px 10px;
+`;
+
+const NameText = styled.span`
+  padding: 0 5px 0;
+  word-break: break-all
+`;
+
+const NameForm = styled.input`
+  display: block;
+  border: none;
+  font-weight: bold;
+  padding: 6px 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-sizing: border-box;
+  width: 100%;
+
+  &::placeholder {
+    color: #c0c0c0;
+  }
+`;
+
 const UserName = styled.h2`
   font-size: 1.1rem;
   font-weight: normal;
@@ -40,9 +65,22 @@ const UserName = styled.h2`
   margin: 5px 0;
 `;
 
-const Name = styled.span`
-  padding: 0 5px 0;
-  word-break: break-all
+const Description = styled.p`
+  margin: 16px 0;
+`;
+
+const DescriptionForm = styled.textarea`
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #f5f5f5;
+  padding: 6px 10px;
+  border-radius: 5px;
+  margin: 16px 0;
+
+  &::placeholder {
+    color: #c0c0c0;
+  }
 `;
 
 const Download = styled.div`
@@ -59,6 +97,10 @@ const Button = styled.button`
   border-radius: 0.9rem;
   padding: 0.3rem 15px 0.5rem 10px;
   margin-right: 10px;
+
+  :disabled {
+    background-color: #999999;
+  }
 `;
 
 const EditButton = styled(Button)`
@@ -86,18 +128,35 @@ class EmojiDetailInfo extends Component {
         <Info>
           <TitleArea>
             <div>
-              <Title>:<Name>{ emoji.name }</Name>:</Title>
+              <Title>
+                {
+                  isEditing
+                    ? <NameForm type="text" value={emoji.name} />
+                    : <Name>:<NameText>{ emoji.name }</NameText>:</Name>
+                }
+              </Title>
               <UserName>by { emoji.user.name }</UserName>
             </div>
             <Download>
               <FontAwesomeIcon icon={faDownload} /> {emoji.number_of_downloaded}
             </Download>
           </TitleArea>
-          <p>{ emoji.description }</p>
-          <EditButton isShow>
-            <FontAwesomeIcon icon={faPencilAlt} /> edit emoji
+          {
+            isEditing
+              ? <DescriptionForm value={emoji.description} />
+              : <Description>{ emoji.description }</Description>
+          }
+          <EditButton
+            isShow
+            onClick={() => this.setState({ isEditing: !isEditing })}
+          >
+            <FontAwesomeIcon icon={faPencilAlt} />
+            { isEditing ? ' save' : ' edit emoji' }
           </EditButton>
-          <DeleteButton isShow>
+          <DeleteButton
+            isShow
+            disabled={isEditing}
+          >
             <FontAwesomeIcon icon={faTrashAlt} /> delete emoji
           </DeleteButton>
         </Info>
