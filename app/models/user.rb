@@ -13,8 +13,10 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :authentications
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   validates :name, presence: true
-  validates :password, presence: true, length: { minimum: 6 }, confirmation: true
-  validates :password_confirmation, presence: true
+  validates :password, presence: true, length: { minimum: 6 }, confirmation: true, if: -> {
+    new_record? || changes[:crypted_password]
+  }
+  validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
 
   def activate
     AccessToken.create(user: self)

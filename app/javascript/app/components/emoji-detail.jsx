@@ -68,7 +68,6 @@ const DownloadButton = styled.a`
   border: solid 3px #dfdfdf;
   border-radius: 25px;
   font-weight: bold;
-  text-decoration: none;
   text-align: center;
   line-height: 38px;
 `;
@@ -99,6 +98,9 @@ const DownloadCheckBox = styled.div`
 const EmojiPopup = ({
   emoji,
   onClose,
+  addTag,
+  deleteTag,
+  accessToken,
   isAddedToCart,
   deleteEmojiFromDownloadCart,
   addEmojiToDownloadCart,
@@ -121,11 +123,13 @@ const EmojiPopup = ({
           <p>{ emoji.description }</p>
         </Info>
       </FlexBox>
-      {
-        emoji.tags.length > 0 ? (
-          <Tags tags={emoji.tags} push={push} />
-        ) : null
-      }
+      <Tags
+        emoji={emoji}
+        push={push}
+        deleteTag={deleteTag}
+        addTag={addTag}
+        accessToken={accessToken}
+      />
     </Content>
     <DownloadButton
       href={emoji.images.slack_url}
@@ -151,6 +155,13 @@ EmojiPopup.propTypes = {
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
+  addTag: PropTypes.func.isRequired,
+  deleteTag: PropTypes.func.isRequired,
+  accessToken: PropTypes.string,
+};
+
+EmojiPopup.defaultProps = {
+  accessToken: undefined,
 };
 
 export default EmojiPopup;

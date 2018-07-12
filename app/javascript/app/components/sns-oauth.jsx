@@ -30,7 +30,7 @@ class SnsOauth extends Component {
     const accessToken = Cookies.get('access_token');
     if (accessToken !== undefined) {
       Cookies.remove('access_token');
-      this.props.authentication(accessToken);
+      this.props.authentication(accessToken, this.props.callbackUrl);
     }
   }
 
@@ -67,6 +67,11 @@ class SnsOauth extends Component {
 SnsOauth.propTypes = {
   authentication: PropTypes.func.isRequired,
   caption: PropTypes.string.isRequired,
+  callbackUrl: PropTypes.string,
+};
+
+SnsOauth.defaultProps = {
+  callbackUrl: undefined,
 };
 
 export default SnsOauth;
