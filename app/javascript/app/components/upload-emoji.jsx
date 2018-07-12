@@ -3,19 +3,30 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faCircleNotch from '@fortawesome/fontawesome-free-solid/faCircleNotch';
+import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
 
 import { STATUS } from '../constants/upload-emoji';
 
 const Container = styled.div`
   display: flex;
   align-items: center;
-  border: ${props => (
-    props.status !== STATUS.UPLOADING ? 'solid 3px #c4c4c4' : 'none'
-  )};
+  border: ${(props) => {
+    switch (props.status) {
+      case STATUS.UPLOADING:
+        return 'none';
+      case STATUS.UPLOAD_ERROR:
+        return 'solid 3px #d32f2f';
+      default:
+        return 'solid 3px #c4c4c4';
+    }
+  }};
   border-radius: 10px;
   padding: 5px;
   margin-bottom: 10px;
   position: relative;
+  ${props => (
+    props.status === STATUS.UPLOAD_ERROR ? 'color: #d32f2f' : null
+  )}
 `;
 
 const Image = styled.img`
@@ -24,7 +35,7 @@ const Image = styled.img`
   margin: 10px;
 `;
 
-const LoadingIcon = styled.div`
+const Icon = styled.div`
   font-size: 30px;
   width: 40px;
   height: 40px;
@@ -100,7 +111,12 @@ class UploadEmoji extends Component {
   }
 
   render() {
-    const { id, status, image } = this.props.emoji;
+    const {
+      id,
+      status,
+      image,
+      errorMessage,
+    } = this.props.emoji;
 
     return (
       <div>
@@ -109,8 +125,18 @@ class UploadEmoji extends Component {
             case STATUS.UPLOADING:
               return (
                 <Container status={status}>
-                  <LoadingIcon><FontAwesomeIcon icon={faCircleNotch} spin /></LoadingIcon>
+                  <Icon><FontAwesomeIcon icon={faCircleNotch} spin /></Icon>
                   <div>Uploading...</div>
+                </Container>
+              );
+            case STATUS.UPLOAD_ERROR:
+              return (
+                <Container status={status}>
+                  <Icon><FontAwesomeIcon icon={faTimes} /></Icon>
+                  <div>{ errorMessage }</div>
+                  <DeleteButton
+                    onClick={() => this.props.deleteEmoji(id)}
+                  />
                 </Container>
               );
             default:
@@ -155,6 +181,7 @@ UploadEmoji.propTypes = {
     image: PropTypes.string,
     name: PropTypes.string,
     description: PropTypes.string,
+    errorMessage: PropTypes.string,
   }).isRequired,
   saveEmoji: PropTypes.func.isRequired,
   deleteEmoji: PropTypes.func.isRequired,

@@ -127,7 +127,9 @@ class UploadPopup extends Component {
       <Background>
         <UploadContainer>
           <Title>Upload</Title>
-          <EmojiDropzone onDrop={accepted => this.onDrop(accepted)}>
+          <EmojiDropzone
+            onDrop={accepted => this.onDrop(accepted)}
+          >
             <UploadIcon><FontAwesomeIcon icon={faCloudUploadAlt} /></UploadIcon>
             <DropzoneMessage>Drag and drop or click here</DropzoneMessage>
           </EmojiDropzone>
