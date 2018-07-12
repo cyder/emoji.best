@@ -125,15 +125,17 @@ class EmojiDetailInfo extends Component {
 
   onClickEditButton() {
     if (this.state.isEditing) {
-      const { id } = this.props.emoji;
+      const { emoji, accessToken } = this.props;
+      const { id } = emoji;
       const { name, description } = this.state;
-      this.props.editEmoji(id, name, description);
+      this.props.editEmoji(id, name, description, accessToken);
     }
     this.setState({ isEditing: !this.state.isEditing });
   }
 
   onClickDeleteButton() {
-    this.props.deleteEmoji(this.props.emoji.id);
+    const { emoji, accessToken } = this.props;
+    this.props.deleteEmoji(emoji.id, accessToken);
   }
 
   render() {
