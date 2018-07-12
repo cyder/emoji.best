@@ -6,7 +6,6 @@ import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faCloudUploadAlt from '@fortawesome/fontawesome-free-solid/faCloudUploadAlt';
-import { replace } from 'react-router-redux';
 
 import UploadEmoji from '../components/upload-emoji';
 import * as UploadEmojiActions from '../actions/upload-emoji';
