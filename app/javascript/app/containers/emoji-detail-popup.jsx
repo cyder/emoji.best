@@ -11,6 +11,7 @@ import { Wrapper, Container } from '../components/css/popup';
 import { STATUS } from '../constants/emoji';
 import * as EmojiActions from '../actions/emoji';
 import * as DownloadCartActions from '../actions/download-cart';
+import PopupBackground from '../components/popup-background';
 
 class EmojiDetailPopup extends Component {
   componentWillMount() {
@@ -59,6 +60,7 @@ class EmojiDetailPopup extends Component {
             })()
           }
         </Container>
+        <PopupBackground onClose={this.onClose} />
       </Wrapper>
     );
   }

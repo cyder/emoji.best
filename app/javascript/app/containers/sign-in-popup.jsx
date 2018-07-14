@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import SnsOauth from '../components/sns-oauth';
 import * as MyselfActions from '../actions/myself';
+import PopupBackground from '../components/popup-background';
 
 import {
   Wrapper,
@@ -88,6 +89,7 @@ class SignInPopup extends Component {
           </Message>
           <CloseButton onClick={this.onClose} />
         </Container>
+        <PopupBackground onClose={this.onClose} />
       </Wrapper>
     );
   }
