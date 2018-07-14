@@ -127,8 +127,12 @@ class Tags extends Component {
 
   onClickAddTagButton() {
     const { newTagName } = this.state;
+    const { tags } = this.props.emoji;
+
     if (newTagName === '') {
       this.setState({ errorMessage: 'Please enter a Tag name.' });
+    } else if (tags.filter(tag => tag.name === newTagName).length > 0) {
+      this.setState({ errorMessage: 'Tag name is duplicated.' });
     } else {
       const { addTag, emoji, accessToken } = this.props;
       addTag(emoji.id, this.state.newTagName, accessToken);
