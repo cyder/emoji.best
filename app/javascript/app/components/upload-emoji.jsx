@@ -8,7 +8,6 @@ import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
 import { STATUS } from '../constants/upload-emoji';
 
 const Container = styled.div`
-  align-items: center;
   border: ${(props) => {
     switch (props.status) {
       case STATUS.UPLOADING:
@@ -31,6 +30,7 @@ const Container = styled.div`
 
 const FlexBox = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const Image = styled.img`
