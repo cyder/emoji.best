@@ -7,7 +7,7 @@ import SnsOauth from '../components/sns-oauth';
 import * as MyselfActions from '../actions/myself';
 
 import {
-  Background,
+  Wrapper,
   Container,
   Title,
   OrContainer,
@@ -55,7 +55,7 @@ class SignInPopup extends Component {
 
   render() {
     return (
-      <Background>
+      <Wrapper>
         <Container>
           <Title>Sign In</Title>
           <SnsOauth
@@ -88,7 +88,7 @@ class SignInPopup extends Component {
           </Message>
           <CloseButton onClick={this.onClose} />
         </Container>
-      </Background>
+      </Wrapper>
     );
   }
 }

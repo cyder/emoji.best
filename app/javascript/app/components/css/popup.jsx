@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const Background = styled.div`
+export const Wrapper = styled.div`
   position: fixed;
   top: 0;
   right: 0;

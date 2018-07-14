@@ -12,7 +12,7 @@ import UploadEmoji from '../components/upload-emoji';
 import * as UploadEmojiActions from '../actions/upload-emoji';
 
 import {
-  Background,
+  Wrapper,
   Container,
   Title,
   CloseButton,
@@ -125,7 +125,7 @@ class UploadPopup extends Component {
     } = this.props;
 
     return (
-      <Background>
+      <Wrapper>
         <UploadContainer>
           <Title>Upload</Title>
           <EmojiDropzone onDrop={accepted => this.onDrop(accepted)}>
@@ -150,7 +150,7 @@ class UploadPopup extends Component {
           <UploadButton onClick={this.onSubmit}>Upload</UploadButton>
           <CloseButton onClick={this.onClose} />
         </UploadContainer>
-      </Background>
+      </Wrapper>
     );
   }
 }

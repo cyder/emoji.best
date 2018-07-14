@@ -7,7 +7,7 @@ import EmojiDetail from '../components/emoji-detail';
 import EmojiError from '../components/emoji-error';
 import EmojiShape from '../components/shapes/emoji';
 import DownloadCartShape from '../components/shapes/download-cart';
-import { Background, Container } from '../components/css/popup';
+import { Wrapper, Container } from '../components/css/popup';
 import { STATUS } from '../constants/emoji';
 import * as EmojiActions from '../actions/emoji';
 import * as DownloadCartActions from '../actions/download-cart';
@@ -32,7 +32,7 @@ class EmojiDetailPopup extends Component {
     const { list } = this.props.downloadCart;
 
     return (
-      <Background>
+      <Wrapper>
         <Container>
           {
             (() => {
@@ -59,7 +59,7 @@ class EmojiDetailPopup extends Component {
             })()
           }
         </Container>
-      </Background>
+      </Wrapper>
     );
   }
 }
