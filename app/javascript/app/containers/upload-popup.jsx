@@ -119,6 +119,7 @@ class UploadPopup extends Component {
     const {
       emojis,
       saveEmoji,
+      failedSaveEmoji,
       deleteEmoji,
       accessToken,
     } = this.props;
@@ -143,6 +144,7 @@ class UploadPopup extends Component {
                   deleteEmoji={deleteEmoji}
                   isSaved={this.state.isSaved}
                   accessToken={accessToken}
+                  failedSaveEmoji={failedSaveEmoji}
                 />
               ))
             }
@@ -183,6 +185,7 @@ UploadPopup.propTypes = {
   }).isRequired,
   uploadEmoji: PropTypes.func.isRequired,
   saveEmoji: PropTypes.func.isRequired,
+  failedSaveEmoji: PropTypes.func.isRequired,
   deleteEmoji: PropTypes.func.isRequired,
   emojis: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
