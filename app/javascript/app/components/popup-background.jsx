@@ -16,6 +16,22 @@ export const Background = styled.div`
 class PopupBackground extends Component {
   constructor(props) {
     super(props);
+
+    this.onKeydown = this.onKeydown.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.onKeydown, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.onKeydown, false);
+  }
+
+  onKeydown(event) {
+    const escapeKeyCode = 27;
+    if (event.keyCode === escapeKeyCode) {
+      this.props.onClose();
+    }
   }
 
   render() {
