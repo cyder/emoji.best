@@ -8,7 +8,6 @@ export const Wrapper = styled.div`
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
 `;
 
 export const Container = styled.div`
@@ -18,6 +17,7 @@ export const Container = styled.div`
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
   border-radius: 10px;
+  z-index: 100;
 `;
 
 export const Title = styled.h2`

@@ -10,6 +10,7 @@ import { replace } from 'react-router-redux';
 
 import UploadEmoji from '../components/upload-emoji';
 import * as UploadEmojiActions from '../actions/upload-emoji';
+import PopupBackground from '../components/popup-background';
 
 import {
   Wrapper,
@@ -150,6 +151,7 @@ class UploadPopup extends Component {
           <UploadButton onClick={this.onSubmit}>Upload</UploadButton>
           <CloseButton onClick={this.onClose} />
         </UploadContainer>
+        <PopupBackground />
       </Wrapper>
     );
   }
