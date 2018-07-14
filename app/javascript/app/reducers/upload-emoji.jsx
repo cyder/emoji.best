@@ -2,6 +2,7 @@ import * as types from '../constants/upload-emoji';
 
 const initialState = {
   emojis: [],
+  isFinished: false,
 };
 
 const uploadEmoji = (state = initialState, action) => {
@@ -10,6 +11,7 @@ const uploadEmoji = (state = initialState, action) => {
       return {
         ...state,
         emojis: [...state.emojis, action.emoji],
+        isFinished: false,
       };
     case types.SAVE:
     case types.SUCCESS_UPLOAD: {
@@ -35,12 +37,19 @@ const uploadEmoji = (state = initialState, action) => {
         emojis,
       };
     }
-    case types.DELETE:
+    case types.DELETE: {
+      const emojis = state.emojis.filter(emoji => emoji.id !== action.id);
+      return {
+        ...state,
+        emojis,
+      };
+    }
     case types.SUCCESS_SAVE: {
       const emojis = state.emojis.filter(emoji => emoji.id !== action.id);
       return {
         ...state,
         emojis,
+        isFinished: emojis.length === 0,
       };
     }
     default:
