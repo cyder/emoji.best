@@ -151,7 +151,7 @@ class UploadPopup extends Component {
           <UploadButton onClick={this.onSubmit}>Upload</UploadButton>
           <CloseButton onClick={this.onClose} />
         </UploadContainer>
-        <PopupBackground />
+        <PopupBackground onClose={this.onClose} />
       </Wrapper>
     );
   }
