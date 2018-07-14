@@ -92,6 +92,11 @@ const AddButton = styled.button`
   padding: 0 15px 0 10px;
 `;
 
+const ErrorMessage = styled.span`
+  margin-left: 10px;
+  color: #d32f2f;
+`;
+
 const EmptyMessage = styled.p`
   display: ${props => (props.isEmpty ? 'block' : 'none')};
   margin-top: 0;
@@ -103,6 +108,7 @@ class Tags extends Component {
     this.state = {
       isEditing: false,
       newTagName: '',
+      errorMessage: '',
     };
 
     this.onClick = this.onClick.bind(this);
@@ -120,13 +126,19 @@ class Tags extends Component {
   }
 
   onClickAddTagButton() {
-    const { addTag, emoji, accessToken } = this.props;
-    addTag(emoji.id, this.state.newTagName, accessToken);
-    this.setState({ newTagName: '' });
+    const { newTagName } = this.state;
+    if (newTagName === '') {
+      this.setState({ errorMessage: 'Please enter a Tag name.' });
+    } else {
+      const { addTag, emoji, accessToken } = this.props;
+      addTag(emoji.id, this.state.newTagName, accessToken);
+      this.setState({ newTagName: '' });
+      this.setState({ errorMessage: '' });
+    }
   }
 
   render() {
-    const { isEditing, newTagName } = this.state;
+    const { isEditing, newTagName, errorMessage } = this.state;
     const {
       emoji,
       deleteTag,
@@ -180,6 +192,7 @@ class Tags extends Component {
           <AddButton onClick={this.onClickAddTagButton}>
             add
           </AddButton>
+          <ErrorMessage>{ errorMessage }</ErrorMessage>
         </AddForm>
       </div>
     );
