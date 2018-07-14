@@ -118,10 +118,12 @@ class UploadEmoji extends Component {
     if (nextProps.isSaved !== this.props.isSaved && nextProps.isSaved) {
       const { name, description } = this.state;
       const { emoji, accessToken } = this.props;
-      const { id, image } = emoji;
+      const { id, image, status } = emoji;
 
       if (name !== '') {
-        this.props.saveEmoji(id, name, description, image, accessToken);
+        if (status === STATUS.UPLOADED) {
+          this.props.saveEmoji(id, name, description, image, accessToken);
+        }
       } else {
         this.props.failedSaveEmoji(id, 'Please enter a name.');
       }
