@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import SnsOauth from '../components/sns-oauth';
-import * as PopupManagerActions from '../actions/popup-manager';
 import * as MyselfActions from '../actions/myself';
 
 import {
+  Background,
+  Container,
   Title,
   OrContainer,
   Or,
@@ -15,7 +16,7 @@ import {
   TextForm,
   Button,
   Message,
-  SwitchButton,
+  SwitchLink,
   CloseButton,
   ErrorMessage,
 } from '../components/css/popup';
@@ -28,6 +29,7 @@ class SignInPopup extends Component {
       password: '',
     };
 
+    this.onClose = this.onClose.bind(this);
     this.submit = this.submit.bind(this);
   }
 
@@ -35,41 +37,58 @@ class SignInPopup extends Component {
     this.props.clearError();
   }
 
+  onClose() {
+    if (this.props.history.location.state === undefined) {
+      this.props.history.push('/');
+    } else {
+      this.props.history.goBack();
+    }
+  }
+
   submit() {
-    this.props.signIn(this.state.email, this.state.password);
+    this.props.signIn(
+      this.state.email,
+      this.state.password,
+      this.props.history.location.callbackUrl,
+    );
   }
 
   render() {
     return (
-      <div>
-        <Title>Sign In</Title>
-        <SnsOauth
-          caption="Sign in"
-          authentication={this.props.authentication}
-        />
-        <OrContainer><Or>OR</Or></OrContainer>
-        <Form>
-          <ErrorMessage isShow={this.props.errorMessage !== null}>
-            {this.props.errorMessage}
-          </ErrorMessage>
-          <TextForm
-            type="email"
-            placeholder="Email"
-            onChange={e => this.setState({ email: e.target.value })}
+      <Background>
+        <Container>
+          <Title>Sign In</Title>
+          <SnsOauth
+            caption="Sign in"
+            authentication={this.props.authentication}
+            callbackUrl={this.props.history.location.callbackUrl}
           />
-          <TextForm
-            type="password"
-            placeholder="Password"
-            onChange={e => this.setState({ password: e.target.value })}
-          />
-          <Button onClick={this.submit}>Sign In</Button>
-        </Form>
-        <Message>
-          Not a member?
-          <SwitchButton onClick={this.props.showSignUpPopup}>Sign Up</SwitchButton>
-        </Message>
-        <CloseButton onClick={() => this.props.closePopup()} />
-      </div>
+          <OrContainer><Or>OR</Or></OrContainer>
+          <Form>
+            <ErrorMessage isShow={this.props.errorMessage !== null}>
+              {this.props.errorMessage}
+            </ErrorMessage>
+            <TextForm
+              type="email"
+              placeholder="Email"
+              onChange={e => this.setState({ email: e.target.value })}
+            />
+            <TextForm
+              type="password"
+              placeholder="Password"
+              onChange={e => this.setState({ password: e.target.value })}
+            />
+            <Button onClick={this.submit}>Sign In</Button>
+          </Form>
+          <Message>
+            Not a member?
+            <SwitchLink to={{ pathname: '/signup', state: 'popup' }} replace>
+              Sign Up
+            </SwitchLink>
+          </Message>
+          <CloseButton onClick={this.onClose} />
+        </Container>
+      </Background>
     );
   }
 }
@@ -80,7 +99,6 @@ function mapStateToProps(state) {
 
 function mapDispatchProps(dispatch) {
   return bindActionCreators({
-    ...PopupManagerActions,
     ...MyselfActions,
   }, dispatch);
 }
@@ -88,8 +106,14 @@ function mapDispatchProps(dispatch) {
 const SignInPopupContainer = connect(mapStateToProps, mapDispatchProps)(SignInPopup);
 
 SignInPopup.propTypes = {
-  closePopup: PropTypes.func.isRequired,
-  showSignUpPopup: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      state: PropTypes.string,
+      callbackUrl: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
   authentication: PropTypes.func.isRequired,
   signIn: PropTypes.func.isRequired,
   clearError: PropTypes.func.isRequired,

@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20180711110946) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["emoji_id", "name"], name: "index_tags_on_emoji_id_and_name", unique: true
     t.index ["emoji_id"], name: "index_tags_on_emoji_id"
     t.index ["user_id"], name: "index_tags_on_user_id"
   end

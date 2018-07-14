@@ -8,6 +8,7 @@ const SIGNUP = 'users';
 const SIGNOUT = 'users/sign_out';
 const EMOJIS = 'emojis';
 const EMOJIS_UPLOAD = 'emojis/upload';
+const TAGS = 'tags';
 
 const csrfToken = document.querySelector('meta[name=csrf-token]').content;
 
@@ -15,7 +16,7 @@ function get(path, data = null, accessToken = null) {
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    Authorization: accessToken,
+    Authorization: accessToken || '',
   };
   const params = data !== null ? new URLSearchParams(data) : null;
   const uri = params !== null ? `${path}?${params.toString()}` : path;
@@ -35,7 +36,7 @@ function post(path, data = null, accessToken = null) {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'X-CSRF-Token': csrfToken,
-    Authorization: accessToken,
+    Authorization: accessToken || '',
   };
   const body = JSON.stringify(data);
   const params = {
@@ -59,7 +60,7 @@ function postData(path, data, accessToken = null) {
   const headers = {
     Accept: 'application/json',
     'X-CSRF-Token': csrfToken,
-    Authorization: accessToken,
+    Authorization: accessToken || '',
   };
 
   const body = new FormData();
@@ -84,12 +85,12 @@ function postData(path, data, accessToken = null) {
     .then(response => response.json());
 }
 
-function deleteFetch(path, accessToken) {
+function deleteFetch(path, accessToken = null) {
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'X-CSRF-Token': csrfToken,
-    Authorization: accessToken,
+    Authorization: accessToken || '',
   };
   const params = {
     method: 'DELETE',
@@ -100,10 +101,11 @@ function deleteFetch(path, accessToken) {
   return fetch(path, { ...params }).then(response => response.json());
 }
 
-export function searchEmojis(order, keyword, page = 0, target = 'all') {
-  const data = { page, target };
+export function searchEmojis(order, keyword, page = 0, target = null) {
+  const data = { page };
   if (order != null) data.order = order;
   if (keyword != null) data.keyword = keyword;
+  if (target != null) data.target = target;
 
   const path = `${COMMON_URL}${SEARCH}`;
 
@@ -114,6 +116,19 @@ export function getEmoji(id) {
   const path = `${COMMON_URL}${EMOJI}/${id}`;
 
   return get(path);
+}
+
+export function createTag(emojiId, name, accessToken) {
+  const path = `${COMMON_URL}${EMOJI}/${emojiId}/${TAGS}`;
+  const data = {
+    tag: { name },
+  };
+  return post(path, data, accessToken);
+}
+
+export function deleteTag(emojiId, tagId, accessToken) {
+  const path = `${COMMON_URL}${EMOJI}/${emojiId}/${TAGS}/${tagId}`;
+  return deleteFetch(path, accessToken);
 }
 
 export function downloadEmojisLink(emojis) {
