@@ -3,19 +3,34 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faCircleNotch from '@fortawesome/fontawesome-free-solid/faCircleNotch';
+import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
 
 import { STATUS } from '../constants/upload-emoji';
 
 const Container = styled.div`
-  display: flex;
-  align-items: center;
-  border: ${props => (
-    props.status !== STATUS.UPLOADING ? 'solid 3px #c4c4c4' : 'none'
-  )};
+  border: ${(props) => {
+    switch (props.status) {
+      case STATUS.UPLOADING:
+        return 'none';
+      case STATUS.UPLOAD_ERROR:
+      case STATUS.SAVE_ERROR:
+        return 'solid 3px #d32f2f';
+      default:
+        return 'solid 3px #c4c4c4';
+    }
+  }};
   border-radius: 10px;
   padding: 5px;
   margin-bottom: 10px;
   position: relative;
+  ${props => (
+    props.status === STATUS.UPLOAD_ERROR ? 'color: #d32f2f' : null
+  )}
+`;
+
+const FlexBox = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Image = styled.img`
@@ -24,7 +39,7 @@ const Image = styled.img`
   margin: 10px;
 `;
 
-const LoadingIcon = styled.div`
+const Icon = styled.div`
   font-size: 30px;
   width: 40px;
   height: 40px;
@@ -81,6 +96,15 @@ const DeleteButton = styled.div`
   }
 `;
 
+const ErrorMessage = styled.p`
+  color: #d32f2f;
+  text-align: center;
+  margin: 5px;
+  display: ${props => (
+    props.status === STATUS.SAVE_ERROR ? 'block' : 'none'
+  )}
+`;
+
 class UploadEmoji extends Component {
   constructor(props) {
     super(props);
@@ -92,58 +116,85 @@ class UploadEmoji extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isSaved !== this.props.isSaved && nextProps.isSaved) {
-      const { emoji, accessToken } = this.props;
-      const { id, image } = emoji;
       const { name, description } = this.state;
-      this.props.saveEmoji(id, name, description, image, accessToken);
+      const { emoji, accessToken } = this.props;
+      const { id, image, status } = emoji;
+
+      if (name !== '') {
+        if (status === STATUS.UPLOADED) {
+          this.props.saveEmoji(id, name, description, image, accessToken);
+        }
+      } else {
+        this.props.failedSaveEmoji(id, 'Please enter a name.');
+      }
     }
   }
 
   render() {
-    const { id, status, image } = this.props.emoji;
+    const {
+      id,
+      status,
+      image,
+      errorMessage,
+    } = this.props.emoji;
 
     return (
-      <div>
+      <Container status={status}>
         {(() => {
           switch (status) {
             case STATUS.UPLOADING:
               return (
-                <Container status={status}>
-                  <LoadingIcon><FontAwesomeIcon icon={faCircleNotch} spin /></LoadingIcon>
+                <FlexBox>
+                  <Icon><FontAwesomeIcon icon={faCircleNotch} spin /></Icon>
                   <div>Uploading...</div>
-                </Container>
+                </FlexBox>
               );
-            default:
+            case STATUS.UPLOAD_ERROR:
               return (
-                <Container status={status}>
-                  <Image src={image} />
-                  <Name>
-                    emoji name
-                    <TextForm
-                      type="text"
-                      placeholder="input emoji name"
-                      value={this.state.name}
-                      onChange={e => this.setState({ name: e.target.value })}
-                    />
-                  </Name>
-                  <Description>
-                    description
-                    <TextForm
-                      type="text"
-                      placeholder="input description"
-                      value={this.state.description}
-                      onChange={e => this.setState({ description: e.target.value })}
-                    />
-                  </Description>
+                <FlexBox>
+                  <Icon><FontAwesomeIcon icon={faTimes} /></Icon>
+                  <div>{ errorMessage }</div>
                   <DeleteButton
                     onClick={() => this.props.deleteEmoji(id)}
                   />
-                </Container>
+                </FlexBox>
+              );
+            default:
+              return (
+                <div>
+                  <ErrorMessage status={this.props.emoji.status}>
+                    {this.props.emoji.errorMessage}
+                  </ErrorMessage>
+                  <FlexBox>
+                    <Image src={image} />
+                    <Name>
+                      emoji name
+                      <TextForm
+                        type="text"
+                        placeholder="input emoji name"
+                        value={this.state.name}
+                        onChange={e => this.setState({ name: e.target.value })}
+                      />
+                    </Name>
+                    <Description>
+                      description
+                      <TextForm
+                        type="text"
+                        placeholder="input description"
+                        value={this.state.description}
+                        onChange={e => this.setState({ description: e.target.value })}
+                      />
+                    </Description>
+                    <DeleteButton
+                      onClick={() => this.props.deleteEmoji(id)}
+                    />
+                  </FlexBox>
+                </div>
               );
             }
           })()
         }
-      </div>
+      </Container>
     );
   }
 }
@@ -155,9 +206,11 @@ UploadEmoji.propTypes = {
     image: PropTypes.string,
     name: PropTypes.string,
     description: PropTypes.string,
+    errorMessage: PropTypes.string,
   }).isRequired,
   saveEmoji: PropTypes.func.isRequired,
   deleteEmoji: PropTypes.func.isRequired,
+  failedSaveEmoji: PropTypes.func.isRequired,
   isSaved: PropTypes.bool.isRequired,
   accessToken: PropTypes.string.isRequired,
 };
