@@ -70,6 +70,7 @@ group :development do
   gem "capistrano-rbenv"
   gem 'capistrano-yarn'
   gem "capistrano3-unicorn"
+  gem "slack-notifier"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
 end

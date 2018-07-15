@@ -1,3 +1,5 @@
+require "slack-notifier"
+
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.11.0"
 
@@ -47,6 +49,8 @@ set :log_level, :debug
 
 set :env_file, ".env"
 
+set :slack_url, ENV["DEPLOY_SLACK_URL"]
+
 namespace :deploy do
   desc "Restart application"
   task :restart do
@@ -68,6 +72,16 @@ namespace :deploy do
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
+    end
+  end
+
+  task :cleanup do
+    on roles(:app) do
+      raise NameError.new("undefined enviroment variable DEPLOY_SLACK_URL", "ENV['DEPLOY_SLACK_URL']") if fetch(:slack_url).nil?
+
+      notifier = Slack::Notifier.new(fetch(:slack_url))
+      message = "#{fetch(:rails_env)}環境へ#{fetch(:branch)}をデプロイした."
+      notifier.ping message
     end
   end
 end
