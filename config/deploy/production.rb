@@ -42,11 +42,7 @@ server "18.191.221.50", user: "capcap", roles: %w[app db web]
 #    auth_methods: %w(password)
 #  }
 
-set :ssh_options, {
-  keys: %w[~/.ssh/emoji_best.pem],
-  forward_agent: true,
-  auth_methods: %w[publickey],
-}
+set :ssh_options, keys: "~/.ssh/id_rsa"
 
 # The server-based syntax can be used to override options:
 # ------------------------------------
