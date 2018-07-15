@@ -88,7 +88,6 @@ class MainCopntent extends Component {
           <EmojiList
             emojis={this.props.emojis}
             cart={this.props.downloadCart}
-            searchEmojis={this.props.searchEmojis}
             addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
             deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
             pushUrl={this.props.pushUrl}
