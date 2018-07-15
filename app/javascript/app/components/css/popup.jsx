@@ -2,13 +2,12 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const Background = styled.div`
+export const Wrapper = styled.div`
   position: fixed;
   top: 0;
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
   z-index: 100;
 `;
 
@@ -19,6 +18,7 @@ export const Container = styled.div`
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
   border-radius: 10px;
+  z-index: 100;
 `;
 
 export const Title = styled.h2`

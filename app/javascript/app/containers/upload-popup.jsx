@@ -9,9 +9,10 @@ import faCloudUploadAlt from '@fortawesome/fontawesome-free-solid/faCloudUploadA
 
 import UploadEmoji from '../components/upload-emoji';
 import * as UploadEmojiActions from '../actions/upload-emoji';
+import PopupBackground from '../components/popup-background';
 
 import {
-  Background,
+  Wrapper,
   Container,
   Title,
   CloseButton,
@@ -125,7 +126,7 @@ class UploadPopup extends Component {
     } = this.props;
 
     return (
-      <Background>
+      <Wrapper>
         <UploadContainer>
           <Title>Upload</Title>
           <EmojiDropzone
@@ -153,7 +154,8 @@ class UploadPopup extends Component {
           <UploadButton onClick={this.onSubmit}>Upload</UploadButton>
           <CloseButton onClick={this.onClose} />
         </UploadContainer>
-      </Background>
+        <PopupBackground onClose={this.onClose} />
+      </Wrapper>
     );
   }
 }
