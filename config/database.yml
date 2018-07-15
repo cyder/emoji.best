@@ -51,6 +51,6 @@ test:
 #
 production:
   <<: *default
-  database: emojix_production
-  username: emojic
-  password: <%= ENV['EMOJIX_PASSWORD'] %>
+  database: emoji_best_production
+  username: emoji_best
+  password: <%= ENV['EMOJI_BEST_PASSWORD'] %>

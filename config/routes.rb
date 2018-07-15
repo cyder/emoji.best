@@ -14,11 +14,12 @@ Rails.application.routes.draw do
       resources :search, only: [:index]
       resources :emojis, only: [:create, :show, :update, :destroy] do
         resources :tags, only: [:create, :destroy]
+        get "download", to: "download#index"
         collection do
           post "upload", to: :upload
         end
       end
-      resources :download, only: [:index]
+      get "download", to: "download#zip"
     end
     root to: "error#render_404"
     get "/*path", to: "error#render_404"

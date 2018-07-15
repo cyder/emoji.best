@@ -9,15 +9,14 @@ import * as EmojisActions from '../actions/emojis';
 const Input = styled.input`
   display: block;
   width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
   padding: 0 20px;
-  height: 2.6rem;
+  height: 2.8rem;
   font-size: 1.2rem;
-  border-radius: 1.3rem;
+  border-radius: 1.4rem;
   border: solid 3px rgba(255, 255, 255, 0.3);
   background-clip: padding-box;
   color: #2d2d2d;
+  box-sizing: border-box;
 `;
 
 class SearchForm extends Component {
