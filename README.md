@@ -1,5 +1,5 @@
-# Emojix | [![CircleCI](https://circleci.com/gh/cyder/emojix.svg?style=svg)](https://circleci.com/gh/cyder/emojix) [![codecov](https://codecov.io/gh/cyder/emojix/branch/master/graph/badge.svg)](https://codecov.io/gh/cyder/emojix)
-slack用emoji投稿サイト、「Emojix（仮称）」用リポジトリです。
+# Emojix | [![CircleCI](https://circleci.com/gh/cyder/emoji.best.svg?style=svg)](https://circleci.com/gh/cyder/emoji.best) [![codecov](https://codecov.io/gh/cyder/emoji.best/branch/master/graph/badge.svg)](https://codecov.io/gh/cyder/emoji.best)
+slack用emoji投稿サイト、「emoji.best」用リポジトリです。
 
 ## 必要環境
 * Xcode Command line tools
@@ -63,8 +63,8 @@ brew install yarn
 ## セットアップ
 1. 次のコマンドを実行する。
 ```sh
-git@github.com:cyder-akashi/emojix.git
-cd emojix
+git@github.com:cyder-akashi/emoji.best.git
+cd emoji.best
 ```
 
 2. ライブラリをインストールする

@@ -10,3 +10,24 @@ AllCops:
   TargetRubyVersion: 2.5
 DotPosition:
   EnforcedStyle: leading
+
+Metrics/BlockLength:
+  Exclude:
+    - "Rakefile"
+    - "**/*.rake"
+    - "spec/**/*.rb"
+    - "Gemfile"
+    - "Guardfile"
+    - "config/environments/*.rb"
+    - "config/routes.rb"
+    - "config/routes/**/*.rb"
+    - "*.gemspec"
+    - "config/deploy.rb"
+
+Style/GlobalVars:
+  Exclude:
+    - "config/unicorn/*.rb"
+
+Lint/HandleExceptions:
+  Exclude:
+    - "config/unicorn/*.rb"
