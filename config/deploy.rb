@@ -77,7 +77,7 @@ namespace :deploy do
 
   task :cleanup do
     on roles(:app) do
-      raise NameError.new("undefined enviroment variable DEPLOY_SLACK_URL", "ENV['DEPLOY_SLACK_URL']") if fetch(:slack_url).nil?
+      raise NameError.new("undefined environment variable DEPLOY_SLACK_URL", "ENV['DEPLOY_SLACK_URL']") if fetch(:slack_url).nil?
 
       notifier = Slack::Notifier.new(fetch(:slack_url))
       message = "#{fetch(:rails_env)}環境へ#{fetch(:branch)}をデプロイした."
