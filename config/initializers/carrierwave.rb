@@ -8,6 +8,7 @@ if Rails.env.production?
     }
     config.fog_public = true
     config.fog_directory = ENV["AWS_S3_BUCKET"]
+    config.storage = :fog
     config.cache_storage = :fog
   end
 else
