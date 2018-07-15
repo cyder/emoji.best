@@ -101,7 +101,7 @@ function deleteFetch(path, accessToken = null) {
   return fetch(path, { ...params }).then(response => response.json());
 }
 
-export function searchEmojis(order, keyword, page = 0, target = null) {
+export function searchEmojis(order, keyword, page = 0, target = null, accessToken = null) {
   const data = { page };
   if (order != null) data.order = order;
   if (keyword != null) data.keyword = keyword;
@@ -109,7 +109,7 @@ export function searchEmojis(order, keyword, page = 0, target = null) {
 
   const path = `${COMMON_URL}${SEARCH}`;
 
-  return get(path, data);
+  return get(path, data, accessToken);
 }
 
 export function getEmoji(id) {
