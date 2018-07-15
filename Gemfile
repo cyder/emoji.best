@@ -68,7 +68,7 @@ group :development do
   gem "capistrano-bundler"
   gem "capistrano-rails"
   gem "capistrano-rbenv"
-  gem 'capistrano-yarn'
+  gem "capistrano-yarn"
   gem "capistrano3-unicorn"
   gem "slack-notifier"
   gem "spring"
