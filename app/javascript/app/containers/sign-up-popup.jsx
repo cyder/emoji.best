@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 
 import SnsOauth from '../components/sns-oauth';
 import * as MyselfActions from '../actions/myself';
+import PopupBackground from '../components/popup-background';
 
 import {
-  Background,
+  Wrapper,
   Container,
   Title,
   OrContainer,
@@ -59,7 +60,7 @@ class SignUpPopup extends Component {
 
   render() {
     return (
-      <Background>
+      <Wrapper>
         <Container>
           <Title>Sign Up</Title>
           <SnsOauth
@@ -102,7 +103,8 @@ class SignUpPopup extends Component {
           </Message>
           <CloseButton onClick={this.onClose} />
         </Container>
-      </Background>
+        <PopupBackground onClose={this.onClose} />
+      </Wrapper>
     );
   }
 }

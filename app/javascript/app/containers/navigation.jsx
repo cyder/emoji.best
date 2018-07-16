@@ -9,14 +9,6 @@ import faCloudUploadAlt from '@fortawesome/fontawesome-free-solid/faCloudUploadA
 import { STATUS } from '../constants/myself';
 import Profile from './profile';
 
-const Container = styled.nav`
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 1.2rem;
-  line-height: 3.6rem;
-`;
-
 const List = styled.ul`
   margin: 0 10px;
 `;
@@ -26,8 +18,13 @@ const Item = styled.li`
   margin: 0 10px;
 `;
 
-const Navigation = ({ status, location }) => (
-  <Container>
+const Navigation = ({
+  status,
+  location,
+  showSignInPopup,
+  showSignUpPopup,
+}) => (
+  <div>
     {
       status === STATUS.SIGNIN ? (
         <List>
@@ -65,7 +62,7 @@ const Navigation = ({ status, location }) => (
         </List>
       )
     }
-  </Container>
+  </div>
 );
 
 function mapStateToProps(state) {

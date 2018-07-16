@@ -4,6 +4,20 @@ export function getEmoji(id) {
   return { type: types.GET, id };
 }
 
+export function editEmoji(id, name, description, accessToken) {
+  return {
+    type: types.EDIT,
+    id,
+    name,
+    description,
+    accessToken,
+  };
+}
+
+export function deleteEmoji(id, accessToken) {
+  return { type: types.DELETE, id, accessToken };
+}
+
 export function successGetEmoji(emoji) {
   return { type: types.SUCCESS_GET, emoji };
 }

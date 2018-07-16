@@ -5,6 +5,7 @@ import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
 import PropTypes from 'prop-types';
 
 import Tags from './tags';
+import EmojiDetailInfo from './emoji-detail-info';
 import { CloseButton } from '../components/css/popup';
 import EmojiShape from './shapes/emoji';
 
@@ -13,48 +14,6 @@ const Content = styled.div`
   width: 80vw;
   padding: 40px 40px 20px;
   border-bottom: 2px solid #eeeeee;
-`;
-
-const FlexBox = styled.div`
-  display: flex;
-`;
-
-const Img = styled.img`
-  width: 100px;
-  height: 100px;
-  margin: 10px;
-`;
-
-const Info = styled.div`
-  flex-grow: 1;
-  margin-left: 20px;
-`;
-
-const TitleArea = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Title = styled.h1`
-  font-size: 1.8rem;
-  margin: 0;
-`;
-
-const UserName = styled.h2`
-  font-size: 1.1rem;
-  font-weight: normal;
-  color: #8d8d8d;
-  margin: 5px 0;
-`;
-
-const Name = styled.span`
-  padding: 0 5px 0;
-  word-break: break-all
-`;
-
-const Download = styled.div`
-  font-size: 1.2rem;
-  color: #8d8d8d;
 `;
 
 const DownloadButton = styled.a`
@@ -97,10 +56,12 @@ const DownloadCheckBox = styled.div`
 
 const EmojiPopup = ({
   emoji,
+  editEmoji,
+  deleteEmoji,
   onClose,
   addTag,
   deleteTag,
-  accessToken,
+  myself,
   isAddedToCart,
   deleteEmojiFromDownloadCart,
   addEmojiToDownloadCart,
@@ -108,27 +69,19 @@ const EmojiPopup = ({
 }) => (
   <article>
     <Content>
-      <FlexBox>
-        <Img alt={emoji.name} src={emoji.images.thumb_url} />
-        <Info>
-          <TitleArea>
-            <div>
-              <Title>:<Name>{ emoji.name }</Name>:</Title>
-              <UserName>by { emoji.user.name }</UserName>
-            </div>
-            <Download>
-              <FontAwesomeIcon icon={faDownload} /> {emoji.number_of_downloaded}
-            </Download>
-          </TitleArea>
-          <p>{ emoji.description }</p>
-        </Info>
-      </FlexBox>
+      <EmojiDetailInfo
+        emoji={emoji}
+        myself={myself}
+        editEmoji={editEmoji}
+        deleteEmoji={deleteEmoji}
+        push={push}
+      />
       <Tags
         emoji={emoji}
         push={push}
         deleteTag={deleteTag}
         addTag={addTag}
-        accessToken={accessToken}
+        accessToken={myself.accessToken}
       />
     </Content>
     <DownloadButton
@@ -151,17 +104,17 @@ const EmojiPopup = ({
 EmojiPopup.propTypes = {
   onClose: PropTypes.func.isRequired,
   emoji: EmojiShape.isRequired,
+  editEmoji: PropTypes.func.isRequired,
+  deleteEmoji: PropTypes.func.isRequired,
   isAddedToCart: PropTypes.bool.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
   addTag: PropTypes.func.isRequired,
   deleteTag: PropTypes.func.isRequired,
-  accessToken: PropTypes.string,
-};
-
-EmojiPopup.defaultProps = {
-  accessToken: undefined,
+  myself: PropTypes.shape({
+    accessToken: PropTypes.string,
+  }).isRequired,
 };
 
 export default EmojiPopup;

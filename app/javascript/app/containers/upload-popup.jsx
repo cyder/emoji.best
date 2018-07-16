@@ -6,13 +6,13 @@ import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faCloudUploadAlt from '@fortawesome/fontawesome-free-solid/faCloudUploadAlt';
-import { replace } from 'react-router-redux';
 
 import UploadEmoji from '../components/upload-emoji';
 import * as UploadEmojiActions from '../actions/upload-emoji';
+import PopupBackground from '../components/popup-background';
 
 import {
-  Background,
+  Wrapper,
   Container,
   Title,
   CloseButton,
@@ -94,7 +94,7 @@ class UploadPopup extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.emojis.length === 0 && this.state.isSaved) {
+    if (nextProps.isFinished) {
       const callbackUrl = nextProps.history.location.callbackUrl || '/';
       this.props.history.push(callbackUrl);
     }
@@ -120,15 +120,18 @@ class UploadPopup extends Component {
     const {
       emojis,
       saveEmoji,
+      failedSaveEmoji,
       deleteEmoji,
       accessToken,
     } = this.props;
 
     return (
-      <Background>
+      <Wrapper>
         <UploadContainer>
           <Title>Upload</Title>
-          <EmojiDropzone onDrop={accepted => this.onDrop(accepted)}>
+          <EmojiDropzone
+            onDrop={accepted => this.onDrop(accepted)}
+          >
             <UploadIcon><FontAwesomeIcon icon={faCloudUploadAlt} /></UploadIcon>
             <DropzoneMessage>Drag and drop or click here</DropzoneMessage>
           </EmojiDropzone>
@@ -142,6 +145,7 @@ class UploadPopup extends Component {
                   deleteEmoji={deleteEmoji}
                   isSaved={this.state.isSaved}
                   accessToken={accessToken}
+                  failedSaveEmoji={failedSaveEmoji}
                 />
               ))
             }
@@ -150,7 +154,8 @@ class UploadPopup extends Component {
           <UploadButton onClick={this.onSubmit}>Upload</UploadButton>
           <CloseButton onClick={this.onClose} />
         </UploadContainer>
-      </Background>
+        <PopupBackground onClose={this.onClose} />
+      </Wrapper>
     );
   }
 }
@@ -182,10 +187,12 @@ UploadPopup.propTypes = {
   }).isRequired,
   uploadEmoji: PropTypes.func.isRequired,
   saveEmoji: PropTypes.func.isRequired,
+  failedSaveEmoji: PropTypes.func.isRequired,
   deleteEmoji: PropTypes.func.isRequired,
   emojis: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
   }).isRequired).isRequired,
+  isFinished: PropTypes.bool.isRequired,
   accessToken: PropTypes.string,
 };
 
