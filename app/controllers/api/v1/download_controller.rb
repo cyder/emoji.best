@@ -1,5 +1,3 @@
-require "open-uri"
-
 class Api::V1::DownloadController < Api::V1::BaseController
   include ActionController::Streaming
   include Zipline
