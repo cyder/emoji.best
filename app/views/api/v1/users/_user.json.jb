@@ -10,6 +10,9 @@ json = {
 if user == current_user
   json[:email] = user.email
   json[:number_of_downloaded] = user.number_of_downloaded
+  json[:twitter] = user.twitter
+  json[:facebook] = user.facebook
+  json[:google] = user.google
 end
 
 json

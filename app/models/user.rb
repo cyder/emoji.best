@@ -11,7 +11,16 @@ class User < ApplicationRecord
   has_many :download_logs, dependent: :nullify
   has_many :authentications, dependent: :destroy
   accepts_nested_attributes_for :authentications
-  validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
+  validates :email,
+            presence: true,
+            uniqueness: true,
+            format: { with: VALID_EMAIL_REGEX },
+            if: -> { !with_sns? }
+  validates :email,
+            allow_nil: true,
+            uniqueness: true,
+            format: { with: VALID_EMAIL_REGEX },
+            if: -> { with_sns? }
   validates :name, presence: true
   validates :password, presence: true, length: { minimum: 6 }, confirmation: true, if: -> {
     new_record? || changes[:crypted_password]
@@ -29,4 +38,10 @@ class User < ApplicationRecord
   def number_of_uploaded
     emojis.size
   end
+
+  private
+
+    def with_sns?
+      twitter.present? || facebook.present? || google.present?
+    end
 end

@@ -5,4 +5,9 @@ FactoryBot.define do
     password_confirmation "password"
     name "name"
   end
+
+  factory :user_with_twitter, class: User do
+    name "user with twitter"
+    twitter "twitter id"
+  end
 end
