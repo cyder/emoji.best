@@ -1,3 +1,5 @@
+require "open-uri"
+
 class Api::V1::DownloadController < Api::V1::BaseController
   include ActionController::Streaming
   include Zipline
@@ -9,8 +11,13 @@ class Api::V1::DownloadController < Api::V1::BaseController
 
   def index
     emoji = Emoji.find_with_logging!(params[:emoji_id], current_user)
-    image = emoji.image.slack
-    send_file image.file.path
+    file = emoji.image.slack.file
+    if defined?(CarrierWave::Storage::Fog::File) && file.is_a?(CarrierWave::Storage::Fog::File)
+      data = OpenURI.open_uri(file.url)
+    elsif defined?(CarrierWave::SanitizedFile) && file.is_a?(CarrierWave::SanitizedFile)
+      data = file.path
+    end
+    send_file data, filename: emoji.image.file.filename
   end
 
   def zip
