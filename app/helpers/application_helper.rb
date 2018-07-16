@@ -29,7 +29,7 @@ module ApplicationHelper
 
     def twitter_meta_tags
       {
-        card: "summarylargeimage",
+        card: "summary_large_image",
         site: "@Cyder_PR",
       }
     end
