@@ -51,7 +51,6 @@ const Email = styled.div`
 
 const Info = styled.div`
   font-size: 1rem;
-  text-align: right;
   margin: 5px 10px;
 `;
 
@@ -96,9 +95,7 @@ class Profile extends Component {
         <Popup isShow={this.state.isShowPopup}>
           <Name>{ user.name }</Name>
           <Email>{ user.email }</Email>
-          <Hr />
           <Info><Number>{ user.number_of_uploaded }</Number> Upload</Info>
-          <Info><Number>{ user.number_of_downloaded }</Number> Download</Info>
           <Hr />
           <Button>Edit Profile</Button>
           <Button onClick={() => signOut(accessToken)} >Sign Out</Button>

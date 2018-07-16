@@ -13,6 +13,7 @@ import { STATUS } from '../constants/emojis';
 
 import * as EmojisActions from '../actions/emojis';
 import * as DownloadCartActions from '../actions/download-cart';
+import { join } from '../../../../node_modules/redux-saga/effects';
 
 class MainCopntent extends Component {
   constructor(props) {
@@ -23,7 +24,12 @@ class MainCopntent extends Component {
 
   componentWillMount() {
     const params = new URLSearchParams(this.props.router.location.search);
-    this.props.searchEmojis(params.get('keyword'), params.get('order'), params.get('target'));
+    this.props.searchEmojis(
+      params.get('keyword'),
+      params.get('order'),
+      params.get('target'),
+      this.props.myself.accessToken,
+    );
   }
 
   componentDidMount() {
@@ -42,7 +48,12 @@ class MainCopntent extends Component {
     const isRootLocation = nextProps.router.location.pathname === '/';
 
     if (isChangedParams && isRootLocation) {
-      this.props.searchEmojis(keyword, order, target);
+      this.props.searchEmojis(
+        keyword,
+        order,
+        target,
+        this.props.myself.accessToken,
+      );
     }
   }
 
@@ -59,7 +70,13 @@ class MainCopntent extends Component {
     const { keyword, order, target } = this.props.emojis;
     if (this.props.emojis.status === STATUS.SHOWING && scrollBottom < offset) {
       const page = this.props.emojis.lastPage + 1;
-      this.props.loadNextEmojis(page, keyword, order, target);
+      this.props.loadNextEmojis(
+        page,
+        keyword,
+        order,
+        target,
+        this.props.myself.accessToken,
+      );
     }
   }
 
@@ -71,7 +88,6 @@ class MainCopntent extends Component {
           <EmojiList
             emojis={this.props.emojis}
             cart={this.props.downloadCart}
-            searchEmojis={this.props.searchEmojis}
             addEmojiToDownloadCart={this.props.addEmojiToDownloadCart}
             deleteEmojiFromDownloadCart={this.props.deleteEmojiFromDownloadCart}
             pushUrl={this.props.pushUrl}
@@ -114,6 +130,9 @@ MainCopntent.propTypes = {
       pathname: PropTypes.string.isRequired,
       search: PropTypes.string.isRequired,
     }).isRequired,
+  }).isRequired,
+  myself: PropTypes.shape({
+    accessToken: PropTypes.string,
   }).isRequired,
 };
 

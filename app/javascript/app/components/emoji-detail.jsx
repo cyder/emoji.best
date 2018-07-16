@@ -85,8 +85,7 @@ const EmojiPopup = ({
       />
     </Content>
     <DownloadButton
-      href={emoji.images.slack_url}
-      target="_blank"
+      href={`/api/v1/emojis/${emoji.id}/download`}
       download
     >
       <FontAwesomeIcon icon={faDownload} /> download

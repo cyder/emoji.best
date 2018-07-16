@@ -6,22 +6,24 @@ export function pushUrl(keyword, order, target = null) {
   return { type: types.PUSH_URL };
 }
 
-export function searchEmojis(keyword, order, target = null) {
+export function searchEmojis(keyword, order, target = null, accessToken = null) {
   return {
     type: types.SEARCH,
     keyword,
     order,
     target,
+    accessToken,
   };
 }
 
-export function loadNextEmojis(page, keyword, order, target = null) {
+export function loadNextEmojis(page, keyword, order, target = null, accessToken = null) {
   return {
     type: types.LOAD_NEXT,
     keyword,
     order,
     page,
     target,
+    accessToken,
   };
 }
 
