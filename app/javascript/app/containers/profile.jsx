@@ -97,7 +97,6 @@ class Profile extends Component {
           <Email>{ user.email }</Email>
           <Info><Number>{ user.number_of_uploaded }</Number> Upload</Info>
           <Hr />
-          <Button>Edit Profile</Button>
           <Button onClick={() => signOut(accessToken)} >Sign Out</Button>
         </Popup>
       </Container>
