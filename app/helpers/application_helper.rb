@@ -9,20 +9,34 @@ module ApplicationHelper
       icon: [
         { href: image_url("favicon.png") },
       ],
-      og: {
+      og: og_meta_tags,
+      twitter: twitter_meta_tags,
+      fb: fb_meta_tags,
+    }
+  end
+
+  private
+
+    def og_meta_tags
+      {
         site_name: "emoji.best",
         description: "This is posting site of emoji for slack. Let's share emojis!!",
         type: "website",
         url: request.original_url,
         image: image_url("ogp.png"),
-      },
-      twitter: {
+      }
+    end
+
+    def twitter_meta_tags
+      {
         card: "summarylargeimage",
         site: "@Cyder_PR",
-      },
-      fb: {
+      }
+    end
+
+    def fb_meta_tags
+      {
         app_id: "150795858797745",
-      },
-    }
-  end
+      }
+    end
 end
