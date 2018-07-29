@@ -17,7 +17,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password:
-  host: localhost
+  host: db
 
 development:
   <<: *default
@@ -54,3 +54,4 @@ production:
   database: emoji_best_production
   username: emoji_best
   password: <%= ENV['EMOJI_BEST_PASSWORD'] %>
+  host: localhost
