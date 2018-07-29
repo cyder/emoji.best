@@ -7,6 +7,15 @@ class Api::V1::EmojisController < Api::V1::BaseController
     @emoji.save!
   end
 
+  def create_multi
+    @emojis = params[:emojis].map do |target|
+      emoji = current_user.emojis.build emoji_params(target)
+      emoji.remote_image_url = target[:emoji][:image]
+      emoji.save!
+      emoji
+    end
+  end
+
   def show
     @emoji = Emoji.find(params[:id])
   end
@@ -34,7 +43,7 @@ class Api::V1::EmojisController < Api::V1::BaseController
 
   private
 
-    def emoji_params
-      params.require(:emoji).permit(:name, :description)
+    def emoji_params(target = nil)
+      (target || params).require(:emoji).permit(:name, :description)
     end
 end
