@@ -8,11 +8,13 @@ class Api::V1::EmojisController < Api::V1::BaseController
   end
 
   def create_multi
-    @emojis = params[:emojis].map do |target|
-      emoji = current_user.emojis.build emoji_params(target)
-      emoji.remote_image_url = target[:emoji][:image]
-      emoji.save!
-      emoji
+    Emoji.transaction do
+      @emojis = params[:emojis].map do |target|
+        emoji = current_user.emojis.build emoji_params(target)
+        emoji.remote_image_url = target[:emoji][:image]
+        emoji.save!
+        emoji
+      end
     end
   end
 
