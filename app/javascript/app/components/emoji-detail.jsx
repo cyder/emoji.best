@@ -8,6 +8,7 @@ import Tags from './tags';
 import EmojiDetailInfo from './emoji-detail-info';
 import { CloseButton } from '../components/css/popup';
 import EmojiShape from './shapes/emoji';
+import DownloadCheckbox from './molecules/buttons/download-checkbox';
 
 const Content = styled.div`
   max-width: 660px;
@@ -31,27 +32,10 @@ const DownloadButton = styled.a`
   line-height: 38px;
 `;
 
-const DownloadCheckBox = styled.div`
-  width: 50px;
-  height: 50px;
-  background-color: ${props => (props.isAddedToCart ? '#464646' : '#dfdfdf')};
-  border-radius: 25px;
+const DownloadCheckboxWrapper = styled.div`
   position: absolute;
   top: -20px;
   right: -20px;
-
-  &::after {
-    display: block;
-    content: '';
-    position: absolute;
-    top: 16px;
-    left: 14px;
-    width: 18px;
-    height: 8px;
-    border-left: 5px solid #ffffff;
-    border-bottom: 5px solid #ffffff;
-    transform: rotate(-45deg);
-  }
 `;
 
 const EmojiPopup = ({
@@ -90,12 +74,14 @@ const EmojiPopup = ({
     >
       <FontAwesomeIcon icon={faDownload} /> download
     </DownloadButton>
-    <DownloadCheckBox
-      isAddedToCart={isAddedToCart}
-      onClick={() => (
-        isAddedToCart ? deleteEmojiFromDownloadCart(emoji) : addEmojiToDownloadCart(emoji)
-      )}
-    />
+    <DownloadCheckboxWrapper>
+      <DownloadCheckbox
+        isChecked={isAddedToCart}
+        onClick={() => (
+          isAddedToCart ? deleteEmojiFromDownloadCart(emoji) : addEmojiToDownloadCart(emoji)
+        )}
+      />
+    </DownloadCheckboxWrapper>
     <CloseButton onClick={onClose} />
   </article>
 );
