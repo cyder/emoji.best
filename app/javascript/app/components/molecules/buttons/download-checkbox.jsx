@@ -10,7 +10,7 @@ const DownloadCheckbox = ({ isChecked, onClick }) => (
     onClick={onClick}
     backgroundColor={isChecked ? Color.DARK : Color.GRAY}
   >
-    <Check />
+    <Check color={Color.WHITE} />
   </CircleButton>
 );
 

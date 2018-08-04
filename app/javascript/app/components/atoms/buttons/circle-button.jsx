@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import Color from '../../../constants/styles/color';
+
 
 const CircleButton = ({ onClick, backgroundColor, children }) => (
   <Button
@@ -27,7 +29,7 @@ CircleButton.propTypes = {
 
 CircleButton.defaultProps = {
   onClick: null,
-  backgroundColor: '#000000',
+  backgroundColor: Color.BLACK,
   children: undefined,
 };
 

@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-export default () => (
+import Color from '../../../constants/styles/color';
+
+const Check = ({ color }) => (
   <Wrapper>
-    <Icon />
+    <Icon color={color} />
   </Wrapper>
 );
 
@@ -18,7 +21,17 @@ const Icon = styled.div`
   left: 14px;
   width: 18px;
   height: 8px;
-  border-left: 5px solid #ffffff;
-  border-bottom: 5px solid #ffffff;
+  border-left: 5px solid  ${props => (props.color)};
+  border-bottom: 5px solid  ${props => (props.color)};
   transform: rotate(-45deg);
 `;
+
+Check.propTypes = {
+  color: PropTypes.string,
+};
+
+Check.defaultProps = {
+  color: Color.BLACK,
+};
+
+export default Check;
