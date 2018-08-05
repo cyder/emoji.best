@@ -13,10 +13,14 @@ const Container = styled.div`
   display: flex;
 `;
 
-const Img = styled.img`
+const Img = styled.div`
   width: 100px;
   height: 100px;
   margin: 10px;
+  background-image: url("${props => props.emojiUrl}");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
 `;
 
 const Info = styled.div`
@@ -155,7 +159,7 @@ class EmojiDetailInfo extends Component {
 
     return (
       <Container>
-        <Img alt={emoji.name} src={emoji.images.thumb_url} />
+        <Img alt={emoji.name} emojiUrl={emoji.images.thumb_url} />
         <Info>
           <TitleArea>
             <div>
