@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CircleButton from '../../atoms/buttons/circle-button';
 import Check from '../../atoms/icons/check';
-import Color from '../../../constants/styles/color';
+import { DARK, GRAY, WHITE } from '../../../constants/styles/color';
 
 const DownloadCheckbox = ({ isChecked, onClick }) => (
   <CircleButton
     isChecked={isChecked}
     onClick={onClick}
-    backgroundColor={isChecked ? Color.DARK : Color.GRAY}
+    backgroundColor={isChecked ? DARK : GRAY}
   >
-    <Check color={Color.WHITE} />
+    <Check color={WHITE} />
   </CircleButton>
 );
 

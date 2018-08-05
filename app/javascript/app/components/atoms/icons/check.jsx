@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Color from '../../../constants/styles/color';
+import { BLACK } from '../../../constants/styles/color';
 
 const Check = ({ color }) => (
   <Wrapper>
@@ -31,7 +31,7 @@ Check.propTypes = {
 };
 
 Check.defaultProps = {
-  color: Color.BLACK,
+  color: BLACK,
 };
 
 export default Check;

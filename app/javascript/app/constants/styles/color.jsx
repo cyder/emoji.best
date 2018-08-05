@@ -1,6 +1,4 @@
-export default {
-  BLACK: '#000000',
-  DARK: '#464646',
-  GRAY: '#dfdfdf',
-  WHITE: '#ffffff',
-};
+export const BLACK = '#000000';
+export const DARK = '#464646';
+export const GRAY = '#dfdfdf';
+export const WHITE = '#ffffff';
