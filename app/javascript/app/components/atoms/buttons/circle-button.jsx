@@ -19,6 +19,7 @@ const Button = styled.div`
   height: 50px;
   border-radius: 25px;
   background-color: ${props => (props.backgroundColor)};
+  cursor: pointer;
 `;
 
 CircleButton.propTypes = {
