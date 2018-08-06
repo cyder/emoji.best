@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
+import faTwitter from '@fortawesome/fontawesome-free-brands/faTwitter';
+import faFacebook from '@fortawesome/fontawesome-free-brands/faFacebook';
+import faGoogle from '@fortawesome/fontawesome-free-brands/faGoogle';
 
 import { DARK, GRAY_ALPHA, WHITE } from '../../../constants/styles/color';
-import { DOWNLOAD } from '../../../constants/styles/icon';
+import * as Icon from '../../../constants/styles/icon';
 
 
 const FillButton = ({
@@ -19,8 +22,14 @@ const FillButton = ({
 }) => {
   const faIcon = (() => {
     switch (icon) {
-      case DOWNLOAD:
+      case Icon.DOWNLOAD:
         return faDownload;
+      case Icon.TWITTER:
+        return faTwitter;
+      case Icon.FACEBOOK:
+        return faFacebook;
+      case Icon.GOOGLE:
+        return faGoogle;
       default:
         return null;
     }
@@ -83,8 +92,10 @@ const Button = styled.button`
 `;
 
 const IconWrapper = styled.div`
+  font-size: 1.3rem;
   position: absolute;
   top: 0;
+  bottom: 0;
   left: 20px;
 `;
 
