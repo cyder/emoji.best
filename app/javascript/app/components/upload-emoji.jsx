@@ -37,7 +37,7 @@ const Image = styled.div`
   width: 40px;
   height: 40px;
   margin: 10px;
-  background-image: url("${props => props.imgPath}");
+  background-image: url("${props => props.src}");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
@@ -170,7 +170,7 @@ class UploadEmoji extends Component {
                     {this.props.emoji.errorMessage}
                   </ErrorMessage>
                   <FlexBox>
-                    <Image imgPath={image} />
+                    <Image src={image} />
                     <Name>
                       emoji name
                       <TextForm

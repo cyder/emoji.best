@@ -17,7 +17,7 @@ const Img = styled.div`
   width: 100px;
   height: 100px;
   margin: 10px;
-  background-image: url("${props => props.emojiUrl}");
+  background-image: url("${props => props.src}");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
@@ -159,7 +159,7 @@ class EmojiDetailInfo extends Component {
 
     return (
       <Container>
-        <Img alt={emoji.name} emojiUrl={emoji.images.thumb_url} />
+        <Img alt={emoji.name} src={emoji.images.thumb_url} />
         <Info>
           <TitleArea>
             <div>

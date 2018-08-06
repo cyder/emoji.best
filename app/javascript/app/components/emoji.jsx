@@ -42,7 +42,7 @@ const Name = styled.span`
 const Img = styled.div`
   width: 50px;
   height: 50px;
-  background-image: url("${props => props.emojiUrl}");
+  background-image: url("${props => props.src}");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
@@ -87,7 +87,7 @@ const Emoji = ({
   <Container>
     <DetailLink to={{ pathname: `/emoji/${emoji.id}`, state: 'popup' }} >
       <TitleArea>
-        <Img alt={emoji.name} emojiUrl={emoji.images.thumb_url} />
+        <Img alt={emoji.name} src={emoji.images.thumb_url} />
         <Title>:<Name>{emoji.name}</Name>:</Title>
       </TitleArea>
       <Menus>
