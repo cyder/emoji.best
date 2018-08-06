@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
 
-import { DARK, GRAY, WHITE } from '../../../constants/styles/color';
+import { DARK, GRAY_ALPHA, WHITE } from '../../../constants/styles/color';
 import { DOWNLOAD } from '../../../constants/styles/icon';
 
 
@@ -49,11 +49,12 @@ const Wrapper = styled.div`
   position: relative;
   color: ${WHITE};
   border-radius: 1000px;
-  border: solid 3px ${GRAY};
   background-color: ${props => (props.backgroundColor)};
   font-size: 1.1rem;
   line-height: 2.6rem;
   font-weight: bold;
+  border: solid 3px ${GRAY_ALPHA};
+  box-sizing: border-box;
 `;
 
 const Button = styled.a`
