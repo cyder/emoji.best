@@ -24,7 +24,8 @@ const FillButton = ({
       default:
         return null;
     }
-  });
+  })();
+
   return (
     <Wrapper backgroundColor={backgroundColor}>
       <Button
@@ -37,7 +38,7 @@ const FillButton = ({
       </Button>
       {faIcon && (
         <IconWrapper>
-          <FontAwesomeIcon icon={faDownload} />
+          <FontAwesomeIcon icon={faIcon} />
         </IconWrapper>
       )}
     </Wrapper>
