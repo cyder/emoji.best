@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
 
 import DownloadCartShape from './shapes/download-cart';
 import FillButton from './atoms/buttons/fill-button';
+import { DOWNLOAD } from '../constants/styles/icon';
 
 const Container = styled.section`
   display: ${props => (props.list.length === 0 ? 'none' : 'block')};
@@ -95,6 +94,7 @@ const DownloadCart = ({
     <DownloadButtonWrapper>
       <FillButton
         label="download"
+        icon={DOWNLOAD}
         href={cart.downloadLink}
         onClick={() => downloadEmojis(cart.list)}
         target="_blank"
