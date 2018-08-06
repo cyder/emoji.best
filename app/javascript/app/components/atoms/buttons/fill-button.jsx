@@ -1,14 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
-import faTwitter from '@fortawesome/fontawesome-free-brands/faTwitter';
-import faFacebook from '@fortawesome/fontawesome-free-brands/faFacebook';
-import faGoogle from '@fortawesome/fontawesome-free-brands/faGoogle';
 
 import { DARK, GRAY_ALPHA, WHITE } from '../../../constants/styles/color';
-import * as Icon from '../../../constants/styles/icon';
+import FaIcon from '../icons/faIcon';
 
 
 const FillButton = ({
@@ -19,48 +14,31 @@ const FillButton = ({
   target,
   download,
   icon,
-}) => {
-  const faIcon = (() => {
-    switch (icon) {
-      case Icon.DOWNLOAD:
-        return faDownload;
-      case Icon.TWITTER:
-        return faTwitter;
-      case Icon.FACEBOOK:
-        return faFacebook;
-      case Icon.GOOGLE:
-        return faGoogle;
-      default:
-        return null;
+}) => (
+  <Wrapper backgroundColor={backgroundColor}>
+    {
+      href ? (
+        <LinkButton
+          onClick={onClick}
+          download={download}
+          target={target}
+          href={href}
+        >
+          {label}
+        </LinkButton>
+      ) : (
+        <Button onClick={onClick}>
+          {label}
+        </Button>
+      )
     }
-  })();
-
-  return (
-    <Wrapper backgroundColor={backgroundColor}>
-      {
-        href ? (
-          <LinkButton
-            onClick={onClick}
-            download={download}
-            target={target}
-            href={href}
-          >
-            {label}
-          </LinkButton>
-        ) : (
-          <Button onClick={onClick}>
-            {label}
-          </Button>
-          )
-      }
-      {faIcon && (
-        <IconWrapper>
-          <FontAwesomeIcon icon={faIcon} />
-        </IconWrapper>
-      )}
-    </Wrapper>
-  );
-};
+    {icon && (
+      <IconWrapper>
+        <FaIcon icon={icon} />
+      </IconWrapper>
+    )}
+  </Wrapper>
+);
 
 const Wrapper = styled.div`
   position: relative;
