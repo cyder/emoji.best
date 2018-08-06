@@ -24,9 +24,7 @@ const FaIcon = ({ icon }) => {
     }
   })();
 
-  return (
-    <FontAwesomeIcon icon={faIcon} />
-  );
+  return faIcon && <FontAwesomeIcon icon={faIcon} />;
 };
 
 FaIcon.propTypes = {
