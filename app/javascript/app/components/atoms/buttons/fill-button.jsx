@@ -28,14 +28,22 @@ const FillButton = ({
 
   return (
     <Wrapper backgroundColor={backgroundColor}>
-      <Button
-        onClick={onClick}
-        download={download}
-        target={target}
-        href={href}
-      >
-        {label}
-      </Button>
+      {
+        href ? (
+          <LinkButton
+            onClick={onClick}
+            download={download}
+            target={target}
+            href={href}
+          >
+            {label}
+          </LinkButton>
+        ) : (
+          <Button onClick={onClick}>
+            {label}
+          </Button>
+          )
+      }
       {faIcon && (
         <IconWrapper>
           <FontAwesomeIcon icon={faIcon} />
@@ -55,11 +63,22 @@ const Wrapper = styled.div`
   font-weight: bold;
   border: solid 3px ${GRAY_ALPHA};
   box-sizing: border-box;
+  cursor: pointer;
 `;
 
-const Button = styled.a`
+const LinkButton = styled.a`
   display: block;
-  cursor: pointer;
+  text-align: center;
+`;
+
+const Button = styled.button`
+  display: block;
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  color: inherit;
+  line-height: inherit;
+  cursor: inherit;
   text-align: center;
 `;
 
