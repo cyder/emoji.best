@@ -35,7 +35,11 @@ const FillButton = ({
       >
         {label}
       </Button>
-      { faIcon && <IconWrapper><FontAwesomeIcon icon={faDownload} /></IconWrapper> }
+      {faIcon && (
+        <IconWrapper>
+          <FontAwesomeIcon icon={faDownload} />
+        </IconWrapper>
+      )}
     </Wrapper>
   );
 };
