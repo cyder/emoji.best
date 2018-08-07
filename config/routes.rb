@@ -26,5 +26,6 @@ Rails.application.routes.draw do
   end
 
   root to: "app#index"
+  get "/emoji/:id", to: "emojis#show"
   get "/*path", to: "app#index"
 end
