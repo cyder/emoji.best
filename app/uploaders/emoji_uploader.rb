@@ -9,6 +9,11 @@ class EmojiUploader < CarrierWave::Uploader::Base
     process resize_to_limit: [128, 128]
   end
 
+  version :ogp, from_version: :thumb do
+    process resize_to_fit: [200, 200]
+    process resize_and_pad: [200, 200, "#ffffff"]
+  end
+
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{model.id}/#{(version_name || "original")}"
   end
