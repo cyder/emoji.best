@@ -43,6 +43,75 @@ X-Frame-Options: SAMEORIGIN
 }
 ```
 
+## POST /api/v1/emojis/multi
+Returns a emoji.
+
+### Example
+
+#### Request
+```
+POST /api/v1/emojis/multi HTTP/1.1
+Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+Authorization: 1645:8d781e1277954dced77c953caf568050
+Content-Type: application/x-www-form-urlencoded
+Host: www.example.com
+
+emojis[][emoji][name]=emoji1&emojis[][emoji][description]=description&emojis[][emoji][image]=http%3A%2F%2Fcyder.tech%2Fimages%2Ftwitter-white.png&emojis[][emoji][name]=emoji2&emojis[][emoji][description]=&emojis[][emoji][image]=http%3A%2F%2Fcyder.tech%2Fimages%2Ftwitter-white.png
+```
+
+#### Response
+```
+HTTP/1.1 200
+Content-Type: application/json; charset=utf-8
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+
+{
+  "emojis": [
+    {
+      "emoji": {
+        "id": 991,
+        "name": "emoji1",
+        "description": "description",
+        "number_of_downloaded": 0,
+        "images": {
+          "large_url": "http://localhost:3000/uploads/emoji/991/large/emoji1.png",
+          "thumb_url": "http://localhost:3000/uploads/emoji/991/thumb/emoji1.png",
+          "slack_url": "http://localhost:3000/uploads/emoji/991/slack/emoji1.png"
+        },
+        "tags": [
+
+        ],
+        "user": {
+          "id": 1645,
+          "name": "name"
+        }
+      }
+    },
+    {
+      "emoji": {
+        "id": 992,
+        "name": "emoji2",
+        "description": "",
+        "number_of_downloaded": 0,
+        "images": {
+          "large_url": "http://localhost:3000/uploads/emoji/992/large/emoji2.png",
+          "thumb_url": "http://localhost:3000/uploads/emoji/992/thumb/emoji2.png",
+          "slack_url": "http://localhost:3000/uploads/emoji/992/slack/emoji2.png"
+        },
+        "tags": [
+
+        ],
+        "user": {
+          "id": 1645,
+          "name": "name"
+        }
+      }
+    }
+  ]
+}
+```
+
 ## GET /api/v1/emojis/:id
 Returns a emoji.
 

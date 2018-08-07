@@ -41,6 +41,49 @@ describe "POST /api/v1/emojis" do
   end
 end
 
+describe "POST /api/v1/emojis/multi" do
+  let(:user) { create(:user) }
+  let(:access_token) { create(:access_token, user: user) }
+  let(:headers) { { "Authorization" => access_token.token } }
+  let(:image) { "http://cyder.tech/images/twitter-white.png" }
+  let(:emoji1) { { emoji: { name: "emoji1", description: "description", image: image } } }
+  let(:emoji2) { { emoji: { name: "emoji2", description: "", image: image } } }
+  let(:emojis) { [emoji1, emoji2] }
+  let(:params) { { emojis: emojis } }
+
+  context "with valid params" do
+    it "returns a emoji", autodoc: true do
+      is_expected.to eq 200
+      json = JSON.parse(response.body)
+      expect(json["emojis"].length).to eq emojis.length
+      expect(json["emojis"][0]["emoji"]["name"]).to eq "emoji1"
+    end
+
+    it { expect { subject }.to change(Emoji, :count).by(emojis.length) }
+  end
+
+  context "with invalid params" do
+    let(:image) { nil }
+
+    it "returns a invalid email error" do
+      is_expected.to eq 400
+      json = JSON.parse(response.body)
+      expect(json["errors"]["image"]).to be_present
+      expect(json["errors"]["image"][0]["error"]).to eq "blank"
+    end
+  end
+
+  context "without access token" do
+    let(:headers) { { "Authorization" => nil } }
+
+    it "return a error" do
+      is_expected.to eq 403
+      json = JSON.parse(response.body)
+      expect(json["errors"]["error"]).to be_present
+    end
+  end
+end
+
 describe "GET /api/v1/emojis/:id" do
   context "with valid id" do
     let(:emoji) { create(:emoji) }

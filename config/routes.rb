@@ -16,7 +16,8 @@ Rails.application.routes.draw do
         resources :tags, only: [:create, :destroy]
         get "download", to: "download#index"
         collection do
-          post "upload", to: :upload
+          post "upload"
+          post "multi", to: "emojis#create_multi"
         end
       end
       get "download", to: "download#zip"
