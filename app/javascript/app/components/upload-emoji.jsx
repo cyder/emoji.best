@@ -33,10 +33,14 @@ const FlexBox = styled.div`
   align-items: center;
 `;
 
-const Image = styled.img`
+const Image = styled.div`
   width: 40px;
   height: 40px;
   margin: 10px;
+  background-image: url("${props => props.src}");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
 `;
 
 const Icon = styled.div`

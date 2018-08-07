@@ -30,11 +30,15 @@ const Emoji = styled.div`
   position: relative;
 `;
 
-const Img = styled.img`
+const Img = styled.div`
   width: 50px;
   height: 50px;
   padding: 5px;
   background-color: #ffffff;
+  background-image: url("${props => props.src}");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
   border: solid 5px #dfdfdf;
   border-radius: 10px;
 `;

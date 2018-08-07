@@ -13,10 +13,14 @@ const Container = styled.div`
   display: flex;
 `;
 
-const Img = styled.img`
+const Img = styled.div`
   width: 100px;
   height: 100px;
   margin: 10px;
+  background-image: url("${props => props.src}");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
 `;
 
 const Info = styled.div`

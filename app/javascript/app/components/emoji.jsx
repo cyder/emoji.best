@@ -40,9 +40,13 @@ const Name = styled.span`
   word-break: break-all
 `;
 
-const Img = styled.img`
+const Img = styled.div`
   width: 50px;
   height: 50px;
+  background-image: url("${props => props.src}");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
 `;
 
 const Menus = styled.div`
