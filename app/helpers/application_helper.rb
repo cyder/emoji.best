@@ -1,8 +1,9 @@
 module ApplicationHelper
   def default_meta_tags
     {
-      site: "emoji.best",
+      site: "emoji.best - Let's share emojis!!",
       charset: "utf-8",
+      reverse: true,
       description: "This is posting site of emoji for slack. Let's share emojis!!",
       keywords: "emoji best cyder slack",
       canonical: request.base_url,
