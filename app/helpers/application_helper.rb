@@ -20,11 +20,11 @@ module ApplicationHelper
 
     def og_meta_tags
       {
-        site_name: "emoji.best",
-        title: "emoji.best",
-        description: "This is posting site of emoji for slack. Let's share emojis!!",
+        site_name: :site,
+        title: :full_title,
+        description: :description,
         type: "website",
-        url: request.base_url,
+        url: :canonical,
         image: image_url("ogp.png"),
       }
     end
