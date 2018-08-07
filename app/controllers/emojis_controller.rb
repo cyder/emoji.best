@@ -9,6 +9,8 @@ class EmojisController < ApplicationController
     @page_description = description
     @page_keywords = tags_name.join(", ")
     set_meta_tags canonical: request.base_url + request.path
+    set_meta_tags og: { image: emoji.image.ogp }
+    set_meta_tags twitter: { card: "summary" }
 
     render template: "app/index"
   end
