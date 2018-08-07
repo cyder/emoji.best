@@ -25,8 +25,8 @@ const Message = styled.p`
 const EmojiError = ({ onClose }) => (
   <article>
     <Content>
-      <Img alt="No Result found" src={EmptyImage} />
-      <Message>Oops! No Result found.</Message>
+      <Img alt="No result found" src={EmptyImage} />
+      <Message>Oops! No result found.</Message>
     </Content>
     <CloseButton onClick={onClose} />
   </article>
