@@ -95,7 +95,7 @@ const DownloadCart = ({
         cart.list.map(emoji => (
           <Emoji key={emoji.id}>
             <ImgWrapper>
-              <EmojiImg src={emoji.images.thumb_url} />
+              <EmojiImg src={emoji.images.thumb_url} alt={emoji.name} />
             </ImgWrapper>
             <DeleteButton onClick={() => deleteEmojiFromDownloadCart(emoji)} />
           </Emoji>

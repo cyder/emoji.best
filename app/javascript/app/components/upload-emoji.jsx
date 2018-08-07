@@ -168,7 +168,7 @@ class UploadEmoji extends Component {
                   </ErrorMessage>
                   <FlexBox>
                     <ImgWrapper>
-                      <EmojiImg src={image} />
+                      <EmojiImg src={image} alt={this.state.name} />
                     </ImgWrapper>
                     <Name>
                       emoji name

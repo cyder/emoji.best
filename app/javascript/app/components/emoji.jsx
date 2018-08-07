@@ -69,7 +69,7 @@ const Emoji = ({
     <DetailLink to={{ pathname: `/emoji/${emoji.id}`, state: 'popup' }} >
       <TitleArea>
         <ImgWrapper>
-          <EmojiImg src={emoji.images.thumb_url} />
+          <EmojiImg src={emoji.images.thumb_url} alt={emoji.name} />
         </ImgWrapper>
         <Title>:<Name>{emoji.name}</Name>:</Title>
       </TitleArea>

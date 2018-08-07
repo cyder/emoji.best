@@ -157,7 +157,7 @@ class EmojiDetailInfo extends Component {
     return (
       <Container>
         <ImgWrapper>
-          <EmojiImg src={emoji.images.thumb_url} />
+          <EmojiImg src={emoji.images.thumb_url} alt={emoji.name} />
         </ImgWrapper>
         <Info>
           <TitleArea>
