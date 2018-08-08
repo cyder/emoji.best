@@ -185,8 +185,8 @@ class EmojiList extends Component {
           <LoadingIcon alt="loading" src={LoadingImage} />
         </Loading>
         <EmptyView isShow={emojis.list.length === 0 && emojis.status !== STATUS.LOADING}>
-          <img alt="No Result found" src={EmptyImage} />
-          <EmptyMessage>Oops! No Result found.</EmptyMessage>
+          <img alt="No result found" src={EmptyImage} />
+          <EmptyMessage>Oops! No result found.</EmptyMessage>
         </EmptyView>
       </Container>
     );
