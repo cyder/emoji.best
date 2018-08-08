@@ -5,6 +5,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
 
 import DownloadCartShape from './shapes/download-cart';
+import EmojiImg from './atoms/emojis/emoji-img';
 
 const Container = styled.section`
   display: ${props => (props.list.length === 0 ? 'none' : 'block')};
@@ -30,15 +31,11 @@ const Emoji = styled.div`
   position: relative;
 `;
 
-const Img = styled.div`
+const ImgWrapper = styled.div`
   width: 50px;
   height: 50px;
   padding: 5px;
   background-color: #ffffff;
-  background-image: url("${props => props.src}");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: contain;
   border: solid 5px #dfdfdf;
   border-radius: 10px;
 `;
@@ -97,7 +94,9 @@ const DownloadCart = ({
       {
         cart.list.map(emoji => (
           <Emoji key={emoji.id}>
-            <Img alt={emoji.name} src={emoji.images.thumb_url} />
+            <ImgWrapper>
+              <EmojiImg src={emoji.images.thumb_url} alt={emoji.name} />
+            </ImgWrapper>
             <DeleteButton onClick={() => deleteEmojiFromDownloadCart(emoji)} />
           </Emoji>
         ))
