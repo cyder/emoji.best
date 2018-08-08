@@ -3,17 +3,17 @@ class AppController < ApplicationController
   end
 
   def signin
-    @page_title = "Sign In"
-    render action: :index
+    set_meta_tags title: "Sign In"
+    render :index
   end
 
   def signup
-    @page_title = "Sign Up"
-    render action: :index
+    set_meta_tags title: "Sign Up"
+    render :index
   end
 
   def upload
-    @page_title = "Upload"
-    render action: :index
+    set_meta_tags title: "Upload"
+    render :index
   end
 end
