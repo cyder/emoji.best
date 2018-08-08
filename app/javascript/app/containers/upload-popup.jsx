@@ -17,6 +17,7 @@ import {
   Title,
   CloseButton,
 } from '../components/css/popup';
+import HeadTitle from '../components/atoms/head/head-title';
 
 const UploadContainer = styled(Container)`
   width: 80vw;
@@ -127,6 +128,7 @@ class UploadPopup extends Component {
 
     return (
       <Wrapper>
+        <HeadTitle pageTitle="Upload" />
         <UploadContainer>
           <Title>Upload</Title>
           <EmojiDropzone
