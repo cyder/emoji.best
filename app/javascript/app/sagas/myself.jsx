@@ -10,11 +10,11 @@ import {
   failedSignIn,
   failedSignUp,
 } from '../actions/myself';
-import { authentication, signIn, signUp, signOut } from '../api';
+import api from '../api';
 
 function* sageAuthentication(action) {
   try {
-    const json = yield authentication(action.accessToken);
+    const json = yield api.authentication(action.accessToken);
     yield put(successSignIn(json.user, action.accessToken));
     yield put(push(action.callbackUrl));
   } catch (status) {
@@ -24,7 +24,7 @@ function* sageAuthentication(action) {
 
 function* sageSignIn(action) {
   try {
-    const json = yield signIn(action.email, action.password);
+    const json = yield api.signIn(action.email, action.password);
     yield put(successSignIn(json.user, json.access_token));
     yield put(push(action.callbackUrl));
   } catch (status) {
@@ -34,7 +34,7 @@ function* sageSignIn(action) {
 
 function* sageSignUp(action) {
   try {
-    const json = yield yield signUp(
+    const json = yield yield api.signUp(
       action.name,
       action.email,
       action.password,
@@ -48,7 +48,7 @@ function* sageSignUp(action) {
 }
 
 function* sageSignOut(action) {
-  yield signOut(action.accessToken);
+  yield api.signOut(action.accessToken);
   yield put(successSignOut());
 }
 
