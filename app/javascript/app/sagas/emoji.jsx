@@ -3,11 +3,11 @@ import { takeEvery, put } from 'redux-saga/effects';
 
 import { GET, EDIT, DELETE, ADD_TAG, DELETE_TAG } from '../constants/emoji';
 import { successGetEmoji, failedGetEmoji, successAddTag } from '../actions/emoji';
-import { getEmoji, editEmoji, deleteEmoji, createTag, deleteTag } from '../api';
+import api, { editEmoji, deleteEmoji, createTag, deleteTag } from '../api';
 
 function* sageGetEmoji(action) {
   try {
-    const json = yield getEmoji(action.id);
+    const json = yield api.getEmoji(action.id);
     yield put(successGetEmoji(json.emoji));
   } catch (status) {
     yield put(failedGetEmoji());

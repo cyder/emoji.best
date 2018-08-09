@@ -1,3 +1,5 @@
+import * as emoji from './emoji-api';
+
 const COMMON_URL = '/api/v1/';
 const SEARCH = 'search';
 const EMOJI = 'emojis';
@@ -11,6 +13,10 @@ const EMOJIS_UPLOAD = 'emojis/upload';
 const TAGS = 'tags';
 
 const csrfToken = document.querySelector('meta[name=csrf-token]').content;
+
+export default {
+  ...emoji,
+};
 
 function get(path, data = null, accessToken = null) {
   const headers = {
@@ -124,23 +130,6 @@ function deleteFetch(path, accessToken = null) {
   };
 
   return fetch(path, { ...params }).then(response => response.json());
-}
-
-export function searchEmojis(order, keyword, page = 0, target = null, accessToken = null) {
-  const data = { page };
-  if (order != null) data.order = order;
-  if (keyword != null) data.keyword = keyword;
-  if (target != null) data.target = target;
-
-  const path = `${COMMON_URL}${SEARCH}`;
-
-  return get(path, data, accessToken);
-}
-
-export function getEmoji(id) {
-  const path = `${COMMON_URL}${EMOJI}/${id}`;
-
-  return get(path);
 }
 
 export function editEmoji(id, name, description, accessToken) {
