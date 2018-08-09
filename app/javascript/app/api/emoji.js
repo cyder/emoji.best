@@ -1,5 +1,16 @@
-import { getRequest, patchRequest, deleteRequest, postRequest } from './base';
-import { COMMON_URL, SEARCH, EMOJI, EMOJIS_UPLOAD } from './constans';
+import {
+  getRequest,
+  patchRequest,
+  deleteRequest,
+  postRequest,
+} from './base';
+
+import {
+  COMMON_URL,
+  SEARCH,
+  EMOJI,
+  EMOJIS_UPLOAD,
+} from './constans';
 
 export const searchEmojis = (order, keyword, page = 0, target = null, accessToken = null) => {
   const data = { page };

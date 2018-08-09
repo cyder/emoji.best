@@ -5,7 +5,7 @@ const csrfToken = document.querySelector('meta[name=csrf-token]').content;
  * @param {string} path - URL指定
  * @param {object} params - パラメータ(fetchの引数に準ずる))
  */
-export const baseRequest = (path, params) =>
+export const baseRequest = (path, params) => (
   fetch(path, params)
     .then((response) => {
       if (!response.ok) {
@@ -13,7 +13,8 @@ export const baseRequest = (path, params) =>
       }
       return response;
     })
-    .then(response => response.json());
+    .then(response => response.json())
+);
 
 /**
  * get request
@@ -82,8 +83,9 @@ export const postRequest = (path, options = {}) => {
  *  data: 送信データオブジェクト
  *  accessToken: アクセストークン
  */
-export const patchRequest = (path, options = {}) =>
-  postRequest(path, { ...options, method: 'PATCH' });
+export const patchRequest = (path, options = {}) => (
+  postRequest(path, { ...options, method: 'PATCH' })
+);
 
 /**
  * delete request
@@ -92,5 +94,6 @@ export const patchRequest = (path, options = {}) =>
  *  data: 送信データオブジェクト
  *  accessToken: アクセストークン
  */
-export const deleteRequest = (path, options = {}) =>
-  postRequest(path, { ...options, method: 'DELETE' });
+export const deleteRequest = (path, options = {}) => (
+  postRequest(path, { ...options, method: 'DELETE' })
+);

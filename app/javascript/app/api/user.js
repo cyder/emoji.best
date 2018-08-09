@@ -1,5 +1,11 @@
 import { getRequest, postRequest, deleteRequest } from './base';
-import { COMMON_URL, AUTH, SIGNIN, SIGNUP, SIGNOUT } from './constans';
+import {
+  COMMON_URL,
+  AUTH,
+  SIGNIN,
+  SIGNUP,
+  SIGNOUT,
+} from './constans';
 
 export const authentication = (accessToken) => {
   const path = `${COMMON_URL}${AUTH}`;
