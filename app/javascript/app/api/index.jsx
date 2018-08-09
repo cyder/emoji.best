@@ -1,4 +1,4 @@
-import * as emoji from './emoji-api';
+import * as emoji from './emoji';
 
 const COMMON_URL = '/api/v1/';
 const SEARCH = 'search';
