@@ -6,9 +6,11 @@ import EmojiDetailPopup from '../containers/emoji-detail-popup';
 import SignInPopup from '../containers/sign-in-popup';
 import SignUpPopup from '../containers/sign-up-popup';
 import UploadPopup from '../containers/upload-popup';
+import HeadTitle from './atoms/head/head-title';
 
 const App = () => (
   <div>
+    <HeadTitle />
     <MainContent />
     <Route path="/emoji/:id" component={EmojiDetailPopup} />
     <Route path="/signin" component={SignInPopup} />
