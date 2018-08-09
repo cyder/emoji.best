@@ -1,8 +1,7 @@
 import * as emoji from './emoji';
+import * as tag from './tag';
 
 const COMMON_URL = '/api/v1/';
-const SEARCH = 'search';
-const EMOJI = 'emojis';
 const DOWNLOAD = 'download';
 const AUTH = 'users/authentication';
 const SIGNIN = 'users/sign_in';
@@ -10,12 +9,12 @@ const SIGNUP = 'users';
 const SIGNOUT = 'users/sign_out';
 const EMOJIS = 'emojis';
 const EMOJIS_UPLOAD = 'emojis/upload';
-const TAGS = 'tags';
 
 const csrfToken = document.querySelector('meta[name=csrf-token]').content;
 
 export default {
   ...emoji,
+  ...tag,
 };
 
 function get(path, data = null, accessToken = null) {
@@ -105,19 +104,6 @@ function deleteFetch(path, accessToken = null) {
   };
 
   return fetch(path, { ...params }).then(response => response.json());
-}
-
-export function createTag(emojiId, name, accessToken) {
-  const path = `${COMMON_URL}${EMOJI}/${emojiId}/${TAGS}`;
-  const data = {
-    tag: { name },
-  };
-  return post(path, data, accessToken);
-}
-
-export function deleteTag(emojiId, tagId, accessToken) {
-  const path = `${COMMON_URL}${EMOJI}/${emojiId}/${TAGS}/${tagId}`;
-  return deleteFetch(path, accessToken);
 }
 
 export function downloadEmojisLink(emojis) {
