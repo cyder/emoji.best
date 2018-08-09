@@ -62,31 +62,6 @@ function post(path, data = null, accessToken = null) {
     .then(response => response.json());
 }
 
-function patch(path, data = null, accessToken = null) {
-  const headers = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    'X-CSRF-Token': csrfToken,
-    Authorization: accessToken || '',
-  };
-  const body = JSON.stringify(data);
-  const params = {
-    method: 'PATCH',
-    credentials: 'same-origin',
-    headers,
-    body,
-  };
-
-  return fetch(path, { ...params })
-    .then((response) => {
-      if (!response.ok) {
-        throw response.status;
-      }
-      return response;
-    })
-    .then(response => response.json());
-}
-
 function postData(path, data, accessToken = null) {
   const headers = {
     Accept: 'application/json',
@@ -130,15 +105,6 @@ function deleteFetch(path, accessToken = null) {
   };
 
   return fetch(path, { ...params }).then(response => response.json());
-}
-
-export function editEmoji(id, name, description, accessToken) {
-  const path = `${COMMON_URL}${EMOJI}/${id}`;
-  const data = {
-    emoji: { name, description },
-  };
-
-  return patch(path, data, accessToken);
 }
 
 export function deleteEmoji(id, accessToken) {

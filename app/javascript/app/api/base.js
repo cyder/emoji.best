@@ -31,7 +31,7 @@ export const postRequest = (path, options = {}) => {
   };
   const body = JSON.stringify(options.data || null);
   const params = {
-    method: 'POST',
+    method: options.method || 'POST',
     credentials: 'same-origin',
     headers,
     body,
@@ -39,3 +39,7 @@ export const postRequest = (path, options = {}) => {
 
   return baseRequest(path, params);
 };
+
+export const patchRequest = (path, options = {}) =>
+  postRequest(path, { ...options, method: 'PATCH' });
+
