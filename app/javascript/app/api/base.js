@@ -25,11 +25,25 @@ export const getRequest = (path, options = {}) => {
 export const postRequest = (path, options = {}) => {
   const headers = {
     Accept: 'application/json',
-    'Content-Type': 'application/json',
     'X-CSRF-Token': csrfToken,
     Authorization: options.accessToken || '',
   };
-  const body = JSON.stringify(options.data || null);
+
+  if (!options.isFile) {
+    headers['Content-Type'] = 'application/json';
+  }
+
+  const body = (() => {
+    if (options.isFile) {
+      const temp = new FormData();
+      Object.keys(options.data).forEach(key => (
+        temp.append(key, options.data[key])
+      ));
+      return temp;
+    }
+    return JSON.stringify(options.data || null);
+  })();
+
   const params = {
     method: options.method || 'POST',
     credentials: 'same-origin',

@@ -1,5 +1,5 @@
-import { getRequest, patchRequest, deleteRequest } from './base';
-import { COMMON_URL, SEARCH, EMOJI } from './constans';
+import { getRequest, patchRequest, deleteRequest, postRequest } from './base';
+import { COMMON_URL, SEARCH, EMOJI, EMOJIS_UPLOAD } from './constans';
 
 export const searchEmojis = (order, keyword, page = 0, target = null, accessToken = null) => {
   const data = { page };
@@ -31,4 +31,23 @@ export const deleteEmoji = (id, accessToken) => {
   const path = `${COMMON_URL}${EMOJI}/${id}`;
 
   return deleteRequest(path, { accessToken });
+};
+
+export const uploadEmoji = (image, accessToken) => {
+  const path = `${COMMON_URL}${EMOJIS_UPLOAD}`;
+  const data = { image };
+  return postRequest(path, { data, accessToken, isFile: true });
+};
+
+
+export const saveEmoji = (name, description, image, accessToken) => {
+  const path = `${COMMON_URL}${EMOJI}`;
+  const data = {
+    emoji: {
+      name,
+      description,
+      image,
+    },
+  };
+  return postRequest(path, { data, accessToken });
 };
