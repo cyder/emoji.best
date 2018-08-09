@@ -5,10 +5,10 @@ class EmojisController < ApplicationController
 
     if emoji.present?
       set_meta_tags emoji
+      render template: "app/index"
     else
       set_meta_tags title: "not found"
+      render template: "app/index", status: 404
     end
-
-    render template: "app/index"
   end
 end
