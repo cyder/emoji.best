@@ -43,3 +43,5 @@ export const postRequest = (path, options = {}) => {
 export const patchRequest = (path, options = {}) =>
   postRequest(path, { ...options, method: 'PATCH' });
 
+export const deleteRequest = (path, options = {}) =>
+  postRequest(path, { ...options, method: 'DELETE' });

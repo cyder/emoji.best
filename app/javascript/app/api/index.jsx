@@ -107,12 +107,6 @@ function deleteFetch(path, accessToken = null) {
   return fetch(path, { ...params }).then(response => response.json());
 }
 
-export function deleteEmoji(id, accessToken) {
-  const path = `${COMMON_URL}${EMOJI}/${id}`;
-
-  return deleteFetch(path, accessToken);
-}
-
 export function createTag(emojiId, name, accessToken) {
   const path = `${COMMON_URL}${EMOJI}/${emojiId}/${TAGS}`;
   const data = {

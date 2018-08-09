@@ -1,4 +1,4 @@
-import { getRequest, patchRequest } from './base';
+import { getRequest, patchRequest, deleteRequest } from './base';
 import { COMMON_URL, SEARCH, EMOJI } from './constans';
 
 export const searchEmojis = (order, keyword, page = 0, target = null, accessToken = null) => {
@@ -25,4 +25,10 @@ export const editEmoji = (id, name, description, accessToken) => {
   };
 
   return patchRequest(path, { data, accessToken });
+};
+
+export const deleteEmoji = (id, accessToken) => {
+  const path = `${COMMON_URL}${EMOJI}/${id}`;
+
+  return deleteRequest(path, { accessToken });
 };

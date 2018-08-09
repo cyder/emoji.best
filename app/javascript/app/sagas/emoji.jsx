@@ -3,7 +3,7 @@ import { takeEvery, put } from 'redux-saga/effects';
 
 import { GET, EDIT, DELETE, ADD_TAG, DELETE_TAG } from '../constants/emoji';
 import { successGetEmoji, failedGetEmoji, successAddTag } from '../actions/emoji';
-import api, { deleteEmoji, createTag, deleteTag } from '../api';
+import api, { createTag, deleteTag } from '../api';
 
 function* sageGetEmoji(action) {
   try {
@@ -20,7 +20,7 @@ function* sageEditEmoji(action) {
 
 
 function* sageDeleteEmoji(action) {
-  yield deleteEmoji(action.id, action.accessToken);
+  yield api.deleteEmoji(action.id, action.accessToken);
 }
 
 function* sageAddTag(action) {
