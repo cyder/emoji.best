@@ -162,7 +162,7 @@ class Header extends Component {
               <Logo alt="emoji.best" src={this.state.logoImage} isSmall={isSmall} />
             </Link>
           </Title>
-          <SubTitle isSmall={isSmall} >{'Let\'s share emojis!!'}</SubTitle>
+          <SubTitle isSmall={isSmall} >{'Let\'s share custom emojis!!'}</SubTitle>
           <SearchFormArea isSmall={isSmall} >
             <SearchForm />
           </SearchFormArea>
