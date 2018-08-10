@@ -4,7 +4,6 @@
   description: emoji.description,
   number_of_downloaded: emoji.number_of_downloaded,
   images: {
-    large_url: emoji.image_url(:large),
     thumb_url: emoji.image_url(:thumb),
     slack_url: emoji.image_url(:slack),
   },

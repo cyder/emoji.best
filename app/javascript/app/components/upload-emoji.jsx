@@ -6,6 +6,7 @@ import faCircleNotch from '@fortawesome/fontawesome-free-solid/faCircleNotch';
 import faTimes from '@fortawesome/fontawesome-free-solid/faTimes';
 
 import { STATUS } from '../constants/upload-emoji';
+import EmojiImg from './atoms/emojis/emoji-img';
 
 const Container = styled.div`
   border: ${(props) => {
@@ -33,7 +34,7 @@ const FlexBox = styled.div`
   align-items: center;
 `;
 
-const Image = styled.img`
+const ImgWrapper = styled.div`
   width: 40px;
   height: 40px;
   margin: 10px;
@@ -166,7 +167,9 @@ class UploadEmoji extends Component {
                     {this.props.emoji.errorMessage}
                   </ErrorMessage>
                   <FlexBox>
-                    <Image src={image} />
+                    <ImgWrapper>
+                      <EmojiImg src={image} alt={this.state.name} />
+                    </ImgWrapper>
                     <Name>
                       emoji name
                       <TextForm

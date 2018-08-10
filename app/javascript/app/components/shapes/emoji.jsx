@@ -7,7 +7,6 @@ const EmojiShape = PropTypes.shape({
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   images: PropTypes.shape({
-    large_url: PropTypes.string.isRequired,
     slack_url: PropTypes.string.isRequired,
     thumb_url: PropTypes.string.isRequired,
   }).isRequired,

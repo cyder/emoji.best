@@ -8,12 +8,13 @@ import PropTypes from 'prop-types';
 
 import EmojiShape from './shapes/emoji';
 import UserShape from './shapes/user';
+import EmojiImg from './atoms/emojis/emoji-img';
 
 const Container = styled.div`
   display: flex;
 `;
 
-const Img = styled.img`
+const ImgWrapper = styled.div`
   width: 100px;
   height: 100px;
   margin: 10px;
@@ -155,7 +156,9 @@ class EmojiDetailInfo extends Component {
 
     return (
       <Container>
-        <Img alt={emoji.name} src={emoji.images.thumb_url} />
+        <ImgWrapper>
+          <EmojiImg src={emoji.images.thumb_url} alt={emoji.name} />
+        </ImgWrapper>
         <Info>
           <TitleArea>
             <div>

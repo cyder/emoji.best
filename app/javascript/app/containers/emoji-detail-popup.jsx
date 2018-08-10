@@ -12,6 +12,7 @@ import { STATUS } from '../constants/emoji';
 import * as EmojiActions from '../actions/emoji';
 import * as DownloadCartActions from '../actions/download-cart';
 import PopupBackground from '../components/popup-background';
+import HeadTitle from '../components/atoms/head/head-title';
 
 class EmojiDetailPopup extends Component {
   componentWillMount() {
@@ -34,6 +35,7 @@ class EmojiDetailPopup extends Component {
 
     return (
       <Wrapper>
+        <HeadTitle pageTitle={emoji && emoji.name} />
         <Container>
           {
             (() => {

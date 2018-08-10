@@ -1,11 +1,12 @@
 module ApplicationHelper
   def default_meta_tags
     {
-      site: "emoji.best",
+      site: "emoji.best - Let's share emojis!!",
       charset: "utf-8",
+      reverse: true,
       description: "This is posting site of emoji for slack. Let's share emojis!!",
       keywords: "emoji best cyder slack",
-      canonical: request.original_url,
+      canonical: request.base_url,
       icon: [
         { href: image_url("favicon.png") },
       ],
@@ -19,11 +20,11 @@ module ApplicationHelper
 
     def og_meta_tags
       {
-        site_name: "emoji.best",
-        title: "emoji.best",
-        description: "This is posting site of emoji for slack. Let's share emojis!!",
+        site_name: :site,
+        title: :full_title,
+        description: :description,
         type: "website",
-        url: request.original_url,
+        url: :canonical,
         image: image_url("ogp.png"),
       }
     end
