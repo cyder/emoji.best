@@ -26,5 +26,9 @@ Rails.application.routes.draw do
   end
 
   root to: "app#index"
+  get "/signin", to: "app#signin"
+  get "/signup", to: "app#signup"
+  get "/upload", to: "app#upload"
+  get "/emoji/:id", to: "emojis#show"
   get "/*path", to: "app#index"
 end
