@@ -3,10 +3,10 @@ import { takeEvery, put } from 'redux-saga/effects';
 
 import { SEARCH, LOAD_NEXT } from '../constants/emojis';
 import { successLoadEmojis } from '../actions/emojis';
-import { searchEmojis } from '../api';
+import api from '../api';
 
 function* sageSearchEmojis(action) {
-  const json = yield searchEmojis(
+  const json = yield api.searchEmojis(
     action.order,
     action.keyword,
     action.page,
