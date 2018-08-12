@@ -97,7 +97,7 @@ class SignUpPopup extends Component {
               onChange={e => this.setState({ passwordConfirm: e.target.value })}
             />
             <ButtonWrapper>
-              <FillButton label="Sign Up" onClick={this.submit} />
+              <FillButton onClick={this.submit} >Sign Up</FillButton>
             </ButtonWrapper>
           </Form>
           <Message>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { ButtonWrapper, Form } from './css/popup';
-import FillButton from './atoms/buttons/fill-button';
+import LabelAndIconButton from './molecules/buttons/label-and-icon-button';
 import * as Color from '../constants/styles/color';
 import * as Icon from '../constants/styles/icon';
 
@@ -41,7 +41,7 @@ class SnsOauth extends Component {
     return (
       <Form>
         <ButtonWrapper>
-          <FillButton
+          <LabelAndIconButton
             onClick={() => this.openWindow('/oauth/twitter')}
             label={`${this.props.caption} with Twitter`}
             backgroundColor={Color.TWITTER}
@@ -49,7 +49,7 @@ class SnsOauth extends Component {
           />
         </ButtonWrapper>
         <ButtonWrapper>
-          <FillButton
+          <LabelAndIconButton
             onClick={() => this.openWindow('/oauth/facebook')}
             label={`${this.props.caption} with Facebook`}
             backgroundColor={Color.FACEBOOK}
@@ -57,7 +57,7 @@ class SnsOauth extends Component {
           />
         </ButtonWrapper>
         <ButtonWrapper>
-          <FillButton
+          <LabelAndIconButton
             onClick={() => this.openWindow('/oauth/google')}
             label={`${this.props.caption} with Google`}
             backgroundColor={Color.GOOGLE}

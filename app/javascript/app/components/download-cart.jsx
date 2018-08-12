@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import DownloadCartShape from './shapes/download-cart';
 import EmojiImg from './atoms/emojis/emoji-img';
-import FillButton from './atoms/buttons/fill-button';
+import LabelAndIconButton from './molecules/buttons/label-and-icon-button';
 import { DOWNLOAD } from '../constants/styles/icon';
 
 const Container = styled.section`
@@ -95,7 +95,7 @@ const DownloadCart = ({
     </List>
     <Message>choose {cart.list.length} emojis</Message>
     <DownloadButtonWrapper>
-      <FillButton
+      <LabelAndIconButton
         label="download"
         icon={DOWNLOAD}
         href={cart.downloadLink}

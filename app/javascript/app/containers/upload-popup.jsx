@@ -144,7 +144,7 @@ class UploadPopup extends Component {
           </Emojis>
           <UploadMessage>choose {emojis.length} emojis</UploadMessage>
           <UploadButtonWrapper>
-            <FillButton label="Upload "onClick={this.onSubmit} />
+            <FillButton onClick={this.onSubmit} >Upload</FillButton>
           </UploadButtonWrapper>
           <CloseButton onClick={this.onClose} />
         </UploadContainer>

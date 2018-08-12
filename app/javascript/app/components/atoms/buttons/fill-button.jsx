@@ -3,19 +3,17 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { DARK, GRAY_ALPHA, WHITE } from '../../../constants/styles/color';
-import FaIcon from '../icons/faIcon';
 import Button from './button';
 import LinkButton from './link-button';
 
 
 const FillButton = ({
+  children,
   onClick,
   backgroundColor,
-  label,
   href,
   target,
   download,
-  icon,
 }) => (
   <Wrapper backgroundColor={backgroundColor}>
     {
@@ -26,24 +24,18 @@ const FillButton = ({
           target={target}
           href={href}
         >
-          {label}
+          { children }
         </LinkButton>
       ) : (
         <Button onClick={onClick}>
-          {label}
+          { children }
         </Button>
       )
     }
-    {icon && (
-      <IconWrapper>
-        <FaIcon icon={icon} />
-      </IconWrapper>
-    )}
   </Wrapper>
 );
 
 const Wrapper = styled.div`
-  position: relative;
   color: ${WHITE};
   border-radius: 1000px;
   background-color: ${props => (props.backgroundColor)};
@@ -51,35 +43,25 @@ const Wrapper = styled.div`
   line-height: 2.6rem;
   font-weight: bold;
   border: solid 3px ${GRAY_ALPHA};
-  box-sizing: border-box;
   cursor: pointer;
 `;
 
-const IconWrapper = styled.div`
-  font-size: 1.3rem;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 20px;
-`;
-
 FillButton.propTypes = {
+  children: PropTypes.node,
   onClick: PropTypes.func,
   backgroundColor: PropTypes.string,
-  label: PropTypes.string.isRequired,
   href: PropTypes.string,
   target: PropTypes.string,
   download: PropTypes.bool,
-  icon: PropTypes.string,
 };
 
 FillButton.defaultProps = {
-  onClick: null,
+  onClick: undefined,
   backgroundColor: DARK,
-  href: null,
-  target: null,
-  download: false,
-  icon: null,
+  href: undefined,
+  target: undefined,
+  download: undefined,
+  children: undefined,
 };
 
 export default FillButton;

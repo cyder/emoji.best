@@ -83,7 +83,7 @@ class SignInPopup extends Component {
               onChange={e => this.setState({ password: e.target.value })}
             />
             <ButtonWrapper>
-              <FillButton onClick={this.submit} label="Sign In" />
+              <FillButton onClick={this.submit} >Sign In</FillButton>
             </ButtonWrapper>
           </Form>
           <Message>
