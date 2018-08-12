@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { DARK, GRAY_ALPHA, WHITE } from '../../../constants/styles/color';
 import FaIcon from '../icons/faIcon';
+import Button from './button';
 
 
 const FillButton = ({
@@ -55,17 +56,6 @@ const Wrapper = styled.div`
 
 const LinkButton = styled.a`
   display: block;
-  text-align: center;
-`;
-
-const Button = styled.button`
-  display: block;
-  background-color: transparent;
-  border: none;
-  width: 100%;
-  color: inherit;
-  line-height: inherit;
-  cursor: inherit;
   text-align: center;
 `;
 

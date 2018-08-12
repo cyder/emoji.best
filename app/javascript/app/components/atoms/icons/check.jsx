@@ -12,6 +12,8 @@ const Check = ({ color }) => (
 
 const Wrapper = styled.div`
   position: relative;
+  width: 50px;
+  height: 50px;
 `;
 
 const Icon = styled.div`
