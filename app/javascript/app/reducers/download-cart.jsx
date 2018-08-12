@@ -1,19 +1,25 @@
 import * as types from '../constants/download-cart';
-import { downloadEmojisLink } from '../api/';
 
 const initialState = {
   list: [],
   downloadLink: '',
 };
 
+const generateDownloadLink = (list) => {
+  const params = new URLSearchParams();
+  list.forEach(emoji => params.append('emojis[]', emoji.id));
+  return `/api/v1/download?${params.toString()}`;
+};
+
 const downloadCart = (state = initialState, action) => {
   switch (action.type) {
     case types.ADD: {
       const list = [action.emoji, ...state.list];
+
       return {
         ...state,
         list,
-        downloadLink: downloadEmojisLink(list),
+        downloadLink: generateDownloadLink(list),
       };
     }
     case types.DELETE: {
@@ -21,7 +27,7 @@ const downloadCart = (state = initialState, action) => {
       return {
         ...state,
         list,
-        downloadLink: downloadEmojisLink(list),
+        downloadLink: generateDownloadLink(list),
       };
     }
     case types.DOWNLOAD:

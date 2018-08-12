@@ -9,13 +9,14 @@
     "@rails/webpacker": "^3.4.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-react": "^6.24.1",
-    "js-cookie": "^2.2.0",
     "history": "^4.7.2",
+    "js-cookie": "^2.2.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-dropzone": "^4.2.13",
     "react-ga": "^2.5.3",
+    "react-helmet": "^5.2.0",
     "react-redux": "^5.0.7",
     "react-resize-detector": "^3.0.1",
     "react-router-dom": "^4.3.1",
@@ -26,6 +27,7 @@
     "redux-saga": "^0.16.0",
     "style-loader": "^0.21.0",
     "styled-components": "^3.3.2",
+    "url-search-params-polyfill": "^4.0.1",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

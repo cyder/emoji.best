@@ -22,6 +22,7 @@ import {
   CloseButton,
   ErrorMessage,
 } from '../components/css/popup';
+import HeadTitle from '../components/atoms/head/head-title';
 
 class SignInPopup extends Component {
   constructor(props) {
@@ -58,6 +59,7 @@ class SignInPopup extends Component {
   render() {
     return (
       <Wrapper>
+        <HeadTitle pageTitle="Sign In" />
         <Container>
           <Title>Sign In</Title>
           <SnsOauth

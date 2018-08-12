@@ -7,6 +7,7 @@ import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
 
 import EmojiShape from './shapes/emoji';
 import DownloadCheckbox from './molecules/buttons/download-checkbox';
+import EmojiImg from './atoms/emojis/emoji-img';
 
 const Container = styled.article`
   position: relative;
@@ -40,7 +41,7 @@ const Name = styled.span`
   word-break: break-all
 `;
 
-const Img = styled.img`
+const ImgWrapper = styled.div`
   width: 50px;
   height: 50px;
 `;
@@ -67,7 +68,9 @@ const Emoji = ({
   <Container>
     <DetailLink to={{ pathname: `/emoji/${emoji.id}`, state: 'popup' }} >
       <TitleArea>
-        <Img alt={emoji.name} src={emoji.images.thumb_url} />
+        <ImgWrapper>
+          <EmojiImg src={emoji.images.thumb_url} alt={emoji.name} />
+        </ImgWrapper>
         <Title>:<Name>{emoji.name}</Name>:</Title>
       </TitleArea>
       <Menus>

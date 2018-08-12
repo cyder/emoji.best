@@ -67,6 +67,20 @@ class Emoji < ApplicationRecord
     emoji
   end
 
+  def to_meta_tags
+    tags_name = tags.pluck(:name).join(", ")
+    tags_description = tags_name.empty? ? "" : "(tags: #{tags_name})"
+    meta_description = "Detail of \"#{name}\" custom Emoji. #{description} #{tags_description}"
+
+    {
+      title: name,
+      description: meta_description,
+      keywords: tags_name,
+      og: { image: image.ogp },
+      twitter: { card: "summary" },
+    }
+  end
+
   private
 
     def replace_space

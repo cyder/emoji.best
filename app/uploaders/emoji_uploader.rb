@@ -1,24 +1,17 @@
 class EmojiUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  version :large do
-    process create_square_version: 512
-  end
-
-  version :thumb, from_version: :large do
+  version :thumb do
     process resize_to_limit: [256, 256]
   end
 
-  version :slack, from_version: :large do
+  version :slack, from_version: :thumb do
     process resize_to_limit: [128, 128]
   end
 
-  def create_square_version(max)
-    image = MiniMagick::Image.open(current_path)
-    width = image[:width]
-    height = image[:height]
-    length = [width, height, max].min
-    resize_to_fill(length, length)
+  version :ogp, from_version: :thumb do
+    process resize_to_fit: [200, 200]
+    process resize_and_pad: [200, 200, "#ffffff"]
   end
 
   def store_dir

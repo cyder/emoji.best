@@ -21,6 +21,7 @@ import {
   CloseButton,
   ErrorMessage,
 } from '../components/css/popup';
+import HeadTitle from '../components/atoms/head/head-title';
 import FillButton from '../components/atoms/buttons/fill-button';
 
 class SignUpPopup extends Component {
@@ -62,6 +63,7 @@ class SignUpPopup extends Component {
   render() {
     return (
       <Wrapper>
+        <HeadTitle pageTitle="Sign Up" />
         <Container>
           <Title>Sign Up</Title>
           <SnsOauth
