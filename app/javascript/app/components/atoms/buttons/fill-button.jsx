@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { DARK, GRAY_ALPHA, WHITE } from '../../../constants/styles/color';
 import FaIcon from '../icons/faIcon';
 import Button from './button';
+import LinkButton from './link-button';
 
 
 const FillButton = ({
@@ -52,11 +53,6 @@ const Wrapper = styled.div`
   border: solid 3px ${GRAY_ALPHA};
   box-sizing: border-box;
   cursor: pointer;
-`;
-
-const LinkButton = styled.a`
-  display: block;
-  text-align: center;
 `;
 
 const IconWrapper = styled.div`
