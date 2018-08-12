@@ -6,9 +6,9 @@ import Tags from './tags';
 import EmojiDetailInfo from './emoji-detail-info';
 import { CloseButton } from '../components/css/popup';
 import EmojiShape from './shapes/emoji';
+import DownloadIcon from './atoms/icons/download';
 import DownloadCheckbox from './molecules/buttons/download-checkbox';
 import LabelAndIconButton from './molecules/buttons/label-and-icon-button';
-import { DOWNLOAD } from '../constants/styles/icon';
 
 const Content = styled.div`
   max-width: 660px;
@@ -61,7 +61,7 @@ const EmojiPopup = ({
     <DownloadButtonWrapper>
       <LabelAndIconButton
         label="download"
-        icon={DOWNLOAD}
+        icon={<DownloadIcon />}
         href={`/api/v1/emojis/${emoji.id}/download`}
         download
       />

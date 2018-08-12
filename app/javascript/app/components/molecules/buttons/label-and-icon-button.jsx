@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import { WHITE } from '../../../constants/styles/color';
 import FillButton from '../../atoms/buttons/fill-button';
-import FaIcon from '../../atoms/icons/faIcon';
 
 const LabelAndIconButton = ({
   label,
@@ -28,7 +27,7 @@ const LabelAndIconButton = ({
     {
       icon && (
         <IconWrapper>
-          <FaIcon icon={icon} />
+          { icon }
         </IconWrapper>
       )
     }
@@ -53,7 +52,7 @@ const IconWrapper = styled.div`
 
 LabelAndIconButton.propTypes = {
   label: PropTypes.string.isRequired,
-  icon: PropTypes.string,
+  icon: PropTypes.node,
   onClick: PropTypes.func,
   backgroundColor: PropTypes.string,
   href: PropTypes.string,

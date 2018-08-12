@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 
 import { ButtonWrapper, Form } from './css/popup';
 import LabelAndIconButton from './molecules/buttons/label-and-icon-button';
+import TwitterIcon from './atoms/icons/twitter';
+import FacebookIcon from './atoms/icons/facebook';
+import GoogleIcon from './atoms/icons/google';
 import * as Color from '../constants/styles/color';
-import * as Icon from '../constants/styles/icon';
 
 const Cookies = require('js-cookie');
 
@@ -45,7 +47,7 @@ class SnsOauth extends Component {
             onClick={() => this.openWindow('/oauth/twitter')}
             label={`${this.props.caption} with Twitter`}
             backgroundColor={Color.TWITTER}
-            icon={Icon.TWITTER}
+            icon={<TwitterIcon />}
           />
         </ButtonWrapper>
         <ButtonWrapper>
@@ -53,7 +55,7 @@ class SnsOauth extends Component {
             onClick={() => this.openWindow('/oauth/facebook')}
             label={`${this.props.caption} with Facebook`}
             backgroundColor={Color.FACEBOOK}
-            icon={Icon.FACEBOOK}
+            icon={<FacebookIcon />}
           />
         </ButtonWrapper>
         <ButtonWrapper>
@@ -61,7 +63,7 @@ class SnsOauth extends Component {
             onClick={() => this.openWindow('/oauth/google')}
             label={`${this.props.caption} with Google`}
             backgroundColor={Color.GOOGLE}
-            icon={Icon.GOOGLE}
+            icon={<GoogleIcon />}
           />
         </ButtonWrapper>
       </Form>

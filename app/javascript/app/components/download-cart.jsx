@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 import DownloadCartShape from './shapes/download-cart';
 import EmojiImg from './atoms/emojis/emoji-img';
+import DownloadIcon from './atoms/icons/download';
 import LabelAndIconButton from './molecules/buttons/label-and-icon-button';
-import { DOWNLOAD } from '../constants/styles/icon';
 
 const Container = styled.section`
   display: ${props => (props.list.length === 0 ? 'none' : 'block')};
@@ -97,7 +97,7 @@ const DownloadCart = ({
     <DownloadButtonWrapper>
       <LabelAndIconButton
         label="download"
-        icon={DOWNLOAD}
+        icon={<DownloadIcon />}
         href={cart.downloadLink}
         onClick={() => downloadEmojis(cart.list)}
         target="_blank"
