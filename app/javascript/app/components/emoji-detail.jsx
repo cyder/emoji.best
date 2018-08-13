@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
 import PropTypes from 'prop-types';
 
 import Tags from './tags';
 import EmojiDetailInfo from './emoji-detail-info';
 import { CloseButton } from '../components/css/popup';
 import EmojiShape from './shapes/emoji';
+import DownloadIcon from './atoms/icons/download';
 import DownloadCheckbox from './molecules/buttons/download-checkbox';
+import LabelAndIconButton from './molecules/buttons/label-and-icon-button';
 
 const Content = styled.div`
   max-width: 660px;
@@ -17,19 +17,9 @@ const Content = styled.div`
   border-bottom: 2px solid #eeeeee;
 `;
 
-const DownloadButton = styled.a`
-  display: block;
-  width: 200px;
-  height: 38px;
+const DownloadButtonWrapper = styled.div`
+  width: 240px;
   margin: 15px auto;
-  color: #ffffff;
-  background-color: #464646;
-  font-size: 1rem;
-  border: solid 3px #dfdfdf;
-  border-radius: 25px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 38px;
 `;
 
 const DownloadCheckboxWrapper = styled.div`
@@ -68,12 +58,14 @@ const EmojiPopup = ({
         accessToken={myself.accessToken}
       />
     </Content>
-    <DownloadButton
-      href={`/api/v1/emojis/${emoji.id}/download`}
-      download
-    >
-      <FontAwesomeIcon icon={faDownload} /> download
-    </DownloadButton>
+    <DownloadButtonWrapper>
+      <LabelAndIconButton
+        label="download"
+        icon={<DownloadIcon />}
+        href={`/api/v1/emojis/${emoji.id}/download`}
+        download
+      />
+    </DownloadButtonWrapper>
     <DownloadCheckboxWrapper>
       <DownloadCheckbox
         isChecked={isAddedToCart}

@@ -1,22 +1,14 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { Button, Form } from './css/popup';
+import { ButtonWrapper, Form } from './css/popup';
+import LabelAndIconButton from './molecules/buttons/label-and-icon-button';
+import TwitterIcon from './atoms/icons/twitter';
+import FacebookIcon from './atoms/icons/facebook';
+import GoogleIcon from './atoms/icons/google';
+import * as Color from '../constants/styles/color';
 
 const Cookies = require('js-cookie');
-
-export const TwitterButton = styled(Button)`
-  background-color: #65cce9;
-`;
-
-export const FacebookButton = styled(Button)`
-  background-color: #4e83b7;
-`;
-
-export const GoogleButton = styled(Button)`
-  background-color: #d47b5f;
-`;
 
 class SnsOauth extends Component {
   constructor(props) {
@@ -50,15 +42,30 @@ class SnsOauth extends Component {
   render() {
     return (
       <Form>
-        <TwitterButton onClick={() => this.openWindow('/oauth/twitter')}>
-          { this.props.caption } with Twitter
-        </TwitterButton>
-        <FacebookButton onClick={() => this.openWindow('/oauth/facebook')}>
-          { this.props.caption } with Facebook
-        </FacebookButton>
-        <GoogleButton onClick={() => this.openWindow('/oauth/google')}>
-          { this.props.caption } with Google
-        </GoogleButton>
+        <ButtonWrapper>
+          <LabelAndIconButton
+            onClick={() => this.openWindow('/oauth/twitter')}
+            label={`${this.props.caption} with Twitter`}
+            backgroundColor={Color.TWITTER}
+            icon={<TwitterIcon />}
+          />
+        </ButtonWrapper>
+        <ButtonWrapper>
+          <LabelAndIconButton
+            onClick={() => this.openWindow('/oauth/facebook')}
+            label={`${this.props.caption} with Facebook`}
+            backgroundColor={Color.FACEBOOK}
+            icon={<FacebookIcon />}
+          />
+        </ButtonWrapper>
+        <ButtonWrapper>
+          <LabelAndIconButton
+            onClick={() => this.openWindow('/oauth/google')}
+            label={`${this.props.caption} with Google`}
+            backgroundColor={Color.GOOGLE}
+            icon={<GoogleIcon />}
+          />
+        </ButtonWrapper>
       </Form>
     );
   }

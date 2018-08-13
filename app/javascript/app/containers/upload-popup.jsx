@@ -18,6 +18,7 @@ import {
   CloseButton,
 } from '../components/css/popup';
 import HeadTitle from '../components/atoms/head/head-title';
+import FillButton from '../components/atoms/buttons/fill-button';
 
 const UploadContainer = styled(Container)`
   width: 80vw;
@@ -60,20 +61,9 @@ const UploadMessage = styled.p`
   margin: 0 0 10px;
 `;
 
-const UploadButton = styled.button`
-  display: block;
+const UploadButtonWrapper = styled.div`
   width: 240px;
-  height: 44px;
-  margin: auto;
-  color: #ffffff;
-  background-color: #464646;
-  font-size: 1.1rem;
-  border: solid 3px #dfdfdf;
-  border-radius: 25px;
-  font-weight: bold;
-  text-decoration: none;
-  text-align: center;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
 `;
 
 class UploadPopup extends Component {
@@ -153,7 +143,9 @@ class UploadPopup extends Component {
             }
           </Emojis>
           <UploadMessage>choose {emojis.length} emojis</UploadMessage>
-          <UploadButton onClick={this.onSubmit}>Upload</UploadButton>
+          <UploadButtonWrapper>
+            <FillButton onClick={this.onSubmit} >Upload</FillButton>
+          </UploadButtonWrapper>
           <CloseButton onClick={this.onClose} />
         </UploadContainer>
         <PopupBackground onClose={this.onClose} />
