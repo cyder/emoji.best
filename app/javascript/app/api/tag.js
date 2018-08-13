@@ -1,5 +1,5 @@
 import { postRequest, deleteRequest } from './base';
-import { COMMON_URL, EMOJI, TAGS } from './constans';
+import { COMMON_URL, EMOJI, TAGS } from './constants';
 
 export const createTag = (emojiId, name, accessToken) => {
   const path = `${COMMON_URL}${EMOJI}/${emojiId}/${TAGS}`;

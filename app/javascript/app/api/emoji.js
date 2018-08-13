@@ -10,7 +10,7 @@ import {
   SEARCH,
   EMOJI,
   EMOJIS_UPLOAD,
-} from './constans';
+} from './constants';
 
 export const searchEmojis = (order, keyword, page = 0, target = null, accessToken = null) => {
   const data = { page };
