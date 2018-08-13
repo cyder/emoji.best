@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import SnsOauth from '../components/sns-oauth';
 import * as MyselfActions from '../actions/myself';
 import PopupBackground from '../components/popup-background';
+import FillButton from '../components/atoms/buttons/fill-button';
 
 import {
   Wrapper,
@@ -15,7 +16,7 @@ import {
   Or,
   Form,
   TextForm,
-  Button,
+  ButtonWrapper,
   Message,
   SwitchLink,
   CloseButton,
@@ -81,7 +82,9 @@ class SignInPopup extends Component {
               placeholder="Password"
               onChange={e => this.setState({ password: e.target.value })}
             />
-            <Button onClick={this.submit}>Sign In</Button>
+            <ButtonWrapper>
+              <FillButton onClick={this.submit} >Sign In</FillButton>
+            </ButtonWrapper>
           </Form>
           <Message>
             Not a member?

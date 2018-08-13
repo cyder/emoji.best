@@ -78,6 +78,10 @@ export const TextForm = styled.input`
   }
 `;
 
+export const ButtonWrapper = styled.div`
+  margin: 15px 0 10px;
+`;
+
 export const Button = styled.button`
   display: block;
   width: 100%;

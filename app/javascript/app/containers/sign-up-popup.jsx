@@ -15,13 +15,14 @@ import {
   Or,
   Form,
   TextForm,
-  Button,
+  ButtonWrapper,
   Message,
   SwitchLink,
   CloseButton,
   ErrorMessage,
 } from '../components/css/popup';
 import HeadTitle from '../components/atoms/head/head-title';
+import FillButton from '../components/atoms/buttons/fill-button';
 
 class SignUpPopup extends Component {
   constructor(props) {
@@ -95,7 +96,9 @@ class SignUpPopup extends Component {
               placeholder="Password (Confirm)"
               onChange={e => this.setState({ passwordConfirm: e.target.value })}
             />
-            <Button onClick={this.submit}>Sign Up</Button>
+            <ButtonWrapper>
+              <FillButton onClick={this.submit} >Sign Up</FillButton>
+            </ButtonWrapper>
           </Form>
           <Message>
             Already a member?
