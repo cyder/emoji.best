@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faDownload from '@fortawesome/fontawesome-free-solid/faDownload';
 
 import DownloadCartShape from './shapes/download-cart';
 import EmojiImg from './atoms/emojis/emoji-img';
+import DownloadIcon from './atoms/icons/download';
+import LabelAndIconButton from './molecules/buttons/label-and-icon-button';
 
 const Container = styled.section`
   display: ${props => (props.list.length === 0 ? 'none' : 'block')};
@@ -69,19 +69,10 @@ const Message = styled.p`
   margin: 0;
 `;
 
-const DownloadButton = styled.a`
+const DownloadButtonWrapper = styled.div`
   display: block;
   width: 240px;
-  height: 44px;
   margin: 15px auto;
-  color: #ffffff;
-  background-color: #464646;
-  font-size: 1.1rem;
-  border: solid 3px #dfdfdf;
-  border-radius: 25px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 44px;
 `;
 
 const DownloadCart = ({
@@ -103,14 +94,16 @@ const DownloadCart = ({
       }
     </List>
     <Message>choose {cart.list.length} emojis</Message>
-    <DownloadButton
-      href={cart.downloadLink}
-      onClick={() => downloadEmojis(cart.list)}
-      target="_blank"
-      download
-    >
-      <FontAwesomeIcon icon={faDownload} /> download
-    </DownloadButton>
+    <DownloadButtonWrapper>
+      <LabelAndIconButton
+        label="download"
+        icon={<DownloadIcon />}
+        href={cart.downloadLink}
+        onClick={() => downloadEmojis(cart.list)}
+        target="_blank"
+        download
+      />
+    </DownloadButtonWrapper>
   </Container>
 );
 

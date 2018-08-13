@@ -2,19 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import Button from './button';
 import { BLACK } from '../../../constants/styles/color';
 
 
 const CircleButton = ({ onClick, backgroundColor, children }) => (
-  <Button
-    onClick={onClick}
-    backgroundColor={backgroundColor}
-  >
-    { children }
-  </Button>
+  <ButtonWrapper backgroundColor={backgroundColor} >
+    <Button onClick={onClick} >
+      { children }
+    </Button>
+  </ButtonWrapper>
 );
 
-const Button = styled.div`
+const ButtonWrapper = styled.div`
   width: 50px;
   height: 50px;
   border-radius: 25px;

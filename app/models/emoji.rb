@@ -70,7 +70,9 @@ class Emoji < ApplicationRecord
   def to_meta_tags
     tags_name = tags.pluck(:name).join(", ")
     tags_description = tags_name.empty? ? "" : "(tags: #{tags_name})"
-    meta_description = "Detail of \"#{name}\" custom Emoji. #{description} #{tags_description}"
+    site_description = "emoji.best is a crowdsourced site for posting custom emojis for Slack or Discord. Let's share custom emojis!!"
+    emoji_description = "Detail of \"#{name}\" custom Emoji."
+    meta_description = "#{emoji_description} #{description} #{tags_description} | #{site_description}"
 
     {
       title: name,

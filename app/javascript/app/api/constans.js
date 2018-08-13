@@ -1,0 +1,11 @@
+export const COMMON_URL = '/api/v1/';
+export const SEARCH = 'search';
+export const EMOJI = 'emojis';
+export const DOWNLOAD = 'download';
+export const AUTH = 'users/authentication';
+export const SIGNIN = 'users/sign_in';
+export const SIGNUP = 'users';
+export const SIGNOUT = 'users/sign_out';
+export const EMOJIS = 'emojis';
+export const EMOJIS_UPLOAD = 'emojis/upload';
+export const TAGS = 'tags';

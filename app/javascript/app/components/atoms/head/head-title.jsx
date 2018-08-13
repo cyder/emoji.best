@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const HeadTitle = ({ pageTitle }) => {
   const prefix = pageTitle ? `${pageTitle} | ` : '';
-  const siteTitle = 'emoji.best - Let\'s share emojis!!';
+  const siteTitle = 'emoji.best - Let\'s share custom emojis!!';
   const title = `${prefix}${siteTitle}`;
 
   return (
