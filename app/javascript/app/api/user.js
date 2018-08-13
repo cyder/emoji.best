@@ -5,7 +5,7 @@ import {
   SIGNIN,
   SIGNUP,
   SIGNOUT,
-} from './constans';
+} from './constants';
 
 export const authentication = (accessToken) => {
   const path = `${COMMON_URL}${AUTH}`;
