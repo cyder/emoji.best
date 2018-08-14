@@ -34,7 +34,7 @@ gem "jb"
 
 gem "carrierwave"
 gem "dotenv-rails"
-gem "fog"
+gem "fog-aws"
 gem "meta-tags"
 gem "mini_magick"
 gem "search_cop"
