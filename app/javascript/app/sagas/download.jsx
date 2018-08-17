@@ -2,6 +2,7 @@ import 'babel-polyfill';
 import { takeEvery } from 'redux-saga/effects';
 
 import { DOWNLOAD as DOWNLOAD_EMOJI } from '../constants/emoji';
+import { DOWNLOAD as DOWNLOAD_EMOJIS } from '../constants/download-cart';
 import api from '../api';
 
 function downloadBlob(blob, name) {
@@ -16,6 +17,12 @@ function* sageDownloadEmoji(action) {
   downloadBlob(blob, action.emoji.name);
 }
 
+function* sageDownloadEmojis(action) {
+  const blob = yield api.downloadEmojis(action.emojis, action.accessToken);
+  downloadBlob(blob, 'emojis');
+}
+
 export default function* emojiSaga() {
   yield takeEvery(DOWNLOAD_EMOJI, sageDownloadEmoji);
+  yield takeEvery(DOWNLOAD_EMOJIS, sageDownloadEmojis);
 }
