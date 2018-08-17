@@ -40,6 +40,7 @@ const EmojiPopup = ({
   deleteEmojiFromDownloadCart,
   addEmojiToDownloadCart,
   push,
+  downloadEmoji,
 }) => (
   <article>
     <Content>
@@ -62,7 +63,11 @@ const EmojiPopup = ({
       <LabelAndIconButton
         label="download"
         icon={<DownloadIcon />}
-        href={`/api/v1/emojis/${emoji.id}/download`}
+        href="#"
+        onClick={(e) => {
+          e.preventDefault();
+          downloadEmoji(emoji, myself.accessToken);
+        }}
         download
       />
     </DownloadButtonWrapper>
@@ -92,6 +97,7 @@ EmojiPopup.propTypes = {
   myself: PropTypes.shape({
     accessToken: PropTypes.string,
   }).isRequired,
+  downloadEmoji: PropTypes.func.isRequired,
 };
 
 export default EmojiPopup;
