@@ -9,7 +9,9 @@ function downloadBlob(blob, name) {
   const a = document.createElement('a');
   a.href = window.URL.createObjectURL(blob);
   a.download = name;
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
 }
 
 function* sageDownloadEmoji(action) {
