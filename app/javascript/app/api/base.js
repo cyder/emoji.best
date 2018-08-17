@@ -13,15 +13,15 @@ export const baseRequest = (path, params) => (
       }
       return response;
     })
-    .then(response => response.json())
 );
 
 /**
  * get request
  * @param {string} path - URL指定
- * @param {object} [params={}] - オプション
+ * @param {object} [options={}] - オプション
  *  data: 送信データオブジェクト
  *  accessToken: アクセストークン
+ *  responseAs: blob / json / arrayBuffer / formData / text
  */
 export const getRequest = (path, options = {}) => {
   const headers = {
@@ -32,17 +32,18 @@ export const getRequest = (path, options = {}) => {
   const params = options.data !== null ? new URLSearchParams(options.data) : null;
   const uri = params !== null ? `${path}?${params.toString()}` : path;
 
-  return baseRequest(uri, { headers });
+  return baseRequest(uri, { headers }).then(response => response[options.responseAs || 'json']());
 };
 
 /**
  * post request(delete, fetchも可能)
  * @param {string} path - URL指定
- * @param {object} [params={}] - オプション
+ * @param {object} [options={}] - オプション
  *  data: 送信データオブジェクト
  *  accessToken: アクセストークン
  *  method: POST / DELETE / FETCH
  *  isFile: ファイルをform-dataで送る際にtureにする。
+ *  responseAs: blob / json / arrayBuffer / formData / text
  */
 export const postRequest = (path, options = {}) => {
   const headers = {
@@ -73,7 +74,7 @@ export const postRequest = (path, options = {}) => {
     body,
   };
 
-  return baseRequest(path, params);
+  return baseRequest(path, params).then(response => response[options.responseAs || 'json']());
 };
 
 /**
