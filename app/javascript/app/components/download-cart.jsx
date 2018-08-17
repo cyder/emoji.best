@@ -98,7 +98,7 @@ const DownloadCart = ({
       <LabelAndIconButton
         label="download"
         icon={<DownloadIcon />}
-        href={cart.downloadLink}
+        href="#"
         onClick={(e) => {
           e.preventDefault();
           downloadEmojis(cart.list);
