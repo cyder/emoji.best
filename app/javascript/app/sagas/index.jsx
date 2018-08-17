@@ -5,6 +5,7 @@ import emojisSaga from './emojis';
 import emojiSaga from './emoji';
 import myself from './myself';
 import uploadEmoji from './upload-emoji';
+import download from './download';
 
 export default function* rootSaga() {
   yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     emojiSaga(),
     myself(),
     uploadEmoji(),
+    download(),
   ]);
 }
