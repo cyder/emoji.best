@@ -66,7 +66,7 @@ export const saveEmoji = (name, description, image, accessToken) => {
 
 export const downloadEmoji = (id, accessToken) => {
   const path = `${COMMON_URL}${EMOJI}/${id}/${DOWNLOAD}`;
-  return getRequest(path, { accessToken, responseAs: 'blob' });
+  return postRequest(path, { accessToken, responseAs: 'blob' });
 };
 
 export const downloadEmojis = (list, accessToken) => {
@@ -74,5 +74,5 @@ export const downloadEmojis = (list, accessToken) => {
   list.forEach(emoji => params.append('emojis[]', emoji.id));
 
   const path = `${COMMON_URL}${DOWNLOAD}?${params.toString()}`;
-  return getRequest(path, { accessToken, responseAs: 'blob' });
+  return postRequest(path, { accessToken, responseAs: 'blob' });
 };
