@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "GET /api/v1/emojis/:id/download" do
+describe "POST /api/v1/emojis/:id/download" do
   let(:id) { create(:emoji).id }
 
   context "with valid params" do
@@ -24,7 +24,7 @@ describe "GET /api/v1/emojis/:id/download" do
   end
 end
 
-describe "GET /api/v1/download" do
+describe "POST /api/v1/download" do
   let(:emoji1) { create(:emoji, name: "emoji1") }
   let(:emoji2) { create(:emoji, name: "emoji2") }
   let(:emojis) { [emoji1.id, emoji2.id] }

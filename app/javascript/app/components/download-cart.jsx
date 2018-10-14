@@ -98,8 +98,10 @@ const DownloadCart = ({
       <LabelAndIconButton
         label="download"
         icon={<DownloadIcon />}
-        href={cart.downloadLink}
-        onClick={() => downloadEmojis(cart.list)}
+        onClick={(e) => {
+          e.preventDefault();
+          downloadEmojis(cart.list);
+        }}
         target="_blank"
         download
       />
