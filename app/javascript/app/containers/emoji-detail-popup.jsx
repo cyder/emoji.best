@@ -54,6 +54,7 @@ class EmojiDetailPopup extends Component {
                       deleteTag={this.props.deleteTag}
                       addTag={this.props.addTag}
                       myself={this.props.myself}
+                      downloadEmoji={this.props.downloadEmoji}
                     />
                   );
                 case STATUS.ERROR:
@@ -107,6 +108,7 @@ EmojiDetailPopup.propTypes = {
   deleteEmoji: PropTypes.func.isRequired,
   addEmojiToDownloadCart: PropTypes.func.isRequired,
   deleteEmojiFromDownloadCart: PropTypes.func.isRequired,
+  downloadEmoji: PropTypes.func.isRequired,
   downloadCart: DownloadCartShape.isRequired,
   addTag: PropTypes.func.isRequired,
   deleteTag: PropTypes.func.isRequired,

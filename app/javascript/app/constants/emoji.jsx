@@ -1,6 +1,7 @@
 export const GET = 'emoji/GET';
 export const EDIT = 'emoji/EDIT';
 export const DELETE = 'emoji/DELETE';
+export const DOWNLOAD = 'emoji/DOWNLOAD';
 export const SUCCESS_GET = 'emoji/SUCCESS_GET';
 export const FAILED_GET = 'emoji/FAILED_GET';
 export const ADD_TAG = 'emoji/ADD_TAG';

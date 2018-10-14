@@ -18,6 +18,10 @@ export function deleteEmoji(id, accessToken) {
   return { type: types.DELETE, id, accessToken };
 }
 
+export function downloadEmoji(emoji, accessToken) {
+  return { type: types.DOWNLOAD, emoji, accessToken };
+}
+
 export function successGetEmoji(emoji) {
   return { type: types.SUCCESS_GET, emoji };
 }

@@ -7,6 +7,7 @@ import {
 
 import {
   COMMON_URL,
+  DOWNLOAD,
   SEARCH,
   EMOJI,
   EMOJIS_UPLOAD,
@@ -61,4 +62,17 @@ export const saveEmoji = (name, description, image, accessToken) => {
     },
   };
   return postRequest(path, { data, accessToken });
+};
+
+export const downloadEmoji = (id, accessToken) => {
+  const path = `${COMMON_URL}${EMOJI}/${id}/${DOWNLOAD}`;
+  return getRequest(path, { accessToken, responseAs: 'blob' });
+};
+
+export const downloadEmojis = (list, accessToken) => {
+  const params = new URLSearchParams();
+  list.forEach(emoji => params.append('emojis[]', emoji.id));
+
+  const path = `${COMMON_URL}${DOWNLOAD}?${params.toString()}`;
+  return getRequest(path, { accessToken, responseAs: 'blob' });
 };
