@@ -69,13 +69,10 @@ export const downloadEmoji = (id, accessToken) => {
   return getRequest(path, { accessToken, responseAs: 'blob' });
 };
 
-const generateDownloadLink = (list) => {
+export const downloadEmojis = (list, accessToken) => {
   const params = new URLSearchParams();
   list.forEach(emoji => params.append('emojis[]', emoji.id));
-  return `${COMMON_URL}${DOWNLOAD}?${params.toString()}`;
-};
 
-export const downloadEmojis = (list, accessToken) => {
-  const path = generateDownloadLink(list);
+  const path = `${COMMON_URL}${DOWNLOAD}?${params.toString()}`;
   return getRequest(path, { accessToken, responseAs: 'blob' });
 };
