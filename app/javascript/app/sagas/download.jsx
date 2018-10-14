@@ -7,10 +7,10 @@ import api from '../api';
 
 function downloadBlob(blob, name) {
   const a = document.createElement('a');
-  const mimeType = blob.type || 'image/png';
-  const ext = mimeType.substr(mimeType.lastIndexOf('/') + 1);
+  const mimeType = blob.type;
+  const ext = mimeType ? `.${mimeType.substr(mimeType.lastIndexOf('/') + 1)}` : '';
   a.href = window.URL.createObjectURL(blob);
-  a.download = `${name}.${ext}`;
+  a.download = `${name}${ext}`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
