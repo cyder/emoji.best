@@ -63,7 +63,6 @@ const EmojiPopup = ({
       <LabelAndIconButton
         label="download"
         icon={<DownloadIcon />}
-        href="#"
         onClick={(e) => {
           e.preventDefault();
           downloadEmoji(emoji, myself.accessToken);
