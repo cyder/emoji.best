@@ -4,8 +4,9 @@ const csrfToken = document.querySelector('meta[name=csrf-token]').content;
  * requestの基本メソッド
  * @param {string} path - URL指定
  * @param {object} params - パラメータ(fetchの引数に準ずる))
+ * @param {string} responseAs - blob / json / arrayBuffer / formData / text
  */
-export const baseRequest = (path, params) => (
+export const baseRequest = (path, params, responseAs) => (
   fetch(path, params)
     .then((response) => {
       if (!response.ok) {
@@ -13,6 +14,7 @@ export const baseRequest = (path, params) => (
       }
       return response;
     })
+    .then(response => response[(responseAs || 'json')]())
 );
 
 /**
@@ -32,7 +34,7 @@ export const getRequest = (path, options = {}) => {
   const params = options.data !== null ? new URLSearchParams(options.data) : null;
   const uri = params !== null ? `${path}?${params.toString()}` : path;
 
-  return baseRequest(uri, { headers }).then(response => response[options.responseAs || 'json']());
+  return baseRequest(uri, { headers }, options.responseAs);
 };
 
 /**
@@ -74,7 +76,7 @@ export const postRequest = (path, options = {}) => {
     body,
   };
 
-  return baseRequest(path, params).then(response => response[options.responseAs || 'json']());
+  return baseRequest(path, params, options.responseAs);
 };
 
 /**
