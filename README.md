@@ -1,5 +1,5 @@
 # emoji.best | [![CircleCI](https://circleci.com/gh/cyder/emoji.best.svg?style=svg)](https://circleci.com/gh/cyder/emoji.best) [![codecov](https://codecov.io/gh/cyder/emoji.best/branch/master/graph/badge.svg)](https://codecov.io/gh/cyder/emoji.best)
-slack用emoji投稿サイト、「[emoji.best](https://emoji.best/)」用リポジトリです。
+slack用emoji投稿サイト、「[emoji.best](https://emoji-best.cyder.jp/)」用リポジトリです。
 
 ## 必要環境
 * [docker](https://www.docker.com/)
