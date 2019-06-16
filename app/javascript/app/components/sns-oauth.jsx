@@ -28,7 +28,7 @@ class SnsOauth extends Component {
 
   openWindow(path) {
     const params = 'width=800, height=600, location=0, status=0';
-    const subWindow = window.open(path, 'emoji.best', params);
+    const subWindow = window.open(path, 'emoji-best.cyder.jp', params);
     let timer;
     const checkChild = () => {
       if (subWindow.closed) {
