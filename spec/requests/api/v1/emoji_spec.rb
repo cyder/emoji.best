@@ -4,7 +4,7 @@ describe "POST /api/v1/emojis" do
   let(:user) { create(:user) }
   let(:access_token) { create(:access_token, user: user) }
   let(:headers) { { "Authorization" => access_token.token } }
-  let(:image) { "http://cyder.tech/images/twitter-white.png" }
+  let(:image) { "http://cyder.jp/images/twitter-white.png" }
   let(:name) { "name" }
   let(:description) { "description" }
   let(:params) { { emoji: { name: name, description: description, image: image } } }
