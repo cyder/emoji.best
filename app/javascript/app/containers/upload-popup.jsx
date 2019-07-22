@@ -6,7 +6,9 @@ import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faCloudUploadAlt from '@fortawesome/fontawesome-free-solid/faCloudUploadAlt';
+import faCircleNotch from '@fortawesome/fontawesome-free-solid/faCircleNotch';
 
+import { STATUS } from '../constants/upload-emoji';
 import UploadEmoji from '../components/upload-emoji';
 import * as UploadEmojiActions from '../actions/upload-emoji';
 import PopupBackground from '../components/popup-background';
@@ -66,6 +68,21 @@ const UploadButtonWrapper = styled.div`
   margin: 0 auto 20px;
 `;
 
+const FlexBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Icon = styled.div`
+  font-size: 30px;
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  text-align: center;
+  line-height: 40px;
+`;
+
 class UploadPopup extends Component {
   constructor(props) {
     super(props);
@@ -115,6 +132,7 @@ class UploadPopup extends Component {
       deleteEmoji,
       accessToken,
     } = this.props;
+    const saving = emojis.find(item => item.status === STATUS.SAVING) !== undefined;
 
     return (
       <Wrapper>
@@ -144,7 +162,16 @@ class UploadPopup extends Component {
           </Emojis>
           <UploadMessage>choose {emojis.length} emojis</UploadMessage>
           <UploadButtonWrapper>
-            <FillButton onClick={this.onSubmit} >Upload</FillButton>
+            {
+              saving ?
+                <FlexBox>
+                  <Icon><FontAwesomeIcon icon={faCircleNotch} spin /></Icon>
+                  <div>Uploading...</div>
+                </FlexBox> :
+                <FillButton onClick={this.onSubmit} >
+                    Upload
+                </FillButton>
+            }
           </UploadButtonWrapper>
           <CloseButton onClick={this.onClose} />
         </UploadContainer>
@@ -185,6 +212,7 @@ UploadPopup.propTypes = {
   deleteEmoji: PropTypes.func.isRequired,
   emojis: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   isFinished: PropTypes.bool.isRequired,
   accessToken: PropTypes.string,
