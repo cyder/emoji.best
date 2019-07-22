@@ -176,6 +176,7 @@ class UploadEmoji extends Component {
                         type="text"
                         placeholder="input emoji name"
                         value={this.state.name}
+                        disabled={status === STATUS.SAVING}
                         onChange={e => this.setState({ name: e.target.value })}
                       />
                     </Name>
@@ -185,12 +186,13 @@ class UploadEmoji extends Component {
                         type="text"
                         placeholder="input description"
                         value={this.state.description}
+                        disabled={status === STATUS.SAVING}
                         onChange={e => this.setState({ description: e.target.value })}
                       />
                     </Description>
-                    <DeleteButton
+                    {status !== STATUS.SAVING && <DeleteButton
                       onClick={() => this.props.deleteEmoji(id)}
-                    />
+                    />}
                   </FlexBox>
                 </div>
               );
