@@ -140,7 +140,7 @@ GEM
     ipaddress (0.8.3)
     jb (0.5.0)
       multi_json
-    json (2.1.0)
+    json (2.3.1)
     json_spec (1.1.5)
       multi_json (~> 1.0)
       rspec (>= 2.0, < 4.0)
